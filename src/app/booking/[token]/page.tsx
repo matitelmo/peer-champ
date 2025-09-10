@@ -7,6 +7,7 @@ import AvailabilityCalendar, { TimeSlot } from '@/components/booking/Availabilit
 import ProspectForm from '@/components/booking/ProspectForm';
 import { Spinner } from '@/components/ui/Spinner';
 import { ErrorState } from '@/components/ui/ErrorState';
+import { Toast, ToastContainer } from '@/components/ui/ToastContainer';
 
 interface PageProps {
   params: { token: string };
@@ -44,25 +45,37 @@ export default function BookingTokenPage({ params }: PageProps) {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Spinner />
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-3xl mx-auto px-4 py-10">
+          <div className="animate-pulse space-y-4">
+            <div className="h-6 w-48 bg-gray-200 rounded" />
+            <div className="h-32 bg-gray-200 rounded" />
+            <div className="h-48 bg-gray-200 rounded" />
+          </div>
+        </div>
       </div>
     );
   }
 
   if (error || !linkData) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-6">
-        <ErrorState
-          title="Booking link error"
-          message={error || 'Invalid or expired booking link.'}
-        />
+      <div className="min-h-screen bg-gray-50 p-6">
+        <div className="max-w-xl mx-auto">
+          <ErrorState
+            title="Booking link error"
+            message={error || 'Invalid or expired booking link.'}
+          />
+        </div>
+        <ToastContainer>
+          <Toast variant="error" message={error || 'Invalid or expired booking link.'} />
+        </ToastContainer>
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <ToastContainer />
       <div className="max-w-3xl mx-auto px-4 py-10">
         <h1 className="text-2xl font-semibold mb-4">Schedule a call</h1>
         <div className="rounded-lg bg-white p-6 shadow">
