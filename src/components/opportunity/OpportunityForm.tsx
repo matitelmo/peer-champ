@@ -741,7 +741,7 @@ export const OpportunityForm: React.FC<OpportunityFormProps> = ({
                       handleCheckboxChange(
                         'product_interest',
                         interest,
-                        checked
+                        e.target.checked
                       )
                     }
                   />
@@ -771,7 +771,7 @@ export const OpportunityForm: React.FC<OpportunityFormProps> = ({
                       handleCheckboxChange(
                         'technical_requirements',
                         requirement,
-                        checked
+                        e.target.checked
                       )
                     }
                   />
@@ -800,7 +800,7 @@ export const OpportunityForm: React.FC<OpportunityFormProps> = ({
                       handleCheckboxChange(
                         'business_challenges',
                         challenge,
-                        checked
+                        e.target.checked
                       )
                     }
                   />

@@ -56,7 +56,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
     },
   });
 
-  const [errors, setErrors] = useState<Partial<ProfileFormData>>({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -70,11 +70,11 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
         email: profile.email || '',
         role: profile.role || 'sales_rep',
         profile: {
-          department: profile.profile?.department || '',
-          phone: profile.profile?.phone || '',
-          bio: profile.profile?.bio || '',
-          timezone: profile.profile?.timezone || 'America/New_York',
-          language: profile.profile?.language || 'en',
+          department: String(profile.profile?.department || ''),
+          phone: String(profile.profile?.phone || ''),
+          bio: String(profile.profile?.bio || ''),
+          timezone: String(profile.profile?.timezone || 'America/New_York'),
+          language: String(profile.profile?.language || 'en'),
         },
       });
     }
@@ -82,7 +82,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
 
   // Form validation
   const validateForm = (): boolean => {
-    const newErrors: Partial<ProfileFormData> = {};
+    const newErrors: Record<string, string> = {};
 
     if (!formData.first_name.trim()) {
       newErrors.first_name = 'First name is required';
@@ -157,14 +157,12 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
       setFormData((prev) => ({
         ...prev,
         [field]: value,
+      
       }));
-
+    };
       // Clear error when user starts typing
       if (errors[field]) {
-        setErrors((prev) => ({
-          ...prev,
-          [field]: undefined,
-        }));
+        setErrors((prev) => { const newErrors = { ...prev }; delete newErrors[field]; return newErrors; });
       }
 
       // Clear submit error
@@ -189,7 +187,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
           ...prev.profile,
           [field]: value,
         },
-      }));
+      
     };
 
   if (loading) {

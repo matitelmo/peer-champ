@@ -165,7 +165,7 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
               value={formData.currentPassword}
               onChange={handleInputChange('currentPassword')}
               placeholder="Enter your current password"
-              error={!!errors.currentPassword}
+              variant={!!errors.currentPassword ? "error" : "default"}
               disabled={isSubmitting}
               className="w-full"
             />
@@ -190,7 +190,7 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
               value={formData.newPassword}
               onChange={handleInputChange('newPassword')}
               placeholder="Enter your new password"
-              error={!!errors.newPassword}
+              variant={!!errors.newPassword ? "error" : "default"}
               disabled={isSubmitting}
               className="w-full"
             />
@@ -219,7 +219,7 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
               value={formData.confirmPassword}
               onChange={handleInputChange('confirmPassword')}
               placeholder="Confirm your new password"
-              error={!!errors.confirmPassword}
+              variant={!!errors.confirmPassword ? "error" : "default"}
               disabled={isSubmitting}
               className="w-full"
             />

@@ -79,7 +79,7 @@ const SORT_OPTIONS = [
 export const OpportunityList: React.FC<OpportunityListProps> = ({
   className = '',
 }) => {
-  const { opportunities, loading, error, deleteOpportunity, deleting } =
+  const { opportunities, loading, error, deleteOpportunityData, deleting } =
     useOpportunities();
 
   // State for filters and search
@@ -191,7 +191,7 @@ export const OpportunityList: React.FC<OpportunityListProps> = ({
   const confirmDelete = async () => {
     if (selectedOpportunity) {
       try {
-        await deleteOpportunity(selectedOpportunity.id);
+        await deleteOpportunityData(selectedOpportunity.id);
         setShowDeleteModal(false);
         setSelectedOpportunity(null);
       } catch (err) {
@@ -270,8 +270,8 @@ export const OpportunityList: React.FC<OpportunityListProps> = ({
   // Table columns
   const columns = [
     {
-      header: 'Company',
-      accessor: 'prospect_company',
+      title: 'Company',
+      key: 'prospect_company',
       render: (opportunity: Opportunity) => (
         <div className="flex items-center space-x-2">
           <BuildingOfficeIcon size={16} className="text-gray-400" />
@@ -280,8 +280,8 @@ export const OpportunityList: React.FC<OpportunityListProps> = ({
       ),
     },
     {
-      header: 'Opportunity',
-      accessor: 'opportunity_name',
+      title: 'Opportunity',
+      key: 'opportunity_name',
       render: (opportunity: Opportunity) => (
         <div>
           <div className="font-medium">{opportunity.opportunity_name}</div>
@@ -295,20 +295,20 @@ export const OpportunityList: React.FC<OpportunityListProps> = ({
       ),
     },
     {
-      header: 'Deal Value',
-      accessor: 'deal_value',
+      title: 'Deal Value',
+      key: 'deal_value',
       render: (opportunity: Opportunity) => (
         <div className="flex items-center space-x-1">
           <CurrencyDollarIcon size={16} className="text-gray-400" />
           <span>
-            {formatCurrency(opportunity.deal_value, opportunity.currency)}
+            {formatCurrency(opportunity.deal_value || undefined, opportunity.currency)}
           </span>
         </div>
       ),
     },
     {
-      header: 'Stage',
-      accessor: 'deal_stage',
+      title: 'Stage',
+      key: 'deal_stage',
       render: (opportunity: Opportunity) => (
         <Badge variant={getDealStageBadgeVariant(opportunity.deal_stage)}>
           {opportunity.deal_stage.replace('_', ' ').toUpperCase()}
@@ -316,8 +316,8 @@ export const OpportunityList: React.FC<OpportunityListProps> = ({
       ),
     },
     {
-      header: 'Probability',
-      accessor: 'probability',
+      title: 'Probability',
+      key: 'probability',
       render: (opportunity: Opportunity) => (
         <span>
           {opportunity.probability ? `${opportunity.probability}%` : 'N/A'}
@@ -325,18 +325,18 @@ export const OpportunityList: React.FC<OpportunityListProps> = ({
       ),
     },
     {
-      header: 'Close Date',
-      accessor: 'expected_close_date',
+      title: 'Close Date',
+      key: 'expected_close_date',
       render: (opportunity: Opportunity) => (
         <div className="flex items-center space-x-1">
           <CalendarIcon size={16} className="text-gray-400" />
-          <span>{formatDate(opportunity.expected_close_date)}</span>
+          <span>{formatDate(opportunity.expected_close_date || undefined)}</span>
         </div>
       ),
     },
     {
-      header: 'Reference Status',
-      accessor: 'reference_request_status',
+      title: 'Reference Status',
+      key: 'reference_request_status',
       render: (opportunity: Opportunity) => (
         <Badge
           variant={getReferenceStatusBadgeVariant(
@@ -348,8 +348,8 @@ export const OpportunityList: React.FC<OpportunityListProps> = ({
       ),
     },
     {
-      header: 'Priority',
-      accessor: 'priority_score',
+      title: 'Priority',
+      key: 'priority_score',
       render: (opportunity: Opportunity) => (
         <div className="flex items-center space-x-2">
           <div className="w-16 bg-gray-200 rounded-full h-2">
@@ -365,8 +365,8 @@ export const OpportunityList: React.FC<OpportunityListProps> = ({
       ),
     },
     {
-      header: 'Actions',
-      accessor: 'actions',
+      title: 'Actions',
+      key: 'actions',
       render: (opportunity: Opportunity) => (
         <div className="flex space-x-2">
           <Button
@@ -605,7 +605,7 @@ export const OpportunityList: React.FC<OpportunityListProps> = ({
                   Cancel
                 </Button>
                 <LoadingButton
-                  variant="error"
+                  variant="destructive"
                   onClick={confirmDelete}
                   loading={deleting}
                 >
