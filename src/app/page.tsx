@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import Link from 'next/link';
 import { Button } from '@/components/ui';
 import {
   PlusIcon,
@@ -35,12 +36,16 @@ export default function Home() {
               advocates.
             </p>
             <div className="mt-10 flex items-center justify-center gap-4">
-              <Button size="lg" leftIcon={<PlusIcon size={20} />}>
-                Get Started
-              </Button>
-              <Button variant="outline" size="lg">
-                Learn More
-              </Button>
+              <Link href="/auth/signin">
+                <Button size="lg" leftIcon={<PlusIcon size={20} />}>
+                  Get Started
+                </Button>
+              </Link>
+              <Link href="/auth/signin">
+                <Button variant="outline" size="lg">
+                  Sign In
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -177,20 +182,24 @@ export default function Home() {
               customer relationships.
             </p>
             <div className="mt-8 flex items-center justify-center gap-4">
-              <Button
-                variant="secondary"
-                size="lg"
-                leftIcon={<PlusIcon size={20} />}
-              >
-                Start Free Trial
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-white text-white hover:bg-white hover:text-blue-600"
-              >
-                Schedule Demo
-              </Button>
+              <Link href="/auth/signin">
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  leftIcon={<PlusIcon size={20} />}
+                >
+                  Start Free Trial
+                </Button>
+              </Link>
+              <Link href="/auth/signin">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-white text-white hover:bg-white hover:text-blue-600"
+                >
+                  Sign In
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

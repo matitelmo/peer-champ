@@ -1,6 +1,6 @@
 /**
  * Virtualized Table Component
- * 
+ *
  * A high-performance table component for large datasets using virtualization.
  * Renders only visible rows to maintain performance with thousands of records.
  */
@@ -21,7 +21,10 @@ export interface VirtualizedTableProps<T = any> {
   className?: string;
   rowKey?: keyof T | ((record: T) => string);
   rowClassName?: (record: T, index: number) => string;
-  onRow?: (record: T, index: number) => {
+  onRow?: (
+    record: T,
+    index: number
+  ) => {
     onClick?: () => void;
     onDoubleClick?: () => void;
     onMouseEnter?: () => void;
@@ -66,7 +69,7 @@ export const VirtualizedTable = <T extends Record<string, any>>({
       startIndex + Math.ceil(containerHeight / rowHeight) + overscan,
       data.length
     );
-    
+
     return {
       start: Math.max(0, startIndex - overscan),
       end: endIndex,
@@ -114,7 +117,10 @@ export const VirtualizedTable = <T extends Record<string, any>>({
               px-4 py-3 text-${column.align || 'left'} font-medium text-gray-900 dark:text-white
               ${column.headerClassName || ''}
             `}
-            style={{ width: column.width || 'auto', minWidth: column.width || 'auto' }}
+            style={{
+              width: column.width || 'auto',
+              minWidth: column.width || 'auto',
+            }}
           >
             {column.title}
           </div>
@@ -144,8 +150,12 @@ export const VirtualizedTable = <T extends Record<string, any>>({
         onMouseLeave={rowProps.onMouseLeave}
       >
         {columns.map((column) => {
-          const value = column.dataIndex ? record[column.dataIndex] : record[column.key];
-          const content = column.render ? column.render(value, record, actualIndex) : value;
+          const value = column.dataIndex
+            ? record[column.dataIndex]
+            : record[column.key];
+          const content = column.render
+            ? column.render(value, record, actualIndex)
+            : value;
 
           return (
             <div
@@ -154,7 +164,10 @@ export const VirtualizedTable = <T extends Record<string, any>>({
                 px-4 py-3 text-${column.align || 'left'} text-gray-900 dark:text-white
                 ${column.className || ''}
               `}
-              style={{ width: column.width || 'auto', minWidth: column.width || 'auto' }}
+              style={{
+                width: column.width || 'auto',
+                minWidth: column.width || 'auto',
+              }}
             >
               {content}
             </div>
@@ -219,13 +232,11 @@ export const VirtualizedTable = <T extends Record<string, any>>({
             right: 0,
           }}
         >
-          {loading ? (
-            renderLoading()
-          ) : data.length === 0 ? (
-            renderEmpty()
-          ) : (
-            visibleData.map((record, index) => renderRow(record, index))
-          )}
+          {loading
+            ? renderLoading()
+            : data.length === 0
+              ? renderEmpty()
+              : visibleData.map((record, index) => renderRow(record, index))}
         </div>
       </div>
     </div>
@@ -233,7 +244,8 @@ export const VirtualizedTable = <T extends Record<string, any>>({
 };
 
 // Infinite Scroll Table Component
-export interface InfiniteScrollTableProps<T = any> extends VirtualizedTableProps<T> {
+export interface InfiniteScrollTableProps<T = any>
+  extends VirtualizedTableProps<T> {
   hasMore?: boolean;
   onLoadMore?: () => void;
   loadingMore?: boolean;
@@ -255,7 +267,11 @@ export const InfiniteScrollTable = <T extends Record<string, any>>({
 
   // Handle scroll
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const { scrollTop: newScrollTop, scrollHeight, clientHeight } = e.currentTarget;
+    const {
+      scrollTop: newScrollTop,
+      scrollHeight,
+      clientHeight,
+    } = e.currentTarget;
     setScrollTop(newScrollTop);
 
     // Check if we need to load more data
@@ -292,7 +308,7 @@ export const InfiniteScrollTable = <T extends Record<string, any>>({
         className={props.className}
         onScroll={handleScroll}
       />
-      
+
       {/* Loading more indicator */}
       {loadingMore && (
         <div className="flex items-center justify-center py-4">

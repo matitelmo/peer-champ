@@ -48,7 +48,7 @@ jobs:
           else
             VERSION="${{ github.ref_name }}"
           fi
-          
+
           # Generate changelog from git commits
           CHANGELOG=$(git log --pretty=format:"- %s" $(git describe --tags --abbrev=0 HEAD^)..HEAD)
           echo "changelog<<EOF" >> $GITHUB_OUTPUT
@@ -65,18 +65,18 @@ jobs:
           release_name: Release ${{ steps.changelog.outputs.version }}
           body: |
             ## Changes in this Release
-            
+
             ${{ steps.changelog.outputs.changelog }}
-            
+
             ## Installation
-            
+
             ```bash
             npm install
             pnpm install
             ```
-            
+
             ## Development
-            
+
             ```bash
             pnpm dev
             ```

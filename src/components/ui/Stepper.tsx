@@ -1,6 +1,6 @@
 /**
  * Stepper Component
- * 
+ *
  * A step-by-step navigation component for multi-step processes,
  * forms, and workflows with different variants and orientations.
  */
@@ -176,7 +176,9 @@ export const Stepper: React.FC<StepperProps> = ({
           >
             {renderStepIcon(step, index)}
             <div className="mt-2 text-center">
-              <div className={`font-medium ${getTextStatusClasses(step.status)}`}>
+              <div
+                className={`font-medium ${getTextStatusClasses(step.status)}`}
+              >
                 {step.title}
               </div>
               {step.description && (
@@ -186,7 +188,7 @@ export const Stepper: React.FC<StepperProps> = ({
               )}
             </div>
           </div>
-          
+
           {/* Connector */}
           {showConnector && index < steps.length - 1 && (
             <div
@@ -208,7 +210,7 @@ export const Stepper: React.FC<StepperProps> = ({
         <div key={step.id} className="flex items-start">
           <div className="flex flex-col items-center">
             {renderStepIcon(step, index)}
-            
+
             {/* Vertical connector */}
             {showConnector && index < steps.length - 1 && (
               <div
@@ -219,7 +221,7 @@ export const Stepper: React.FC<StepperProps> = ({
               />
             )}
           </div>
-          
+
           <div
             className={`
               ml-4 flex-1 ${allowClick && !step.disabled ? 'cursor-pointer' : ''}

@@ -1,6 +1,6 @@
 /**
  * Drawer Component
- * 
+ *
  * A slide-out drawer component for mobile-friendly side panels and navigation.
  * Supports different positions and animations.
  */
@@ -140,7 +140,7 @@ export const Drawer: React.FC<DrawerProps> = ({
     if (isOpen) {
       // Store the currently focused element
       previousActiveElement.current = document.activeElement as HTMLElement;
-      
+
       // Focus the drawer
       setTimeout(() => {
         drawerRef.current?.focus();
@@ -168,7 +168,7 @@ export const Drawer: React.FC<DrawerProps> = ({
     const positionClass = positionClasses[position];
     const sizeClass = sizeClasses[size][position];
     const animationClass = animationClasses[position].enter;
-    
+
     return `${baseClasses} ${positionClass} ${sizeClass} ${animationClass} ${className}`;
   };
 
@@ -186,11 +186,7 @@ export const Drawer: React.FC<DrawerProps> = ({
       />
 
       {/* Drawer */}
-      <div
-        ref={drawerRef}
-        className={getDrawerClasses()}
-        tabIndex={-1}
-      >
+      <div ref={drawerRef} className={getDrawerClasses()} tabIndex={-1}>
         {/* Header */}
         {(title || showCloseButton) && (
           <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
@@ -202,7 +198,7 @@ export const Drawer: React.FC<DrawerProps> = ({
                 {title}
               </h3>
             )}
-            
+
             {showCloseButton && (
               <button
                 onClick={onClose}
@@ -216,9 +212,7 @@ export const Drawer: React.FC<DrawerProps> = ({
         )}
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-4">
-          {children}
-        </div>
+        <div className="flex-1 overflow-y-auto p-4">{children}</div>
 
         {/* Footer */}
         {footer && (
@@ -274,10 +268,7 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
           >
             Reset
           </Button>
-          <Button
-            onClick={() => onApply(filters)}
-            disabled={loading}
-          >
+          <Button onClick={() => onApply(filters)} disabled={loading}>
             Apply Filters
           </Button>
         </div>
@@ -317,17 +308,10 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
       size="lg"
       footer={
         <div className="flex space-x-3">
-          <Button
-            variant="outline"
-            onClick={onClose}
-            disabled={loading}
-          >
+          <Button variant="outline" onClick={onClose} disabled={loading}>
             Cancel
           </Button>
-          <Button
-            onClick={() => onSave(settings)}
-            disabled={loading}
-          >
+          <Button onClick={() => onSave(settings)} disabled={loading}>
             Save Settings
           </Button>
         </div>

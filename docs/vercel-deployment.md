@@ -38,15 +38,18 @@ This will create a `.vercel/project.json` file with your project configuration.
 Set these in your Vercel dashboard under Project Settings > Environment Variables:
 
 #### Supabase
+
 - `NEXT_PUBLIC_SUPABASE_URL` - Your Supabase project URL
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Your Supabase anonymous key
 - `SUPABASE_SERVICE_ROLE_KEY` - Your Supabase service role key
 
 #### NextAuth
+
 - `NEXTAUTH_URL` - Your production URL (e.g., `https://peerchamps.vercel.app`)
 - `NEXTAUTH_SECRET` - A random secret for JWT signing
 
 #### OAuth Providers (Optional)
+
 - `GOOGLE_CLIENT_ID` - Google OAuth client ID
 - `GOOGLE_CLIENT_SECRET` - Google OAuth client secret
 - `GITHUB_CLIENT_ID` - GitHub OAuth client ID

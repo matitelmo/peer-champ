@@ -1,6 +1,6 @@
 /**
  * Sign Up Page
- * 
+ *
  * Registration page for new users to create accounts.
  * Includes form validation, error handling, and email verification flow.
  */
@@ -42,7 +42,7 @@ export default function SignUpPage() {
   return (
     <AuthLayout
       variant="centered"
-      size="md"
+      size="3xl"
       title="Join PeerChamps"
       subtitle="Create your account to start connecting with advocates"
     >

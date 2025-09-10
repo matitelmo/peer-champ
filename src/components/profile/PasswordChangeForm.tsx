@@ -1,6 +1,6 @@
 /**
  * Password Change Form Component
- * 
+ *
  * Allows users to change their password with current password verification.
  * Includes form validation, error handling, and loading states.
  */
@@ -31,13 +31,13 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
   className = '',
 }) => {
   const { updatePassword } = useProfile();
-  
+
   const [formData, setFormData] = useState<PasswordChangeFormData>({
     currentPassword: '',
     newPassword: '',
     confirmPassword: '',
   });
-  
+
   const [errors, setErrors] = useState<Partial<PasswordChangeFormData>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -56,7 +56,8 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
     } else if (formData.newPassword.length < 8) {
       newErrors.newPassword = 'Password must be at least 8 characters';
     } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(formData.newPassword)) {
-      newErrors.newPassword = 'Password must contain at least one uppercase letter, one lowercase letter, and one number';
+      newErrors.newPassword =
+        'Password must contain at least one uppercase letter, one lowercase letter, and one number';
     }
 
     if (!formData.confirmPassword) {
@@ -66,7 +67,8 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
     }
 
     if (formData.currentPassword === formData.newPassword) {
-      newErrors.newPassword = 'New password must be different from current password';
+      newErrors.newPassword =
+        'New password must be different from current password';
     }
 
     setErrors(newErrors);
@@ -76,7 +78,7 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -114,27 +116,27 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
   };
 
   // Handle input changes
-  const handleInputChange = (field: keyof PasswordChangeFormData) => (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: e.target.value,
-    }));
-    
-    // Clear error when user starts typing
-    if (errors[field]) {
-      setErrors(prev => ({
+  const handleInputChange =
+    (field: keyof PasswordChangeFormData) =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData((prev) => ({
         ...prev,
-        [field]: undefined,
+        [field]: e.target.value,
       }));
-    }
-    
-    // Clear submit error
-    if (submitError) {
-      setSubmitError(null);
-    }
-  };
+
+      // Clear error when user starts typing
+      if (errors[field]) {
+        setErrors((prev) => ({
+          ...prev,
+          [field]: undefined,
+        }));
+      }
+
+      // Clear submit error
+      if (submitError) {
+        setSubmitError(null);
+      }
+    };
 
   return (
     <Card className={`w-full max-w-md mx-auto ${className}`}>
@@ -151,8 +153,8 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Current Password */}
           <div>
-            <label 
-              htmlFor="currentPassword" 
+            <label
+              htmlFor="currentPassword"
               className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
             >
               Current Password
@@ -176,8 +178,8 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
 
           {/* New Password */}
           <div>
-            <label 
-              htmlFor="newPassword" 
+            <label
+              htmlFor="newPassword"
               className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
             >
               New Password
@@ -198,14 +200,15 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({
               </p>
             )}
             <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-              Must be at least 8 characters with uppercase, lowercase, and number
+              Must be at least 8 characters with uppercase, lowercase, and
+              number
             </p>
           </div>
 
           {/* Confirm Password */}
           <div>
-            <label 
-              htmlFor="confirmPassword" 
+            <label
+              htmlFor="confirmPassword"
               className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
             >
               Confirm New Password

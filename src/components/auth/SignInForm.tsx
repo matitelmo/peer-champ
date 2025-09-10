@@ -1,6 +1,6 @@
 /**
  * Sign In Form Component
- * 
+ *
  * Handles user authentication with email and password.
  * Includes form validation, error handling, and loading states.
  */
@@ -34,12 +34,12 @@ export const SignInForm: React.FC<SignInFormProps> = ({
 }) => {
   const { signIn } = useAuth();
   const router = useRouter();
-  
+
   const [formData, setFormData] = useState<SignInFormData>({
     email: '',
     password: '',
   });
-  
+
   const [errors, setErrors] = useState<Partial<SignInFormData>>({});
   const [authError, setAuthError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -67,7 +67,7 @@ export const SignInForm: React.FC<SignInFormProps> = ({
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -76,19 +76,24 @@ export const SignInForm: React.FC<SignInFormProps> = ({
     setAuthError(null);
 
     try {
+      console.log('Attempting to sign in with:', formData.email);
       const { error } = await signIn(formData.email, formData.password);
 
       if (error) {
+        console.error('Sign in error:', error);
         setAuthError(error.message || 'An error occurred during sign in');
       } else {
+        console.log('Sign in successful, redirecting to:', redirectTo);
         // Success - redirect or call onSuccess
         if (onSuccess) {
           onSuccess();
         } else {
-          router.push(redirectTo);
+          // Use window.location for a hard redirect to ensure the page reloads
+          window.location.href = redirectTo;
         }
       }
     } catch (error) {
+      console.error('Unexpected sign in error:', error);
       setAuthError('An unexpected error occurred. Please try again.');
     } finally {
       setIsLoading(false);
@@ -96,142 +101,144 @@ export const SignInForm: React.FC<SignInFormProps> = ({
   };
 
   // Handle input changes
-  const handleInputChange = (field: keyof SignInFormData) => (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: e.target.value,
-    }));
-    
-    // Clear error when user starts typing
-    if (errors[field]) {
-      setErrors(prev => ({
+  const handleInputChange =
+    (field: keyof SignInFormData) =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData((prev) => ({
         ...prev,
-        [field]: undefined,
+        [field]: e.target.value,
       }));
-    }
-    
-    // Clear auth error
-    if (authError) {
-      setAuthError(null);
-    }
-  };
+
+      // Clear error when user starts typing
+      if (errors[field]) {
+        setErrors((prev) => ({
+          ...prev,
+          [field]: undefined,
+        }));
+      }
+
+      // Clear auth error
+      if (authError) {
+        setAuthError(null);
+      }
+    };
 
   return (
-    <Card className={`w-full max-w-md mx-auto ${className}`}>
-      <CardHeader className="text-center">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-          Sign In
-        </h2>
-        <p className="text-gray-600 dark:text-gray-400">
-          Welcome back! Please sign in to your account.
-        </p>
-      </CardHeader>
-
-      <CardBody>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Email Field */}
-          <div>
-            <label 
-              htmlFor="email" 
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-            >
-              Email Address
-            </label>
-            <Input
-              id="email"
-              type="email"
-              value={formData.email}
-              onChange={handleInputChange('email')}
-              placeholder="Enter your email"
-              error={!!errors.email}
-              disabled={isLoading}
-              className="w-full"
-            />
-            {errors.email && (
-              <p className="mt-1 text-sm text-error-600 dark:text-error-400">
-                {errors.email}
-              </p>
-            )}
-          </div>
-
-          {/* Password Field */}
-          <div>
-            <label 
-              htmlFor="password" 
-              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-            >
-              Password
-            </label>
-            <Input
-              id="password"
-              type="password"
-              value={formData.password}
-              onChange={handleInputChange('password')}
-              placeholder="Enter your password"
-              error={!!errors.password}
-              disabled={isLoading}
-              className="w-full"
-            />
-            {errors.password && (
-              <p className="mt-1 text-sm text-error-600 dark:text-error-400">
-                {errors.password}
-              </p>
-            )}
-          </div>
-
-          {/* Forgot Password Link */}
-          <div className="text-right">
-            <a
-              href="/auth/forgot-password"
-              className="text-sm text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
-            >
-              Forgot your password?
-            </a>
-          </div>
-
-          {/* Auth Error */}
-          {authError && (
-            <Alert variant="error" className="mb-4">
-              {authError}
-            </Alert>
-          )}
-
-          {/* Submit Button */}
-          <Button
-            type="submit"
-            variant="primary"
-            size="lg"
-            fullWidth
-            disabled={isLoading}
-            className="w-full"
-          >
-            {isLoading ? (
-              <>
-                <Spinner size="sm" className="mr-2" />
-                Signing In...
-              </>
-            ) : (
-              'Sign In'
-            )}
-          </Button>
-        </form>
-
-        {/* Sign Up Link */}
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            Don't have an account?{' '}
-            <a
-              href="/auth/signup"
-              className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
-            >
-              Sign up here
-            </a>
+    <div className={`w-full max-w-2xl mx-auto ${className}`}>
+      <Card className="w-full">
+        <CardHeader className="text-center pb-8">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+            Sign In
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-400 mt-2">
+            Welcome back! Please sign in to your account.
           </p>
-        </div>
-      </CardBody>
-    </Card>
+        </CardHeader>
+
+        <CardBody className="px-8 pb-8">
+          <form onSubmit={handleSubmit} className="space-y-8">
+            {/* Email Field */}
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3"
+              >
+                Email Address
+              </label>
+              <Input
+                id="email"
+                type="email"
+                value={formData.email}
+                onChange={handleInputChange('email')}
+                placeholder="Enter your email"
+                variant={errors.email ? 'error' : 'default'}
+                disabled={isLoading}
+                className="w-full h-12 text-lg"
+              />
+              {errors.email && (
+                <p className="mt-2 text-sm text-error-600 dark:text-error-400">
+                  {errors.email}
+                </p>
+              )}
+            </div>
+
+            {/* Password Field */}
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3"
+              >
+                Password
+              </label>
+              <Input
+                id="password"
+                type="password"
+                value={formData.password}
+                onChange={handleInputChange('password')}
+                placeholder="Enter your password"
+                variant={errors.password ? 'error' : 'default'}
+                disabled={isLoading}
+                className="w-full h-12 text-lg"
+              />
+              {errors.password && (
+                <p className="mt-2 text-sm text-error-600 dark:text-error-400">
+                  {errors.password}
+                </p>
+              )}
+            </div>
+
+            {/* Forgot Password Link */}
+            <div className="text-right">
+              <a
+                href="/auth/forgot-password"
+                className="text-sm text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300 font-medium"
+              >
+                Forgot your password?
+              </a>
+            </div>
+
+            {/* Auth Error */}
+            {authError && (
+              <Alert variant="error" className="mb-6">
+                {authError}
+              </Alert>
+            )}
+
+            {/* Submit Button */}
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              fullWidth
+              disabled={isLoading}
+              className="w-full h-12 text-lg font-semibold"
+            >
+              {isLoading ? (
+                <>
+                  <Spinner size="sm" className="mr-2" />
+                  Signing In...
+                </>
+              ) : (
+                'Sign In'
+              )}
+            </Button>
+          </form>
+
+          {/* Sign Up Link */}
+          <div className="mt-8 text-center">
+            <p className="text-base text-gray-600 dark:text-gray-400">
+              Don't have an account?{' '}
+              <a
+                href="/auth/signup"
+                className="font-semibold text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
+              >
+                Sign up here
+              </a>
+            </p>
+          </div>
+        </CardBody>
+      </Card>
+    </div>
   );
 };
 

@@ -1,13 +1,19 @@
 /**
  * Tenant/Company Isolation Hook
- * 
+ *
  * Manages multi-tenant data isolation and company context throughout the application.
  * Ensures users can only access data belonging to their company.
  */
 
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from 'react';
 import { useAuth } from './useAuth';
 import { companyService, userService } from '@/lib/database';
 import type { Company, User } from '@/types/database';
@@ -27,7 +33,9 @@ export interface TenantContextType {
   canAccessOpportunity: (opportunityId: string) => boolean;
   canAccessReferenceCall: (referenceCallId: string) => boolean;
   refreshCompany: () => Promise<void>;
-  switchCompany: (companyId: string) => Promise<{ success: boolean; error?: string }>;
+  switchCompany: (
+    companyId: string
+  ) => Promise<{ success: boolean; error?: string }>;
 }
 
 // Create the context
@@ -59,7 +67,9 @@ export const TenantProvider: React.FC<TenantProviderProps> = ({ children }) => {
       setError(null);
 
       // Get user data with company information
-      const { data: userData, error: userError } = await userService.getById(user.id);
+      const { data: userData, error: userError } = await userService.getById(
+        user.id
+      );
 
       if (userError) {
         setError(userError.message);
@@ -79,7 +89,8 @@ export const TenantProvider: React.FC<TenantProviderProps> = ({ children }) => {
 
       // Get company data
       if (userData.company_id) {
-        const { data: companyData, error: companyError } = await companyService.getById(userData.company_id);
+        const { data: companyData, error: companyError } =
+          await companyService.getById(userData.company_id);
 
         if (companyError) {
           setError(companyError.message);
@@ -91,7 +102,9 @@ export const TenantProvider: React.FC<TenantProviderProps> = ({ children }) => {
         setCompany(null);
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch tenant data');
+      setError(
+        err instanceof Error ? err.message : 'Failed to fetch tenant data'
+      );
       setCompany(null);
       setCurrentUser(null);
     } finally {
@@ -161,16 +174,22 @@ export const TenantProvider: React.FC<TenantProviderProps> = ({ children }) => {
   };
 
   // Switch company (for admin users)
-  const switchCompany = async (companyId: string): Promise<{ success: boolean; error?: string }> => {
+  const switchCompany = async (
+    companyId: string
+  ): Promise<{ success: boolean; error?: string }> => {
     if (!isAdmin) {
-      return { success: false, error: 'Only administrators can switch companies' };
+      return {
+        success: false,
+        error: 'Only administrators can switch companies',
+      };
     }
 
     try {
       setError(null);
 
       // Get company data
-      const { data: companyData, error: companyError } = await companyService.getById(companyId);
+      const { data: companyData, error: companyError } =
+        await companyService.getById(companyId);
 
       if (companyError) {
         return { success: false, error: companyError.message };
@@ -183,7 +202,8 @@ export const TenantProvider: React.FC<TenantProviderProps> = ({ children }) => {
       setCompany(companyData);
       return { success: true };
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to switch company';
+      const errorMessage =
+        err instanceof Error ? err.message : 'Failed to switch company';
       setError(errorMessage);
       return { success: false, error: errorMessage };
     }
@@ -207,9 +227,7 @@ export const TenantProvider: React.FC<TenantProviderProps> = ({ children }) => {
   };
 
   return (
-    <TenantContext.Provider value={value}>
-      {children}
-    </TenantContext.Provider>
+    <TenantContext.Provider value={value}>{children}</TenantContext.Provider>
   );
 };
 
@@ -231,7 +249,15 @@ export const withTenantIsolation = <P extends object>(
   }
 ) => {
   const TenantIsolatedComponent = (props: P) => {
-    const { company, currentUser, loading, error, isAdmin, isSalesRep, isAdvocate } = useTenant();
+    const {
+      company,
+      currentUser,
+      loading,
+      error,
+      isAdmin,
+      isSalesRep,
+      isAdvocate,
+    } = useTenant();
 
     if (loading) {
       return (

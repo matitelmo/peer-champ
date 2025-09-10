@@ -2,7 +2,7 @@ name: Performance Testing
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
   schedule:
     # Run performance tests daily at 2 AM UTC
     - cron: '0 2 * * *'
@@ -77,14 +77,14 @@ jobs:
           script: |
             const fs = require('fs');
             const path = require('path');
-            
+
             // Read Lighthouse results
             const lighthouseResults = fs.readFileSync('.lighthouseci/lighthouse-results.json', 'utf8');
             const results = JSON.parse(lighthouseResults);
-            
+
             // Generate performance report
             let comment = '## 🚀 Performance Test Results\n\n';
-            
+
             results.forEach(result => {
               const scores = result.lhr.categories;
               comment += `### ${result.lhr.finalUrl}\n`;
@@ -93,7 +93,7 @@ jobs:
               comment += `- **Best Practices**: ${Math.round(scores['best-practices'].score * 100)}/100\n`;
               comment += `- **SEO**: ${Math.round(scores.seo.score * 100)}/100\n\n`;
             });
-            
+
             // Post comment
             github.rest.issues.createComment({
               issue_number: context.issue.number,

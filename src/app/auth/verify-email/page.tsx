@@ -1,6 +1,6 @@
 /**
  * Email Verification Page
- * 
+ *
  * Page shown to users who need to verify their email address.
  * Provides instructions and resend functionality.
  */
@@ -99,20 +99,21 @@ export default function VerifyEmailPage() {
               />
             </svg>
           </div>
-          
+
           <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
             Check your email
           </h3>
-          
+
           <p className="text-gray-600 dark:text-gray-400 mb-4">
             We've sent a verification link to{' '}
             <span className="font-medium text-gray-900 dark:text-white">
               {user.email}
             </span>
           </p>
-          
+
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            Click the link in the email to verify your account. The link will expire in 24 hours.
+            Click the link in the email to verify your account. The link will
+            expire in 24 hours.
           </p>
         </div>
 
@@ -124,11 +125,7 @@ export default function VerifyEmailPage() {
         )}
 
         {/* Resend Error */}
-        {resendError && (
-          <Alert variant="error">
-            {resendError}
-          </Alert>
-        )}
+        {resendError && <Alert variant="error">{resendError}</Alert>}
 
         {/* Actions */}
         <div className="space-y-3">
@@ -147,7 +144,7 @@ export default function VerifyEmailPage() {
               'Resend Verification Email'
             )}
           </Button>
-          
+
           <div className="text-center">
             <p className="text-sm text-gray-600 dark:text-gray-400">
               Didn't receive the email?{' '}

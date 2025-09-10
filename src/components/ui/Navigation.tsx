@@ -1,6 +1,6 @@
 /**
  * Navigation Components
- * 
+ *
  * Comprehensive navigation components including navbar, sidebar, breadcrumbs,
  * tabs, and pagination for building complete navigation systems.
  */
@@ -11,7 +11,7 @@ import React, { useState, ReactNode } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from './Button';
-import { 
+import {
   Bars3Icon,
   XMarkIcon,
   ChevronRightIcon,
@@ -19,7 +19,7 @@ import {
   UserIcon,
   Cog6ToothIcon,
   BellIcon,
-  MagnifyingGlassIcon
+  MagnifyingGlassIcon,
 } from '@heroicons/react/24/outline';
 
 // Types
@@ -149,7 +149,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                 href={brand.href || '/'}
                 className="flex items-center space-x-2 text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
               >
-                {brand.logo && <div className="flex-shrink-0">{brand.logo}</div>}
+                {brand.logo && (
+                  <div className="flex-shrink-0">{brand.logo}</div>
+                )}
                 <span className="font-semibold text-lg">{brand.name}</span>
               </Link>
             )}
@@ -163,14 +165,17 @@ export const Navbar: React.FC<NavbarProps> = ({
                   href={item.href}
                   className={`
                     flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors
-                    ${isActive(item.href)
-                      ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700'
+                    ${
+                      isActive(item.href)
+                        ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20'
+                        : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700'
                     }
                     ${item.disabled ? 'opacity-50 cursor-not-allowed' : ''}
                   `}
                 >
-                  {item.icon && <div className="flex-shrink-0">{item.icon}</div>}
+                  {item.icon && (
+                    <div className="flex-shrink-0">{item.icon}</div>
+                  )}
                   <span>{item.label}</span>
                   {item.badge && (
                     <span className="bg-primary-600 text-white text-xs rounded-full px-2 py-1">
@@ -265,15 +270,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                   href={item.href}
                   className={`
                     flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors
-                    ${isActive(item.href)
-                      ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700'
+                    ${
+                      isActive(item.href)
+                        ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20'
+                        : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700'
                     }
                     ${item.disabled ? 'opacity-50 cursor-not-allowed' : ''}
                   `}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {item.icon && <div className="flex-shrink-0">{item.icon}</div>}
+                  {item.icon && (
+                    <div className="flex-shrink-0">{item.icon}</div>
+                  )}
                   <span>{item.label}</span>
                   {item.badge && (
                     <span className="bg-primary-600 text-white text-xs rounded-full px-2 py-1">
@@ -344,9 +352,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 href={item.href}
                 className={`
                   flex items-center space-x-3 px-3 py-2 rounded-md text-sm font-medium transition-colors
-                  ${isActive(item.href)
-                    ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700'
+                  ${
+                    isActive(item.href)
+                      ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700'
                   }
                   ${item.disabled ? 'opacity-50 cursor-not-allowed' : ''}
                   ${collapsed ? 'justify-center' : ''}
@@ -371,7 +380,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* User Section */}
         {user && (
           <div className="p-4 border-t border-gray-200 dark:border-gray-700">
-            <div className={`flex items-center space-x-3 ${collapsed ? 'justify-center' : ''}`}>
+            <div
+              className={`flex items-center space-x-3 ${collapsed ? 'justify-center' : ''}`}
+            >
               {user.avatar ? (
                 <img
                   src={user.avatar}
@@ -466,32 +477,35 @@ export const Tabs: React.FC<TabsProps> = ({
 
   const getTabClasses = (item: any) => {
     const isActive = value === item.value;
-    
+
     switch (variant) {
       case 'pills':
         return `
           px-4 py-2 rounded-md font-medium transition-colors
-          ${isActive
-            ? 'bg-white dark:bg-gray-800 text-primary-600 dark:text-primary-400 shadow-sm'
-            : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+          ${
+            isActive
+              ? 'bg-white dark:bg-gray-800 text-primary-600 dark:text-primary-400 shadow-sm'
+              : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
           }
           ${item.disabled ? 'opacity-50 cursor-not-allowed' : ''}
         `;
       case 'underline':
         return `
           px-4 py-2 border-b-2 font-medium transition-colors
-          ${isActive
-            ? 'border-primary-600 dark:border-primary-400 text-primary-600 dark:text-primary-400'
-            : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:border-gray-300 dark:hover:border-gray-600'
+          ${
+            isActive
+              ? 'border-primary-600 dark:border-primary-400 text-primary-600 dark:text-primary-400'
+              : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:border-gray-300 dark:hover:border-gray-600'
           }
           ${item.disabled ? 'opacity-50 cursor-not-allowed' : ''}
         `;
       default:
         return `
           px-4 py-2 border-b-2 font-medium transition-colors
-          ${isActive
-            ? 'border-primary-600 dark:border-primary-400 text-primary-600 dark:text-primary-400'
-            : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:border-gray-300 dark:hover:border-gray-600'
+          ${
+            isActive
+              ? 'border-primary-600 dark:border-primary-400 text-primary-600 dark:text-primary-400'
+              : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:border-gray-300 dark:hover:border-gray-600'
           }
           ${item.disabled ? 'opacity-50 cursor-not-allowed' : ''}
         `;

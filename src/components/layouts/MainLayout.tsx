@@ -1,6 +1,6 @@
 /**
  * Main Layout Component
- * 
+ *
  * The primary layout component that integrates authentication, tenant isolation,
  * and role-based access control. Provides the main structure for the application.
  */
@@ -111,7 +111,9 @@ const MainLayoutContent: React.FC<MainLayoutProps> = ({
               </div>
               <div className="h-8 w-8 rounded-full bg-primary-600 flex items-center justify-center">
                 <span className="text-sm font-medium text-white">
-                  {(user.user_metadata?.first_name || user.email || 'U').charAt(0).toUpperCase()}
+                  {(user.user_metadata?.first_name || user.email || 'U')
+                    .charAt(0)
+                    .toUpperCase()}
                 </span>
               </div>
             </div>
@@ -128,10 +130,10 @@ const MainLayoutContent: React.FC<MainLayoutProps> = ({
         )}
 
         {/* Main Content */}
-        <main className={`flex-1 ${showNavigation ? '' : 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'}`}>
-          <div className="py-6">
-            {children}
-          </div>
+        <main
+          className={`flex-1 ${showNavigation ? '' : 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'}`}
+        >
+          <div className="py-6">{children}</div>
         </main>
       </div>
     </div>

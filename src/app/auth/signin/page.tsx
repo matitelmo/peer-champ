@@ -1,6 +1,6 @@
 /**
  * Sign In Page
- * 
+ *
  * Authentication page for user sign-in with email and password.
  * Includes form validation, error handling, and redirect functionality.
  */
@@ -18,7 +18,7 @@ export default function SignInPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
-  
+
   const redirectTo = searchParams.get('redirect') || '/dashboard';
 
   // Redirect if user is already authenticated
@@ -45,7 +45,7 @@ export default function SignInPage() {
   return (
     <AuthLayout
       variant="centered"
-      size="md"
+      size="3xl"
       title="Welcome Back"
       subtitle="Sign in to your PeerChamps account"
     >

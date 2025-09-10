@@ -1,6 +1,6 @@
 /**
  * Pagination Component
- * 
+ *
  * A flexible pagination component with different variants and features.
  * Supports page navigation, page size selection, and customizable styling.
  */
@@ -10,11 +10,11 @@
 import React, { ReactNode } from 'react';
 import { Button } from './Button';
 import { Select } from './Select';
-import { 
+import {
   ChevronLeftIcon,
   ChevronRightIcon,
   ChevronDoubleLeftIcon,
-  ChevronDoubleRightIcon
+  ChevronDoubleRightIcon,
 } from '@heroicons/react/24/outline';
 
 // Types
@@ -106,7 +106,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   const getVisiblePages = () => {
     const pages: (number | string)[] = [];
     const halfVisible = Math.floor(maxVisiblePages / 2);
-    
+
     if (totalPages <= maxVisiblePages) {
       // Show all pages if total is less than max visible
       for (let i = 1; i <= totalPages; i++) {
@@ -115,29 +115,29 @@ export const Pagination: React.FC<PaginationProps> = ({
     } else {
       // Always show first page
       pages.push(1);
-      
+
       if (current > halfVisible + 2) {
         pages.push('...');
       }
-      
+
       // Show pages around current page
       const start = Math.max(2, current - halfVisible);
       const end = Math.min(totalPages - 1, current + halfVisible);
-      
+
       for (let i = start; i <= end; i++) {
         pages.push(i);
       }
-      
+
       if (current < totalPages - halfVisible - 1) {
         pages.push('...');
       }
-      
+
       // Always show last page
       if (totalPages > 1) {
         pages.push(totalPages);
       }
     }
-    
+
     return pages;
   };
 
@@ -170,7 +170,9 @@ export const Pagination: React.FC<PaginationProps> = ({
   const visiblePages = getVisiblePages();
 
   return (
-    <div className={`flex items-center justify-between ${getSizeClasses()} ${className}`}>
+    <div
+      className={`flex items-center justify-between ${getSizeClasses()} ${className}`}
+    >
       {/* Left side - Total info and page size changer */}
       <div className="flex items-center space-x-4">
         {showTotal && (
@@ -178,7 +180,7 @@ export const Pagination: React.FC<PaginationProps> = ({
             Showing {startItem} to {endItem} of {total} {totalText}
           </span>
         )}
-        
+
         {showSizeChanger && onPageSizeChange && (
           <div className="flex items-center space-x-2">
             <span className="text-gray-700 dark:text-gray-300">Show:</span>
@@ -199,7 +201,9 @@ export const Pagination: React.FC<PaginationProps> = ({
       </div>
 
       {/* Center - Page navigation */}
-      <div className={`flex items-center space-x-1 ${getVariantClasses()} rounded-lg p-1`}>
+      <div
+        className={`flex items-center space-x-1 ${getVariantClasses()} rounded-lg p-1`}
+      >
         {/* First page button */}
         {showPrevNextJump && (
           <Button
@@ -332,7 +336,9 @@ export const SimplePagination: React.FC<SimplePaginationProps> = ({
   };
 
   return (
-    <div className={`flex items-center justify-center space-x-2 ${getSizeClasses()} ${className}`}>
+    <div
+      className={`flex items-center justify-center space-x-2 ${getSizeClasses()} ${className}`}
+    >
       <Button
         variant="outline"
         size={getButtonSize()}

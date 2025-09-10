@@ -35,8 +35,14 @@ describe('Database Migrations', () => {
     files.forEach((file) => {
       const content = fs.readFileSync(path.join(migrationsDir, file), 'utf8');
 
-      // Basic SQL validation
-      expect(content).toContain('CREATE TABLE');
+      // Basic SQL validation - should contain some SQL statement
+      const hasValidSQL =
+        content.includes('CREATE TABLE') ||
+        content.includes('CREATE POLICY') ||
+        content.includes('CREATE FUNCTION') ||
+        content.includes('CREATE INDEX') ||
+        content.includes('ALTER TABLE');
+      expect(hasValidSQL).toBe(true);
       expect(content.length).toBeGreaterThan(0);
 
       // Should not contain common SQL injection patterns

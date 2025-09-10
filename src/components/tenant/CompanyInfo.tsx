@@ -1,6 +1,6 @@
 /**
  * Company Info Component
- * 
+ *
  * Displays company information and settings for the current tenant.
  * Shows company details, subscription information, and settings.
  */
@@ -42,9 +42,7 @@ export const CompanyInfo: React.FC<CompanyInfoProps> = ({
     return (
       <Card className={className}>
         <CardBody>
-          <Alert variant="error">
-            {error}
-          </Alert>
+          <Alert variant="error">{error}</Alert>
         </CardBody>
       </Card>
     );
@@ -101,11 +99,11 @@ export const CompanyInfo: React.FC<CompanyInfoProps> = ({
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">
               {company.name}
             </h2>
-            <p className="text-gray-600 dark:text-gray-400">
-              {company.domain}
-            </p>
+            <p className="text-gray-600 dark:text-gray-400">{company.domain}</p>
           </div>
-          <Badge variant={getSubscriptionBadgeVariant(company.subscription_tier)}>
+          <Badge
+            variant={getSubscriptionBadgeVariant(company.subscription_tier)}
+          >
             {getSubscriptionBadgeText(company.subscription_tier)}
           </Badge>
         </div>
@@ -184,7 +182,10 @@ export const CompanyInfo: React.FC<CompanyInfoProps> = ({
                         </span>
                         <div
                           className="w-4 h-4 rounded border"
-                          style={{ backgroundColor: company.settings.branding.primary_color }}
+                          style={{
+                            backgroundColor:
+                              company.settings.branding.primary_color,
+                          }}
                         />
                         <span className="text-xs text-gray-900 dark:text-white">
                           {company.settings.branding.primary_color}
@@ -202,16 +203,24 @@ export const CompanyInfo: React.FC<CompanyInfoProps> = ({
                     Features
                   </h4>
                   <div className="space-y-1">
-                    {Object.entries(company.settings.features).map(([key, value]) => (
-                      <div key={key} className="flex items-center justify-between">
-                        <span className="text-xs text-gray-600 dark:text-gray-400 capitalize">
-                          {key.replace(/_/g, ' ')}:
-                        </span>
-                        <Badge variant={value ? 'success' : 'secondary'} size="sm">
-                          {value ? 'Enabled' : 'Disabled'}
-                        </Badge>
-                      </div>
-                    ))}
+                    {Object.entries(company.settings.features).map(
+                      ([key, value]) => (
+                        <div
+                          key={key}
+                          className="flex items-center justify-between"
+                        >
+                          <span className="text-xs text-gray-600 dark:text-gray-400 capitalize">
+                            {key.replace(/_/g, ' ')}:
+                          </span>
+                          <Badge
+                            variant={value ? 'success' : 'secondary'}
+                            size="sm"
+                          >
+                            {value ? 'Enabled' : 'Disabled'}
+                          </Badge>
+                        </div>
+                      )
+                    )}
                   </div>
                 </div>
               )}

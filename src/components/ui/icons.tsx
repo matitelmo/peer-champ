@@ -273,6 +273,67 @@ export const TrendingDownIcon = ({ className, size }: IconProps) => (
   </BaseIcon>
 );
 
+// Dashboard and business icons
+export const PhoneIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+  </BaseIcon>
+);
+
+export const VideoCameraIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M23 7l-7 5 7 5V7z" />
+    <rect width="15" height="11" x="1" y="5" rx="2" ry="2" />
+  </BaseIcon>
+);
+
+export const ClockIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <circle cx="12" cy="12" r="10" />
+    <path d="M12 6v6l4 2" />
+  </BaseIcon>
+);
+
+export const BuildingOfficeIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z" />
+    <path d="M6 12H4a2 2 0 0 0-2 2v8h20v-8a2 2 0 0 0-2-2h-2" />
+    <path d="M18 9v3" />
+    <path d="M13 9v3" />
+    <path d="M9 9v3" />
+    <path d="M9 18h.01" />
+    <path d="M13 18h.01" />
+  </BaseIcon>
+);
+
+export const CheckCircleIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+    <path d="M22 4 12 14.01l-3-3" />
+  </BaseIcon>
+);
+
+export const ExclamationTriangleIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+    <path d="M12 9v4" />
+    <path d="M12 17h.01" />
+  </BaseIcon>
+);
+
+export const CurrencyDollarIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M12 1v22" />
+    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+  </BaseIcon>
+);
+
+export const StarIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+  </BaseIcon>
+);
+
 // Export all icons as a group for easier importing
 export const Icons = {
   Plus: PlusIcon,
@@ -307,4 +368,12 @@ export const Icons = {
   Sort: SortIcon,
   Calendar: CalendarIcon,
   ChartBar: ChartBarIcon,
+  Phone: PhoneIcon,
+  VideoCamera: VideoCameraIcon,
+  Clock: ClockIcon,
+  BuildingOffice: BuildingOfficeIcon,
+  CheckCircle: CheckCircleIcon,
+  ExclamationTriangle: ExclamationTriangleIcon,
+  CurrencyDollar: CurrencyDollarIcon,
+  Star: StarIcon,
 };

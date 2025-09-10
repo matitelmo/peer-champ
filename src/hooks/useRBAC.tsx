@@ -1,13 +1,19 @@
 /**
  * Role-Based Access Control Hook
- * 
+ *
  * Provides role-based permissions and access control throughout the application.
  * Manages user roles, permissions, and provides utility functions for checking access.
  */
 
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from 'react';
 import { useAuth } from './useAuth';
 import { supabase } from '@/lib/supabase';
 
@@ -98,7 +104,7 @@ export const RBACProvider: React.FC<RBACProviderProps> = ({ children }) => {
           console.error('Error fetching user role:', error);
           setUserRole(null);
         } else {
-          setUserRole(data?.role as UserRole || null);
+          setUserRole((data?.role as UserRole) || null);
         }
       } catch (error) {
         console.error('Error in fetchUserRole:', error);
@@ -117,9 +123,10 @@ export const RBACProvider: React.FC<RBACProviderProps> = ({ children }) => {
 
     const permissions = defaultPermissions[userRole] || [];
 
-    return permissions.some(permission => 
-      (permission.action === '*' || permission.action === action) &&
-      (permission.resource === '*' || permission.resource === resource)
+    return permissions.some(
+      (permission) =>
+        (permission.action === '*' || permission.action === action) &&
+        (permission.resource === '*' || permission.resource === resource)
     );
   };
 
@@ -147,11 +154,7 @@ export const RBACProvider: React.FC<RBACProviderProps> = ({ children }) => {
     canAccess,
   };
 
-  return (
-    <RBACContext.Provider value={value}>
-      {children}
-    </RBACContext.Provider>
-  );
+  return <RBACContext.Provider value={value}>{children}</RBACContext.Provider>;
 };
 
 // Custom hook to use RBAC context

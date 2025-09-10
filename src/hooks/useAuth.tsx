@@ -1,13 +1,19 @@
 /**
  * Authentication Hook and Context
- * 
+ *
  * Provides authentication state and methods throughout the application.
  * Handles user session management, sign-in, sign-up, and sign-out operations.
  */
 
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
 
@@ -17,11 +23,18 @@ export interface AuthContextType {
   session: Session | null;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
-  signUp: (email: string, password: string, userData?: { firstName?: string; lastName?: string }) => Promise<{ error: any }>;
+  signUp: (
+    email: string,
+    password: string,
+    userData?: { firstName?: string; lastName?: string }
+  ) => Promise<{ error: any }>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<{ error: any }>;
   updatePassword: (newPassword: string) => Promise<{ error: any }>;
-  updateProfile: (updates: { firstName?: string; lastName?: string }) => Promise<{ error: any }>;
+  updateProfile: (updates: {
+    firstName?: string;
+    lastName?: string;
+  }) => Promise<{ error: any }>;
 }
 
 // Create the context
@@ -41,8 +54,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     // Get initial session
     const getInitialSession = async () => {
       try {
-        const { data: { session }, error } = await supabase.auth.getSession();
-        
+        const {
+          data: { session },
+          error,
+        } = await supabase.auth.getSession();
+
         if (error) {
           console.error('Error getting initial session:', error);
         } else {
@@ -59,21 +75,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     getInitialSession();
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        console.log('Auth state changed:', event, session?.user?.email);
-        
-        setSession(session);
-        setUser(session?.user ?? null);
-        setLoading(false);
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log('Auth state changed:', event, session?.user?.email);
 
-        // Handle specific auth events
-        if (event === 'SIGNED_IN' && session?.user) {
-          // Create or update user profile in our database
-          await createOrUpdateUserProfile(session.user);
-        }
+      setSession(session);
+      setUser(session?.user ?? null);
+      setLoading(false);
+
+      // Handle specific auth events
+      if (event === 'SIGNED_IN' && session?.user) {
+        // Create or update user profile in our database
+        await createOrUpdateUserProfile(session.user);
       }
-    );
+    });
 
     return () => {
       subscription.unsubscribe();
@@ -83,16 +99,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   // Create or update user profile in our database
   const createOrUpdateUserProfile = async (user: User) => {
     try {
-      const { error } = await supabase
-        .from('users')
-        .upsert({
+      const { error } = await supabase.from('users').upsert(
+        {
           id: user.id,
           email: user.email,
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString(),
-        }, {
-          onConflict: 'id'
-        });
+        },
+        {
+          onConflict: 'id',
+        }
+      );
 
       if (error) {
         console.error('Error creating/updating user profile:', error);
@@ -103,16 +120,46 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   // Sign in with email and password
-  const signIn = async (email: string, password: string): Promise<{ error: any }> => {
+  const signIn = async (
+    email: string,
+    password: string
+  ): Promise<{ error: any }> => {
     try {
       setLoading(true);
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
+
+      if (error) {
+        console.error('Sign in error:', error);
+        // Provide more user-friendly error messages
+        if (error.message.includes('Email not confirmed')) {
+          return {
+            error: {
+              message:
+                'Please check your email and click the confirmation link before signing in.',
+            },
+          };
+        }
+        if (error.message.includes('Invalid login credentials')) {
+          return {
+            error: {
+              message:
+                'Invalid email or password. Please check your credentials and try again.',
+            },
+          };
+        }
+      }
+
       return { error };
     } catch (error) {
-      return { error };
+      console.error('Unexpected sign in error:', error);
+      return {
+        error: {
+          message: 'An unexpected error occurred. Please try again.',
+        },
+      };
     } finally {
       setLoading(false);
     }
@@ -120,8 +167,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   // Sign up with email and password
   const signUp = async (
-    email: string, 
-    password: string, 
+    email: string,
+    password: string,
     userData?: { firstName?: string; lastName?: string }
   ): Promise<{ error: any }> => {
     try {
@@ -133,8 +180,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           data: {
             first_name: userData?.firstName,
             last_name: userData?.lastName,
-          }
-        }
+          },
+        },
       });
       return { error };
     } catch (error) {
@@ -169,10 +216,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   // Update password
-  const updatePassword = async (newPassword: string): Promise<{ error: any }> => {
+  const updatePassword = async (
+    newPassword: string
+  ): Promise<{ error: any }> => {
     try {
       const { error } = await supabase.auth.updateUser({
-        password: newPassword
+        password: newPassword,
       });
       return { error };
     } catch (error) {
@@ -181,13 +230,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   // Update user profile
-  const updateProfile = async (updates: { firstName?: string; lastName?: string }): Promise<{ error: any }> => {
+  const updateProfile = async (updates: {
+    firstName?: string;
+    lastName?: string;
+  }): Promise<{ error: any }> => {
     try {
       const { error } = await supabase.auth.updateUser({
         data: {
           first_name: updates.firstName,
           last_name: updates.lastName,
-        }
+        },
       });
       return { error };
     } catch (error) {
@@ -207,11 +259,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     updateProfile,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 // Custom hook to use auth context
@@ -224,7 +272,9 @@ export const useAuth = (): AuthContextType => {
 };
 
 // Higher-order component for protecting routes
-export const withAuth = <P extends object>(Component: React.ComponentType<P>) => {
+export const withAuth = <P extends object>(
+  Component: React.ComponentType<P>
+) => {
   const AuthenticatedComponent = (props: P) => {
     const { user, loading } = useAuth();
 
@@ -240,10 +290,14 @@ export const withAuth = <P extends object>(Component: React.ComponentType<P>) =>
       return (
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Authentication Required</h2>
-            <p className="text-gray-600 mb-4">Please sign in to access this page.</p>
-            <a 
-              href="/auth/signin" 
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              Authentication Required
+            </h2>
+            <p className="text-gray-600 mb-4">
+              Please sign in to access this page.
+            </p>
+            <a
+              href="/auth/signin"
               className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700"
             >
               Sign In

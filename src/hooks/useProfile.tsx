@@ -1,14 +1,21 @@
 /**
  * User Profile Hook
- * 
+ *
  * Manages user profile data, including personal information, preferences,
  * and profile updates. Integrates with the authentication system.
  */
 
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from 'react';
 import { useAuth } from './useAuth';
+import { supabase } from '@/lib/supabase';
 import { userService } from '@/lib/database';
 import type { User, UpdateUser } from '@/types/database';
 
@@ -17,10 +24,18 @@ export interface ProfileContextType {
   profile: User | null;
   loading: boolean;
   error: string | null;
-  updateProfile: (updates: UpdateUser) => Promise<{ success: boolean; error?: string }>;
+  updateProfile: (
+    updates: UpdateUser
+  ) => Promise<{ success: boolean; error?: string }>;
   refreshProfile: () => Promise<void>;
-  updatePassword: (currentPassword: string, newPassword: string) => Promise<{ success: boolean; error?: string }>;
-  updateEmail: (newEmail: string, password: string) => Promise<{ success: boolean; error?: string }>;
+  updatePassword: (
+    currentPassword: string,
+    newPassword: string
+  ) => Promise<{ success: boolean; error?: string }>;
+  updateEmail: (
+    newEmail: string,
+    password: string
+  ) => Promise<{ success: boolean; error?: string }>;
   deleteAccount: () => Promise<{ success: boolean; error?: string }>;
 }
 
@@ -32,8 +47,16 @@ interface ProfileProviderProps {
   children: ReactNode;
 }
 
-export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) => {
-  const { user, updatePassword: authUpdatePassword, updateProfile: authUpdateProfile } = useAuth();
+export const ProfileProvider: React.FC<ProfileProviderProps> = ({
+  children,
+}) => {
+  const {
+    user,
+    updatePassword: authUpdatePassword,
+    updateProfile: authUpdateProfile,
+    signIn,
+    signOut,
+  } = useAuth();
   const [profile, setProfile] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -72,7 +95,9 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
   }, [user]);
 
   // Update profile in database
-  const updateProfile = async (updates: UpdateUser): Promise<{ success: boolean; error?: string }> => {
+  const updateProfile = async (
+    updates: UpdateUser
+  ): Promise<{ success: boolean; error?: string }> => {
     if (!user) {
       return { success: false, error: 'No authenticated user' };
     }
@@ -81,7 +106,10 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       setError(null);
 
       // Update in database
-      const { data, error: dbError } = await userService.update(user.id, updates);
+      const { data, error: dbError } = await userService.update(
+        user.id,
+        updates
+      );
 
       if (dbError) {
         return { success: false, error: dbError.message };
@@ -100,7 +128,8 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
 
       return { success: true };
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to update profile';
+      const errorMessage =
+        err instanceof Error ? err.message : 'Failed to update profile';
       setError(errorMessage);
       return { success: false, error: errorMessage };
     }
@@ -113,7 +142,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
 
   // Update password
   const updatePassword = async (
-    currentPassword: string, 
+    currentPassword: string,
     newPassword: string
   ): Promise<{ success: boolean; error?: string }> => {
     if (!user) {
@@ -124,7 +153,6 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       setError(null);
 
       // Verify current password by attempting to sign in
-      const { signIn } = useAuth();
       const { error: signInError } = await signIn(user.email!, currentPassword);
 
       if (signInError) {
@@ -140,7 +168,8 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
 
       return { success: true };
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to update password';
+      const errorMessage =
+        err instanceof Error ? err.message : 'Failed to update password';
       setError(errorMessage);
       return { success: false, error: errorMessage };
     }
@@ -148,7 +177,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
 
   // Update email
   const updateEmail = async (
-    newEmail: string, 
+    newEmail: string,
     password: string
   ): Promise<{ success: boolean; error?: string }> => {
     if (!user) {
@@ -159,7 +188,6 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       setError(null);
 
       // Verify password
-      const { signIn } = useAuth();
       const { error: signInError } = await signIn(user.email!, password);
 
       if (signInError) {
@@ -168,7 +196,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
 
       // Update email in auth
       const { error: updateError } = await supabase.auth.updateUser({
-        email: newEmail
+        email: newEmail,
       });
 
       if (updateError) {
@@ -177,7 +205,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
 
       // Update email in database
       const { error: dbError } = await userService.update(user.id, {
-        email: newEmail
+        email: newEmail,
       });
 
       if (dbError) {
@@ -186,14 +214,18 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
 
       return { success: true };
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to update email';
+      const errorMessage =
+        err instanceof Error ? err.message : 'Failed to update email';
       setError(errorMessage);
       return { success: false, error: errorMessage };
     }
   };
 
   // Delete account
-  const deleteAccount = async (): Promise<{ success: boolean; error?: string }> => {
+  const deleteAccount = async (): Promise<{
+    success: boolean;
+    error?: string;
+  }> => {
     if (!user) {
       return { success: false, error: 'No authenticated user' };
     }
@@ -209,12 +241,12 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
       }
 
       // Sign out user
-      const { signOut } = useAuth();
       await signOut();
 
       return { success: true };
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to delete account';
+      const errorMessage =
+        err instanceof Error ? err.message : 'Failed to delete account';
       setError(errorMessage);
       return { success: false, error: errorMessage };
     }
@@ -232,9 +264,7 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) =>
   };
 
   return (
-    <ProfileContext.Provider value={value}>
-      {children}
-    </ProfileContext.Provider>
+    <ProfileContext.Provider value={value}>{children}</ProfileContext.Provider>
   );
 };
 

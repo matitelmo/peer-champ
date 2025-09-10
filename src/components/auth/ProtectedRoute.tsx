@@ -1,6 +1,6 @@
 /**
  * Protected Route Component
- * 
+ *
  * Wraps routes that require authentication. Redirects unauthenticated users
  * to the sign-in page and shows loading states during auth checks.
  */
@@ -132,11 +132,7 @@ export const RoleProtectedRoute: React.FC<RoleProtectedRouteProps> = ({
     );
   }
 
-  return (
-    <ProtectedRoute {...props}>
-      {children}
-    </ProtectedRoute>
-  );
+  return <ProtectedRoute {...props}>{children}</ProtectedRoute>;
 };
 
 export default ProtectedRoute;

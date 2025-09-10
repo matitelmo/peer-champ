@@ -1,6 +1,6 @@
 /**
  * Profile Form Component
- * 
+ *
  * Allows users to view and edit their profile information.
  * Includes form validation, error handling, and loading states.
  */
@@ -41,7 +41,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
   className = '',
 }) => {
   const { profile, loading, error, updateProfile } = useProfile();
-  
+
   const [formData, setFormData] = useState<ProfileFormData>({
     first_name: '',
     last_name: '',
@@ -55,7 +55,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
       language: 'en',
     },
   });
-  
+
   const [errors, setErrors] = useState<Partial<ProfileFormData>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -109,7 +109,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -145,44 +145,52 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
   };
 
   // Handle input changes
-  const handleInputChange = (field: keyof ProfileFormData) => (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) => {
-    const value = e.target.value;
-    
-    setFormData(prev => ({
-      ...prev,
-      [field]: value,
-    }));
-    
-    // Clear error when user starts typing
-    if (errors[field]) {
-      setErrors(prev => ({
+  const handleInputChange =
+    (field: keyof ProfileFormData) =>
+    (
+      e: React.ChangeEvent<
+        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+      >
+    ) => {
+      const value = e.target.value;
+
+      setFormData((prev) => ({
         ...prev,
-        [field]: undefined,
+        [field]: value,
       }));
-    }
-    
-    // Clear submit error
-    if (submitError) {
-      setSubmitError(null);
-    }
-  };
+
+      // Clear error when user starts typing
+      if (errors[field]) {
+        setErrors((prev) => ({
+          ...prev,
+          [field]: undefined,
+        }));
+      }
+
+      // Clear submit error
+      if (submitError) {
+        setSubmitError(null);
+      }
+    };
 
   // Handle profile object changes
-  const handleProfileChange = (field: keyof ProfileFormData['profile']) => (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) => {
-    const value = e.target.value;
-    
-    setFormData(prev => ({
-      ...prev,
-      profile: {
-        ...prev.profile,
-        [field]: value,
-      },
-    }));
-  };
+  const handleProfileChange =
+    (field: keyof ProfileFormData['profile']) =>
+    (
+      e: React.ChangeEvent<
+        HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+      >
+    ) => {
+      const value = e.target.value;
+
+      setFormData((prev) => ({
+        ...prev,
+        profile: {
+          ...prev.profile,
+          [field]: value,
+        },
+      }));
+    };
 
   if (loading) {
     return (
@@ -218,11 +226,11 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">
               Basic Information
             </h3>
-            
+
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label 
-                  htmlFor="first_name" 
+                <label
+                  htmlFor="first_name"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                 >
                   First Name
@@ -245,8 +253,8 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
               </div>
 
               <div>
-                <label 
-                  htmlFor="last_name" 
+                <label
+                  htmlFor="last_name"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                 >
                   Last Name
@@ -270,8 +278,8 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
             </div>
 
             <div>
-              <label 
-                htmlFor="email" 
+              <label
+                htmlFor="email"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
                 Email Address
@@ -294,8 +302,8 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
             </div>
 
             <div>
-              <label 
-                htmlFor="role" 
+              <label
+                htmlFor="role"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
                 Role
@@ -325,11 +333,11 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">
               Professional Information
             </h3>
-            
+
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label 
-                  htmlFor="department" 
+                <label
+                  htmlFor="department"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                 >
                   Department
@@ -346,8 +354,8 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
               </div>
 
               <div>
-                <label 
-                  htmlFor="phone" 
+                <label
+                  htmlFor="phone"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                 >
                   Phone Number
@@ -365,8 +373,8 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
             </div>
 
             <div>
-              <label 
-                htmlFor="bio" 
+              <label
+                htmlFor="bio"
                 className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
               >
                 Bio
@@ -388,11 +396,11 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">
               Preferences
             </h3>
-            
+
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label 
-                  htmlFor="timezone" 
+                <label
+                  htmlFor="timezone"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                 >
                   Timezone
@@ -416,8 +424,8 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
               </div>
 
               <div>
-                <label 
-                  htmlFor="language" 
+                <label
+                  htmlFor="language"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                 >
                   Language

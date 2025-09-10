@@ -28,6 +28,9 @@ export type { RadioProps } from './Radio';
 export { Toggle, toggleVariants, toggleThumbVariants } from './Toggle';
 export type { ToggleProps } from './Toggle';
 
+export { Badge, badgeVariants } from './Badge';
+export type { BadgeProps } from './Badge';
+
 // Card components
 export {
   Card,
@@ -140,7 +143,11 @@ export { Dialog, FormDialog, AlertDialog } from './Dialog';
 export type { DialogProps, FormDialogProps, AlertDialogProps } from './Dialog';
 
 export { Drawer, FilterDrawer, SettingsDrawer } from './Drawer';
-export type { DrawerProps, FilterDrawerProps, SettingsDrawerProps } from './Drawer';
+export type {
+  DrawerProps,
+  FilterDrawerProps,
+  SettingsDrawerProps,
+} from './Drawer';
 
 export { Popover, Tooltip, Dropdown } from './Popover';
 export type { PopoverProps, TooltipProps, DropdownProps } from './Popover';
@@ -153,11 +160,20 @@ export { DataTable } from './DataTable';
 export type { DataTableProps } from './DataTable';
 
 export { VirtualizedTable, InfiniteScrollTable } from './VirtualizedTable';
-export type { VirtualizedTableProps, InfiniteScrollTableProps } from './VirtualizedTable';
+export type {
+  VirtualizedTableProps,
+  InfiniteScrollTableProps,
+} from './VirtualizedTable';
 
 // Navigation components
 export { Navbar, Sidebar, Breadcrumb, Tabs } from './Navigation';
-export type { NavbarProps, SidebarProps, BreadcrumbProps, TabsProps, NavItem } from './Navigation';
+export type {
+  NavbarProps,
+  SidebarProps,
+  BreadcrumbProps,
+  TabsProps,
+  NavItem,
+} from './Navigation';
 
 export { Pagination, SimplePagination } from './Pagination';
 export type { PaginationProps, SimplePaginationProps } from './Pagination';

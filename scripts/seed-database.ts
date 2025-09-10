@@ -1,6 +1,6 @@
 /**
  * Database Seed Script
- * 
+ *
  * Populates the database with sample data for development and testing.
  * This script creates companies, users, advocates, opportunities, and reference calls.
  */
@@ -142,15 +142,21 @@ const sampleAdvocates = [
     ],
     availability_score: 85,
     total_calls_completed: 12,
-    last_call_date: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+    last_call_date: new Date(
+      Date.now() - 7 * 24 * 60 * 60 * 1000
+    ).toISOString(),
     max_calls_per_month: 8,
     preferred_call_times: ['09:00-12:00', '14:00-17:00'],
     timezone: 'America/New_York',
     languages: ['English'],
     call_duration_preference: 30,
     status: 'active' as const,
-    enrollment_date: new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString(),
-    last_activity_date: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+    enrollment_date: new Date(
+      Date.now() - 90 * 24 * 60 * 60 * 1000
+    ).toISOString(),
+    last_activity_date: new Date(
+      Date.now() - 1 * 24 * 60 * 60 * 1000
+    ).toISOString(),
     total_rewards_earned: 450,
     preferred_reward_type: 'donation' as const,
     internal_notes: 'Very engaged advocate, great technical knowledge',
@@ -176,15 +182,21 @@ const sampleAdvocates = [
     ],
     availability_score: 70,
     total_calls_completed: 8,
-    last_call_date: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
+    last_call_date: new Date(
+      Date.now() - 14 * 24 * 60 * 60 * 1000
+    ).toISOString(),
     max_calls_per_month: 6,
     preferred_call_times: ['10:00-12:00', '15:00-17:00'],
     timezone: 'America/Los_Angeles',
     languages: ['English', 'Spanish'],
     call_duration_preference: 45,
     status: 'active' as const,
-    enrollment_date: new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString(),
-    last_activity_date: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+    enrollment_date: new Date(
+      Date.now() - 60 * 24 * 60 * 60 * 1000
+    ).toISOString(),
+    last_activity_date: new Date(
+      Date.now() - 3 * 24 * 60 * 60 * 1000
+    ).toISOString(),
     total_rewards_earned: 300,
     preferred_reward_type: 'gift_card' as const,
     internal_notes: 'Excellent for security and compliance discussions',
@@ -210,15 +222,21 @@ const sampleAdvocates = [
     ],
     availability_score: 90,
     total_calls_completed: 15,
-    last_call_date: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+    last_call_date: new Date(
+      Date.now() - 3 * 24 * 60 * 60 * 1000
+    ).toISOString(),
     max_calls_per_month: 10,
     preferred_call_times: ['08:00-11:00', '13:00-16:00'],
     timezone: 'Asia/Tokyo',
     languages: ['English', 'Mandarin'],
     call_duration_preference: 30,
     status: 'active' as const,
-    enrollment_date: new Date(Date.now() - 120 * 24 * 60 * 60 * 1000).toISOString(),
-    last_activity_date: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+    enrollment_date: new Date(
+      Date.now() - 120 * 24 * 60 * 60 * 1000
+    ).toISOString(),
+    last_activity_date: new Date(
+      Date.now() - 1 * 24 * 60 * 60 * 1000
+    ).toISOString(),
     total_rewards_earned: 600,
     preferred_reward_type: 'donation' as const,
     internal_notes: 'Very active advocate, great for product discussions',
@@ -250,7 +268,9 @@ const sampleOpportunities = [
     currency: 'USD',
     deal_stage: 'proposal' as const,
     probability: 75,
-    expected_close_date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+    expected_close_date: new Date(
+      Date.now() + 30 * 24 * 60 * 60 * 1000
+    ).toISOString(),
     reference_request_status: 'requested' as const,
     reference_urgency: 'medium' as const,
     reference_type_needed: 'technical' as const,
@@ -262,17 +282,24 @@ const sampleOpportunities = [
     external_crm_id: 'SF-OPP-001',
     external_crm_type: 'salesforce' as const,
     external_crm_url: 'https://salesforce.com/opportunity/001',
-    reference_needed_by: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
-    follow_up_date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+    reference_needed_by: new Date(
+      Date.now() + 14 * 24 * 60 * 60 * 1000
+    ).toISOString(),
+    follow_up_date: new Date(
+      Date.now() + 7 * 24 * 60 * 60 * 1000
+    ).toISOString(),
     created_date: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString(),
     internal_notes: 'High priority opportunity, customer is very interested',
-    sales_notes: 'Customer has budget approved, waiting for technical validation',
+    sales_notes:
+      'Customer has budget approved, waiting for technical validation',
     competitive_situation: 'Competing with 2 other vendors',
     decision_criteria: ['Technical Fit', 'Price', 'Support'],
     key_stakeholders: ['CTO', 'VP Engineering', 'Procurement'],
     tags: ['api', 'integration', 'high-value'],
     priority_score: 85,
-    last_activity_date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+    last_activity_date: new Date(
+      Date.now() - 2 * 24 * 60 * 60 * 1000
+    ).toISOString(),
   },
   {
     company_id: '', // Will be set after companies are created
@@ -289,13 +316,19 @@ const sampleOpportunities = [
     opportunity_name: 'Security Compliance Implementation',
     use_case: 'Customer needs to implement security compliance for SOC 2',
     product_interest: ['Security Features', 'Compliance Tools', 'Audit Logs'],
-    technical_requirements: ['SOC 2 Compliance', 'Audit Logging', 'Access Controls'],
+    technical_requirements: [
+      'SOC 2 Compliance',
+      'Audit Logging',
+      'Access Controls',
+    ],
     business_challenges: ['Compliance Requirements', 'Security Audit'],
     deal_value: 75000,
     currency: 'USD',
     deal_stage: 'qualification' as const,
     probability: 60,
-    expected_close_date: new Date(Date.now() + 45 * 24 * 60 * 60 * 1000).toISOString(),
+    expected_close_date: new Date(
+      Date.now() + 45 * 24 * 60 * 60 * 1000
+    ).toISOString(),
     reference_request_status: 'not_requested' as const,
     reference_urgency: 'low' as const,
     reference_type_needed: 'general' as const,
@@ -307,17 +340,27 @@ const sampleOpportunities = [
     external_crm_id: 'SF-OPP-002',
     external_crm_type: 'salesforce' as const,
     external_crm_url: 'https://salesforce.com/opportunity/002',
-    reference_needed_by: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-    follow_up_date: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toISOString(),
+    reference_needed_by: new Date(
+      Date.now() + 30 * 24 * 60 * 60 * 1000
+    ).toISOString(),
+    follow_up_date: new Date(
+      Date.now() + 10 * 24 * 60 * 60 * 1000
+    ).toISOString(),
     created_date: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
     internal_notes: 'Customer is in early evaluation phase',
     sales_notes: 'Need to schedule technical demo',
     competitive_situation: 'Early stage, no clear competitors yet',
-    decision_criteria: ['Security Features', 'Compliance', 'Ease of Implementation'],
+    decision_criteria: [
+      'Security Features',
+      'Compliance',
+      'Ease of Implementation',
+    ],
     key_stakeholders: ['VP Engineering', 'Security Team', 'Compliance Officer'],
     tags: ['security', 'compliance', 'fintech'],
     priority_score: 70,
-    last_activity_date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+    last_activity_date: new Date(
+      Date.now() - 5 * 24 * 60 * 60 * 1000
+    ).toISOString(),
   },
 ];
 
@@ -427,11 +470,13 @@ async function seedDatabase() {
 
     // 4. Update opportunity company and sales rep IDs and create opportunities
     console.log('💼 Creating opportunities...');
-    const opportunitiesWithIds = sampleOpportunities.map((opportunity, index) => ({
-      ...opportunity,
-      company_id: companies[index % companies.length].id,
-      sales_rep_id: users.filter(u => u.role === 'sales_rep')[index % 2].id,
-    }));
+    const opportunitiesWithIds = sampleOpportunities.map(
+      (opportunity, index) => ({
+        ...opportunity,
+        company_id: companies[index % companies.length].id,
+        sales_rep_id: users.filter((u) => u.role === 'sales_rep')[index % 2].id,
+      })
+    );
 
     const { data: opportunities, error: opportunitiesError } = await supabase
       .from('opportunities')
@@ -439,7 +484,9 @@ async function seedDatabase() {
       .select();
 
     if (opportunitiesError) {
-      throw new Error(`Error creating opportunities: ${opportunitiesError.message}`);
+      throw new Error(
+        `Error creating opportunities: ${opportunitiesError.message}`
+      );
     }
 
     console.log(`✅ Created ${opportunities.length} opportunities`);
@@ -450,7 +497,7 @@ async function seedDatabase() {
       ...call,
       opportunity_id: opportunities[index].id,
       advocate_id: advocates[index].id,
-      sales_rep_id: users.filter(u => u.role === 'sales_rep')[index % 2].id,
+      sales_rep_id: users.filter((u) => u.role === 'sales_rep')[index % 2].id,
     }));
 
     const { data: referenceCalls, error: referenceCallsError } = await supabase
@@ -459,7 +506,9 @@ async function seedDatabase() {
       .select();
 
     if (referenceCallsError) {
-      throw new Error(`Error creating reference calls: ${referenceCallsError.message}`);
+      throw new Error(
+        `Error creating reference calls: ${referenceCallsError.message}`
+      );
     }
 
     console.log(`✅ Created ${referenceCalls.length} reference calls`);
@@ -471,7 +520,6 @@ async function seedDatabase() {
     console.log(`   Advocates: ${advocates.length}`);
     console.log(`   Opportunities: ${opportunities.length}`);
     console.log(`   Reference Calls: ${referenceCalls.length}`);
-
   } catch (error) {
     console.error('❌ Error seeding database:', error);
     process.exit(1);

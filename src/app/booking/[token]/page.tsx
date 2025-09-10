@@ -1,0 +1,118 @@
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import { validateMagicLink } from '@/lib/services/bookingLinkService';
+import { getAdvocate } from '@/lib/services/advocateService';
+import AvailabilityCalendar, { TimeSlot } from '@/components/booking/AvailabilityCalendar';
+import ProspectForm from '@/components/booking/ProspectForm';
+import { Spinner } from '@/components/ui/Spinner';
+import { ErrorState } from '@/components/ui/ErrorState';
+
+interface PageProps {
+  params: { token: string };
+}
+
+export default function BookingTokenPage({ params }: PageProps) {
+  const { token } = params;
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [linkData, setLinkData] = useState<{ opportunityId: string; advocateId: string } | null>(
+    null
+  );
+  const [advocate, setAdvocate] = useState<any | null>(null);
+  const [selectedSlot, setSelectedSlot] = useState<TimeSlot | null>(null);
+  const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    const run = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await validateMagicLink(token);
+        setLinkData(data);
+        const adv = await getAdvocate(data.advocateId);
+        setAdvocate(adv);
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : 'Invalid booking link';
+        setError(msg);
+      } finally {
+        setLoading(false);
+      }
+    };
+    run();
+  }, [token]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Spinner />
+      </div>
+    );
+  }
+
+  if (error || !linkData) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-6">
+        <ErrorState
+          title="Booking link error"
+          message={error || 'Invalid or expired booking link.'}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-3xl mx-auto px-4 py-10">
+        <h1 className="text-2xl font-semibold mb-4">Schedule a call</h1>
+        <div className="rounded-lg bg-white p-6 shadow">
+          <p className="text-gray-700 mb-2">Opportunity: {linkData.opportunityId}</p>
+          <p className="text-gray-700 mb-6">Advocate: {linkData.advocateId}</p>
+          {advocate ? (
+            <div className="space-y-2">
+              <h2 className="text-xl font-medium">{advocate.name}</h2>
+              <p className="text-gray-700">{advocate.title}{advocate.company_name ? ` · ${advocate.company_name}` : ''}</p>
+              {advocate.industry && (
+                <p className="text-gray-600">Industry: {advocate.industry}</p>
+              )}
+              {advocate.geographic_region && (
+                <p className="text-gray-600">Region: {advocate.geographic_region}</p>
+              )}
+              {Array.isArray(advocate.expertise_areas) && advocate.expertise_areas.length > 0 && (
+                <p className="text-gray-600">Expertise: {advocate.expertise_areas.join(', ')}</p>
+              )}
+              {typeof advocate.average_rating === 'number' && (
+                <p className="text-gray-600">Avg. Rating: {advocate.average_rating.toFixed(1)} / 5</p>
+              )}
+            </div>
+          ) : (
+            <p className="text-gray-600">Loading advocate details…</p>
+          )}
+          <div className="mt-6">
+            <h3 className="font-medium mb-2">Select a time</h3>
+            <AvailabilityCalendar
+              slots={[]}
+              onSelect={(slot) => setSelectedSlot(slot)}
+            />
+            {selectedSlot && (
+              <div className="mt-3 text-sm text-gray-700">
+                Selected: {new Date(selectedSlot.start).toLocaleString()} -{' '}
+                {new Date(selectedSlot.end).toLocaleString()}
+              </div>
+            )}
+          </div>
+          <div className="mt-8">
+            <h3 className="font-medium mb-2">Your information</h3>
+            {submitted ? (
+              <div className="text-green-700">Thanks! We saved your details.</div>
+            ) : (
+              <ProspectForm token={token} onSubmitted={() => setSubmitted(true)} />
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+

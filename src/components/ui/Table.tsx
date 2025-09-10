@@ -1,6 +1,6 @@
 /**
  * Table Component
- * 
+ *
  * A comprehensive table component with sorting, pagination, filtering, and selection.
  * Supports different variants, responsive design, and accessibility features.
  */
@@ -13,13 +13,13 @@ import { Input } from './Input';
 import { Select } from './Select';
 import { Checkbox } from './Checkbox';
 import { Spinner } from './Spinner';
-import { 
-  ChevronUpIcon, 
-  ChevronDownIcon, 
-  ChevronLeftIcon, 
+import {
+  ChevronUpIcon,
+  ChevronDownIcon,
+  ChevronLeftIcon,
   ChevronRightIcon,
   FunnelIcon,
-  XMarkIcon
+  XMarkIcon,
 } from '@heroicons/react/24/outline';
 
 // Types
@@ -64,7 +64,10 @@ export interface TableProps<T = any> {
   onPaginationChange?: (page: number, pageSize: number) => void;
   rowKey?: keyof T | ((record: T) => string);
   rowClassName?: (record: T, index: number) => string;
-  onRow?: (record: T, index: number) => {
+  onRow?: (
+    record: T,
+    index: number
+  ) => {
     onClick?: () => void;
     onDoubleClick?: () => void;
     onMouseEnter?: () => void;
@@ -99,8 +102,12 @@ export const Table = <T extends Record<string, any>>({
   showHeader = true,
   sticky = false,
 }: TableProps<T>) => {
-  const [localSorting, setLocalSorting] = useState<{ field: string; order: 'asc' | 'desc' } | null>(null);
-  const [localFilters, setLocalFilters] = useState<Record<string, any>>(filters);
+  const [localSorting, setLocalSorting] = useState<{
+    field: string;
+    order: 'asc' | 'desc';
+  } | null>(null);
+  const [localFilters, setLocalFilters] =
+    useState<Record<string, any>>(filters);
 
   // Get row key
   const getRowKey = (record: T, index: number): string => {
@@ -112,7 +119,7 @@ export const Table = <T extends Record<string, any>>({
 
   // Handle sorting
   const handleSort = (field: string) => {
-    const column = columns.find(col => col.key === field);
+    const column = columns.find((col) => col.key === field);
     if (!column?.sortable) return;
 
     let newOrder: 'asc' | 'desc' = 'asc';
@@ -155,11 +162,15 @@ export const Table = <T extends Record<string, any>>({
     // Apply local sorting if no external sorting
     if (!onSort && localSorting) {
       result.sort((a, b) => {
-        const column = columns.find(col => col.key === localSorting.field);
+        const column = columns.find((col) => col.key === localSorting.field);
         if (!column) return 0;
 
-        const aValue = column.dataIndex ? a[column.dataIndex] : a[localSorting.field];
-        const bValue = column.dataIndex ? b[column.dataIndex] : b[localSorting.field];
+        const aValue = column.dataIndex
+          ? a[column.dataIndex]
+          : a[localSorting.field];
+        const bValue = column.dataIndex
+          ? b[column.dataIndex]
+          : b[localSorting.field];
 
         if (aValue < bValue) return localSorting.order === 'asc' ? -1 : 1;
         if (aValue > bValue) return localSorting.order === 'asc' ? 1 : -1;
@@ -169,11 +180,13 @@ export const Table = <T extends Record<string, any>>({
 
     // Apply local filtering if no external filtering
     if (!onFilter) {
-      result = result.filter(record => {
+      result = result.filter((record) => {
         return Object.entries(localFilters).every(([field, value]) => {
           if (!value) return true;
           const recordValue = record[field];
-          return String(recordValue).toLowerCase().includes(String(value).toLowerCase());
+          return String(recordValue)
+            .toLowerCase()
+            .includes(String(value).toLowerCase());
         });
       });
     }
@@ -211,9 +224,11 @@ export const Table = <T extends Record<string, any>>({
     if (currentSorting?.field !== field) {
       return <ChevronUpIcon className="h-4 w-4 text-gray-400" />;
     }
-    return currentSorting.order === 'asc' ? 
-      <ChevronUpIcon className="h-4 w-4 text-primary-600" /> : 
-      <ChevronDownIcon className="h-4 w-4 text-primary-600" />;
+    return currentSorting.order === 'asc' ? (
+      <ChevronUpIcon className="h-4 w-4 text-primary-600" />
+    ) : (
+      <ChevronDownIcon className="h-4 w-4 text-primary-600" />
+    );
   };
 
   // Render filter input
@@ -246,16 +261,26 @@ export const Table = <T extends Record<string, any>>({
     if (!showHeader) return null;
 
     return (
-      <thead className={`bg-gray-50 dark:bg-gray-800 ${sticky ? 'sticky top-0 z-10' : ''}`}>
+      <thead
+        className={`bg-gray-50 dark:bg-gray-800 ${sticky ? 'sticky top-0 z-10' : ''}`}
+      >
         <tr>
           {selection && (
             <th className="px-4 py-3 text-left">
               <Checkbox
-                checked={selection.selectedRowKeys.length === processedData.length && processedData.length > 0}
-                indeterminate={selection.selectedRowKeys.length > 0 && selection.selectedRowKeys.length < processedData.length}
+                checked={
+                  selection.selectedRowKeys.length === processedData.length &&
+                  processedData.length > 0
+                }
+                indeterminate={
+                  selection.selectedRowKeys.length > 0 &&
+                  selection.selectedRowKeys.length < processedData.length
+                }
                 onChange={(checked) => {
                   if (checked) {
-                    const allKeys = processedData.map((record, index) => getRowKey(record, index));
+                    const allKeys = processedData.map((record, index) =>
+                      getRowKey(record, index)
+                    );
                     selection.onChange(allKeys, processedData);
                   } else {
                     selection.onChange([], []);
@@ -296,7 +321,10 @@ export const Table = <T extends Record<string, any>>({
       return (
         <tbody>
           <tr>
-            <td colSpan={columns.length + (selection ? 1 : 0)} className="px-4 py-8 text-center">
+            <td
+              colSpan={columns.length + (selection ? 1 : 0)}
+              className="px-4 py-8 text-center"
+            >
               <Spinner size="lg" />
             </td>
           </tr>
@@ -308,7 +336,10 @@ export const Table = <T extends Record<string, any>>({
       return (
         <tbody>
           <tr>
-            <td colSpan={columns.length + (selection ? 1 : 0)} className="px-4 py-8 text-center text-gray-500 dark:text-gray-400">
+            <td
+              colSpan={columns.length + (selection ? 1 : 0)}
+              className="px-4 py-8 text-center text-gray-500 dark:text-gray-400"
+            >
               {emptyText}
             </td>
           </tr>
@@ -343,8 +374,8 @@ export const Table = <T extends Record<string, any>>({
                     onChange={(checked) => {
                       const newSelectedKeys = checked
                         ? [...selection.selectedRowKeys, key]
-                        : selection.selectedRowKeys.filter(k => k !== key);
-                      const newSelectedRows = processedData.filter((_, i) => 
+                        : selection.selectedRowKeys.filter((k) => k !== key);
+                      const newSelectedRows = processedData.filter((_, i) =>
                         newSelectedKeys.includes(getRowKey(processedData[i], i))
                       );
                       selection.onChange(newSelectedKeys, newSelectedRows);
@@ -354,8 +385,12 @@ export const Table = <T extends Record<string, any>>({
                 </td>
               )}
               {columns.map((column) => {
-                const value = column.dataIndex ? record[column.dataIndex] : record[column.key];
-                const content = column.render ? column.render(value, record, index) : value;
+                const value = column.dataIndex
+                  ? record[column.dataIndex]
+                  : record[column.key];
+                const content = column.render
+                  ? column.render(value, record, index)
+                  : value;
 
                 return (
                   <td
@@ -380,7 +415,14 @@ export const Table = <T extends Record<string, any>>({
   const renderPagination = () => {
     if (!pagination) return null;
 
-    const { current, pageSize, total, showSizeChanger, showQuickJumper, showTotal } = pagination;
+    const {
+      current,
+      pageSize,
+      total,
+      showSizeChanger,
+      showQuickJumper,
+      showTotal,
+    } = pagination;
     const totalPages = Math.ceil(total / pageSize);
 
     return (
@@ -388,15 +430,20 @@ export const Table = <T extends Record<string, any>>({
         <div className="flex items-center space-x-4">
           {showTotal && (
             <span className="text-sm text-gray-700 dark:text-gray-300">
-              Showing {((current - 1) * pageSize) + 1} to {Math.min(current * pageSize, total)} of {total} entries
+              Showing {(current - 1) * pageSize + 1} to{' '}
+              {Math.min(current * pageSize, total)} of {total} entries
             </span>
           )}
           {showSizeChanger && (
             <div className="flex items-center space-x-2">
-              <span className="text-sm text-gray-700 dark:text-gray-300">Show:</span>
+              <span className="text-sm text-gray-700 dark:text-gray-300">
+                Show:
+              </span>
               <Select
                 value={pageSize.toString()}
-                onChange={(e) => onPaginationChange?.(1, parseInt(e.target.value))}
+                onChange={(e) =>
+                  onPaginationChange?.(1, parseInt(e.target.value))
+                }
                 className="w-20"
               >
                 <option value="10">10</option>
@@ -451,7 +498,9 @@ export const Table = <T extends Record<string, any>>({
   return (
     <div className={`overflow-hidden ${getVariantClasses()} ${className}`}>
       <div className="overflow-x-auto">
-        <table className={`min-w-full divide-y divide-gray-200 dark:divide-gray-700 ${getSizeClasses()}`}>
+        <table
+          className={`min-w-full divide-y divide-gray-200 dark:divide-gray-700 ${getSizeClasses()}`}
+        >
           {renderHeader()}
           {renderBody()}
         </table>

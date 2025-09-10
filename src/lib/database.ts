@@ -1,6 +1,6 @@
 /**
  * Database Utility Functions
- * 
+ *
  * Provides type-safe database operations and utility functions
  * for common database operations throughout the application.
  */
@@ -45,12 +45,12 @@ export const companyService = {
   // Get all companies (admin only)
   async getAll(options?: QueryOptions): Promise<DatabaseListResponse<Company>> {
     try {
-      const query = supabase
-        .from('companies')
-        .select('*', { count: 'exact' });
+      const query = supabase.from('companies').select('*', { count: 'exact' });
 
       if (options?.orderBy) {
-        query.order(options.orderBy, { ascending: options.orderDirection === 'asc' });
+        query.order(options.orderBy, {
+          ascending: options.orderDirection === 'asc',
+        });
       }
 
       if (options?.limit) {
@@ -119,7 +119,10 @@ export const companyService = {
   },
 
   // Update company
-  async update(id: string, updates: UpdateCompany): Promise<DatabaseResponse<Company>> {
+  async update(
+    id: string,
+    updates: UpdateCompany
+  ): Promise<DatabaseResponse<Company>> {
     try {
       const { data, error } = await supabase
         .from('companies')
@@ -143,10 +146,7 @@ export const companyService = {
   // Delete company
   async delete(id: string): Promise<DatabaseResponse<void>> {
     try {
-      const { error } = await supabase
-        .from('companies')
-        .delete()
-        .eq('id', id);
+      const { error } = await supabase.from('companies').delete().eq('id', id);
 
       return {
         data: null,
@@ -164,7 +164,10 @@ export const companyService = {
 // User Operations
 export const userService = {
   // Get all users for a company
-  async getByCompany(companyId: string, options?: QueryOptions): Promise<DatabaseListResponse<User>> {
+  async getByCompany(
+    companyId: string,
+    options?: QueryOptions
+  ): Promise<DatabaseListResponse<User>> {
     try {
       const query = supabase
         .from('users')
@@ -172,7 +175,9 @@ export const userService = {
         .eq('company_id', companyId);
 
       if (options?.orderBy) {
-        query.order(options.orderBy, { ascending: options.orderDirection === 'asc' });
+        query.order(options.orderBy, {
+          ascending: options.orderDirection === 'asc',
+        });
       }
 
       if (options?.limit) {
@@ -241,7 +246,10 @@ export const userService = {
   },
 
   // Update user
-  async update(id: string, updates: UpdateUser): Promise<DatabaseResponse<User>> {
+  async update(
+    id: string,
+    updates: UpdateUser
+  ): Promise<DatabaseResponse<User>> {
     try {
       const { data, error } = await supabase
         .from('users')
@@ -266,11 +274,12 @@ export const userService = {
 // Advocate Operations
 export const advocateService = {
   // Get advocates with filters
-  async getFiltered(filters: AdvocateFilters, options?: QueryOptions): Promise<DatabaseListResponse<Advocate>> {
+  async getFiltered(
+    filters: AdvocateFilters,
+    options?: QueryOptions
+  ): Promise<DatabaseListResponse<Advocate>> {
     try {
-      let query = supabase
-        .from('advocates')
-        .select('*', { count: 'exact' });
+      let query = supabase.from('advocates').select('*', { count: 'exact' });
 
       // Apply filters
       if (filters.company_id) {
@@ -315,7 +324,9 @@ export const advocateService = {
 
       // Apply ordering and pagination
       if (options?.orderBy) {
-        query = query.order(options.orderBy, { ascending: options.orderDirection === 'asc' });
+        query = query.order(options.orderBy, {
+          ascending: options.orderDirection === 'asc',
+        });
       }
 
       if (options?.limit) {
@@ -323,7 +334,10 @@ export const advocateService = {
       }
 
       if (options?.offset) {
-        query = query.range(options.offset, options.offset + (options.limit || 10) - 1);
+        query = query.range(
+          options.offset,
+          options.offset + (options.limit || 10) - 1
+        );
       }
 
       const { data, error, count } = await query;
@@ -384,7 +398,10 @@ export const advocateService = {
   },
 
   // Update advocate
-  async update(id: string, updates: UpdateAdvocate): Promise<DatabaseResponse<Advocate>> {
+  async update(
+    id: string,
+    updates: UpdateAdvocate
+  ): Promise<DatabaseResponse<Advocate>> {
     try {
       const { data, error } = await supabase
         .from('advocates')
@@ -409,7 +426,10 @@ export const advocateService = {
 // Opportunity Operations
 export const opportunityService = {
   // Get opportunities with filters
-  async getFiltered(filters: OpportunityFilters, options?: QueryOptions): Promise<DatabaseListResponse<Opportunity>> {
+  async getFiltered(
+    filters: OpportunityFilters,
+    options?: QueryOptions
+  ): Promise<DatabaseListResponse<Opportunity>> {
     try {
       let query = supabase
         .from('opportunities')
@@ -434,9 +454,15 @@ export const opportunityService = {
 
       if (filters.reference_request_status) {
         if (Array.isArray(filters.reference_request_status)) {
-          query = query.in('reference_request_status', filters.reference_request_status);
+          query = query.in(
+            'reference_request_status',
+            filters.reference_request_status
+          );
         } else {
-          query = query.eq('reference_request_status', filters.reference_request_status);
+          query = query.eq(
+            'reference_request_status',
+            filters.reference_request_status
+          );
         }
       }
 
@@ -457,11 +483,17 @@ export const opportunityService = {
       }
 
       if (filters.expected_close_date_before) {
-        query = query.lte('expected_close_date', filters.expected_close_date_before);
+        query = query.lte(
+          'expected_close_date',
+          filters.expected_close_date_before
+        );
       }
 
       if (filters.expected_close_date_after) {
-        query = query.gte('expected_close_date', filters.expected_close_date_after);
+        query = query.gte(
+          'expected_close_date',
+          filters.expected_close_date_after
+        );
       }
 
       if (filters.tags && filters.tags.length > 0) {
@@ -470,7 +502,9 @@ export const opportunityService = {
 
       // Apply ordering and pagination
       if (options?.orderBy) {
-        query = query.order(options.orderBy, { ascending: options.orderDirection === 'asc' });
+        query = query.order(options.orderBy, {
+          ascending: options.orderDirection === 'asc',
+        });
       }
 
       if (options?.limit) {
@@ -478,7 +512,10 @@ export const opportunityService = {
       }
 
       if (options?.offset) {
-        query = query.range(options.offset, options.offset + (options.limit || 10) - 1);
+        query = query.range(
+          options.offset,
+          options.offset + (options.limit || 10) - 1
+        );
       }
 
       const { data, error, count } = await query;
@@ -518,7 +555,9 @@ export const opportunityService = {
   },
 
   // Create new opportunity
-  async create(opportunity: InsertOpportunity): Promise<DatabaseResponse<Opportunity>> {
+  async create(
+    opportunity: InsertOpportunity
+  ): Promise<DatabaseResponse<Opportunity>> {
     try {
       const { data, error } = await supabase
         .from('opportunities')
@@ -539,7 +578,10 @@ export const opportunityService = {
   },
 
   // Update opportunity
-  async update(id: string, updates: UpdateOpportunity): Promise<DatabaseResponse<Opportunity>> {
+  async update(
+    id: string,
+    updates: UpdateOpportunity
+  ): Promise<DatabaseResponse<Opportunity>> {
     try {
       const { data, error } = await supabase
         .from('opportunities')
@@ -564,7 +606,10 @@ export const opportunityService = {
 // Reference Call Operations
 export const referenceCallService = {
   // Get reference calls with filters
-  async getFiltered(filters: ReferenceCallFilters, options?: QueryOptions): Promise<DatabaseListResponse<ReferenceCall>> {
+  async getFiltered(
+    filters: ReferenceCallFilters,
+    options?: QueryOptions
+  ): Promise<DatabaseListResponse<ReferenceCall>> {
     try {
       let query = supabase
         .from('reference_calls')
@@ -625,7 +670,9 @@ export const referenceCallService = {
 
       // Apply ordering and pagination
       if (options?.orderBy) {
-        query = query.order(options.orderBy, { ascending: options.orderDirection === 'asc' });
+        query = query.order(options.orderBy, {
+          ascending: options.orderDirection === 'asc',
+        });
       }
 
       if (options?.limit) {
@@ -633,7 +680,10 @@ export const referenceCallService = {
       }
 
       if (options?.offset) {
-        query = query.range(options.offset, options.offset + (options.limit || 10) - 1);
+        query = query.range(
+          options.offset,
+          options.offset + (options.limit || 10) - 1
+        );
       }
 
       const { data, error, count } = await query;
@@ -673,7 +723,9 @@ export const referenceCallService = {
   },
 
   // Create new reference call
-  async create(referenceCall: InsertReferenceCall): Promise<DatabaseResponse<ReferenceCall>> {
+  async create(
+    referenceCall: InsertReferenceCall
+  ): Promise<DatabaseResponse<ReferenceCall>> {
     try {
       const { data, error } = await supabase
         .from('reference_calls')
@@ -694,7 +746,10 @@ export const referenceCallService = {
   },
 
   // Update reference call
-  async update(id: string, updates: UpdateReferenceCall): Promise<DatabaseResponse<ReferenceCall>> {
+  async update(
+    id: string,
+    updates: UpdateReferenceCall
+  ): Promise<DatabaseResponse<ReferenceCall>> {
     try {
       const { data, error } = await supabase
         .from('reference_calls')
@@ -721,10 +776,7 @@ export const databaseUtils = {
   // Test database connection
   async testConnection(): Promise<boolean> {
     try {
-      const { error } = await supabase
-        .from('companies')
-        .select('id')
-        .limit(1);
+      const { error } = await supabase.from('companies').select('id').limit(1);
 
       return !error;
     } catch {
@@ -735,8 +787,10 @@ export const databaseUtils = {
   // Get current user's company ID
   async getCurrentUserCompanyId(): Promise<string | null> {
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
       if (!user) return null;
 
       const { data } = await supabase
@@ -752,12 +806,12 @@ export const databaseUtils = {
   },
 
   // Batch operations
-  async batchInsert<T>(table: string, items: T[]): Promise<DatabaseListResponse<T>> {
+  async batchInsert<T>(
+    table: string,
+    items: T[]
+  ): Promise<DatabaseListResponse<T>> {
     try {
-      const { data, error } = await supabase
-        .from(table)
-        .insert(items)
-        .select();
+      const { data, error } = await supabase.from(table).insert(items).select();
 
       return {
         data: data || [],

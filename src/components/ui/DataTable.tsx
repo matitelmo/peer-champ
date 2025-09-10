@@ -1,6 +1,6 @@
 /**
  * Data Table Component
- * 
+ *
  * An advanced data table component with built-in state management,
  * search, filtering, and export functionality.
  */
@@ -14,12 +14,12 @@ import { Button } from './Button';
 import { Select } from './Select';
 import { Checkbox } from './Checkbox';
 import { Drawer } from './Drawer';
-import { 
+import {
   MagnifyingGlassIcon,
   FunnelIcon,
   ArrowDownTrayIcon,
   PlusIcon,
-  XMarkIcon
+  XMarkIcon,
 } from '@heroicons/react/24/outline';
 
 // Types
@@ -87,7 +87,10 @@ export const DataTable = <T extends Record<string, any>>({
   const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentPageSize, setCurrentPageSize] = useState(pageSize);
-  const [sorting, setSorting] = useState<{ field: string; order: 'asc' | 'desc' } | null>(null);
+  const [sorting, setSorting] = useState<{
+    field: string;
+    order: 'asc' | 'desc';
+  } | null>(null);
   const [showFilters, setShowFilters] = useState(false);
 
   // Get row key
@@ -105,14 +108,14 @@ export const DataTable = <T extends Record<string, any>>({
     // Apply search
     if (searchTerm && searchable) {
       const searchLower = searchTerm.toLowerCase();
-      result = result.filter(record => {
+      result = result.filter((record) => {
         if (searchFields) {
-          return searchFields.some(field => {
+          return searchFields.some((field) => {
             const value = record[field];
             return String(value).toLowerCase().includes(searchLower);
           });
         } else {
-          return Object.values(record).some(value => 
+          return Object.values(record).some((value) =>
             String(value).toLowerCase().includes(searchLower)
           );
         }
@@ -121,11 +124,13 @@ export const DataTable = <T extends Record<string, any>>({
 
     // Apply filters
     if (Object.keys(filters).length > 0) {
-      result = result.filter(record => {
+      result = result.filter((record) => {
         return Object.entries(filters).every(([field, value]) => {
           if (!value) return true;
           const recordValue = record[field];
-          return String(recordValue).toLowerCase().includes(String(value).toLowerCase());
+          return String(recordValue)
+            .toLowerCase()
+            .includes(String(value).toLowerCase());
         });
       });
     }
@@ -138,7 +143,7 @@ export const DataTable = <T extends Record<string, any>>({
     if (!sorting) return filteredData;
 
     return [...filteredData].sort((a, b) => {
-      const column = columns.find(col => col.key === sorting.field);
+      const column = columns.find((col) => col.key === sorting.field);
       if (!column) return 0;
 
       const aValue = column.dataIndex ? a[column.dataIndex] : a[sorting.field];
@@ -165,13 +170,13 @@ export const DataTable = <T extends Record<string, any>>({
 
   // Handle filter
   const handleFilter = (field: string, value: any) => {
-    setFilters(prev => ({ ...prev, [field]: value }));
+    setFilters((prev) => ({ ...prev, [field]: value }));
     setCurrentPage(1);
   };
 
   // Clear filter
   const clearFilter = (field: string) => {
-    setFilters(prev => {
+    setFilters((prev) => {
       const newFilters = { ...prev };
       delete newFilters[field];
       return newFilters;
@@ -209,13 +214,17 @@ export const DataTable = <T extends Record<string, any>>({
     } else {
       // Default CSV export
       const csvContent = [
-        columns.map(col => col.title).join(','),
-        ...sortedData.map(record => 
-          columns.map(col => {
-            const value = col.dataIndex ? record[col.dataIndex] : record[col.key];
-            return `"${String(value).replace(/"/g, '""')}"`;
-          }).join(',')
-        )
+        columns.map((col) => col.title).join(','),
+        ...sortedData.map((record) =>
+          columns
+            .map((col) => {
+              const value = col.dataIndex
+                ? record[col.dataIndex]
+                : record[col.key];
+              return `"${String(value).replace(/"/g, '""')}"`;
+            })
+            .join(',')
+        ),
       ].join('\n');
 
       const blob = new Blob([csvContent], { type: 'text/csv' });
@@ -238,7 +247,7 @@ export const DataTable = <T extends Record<string, any>>({
   };
 
   // Get filterable columns
-  const filterableColumns = columns.filter(col => col.filterable);
+  const filterableColumns = columns.filter((col) => col.filterable);
 
   // Render search and filters
   const renderSearchAndFilters = () => {
@@ -258,7 +267,7 @@ export const DataTable = <T extends Record<string, any>>({
               />
             </div>
           )}
-          
+
           {filterable && filterableColumns.length > 0 && (
             <Button
               variant="outline"
@@ -297,17 +306,14 @@ export const DataTable = <T extends Record<string, any>>({
               <span>Export</span>
             </Button>
           )}
-          
+
           {onAdd && (
-            <Button
-              onClick={onAdd}
-              className="flex items-center space-x-2"
-            >
+            <Button onClick={onAdd} className="flex items-center space-x-2">
               <PlusIcon className="h-4 w-4" />
               <span>Add</span>
             </Button>
           )}
-          
+
           {actions}
         </div>
       </div>
@@ -323,7 +329,8 @@ export const DataTable = <T extends Record<string, any>>({
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <span className="text-sm text-primary-700 dark:text-primary-300">
-              {selectedRows.length} item{selectedRows.length !== 1 ? 's' : ''} selected
+              {selectedRows.length} item{selectedRows.length !== 1 ? 's' : ''}{' '}
+              selected
             </span>
             <Button
               variant="ghost"
@@ -336,7 +343,7 @@ export const DataTable = <T extends Record<string, any>>({
               Clear selection
             </Button>
           </div>
-          
+
           {onBulkDelete && (
             <Button
               variant="danger"
@@ -364,17 +371,10 @@ export const DataTable = <T extends Record<string, any>>({
         size="md"
         footer={
           <div className="flex space-x-3">
-            <Button
-              variant="outline"
-              onClick={clearAllFilters}
-            >
+            <Button variant="outline" onClick={clearAllFilters}>
               Clear All
             </Button>
-            <Button
-              onClick={() => setShowFilters(false)}
-            >
-              Apply Filters
-            </Button>
+            <Button onClick={() => setShowFilters(false)}>Apply Filters</Button>
           </div>
         }
       >
@@ -412,7 +412,12 @@ export const DataTable = <T extends Record<string, any>>({
       <div className="text-center py-12">
         <div className="mx-auto h-12 w-12 text-gray-400">
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            />
           </svg>
         </div>
         <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -425,9 +430,7 @@ export const DataTable = <T extends Record<string, any>>({
         )}
         {emptyAction && (
           <div className="mt-6">
-            <Button onClick={emptyAction.onClick}>
-              {emptyAction.label}
-            </Button>
+            <Button onClick={emptyAction.onClick}>{emptyAction.label}</Button>
           </div>
         )}
       </div>
@@ -472,10 +475,14 @@ export const DataTable = <T extends Record<string, any>>({
             showTotal: true,
           }}
           sorting={sorting}
-          selection={selectable ? {
-            selectedRowKeys,
-            onChange: handleSelectionChange,
-          } : undefined}
+          selection={
+            selectable
+              ? {
+                  selectedRowKeys,
+                  onChange: handleSelectionChange,
+                }
+              : undefined
+          }
           onSort={handleSort}
           onPaginationChange={handlePaginationChange}
           rowKey={rowKey}

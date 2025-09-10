@@ -1,6 +1,6 @@
 /**
  * Company Switcher Component
- * 
+ *
  * Allows admin users to switch between different companies for management purposes.
  * Provides a dropdown interface for company selection.
  */
@@ -49,7 +49,9 @@ export const CompanySwitcher: React.FC<CompanySwitcherProps> = ({
         setCompanies(data);
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch companies');
+      setError(
+        err instanceof Error ? err.message : 'Failed to fetch companies'
+      );
     } finally {
       setLoading(false);
     }
@@ -108,7 +110,7 @@ export const CompanySwitcher: React.FC<CompanySwitcherProps> = ({
           Company
         </label>
       )}
-      
+
       <div className="flex items-center space-x-2">
         <Select
           value={company?.id || ''}
@@ -124,10 +126,8 @@ export const CompanySwitcher: React.FC<CompanySwitcherProps> = ({
             </option>
           ))}
         </Select>
-        
-        {switching && (
-          <Spinner size="sm" />
-        )}
+
+        {switching && <Spinner size="sm" />}
       </div>
 
       {error && (

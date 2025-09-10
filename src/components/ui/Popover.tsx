@@ -1,6 +1,6 @@
 /**
  * Popover Component
- * 
+ *
  * A flexible popover component for tooltips, dropdowns, and contextual information.
  * Supports different positions, triggers, and content types.
  */
@@ -15,7 +15,19 @@ export interface PopoverProps {
   children: ReactNode;
   content: ReactNode;
   trigger?: 'click' | 'hover' | 'focus';
-  position?: 'top' | 'bottom' | 'left' | 'right' | 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end' | 'left-start' | 'left-end' | 'right-start' | 'right-end';
+  position?:
+    | 'top'
+    | 'bottom'
+    | 'left'
+    | 'right'
+    | 'top-start'
+    | 'top-end'
+    | 'bottom-start'
+    | 'bottom-end'
+    | 'left-start'
+    | 'left-end'
+    | 'right-start'
+    | 'right-end';
   offset?: number;
   showArrow?: boolean;
   className?: string;
@@ -44,17 +56,27 @@ const positionClasses = {
 // Arrow classes
 const arrowClasses = {
   top: 'top-full left-1/2 transform -translate-x-1/2 border-l-transparent border-r-transparent border-b-transparent border-t-gray-900 dark:border-t-gray-700',
-  'top-start': 'top-full left-4 border-l-transparent border-r-transparent border-b-transparent border-t-gray-900 dark:border-t-gray-700',
-  'top-end': 'top-full right-4 border-l-transparent border-r-transparent border-b-transparent border-t-gray-900 dark:border-t-gray-700',
-  bottom: 'bottom-full left-1/2 transform -translate-x-1/2 border-l-transparent border-r-transparent border-t-transparent border-b-gray-900 dark:border-b-gray-700',
-  'bottom-start': 'bottom-full left-4 border-l-transparent border-r-transparent border-t-transparent border-b-gray-900 dark:border-b-gray-700',
-  'bottom-end': 'bottom-full right-4 border-l-transparent border-r-transparent border-t-transparent border-b-gray-900 dark:border-b-gray-700',
+  'top-start':
+    'top-full left-4 border-l-transparent border-r-transparent border-b-transparent border-t-gray-900 dark:border-t-gray-700',
+  'top-end':
+    'top-full right-4 border-l-transparent border-r-transparent border-b-transparent border-t-gray-900 dark:border-t-gray-700',
+  bottom:
+    'bottom-full left-1/2 transform -translate-x-1/2 border-l-transparent border-r-transparent border-t-transparent border-b-gray-900 dark:border-b-gray-700',
+  'bottom-start':
+    'bottom-full left-4 border-l-transparent border-r-transparent border-t-transparent border-b-gray-900 dark:border-b-gray-700',
+  'bottom-end':
+    'bottom-full right-4 border-l-transparent border-r-transparent border-t-transparent border-b-gray-900 dark:border-b-gray-700',
   left: 'left-full top-1/2 transform -translate-y-1/2 border-t-transparent border-b-transparent border-r-transparent border-l-gray-900 dark:border-l-gray-700',
-  'left-start': 'left-full top-4 border-t-transparent border-b-transparent border-r-transparent border-l-gray-900 dark:border-l-gray-700',
-  'left-end': 'left-full bottom-4 border-t-transparent border-b-transparent border-r-transparent border-l-gray-900 dark:border-l-gray-700',
-  right: 'right-full top-1/2 transform -translate-y-1/2 border-t-transparent border-b-transparent border-l-transparent border-r-gray-900 dark:border-r-gray-700',
-  'right-start': 'right-full top-4 border-t-transparent border-b-transparent border-l-transparent border-r-gray-900 dark:border-r-gray-700',
-  'right-end': 'right-full bottom-4 border-t-transparent border-b-transparent border-l-transparent border-r-gray-900 dark:border-r-gray-700',
+  'left-start':
+    'left-full top-4 border-t-transparent border-b-transparent border-r-transparent border-l-gray-900 dark:border-l-gray-700',
+  'left-end':
+    'left-full bottom-4 border-t-transparent border-b-transparent border-r-transparent border-l-gray-900 dark:border-l-gray-700',
+  right:
+    'right-full top-1/2 transform -translate-y-1/2 border-t-transparent border-b-transparent border-l-transparent border-r-gray-900 dark:border-r-gray-700',
+  'right-start':
+    'right-full top-4 border-t-transparent border-b-transparent border-l-transparent border-r-gray-900 dark:border-r-gray-700',
+  'right-end':
+    'right-full bottom-4 border-t-transparent border-b-transparent border-l-transparent border-r-gray-900 dark:border-r-gray-700',
 };
 
 export const Popover: React.FC<PopoverProps> = ({
@@ -82,7 +104,8 @@ export const Popover: React.FC<PopoverProps> = ({
     const triggerRect = triggerRef.current.getBoundingClientRect();
     const popoverRect = popoverRef.current.getBoundingClientRect();
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+    const scrollLeft =
+      window.pageXOffset || document.documentElement.scrollLeft;
 
     let top = 0;
     let left = 0;
@@ -90,7 +113,10 @@ export const Popover: React.FC<PopoverProps> = ({
     switch (position) {
       case 'top':
         top = triggerRect.top + scrollTop - popoverRect.height - offset;
-        left = triggerRect.left + scrollLeft + (triggerRect.width - popoverRect.width) / 2;
+        left =
+          triggerRect.left +
+          scrollLeft +
+          (triggerRect.width - popoverRect.width) / 2;
         break;
       case 'top-start':
         top = triggerRect.top + scrollTop - popoverRect.height - offset;
@@ -102,7 +128,10 @@ export const Popover: React.FC<PopoverProps> = ({
         break;
       case 'bottom':
         top = triggerRect.bottom + scrollTop + offset;
-        left = triggerRect.left + scrollLeft + (triggerRect.width - popoverRect.width) / 2;
+        left =
+          triggerRect.left +
+          scrollLeft +
+          (triggerRect.width - popoverRect.width) / 2;
         break;
       case 'bottom-start':
         top = triggerRect.bottom + scrollTop + offset;
@@ -113,7 +142,10 @@ export const Popover: React.FC<PopoverProps> = ({
         left = triggerRect.right + scrollLeft - popoverRect.width;
         break;
       case 'left':
-        top = triggerRect.top + scrollTop + (triggerRect.height - popoverRect.height) / 2;
+        top =
+          triggerRect.top +
+          scrollTop +
+          (triggerRect.height - popoverRect.height) / 2;
         left = triggerRect.left + scrollLeft - popoverRect.width - offset;
         break;
       case 'left-start':
@@ -125,7 +157,10 @@ export const Popover: React.FC<PopoverProps> = ({
         left = triggerRect.left + scrollLeft - popoverRect.width - offset;
         break;
       case 'right':
-        top = triggerRect.top + scrollTop + (triggerRect.height - popoverRect.height) / 2;
+        top =
+          triggerRect.top +
+          scrollTop +
+          (triggerRect.height - popoverRect.height) / 2;
         left = triggerRect.right + scrollLeft + offset;
         break;
       case 'right-start':
@@ -256,9 +291,7 @@ export const Popover: React.FC<PopoverProps> = ({
           `}
         />
       )}
-      <div className="p-3">
-        {content}
-      </div>
+      <div className="p-3">{content}</div>
     </div>
   ) : null;
 
@@ -299,9 +332,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
   return (
     <Popover
       content={
-        <div className="text-sm text-white dark:text-gray-200">
-          {content}
-        </div>
+        <div className="text-sm text-white dark:text-gray-200">{content}</div>
       }
       trigger="hover"
       position={position}
