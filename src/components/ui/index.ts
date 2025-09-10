@@ -152,10 +152,8 @@ export type {
 export { Popover, Tooltip, Dropdown } from './Popover';
 export type { PopoverProps, TooltipProps, DropdownProps } from './Popover';
 
-// Simple Separator component used by some pages
-export const Separator = ({ className = '' }: { className?: string }) => (
-  <div className={`w-full h-px bg-gray-200 dark:bg-gray-700 ${className}`} />
-);
+// Separator component
+export { Separator } from './Separator';
 
 // Table components
 export { Table } from './Table';
