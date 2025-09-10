@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
 import { validateMagicLink } from '@/lib/services/bookingLinkService';
 import { getAdvocate } from '@/lib/services/advocateService';
 import AvailabilityCalendar, { TimeSlot } from '@/components/booking/AvailabilityCalendar';
@@ -11,12 +12,8 @@ import { Toast, ToastContainer } from '@/components/ui/ToastContainer';
 import { getMockSlots } from '@/lib/services/mockAvailability';
 import { track } from '@/lib/utils';
 
-interface PageProps {
-  params: { token: string };
-}
-
-export default function BookingTokenPage({ params }: PageProps) {
-  const { token } = params;
+export default function BookingTokenPage() {
+  const { token } = useParams<{ token: string }>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [linkData, setLinkData] = useState<{ opportunityId: string; advocateId: string } | null>(
