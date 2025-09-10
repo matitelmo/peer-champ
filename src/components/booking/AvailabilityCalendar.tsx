@@ -51,8 +51,8 @@ export const AvailabilityCalendar: React.FC<AvailabilityCalendarProps> = ({
   return (
     <div className="space-y-4" role="group" aria-label="Available time slots">
       {grouped.map(([day, list], dayIdx) => (
-        <div key={day} className="border rounded-lg p-4" role="group" aria-label={day}>
-          <div className="font-medium mb-2">{day}</div>
+        <div key={day} className="border rounded-lg p-4 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700" role="group" aria-label={day}>
+          <div className="font-medium mb-2 text-gray-900 dark:text-gray-100">{day}</div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2" role="list">
             {list.map((slot, idx) => {
               const index = `${dayIdx}-${idx}`;
@@ -60,8 +60,8 @@ export const AvailabilityCalendar: React.FC<AvailabilityCalendarProps> = ({
               return (
                 <button
                   key={index}
-                  className={`border rounded px-3 py-2 text-sm text-left hover:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-300 ${
-                    isSelected ? 'border-primary-600 ring-2 ring-primary-200' : 'border-gray-300'
+                  className={`border rounded px-3 py-2 text-sm text-left bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 hover:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-300 ${
+                    isSelected ? 'border-primary-600 ring-2 ring-primary-200' : 'border-gray-300 dark:border-gray-600'
                   }`}
                   role="listitem"
                   aria-pressed={isSelected}

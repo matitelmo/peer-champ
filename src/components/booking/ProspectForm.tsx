@@ -49,10 +49,10 @@ export const ProspectForm: React.FC<ProspectFormProps> = ({ token, onSubmitted }
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-gray-700">Your name</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Your name</label>
         <input
           type="text"
-          className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+          className="mt-1 block w-full border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-md shadow-sm"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
@@ -60,10 +60,10 @@ export const ProspectForm: React.FC<ProspectFormProps> = ({ token, onSubmitted }
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">Work email</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Work email</label>
         <input
           type="email"
-          className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+          className="mt-1 block w-full border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-md shadow-sm"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -72,15 +72,15 @@ export const ProspectForm: React.FC<ProspectFormProps> = ({ token, onSubmitted }
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">Context / preferences (optional)</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Context / preferences (optional)</label>
         <textarea
-          className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+          className="mt-1 block w-full border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-md shadow-sm"
           rows={3}
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
         />
       </div>
-      {error && <div className="text-sm text-red-600">{error}</div>}
+      {error && <div className="text-sm text-red-600 dark:text-red-400">{error}</div>}
       <button
         type="submit"
         className="inline-flex items-center px-4 py-2 rounded-md bg-primary-600 text-white disabled:opacity-50"
