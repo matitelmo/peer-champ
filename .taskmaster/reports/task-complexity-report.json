@@ -1,0 +1,173 @@
+{
+  "meta": {
+    "generatedAt": "2025-09-09T14:10:13.964Z",
+    "tasksAnalyzed": 20,
+    "totalTasks": 20,
+    "analysisCount": 20,
+    "thresholdScore": 5,
+    "projectName": "Taskmaster",
+    "usedResearch": false
+  },
+  "complexityAnalysis": [
+    {
+      "taskId": 1,
+      "taskTitle": "Project Setup and Repository Configuration",
+      "complexityScore": 5,
+      "recommendedSubtasks": 7,
+      "expansionPrompt": "Break down the Project Setup and Repository Configuration task into subtasks covering Next.js initialization, folder structure setup, code quality tools configuration, testing frameworks setup, CI/CD pipeline configuration, and initial deployment setup.",
+      "reasoning": "This task involves multiple technical setup steps that are well-defined but require careful configuration. It includes project initialization, folder structure setup, linting/formatting configuration, testing frameworks, and CI/CD pipeline setup. Each component is relatively straightforward but requires specific knowledge and attention to detail."
+    },
+    {
+      "taskId": 2,
+      "taskTitle": "Supabase Integration and Database Schema Setup",
+      "complexityScore": 7,
+      "recommendedSubtasks": 8,
+      "expansionPrompt": "Break down the Supabase Integration and Database Schema Setup task into subtasks covering Supabase project creation, environment configuration, table creation for each entity (companies, users, advocates, opportunities, reference calls), TypeScript type definitions, Supabase client setup, and Row Level Security implementation.",
+      "reasoning": "This task involves complex database schema design with multiple related tables and security considerations. It requires understanding of SQL, database relationships, TypeScript type definitions, and Row Level Security policies. The implementation details show extensive SQL schema creation with multiple tables and relationships."
+    },
+    {
+      "taskId": 3,
+      "taskTitle": "Authentication and User Management System",
+      "complexityScore": 8,
+      "recommendedSubtasks": 8,
+      "expansionPrompt": "Break down the Authentication and User Management System task into subtasks covering Supabase Auth configuration, authentication hooks and context creation, sign-up/sign-in/sign-out flows, protected route components, role-based access control, user profile management, tenant isolation, and SSO integration.",
+      "reasoning": "This task involves complex authentication flows, role-based access control, and multi-tenant considerations. It requires deep understanding of authentication patterns, React context API, and security best practices. The implementation includes creating custom hooks, context providers, and middleware for access control."
+    },
+    {
+      "taskId": 4,
+      "taskTitle": "Core UI Components and Layout System",
+      "complexityScore": 7,
+      "recommendedSubtasks": 6,
+      "expansionPrompt": "Break down the Core UI Components and Layout System task into subtasks covering design system configuration with Tailwind CSS, layout components implementation, reusable UI component creation (buttons, inputs, cards, modals, tables, navigation), responsive design patterns, loading/error states, and theme support.",
+      "reasoning": "This task involves creating a comprehensive UI component library with consistent design patterns. It requires expertise in component design, Tailwind CSS configuration, responsive layouts, and accessibility considerations. The components will be used throughout the application, so they need to be well-designed, reusable, and thoroughly tested."
+    },
+    {
+      "taskId": 5,
+      "taskTitle": "Company and User Management Interfaces",
+      "complexityScore": 6,
+      "recommendedSubtasks": 6,
+      "expansionPrompt": "Break down the Company and User Management Interfaces task into subtasks covering company management pages (list, creation, details, settings), user management interfaces (list, creation, role assignment, profile editing), data fetching logic, form validation, role-based UI controls, and bulk import functionality.",
+      "reasoning": "This task involves creating multiple CRUD interfaces with complex data relationships. It requires implementing forms with validation, data fetching patterns, and role-based UI controls. The complexity comes from managing relationships between companies and users while ensuring proper access controls."
+    },
+    {
+      "taskId": 6,
+      "taskTitle": "Advocate Management System",
+      "complexityScore": 7,
+      "recommendedSubtasks": 7,
+      "expansionPrompt": "Break down the Advocate Management System task into subtasks covering advocate management interfaces (list, creation, profile, availability), data models and services implementation, fatigue prevention system (participation tracking, availability scoring, cooling-off periods, notifications), invitation flow, and calendar management.",
+      "reasoning": "This task involves complex business logic for managing advocates, including sophisticated fatigue prevention algorithms. It requires implementing multiple interfaces, data models, and business rules. The fatigue prevention system adds significant complexity with its need to track participation, calculate availability, and manage notifications."
+    },
+    {
+      "taskId": 7,
+      "taskTitle": "Opportunity Management and CRM Integration",
+      "complexityScore": 9,
+      "recommendedSubtasks": 9,
+      "expansionPrompt": "Break down the Opportunity Management and CRM Integration task into subtasks covering opportunity data models and interfaces, Salesforce integration (OAuth, data sync, activity logging, custom fields), HubSpot integration, bidirectional sync mechanism, webhook handlers, embedded widget components, and reporting integration.",
+      "reasoning": "This task involves complex third-party integrations with multiple CRM systems. It requires implementing OAuth flows, bidirectional data synchronization, webhook handling, and custom reporting. The complexity is high due to the need to work with external APIs, handle authentication, and maintain data consistency across systems."
+    },
+    {
+      "taskId": 8,
+      "taskTitle": "AI-Powered Advocate Matching System",
+      "complexityScore": 9,
+      "recommendedSubtasks": 8,
+      "expansionPrompt": "Break down the AI-Powered Advocate Matching System task into subtasks covering matching algorithm infrastructure, OpenAI integration, fallback rule-based matching, matching service implementation, confidence scoring system, feedback loop for improving recommendations, matching UI components, and performance optimization.",
+      "reasoning": "This task involves complex AI integration and algorithm development. It requires implementing sophisticated matching logic using OpenAI, creating fallback mechanisms, and building a feedback loop for continuous improvement. The complexity is high due to the AI component, the need for accurate matching, and the requirement to handle various edge cases."
+    },
+    {
+      "taskId": 9,
+      "taskTitle": "Calendar Integration and Scheduling System",
+      "complexityScore": 8,
+      "recommendedSubtasks": 8,
+      "expansionPrompt": "Break down the Calendar Integration and Scheduling System task into subtasks covering OAuth flows for calendar providers, calendar service abstractions, availability calculation and display, meeting creation workflow, notification system, and scheduling UI components.",
+      "reasoning": "This task involves complex integrations with multiple calendar providers and sophisticated availability calculations. It requires implementing OAuth flows, handling time zone differences, and creating a robust scheduling system. The complexity comes from working with external APIs, managing calendar events, and handling edge cases in scheduling."
+    },
+    {
+      "taskId": 10,
+      "taskTitle": "Prospect Booking Experience",
+      "complexityScore": 6,
+      "recommendedSubtasks": 6,
+      "expansionPrompt": "Break down the Prospect Booking Experience task into subtasks covering magic link generation and validation, public-facing booking pages, prospect data collection, booking confirmation flow, meeting reminder system, and analytics tracking.",
+      "reasoning": "This task involves creating a seamless booking experience for prospects with secure magic links. It requires implementing token generation, validation, and expiration logic, as well as user-friendly booking interfaces. The complexity is moderate as it builds on the calendar integration but focuses on the prospect-facing experience."
+    },
+    {
+      "taskId": 11,
+      "taskTitle": "Reference Call Management System",
+      "complexityScore": 7,
+      "recommendedSubtasks": 6,
+      "expansionPrompt": "Break down the Reference Call Management System task into subtasks covering reference call data models and interfaces, call recording integration, pre-call preparation workflow, post-call feedback collection, call status tracking and reporting, and notification system.",
+      "reasoning": "This task involves managing the full lifecycle of reference calls with multiple integrations. It requires implementing data models, integrating with video conferencing APIs, and creating workflows for preparation and feedback. The complexity comes from managing the various states of calls and integrating with external services."
+    },
+    {
+      "taskId": 12,
+      "taskTitle": "Call Intelligence Engine",
+      "complexityScore": 9,
+      "recommendedSubtasks": 6,
+      "expansionPrompt": "Break down the Call Intelligence Engine task into subtasks covering call recording processing pipeline, OpenAI integration for analysis, insight extraction for key categories, CRM integration for insight sharing, insights visualization dashboard, and trend analysis implementation.",
+      "reasoning": "This task involves complex AI processing of call recordings and sophisticated insight extraction. It requires implementing audio processing, transcription, and AI analysis using OpenAI. The complexity is high due to the AI component, the need to process unstructured data, and the requirement to extract meaningful insights from conversations."
+    },
+    {
+      "taskId": 13,
+      "taskTitle": "Rewards Engine",
+      "complexityScore": 7,
+      "recommendedSubtasks": 7,
+      "expansionPrompt": "Break down the Rewards Engine task into subtasks covering reward data models and interfaces, reward type implementations (charitable donations, professional development, stipends, team rewards), reward selection and fulfillment flow, tax documentation generation, reward tracking and reporting, advocate reward history view, and compliance checks.",
+      "reasoning": "This task involves implementing a complex rewards system with multiple reward types and compliance considerations. It requires creating data models, integration with payment systems, and implementing tax documentation. The complexity comes from handling different reward types and ensuring compliance with financial regulations."
+    },
+    {
+      "taskId": 14,
+      "taskTitle": "Analytics Dashboard",
+      "complexityScore": 7,
+      "recommendedSubtasks": 6,
+      "expansionPrompt": "Break down the Analytics Dashboard task into subtasks covering data collection and aggregation, dashboard component creation, executive reporting templates, data export functionality, custom report builder, and real-time dashboard updates.",
+      "reasoning": "This task involves creating sophisticated analytics visualizations and data processing. It requires implementing data aggregation, chart components, and reporting templates. The complexity comes from processing large datasets, creating meaningful visualizations, and enabling custom reporting capabilities."
+    },
+    {
+      "taskId": 15,
+      "taskTitle": "Multi-Tenant Architecture Implementation",
+      "complexityScore": 8,
+      "recommendedSubtasks": 6,
+      "expansionPrompt": "Break down the Multi-Tenant Architecture Implementation task into subtasks covering tenant isolation (database RLS, API validation, storage isolation), tenant middleware creation, role-based access control implementation, white-label customization, tenant-specific settings, and tenant provisioning tools.",
+      "reasoning": "This task involves implementing sophisticated multi-tenant architecture with strong security boundaries. It requires deep understanding of database security, middleware patterns, and access control. The complexity is high due to the need to ensure complete tenant isolation while maintaining application functionality."
+    },
+    {
+      "taskId": 16,
+      "taskTitle": "API Development for Custom Integrations",
+      "complexityScore": 7,
+      "recommendedSubtasks": 7,
+      "expansionPrompt": "Break down the API Development for Custom Integrations task into subtasks covering RESTful API endpoint design, API authentication implementation, API middleware creation, rate limiting and quota management, API documentation, API usage dashboard, and webhook delivery implementation.",
+      "reasoning": "This task involves creating a comprehensive API for third-party integrations. It requires implementing authentication, rate limiting, and documentation. The complexity comes from designing a secure, well-documented API that supports various integration scenarios while maintaining performance and security."
+    },
+    {
+      "taskId": 17,
+      "taskTitle": "Mobile Responsive Implementation",
+      "complexityScore": 5,
+      "recommendedSubtasks": 6,
+      "expansionPrompt": "Break down the Mobile Responsive Implementation task into subtasks covering responsive design for all components, mobile-specific component creation, PWA feature implementation, service worker for offline functionality, app manifest creation, and performance optimization for mobile devices.",
+      "reasoning": "This task involves ensuring the application works well on mobile devices and implementing PWA features. It requires responsive design knowledge and PWA implementation. The complexity is moderate as it builds on existing components but requires careful attention to mobile user experience and performance."
+    },
+    {
+      "taskId": 18,
+      "taskTitle": "Email Notification System",
+      "complexityScore": 6,
+      "recommendedSubtasks": 6,
+      "expansionPrompt": "Break down the Email Notification System task into subtasks covering SendGrid integration, email service creation, email template implementation for various events, email preference management, email delivery tracking, and email template management interface.",
+      "reasoning": "This task involves implementing a comprehensive email notification system with templates and tracking. It requires integrating with SendGrid, creating reusable templates, and implementing delivery tracking. The complexity is moderate as it involves working with external APIs and creating a robust notification system."
+    },
+    {
+      "taskId": 19,
+      "taskTitle": "Security Implementation and Compliance",
+      "complexityScore": 9,
+      "recommendedSubtasks": 6,
+      "expansionPrompt": "Break down the Security Implementation and Compliance task into subtasks covering security best practices implementation, data encryption setup, compliance features implementation, security monitoring and logging, authentication security enhancement, and security documentation creation.",
+      "reasoning": "This task involves implementing comprehensive security measures and compliance features. It requires deep understanding of web security, encryption, and regulatory requirements. The complexity is high due to the need to ensure robust security across all aspects of the application while maintaining compliance with regulations like SOC 2, GDPR, and CCPA."
+    },
+    {
+      "taskId": 20,
+      "taskTitle": "Performance Optimization and Scalability",
+      "complexityScore": 8,
+      "recommendedSubtasks": 7,
+      "expansionPrompt": "Break down the Performance Optimization and Scalability task into subtasks covering frontend performance optimizations, database performance optimization, API performance enhancements, CDN setup for static assets, horizontal scaling implementation, performance monitoring setup, and database sharding strategy.",
+      "reasoning": "This task involves optimizing application performance and implementing scalability measures. It requires expertise in frontend optimization, database tuning, and distributed systems. The complexity is high due to the need to optimize across the full stack while ensuring the application can scale to handle growing user base and data volume."
+    }
+  ]
+}
