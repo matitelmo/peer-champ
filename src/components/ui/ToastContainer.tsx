@@ -86,4 +86,5 @@ const ToastContainer: React.FC<ToastContainerProps> = ({
   );
 };
 
-export { ToastContainer };
+// Re-export for compatibility with some imports
+export { ToastContainer, Toast };

@@ -66,6 +66,9 @@ export const ChevronLeftIcon = ({ className, size }: IconProps) => (
   </BaseIcon>
 );
 
+// Aliases for commonly used names in app code
+export const ArrowLeftIcon = ChevronLeftIcon;
+
 export const SearchIcon = ({ className, size }: IconProps) => (
   <BaseIcon className={className} size={size}>
     <circle cx="11" cy="11" r="8" />
@@ -73,12 +76,16 @@ export const SearchIcon = ({ className, size }: IconProps) => (
   </BaseIcon>
 );
 
+export const MagnifyingGlassIcon = SearchIcon;
+
 export const EditIcon = ({ className, size }: IconProps) => (
   <BaseIcon className={className} size={size}>
     <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
     <path d="m15 5 4 4" />
   </BaseIcon>
 );
+
+export const PencilIcon = EditIcon;
 
 export const TrashIcon = ({ className, size }: IconProps) => (
   <BaseIcon className={className} size={size}>
@@ -253,6 +260,54 @@ export const MailIcon = ({ className, size }: IconProps) => (
   </BaseIcon>
 );
 
+export const EnvelopeIcon = MailIcon;
+
+// Additional icons referenced by app code
+export const MapPinIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M12 22s7-5.33 7-12a7 7 0 1 0-14 0c0 6.67 7 12 7 12Z" />
+    <circle cx="12" cy="10" r="3" />
+  </BaseIcon>
+);
+
+export const XCircleIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <circle cx="12" cy="12" r="10" />
+    <path d="M15 9l-6 6" />
+    <path d="M9 9l6 6" />
+  </BaseIcon>
+);
+
+export const TagIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M7 7h6l7 7-6 6-7-7V7z" />
+    <circle cx="10" cy="10" r="1.5" />
+  </BaseIcon>
+);
+
+export const AlertCircleIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <circle cx="12" cy="12" r="10" />
+    <path d="M12 8v5" />
+    <path d="M12 17h.01" />
+  </BaseIcon>
+);
+
+export const MessageSquareIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+  </BaseIcon>
+);
+
+export const FileTextIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+    <path d="M14 2v6h6" />
+    <line x1="16" y1="13" x2="8" y2="13" />
+    <line x1="16" y1="17" x2="8" y2="17" />
+  </BaseIcon>
+);
+
 export const LockIcon = ({ className, size }: IconProps) => (
   <BaseIcon className={className} size={size}>
     <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
@@ -340,19 +395,25 @@ export const Icons = {
   ChevronDown: ChevronDownIcon,
   ChevronRight: ChevronRightIcon,
   ChevronLeft: ChevronLeftIcon,
+  ArrowLeft: ArrowLeftIcon,
   Search: SearchIcon,
+  MagnifyingGlass: MagnifyingGlassIcon,
   Edit: EditIcon,
+  Pencil: PencilIcon,
   Trash: TrashIcon,
   Save: SaveIcon,
   Close: CloseIcon,
   X: XIcon,
+  XCircle: XCircleIcon,
   Check: CheckIcon,
   AlertTriangle: AlertTriangleIcon,
+  AlertCircle: AlertCircleIcon,
   Info: InfoIcon,
   Settings: SettingsIcon,
   User: UserIcon,
   Users: UsersIcon,
   Mail: MailIcon,
+  Envelope: EnvelopeIcon,
   Lock: LockIcon,
   TrendingUp: TrendingUpIcon,
   TrendingDown: TrendingDownIcon,
@@ -376,4 +437,8 @@ export const Icons = {
   ExclamationTriangle: ExclamationTriangleIcon,
   CurrencyDollar: CurrencyDollarIcon,
   Star: StarIcon,
+  MapPin: MapPinIcon,
+  Tag: TagIcon,
+  MessageSquare: MessageSquareIcon,
+  FileText: FileTextIcon,
 };

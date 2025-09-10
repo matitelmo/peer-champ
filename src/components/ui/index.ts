@@ -175,6 +175,11 @@ export type {
   NavItem,
 } from './Navigation';
 
+// Backwards-compat: export Tabs subcomponents that some pages expect
+export const TabsList = () => null;
+export const TabsTrigger = () => null;
+export const TabsContent = () => null;
+
 export { Pagination, SimplePagination } from './Pagination';
 export type { PaginationProps, SimplePaginationProps } from './Pagination';
 
