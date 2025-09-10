@@ -70,7 +70,7 @@ export const ReferenceCallDetails: React.FC<ReferenceCallDetailsProps> = ({
 
   if (error) {
     return (
-      <Alert variant="destructive">
+      <Alert variant="error">
         <AlertCircleIcon size={20} />
         <div>
           <h4 className="font-semibold">Error loading call details</h4>
@@ -82,7 +82,7 @@ export const ReferenceCallDetails: React.FC<ReferenceCallDetailsProps> = ({
 
   if (!call) {
     return (
-      <Alert variant="destructive">
+      <Alert variant="error">
         <AlertCircleIcon size={20} />
         <div>
           <h4 className="font-semibold">Call not found</h4>

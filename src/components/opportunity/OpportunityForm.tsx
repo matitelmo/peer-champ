@@ -225,28 +225,28 @@ export const OpportunityForm: React.FC<OpportunityFormProps> = ({
         prospect_phone: opportunity.prospect_phone || '',
         prospect_website: opportunity.prospect_website || '',
         prospect_industry: opportunity.prospect_industry || '',
-        prospect_size: opportunity.prospect_size,
+        prospect_size: opportunity.prospect_size || undefined,
         geographic_region: opportunity.geographic_region || '',
         opportunity_name: opportunity.opportunity_name,
         use_case: opportunity.use_case || '',
         product_interest: opportunity.product_interest || [],
         technical_requirements: opportunity.technical_requirements || [],
         business_challenges: opportunity.business_challenges || [],
-        deal_value: opportunity.deal_value,
+        deal_value: opportunity.deal_value || undefined,
         currency: opportunity.currency || 'USD',
         deal_stage: opportunity.deal_stage,
-        probability: opportunity.probability,
+        probability: opportunity.probability || undefined,
         expected_close_date: opportunity.expected_close_date || '',
         reference_request_status: opportunity.reference_request_status,
         reference_urgency: opportunity.reference_urgency,
         reference_type_needed: opportunity.reference_type_needed,
         desired_advocate_industry: opportunity.desired_advocate_industry || '',
-        desired_advocate_size: opportunity.desired_advocate_size,
+        desired_advocate_size: opportunity.desired_advocate_size || undefined,
         desired_advocate_region: opportunity.desired_advocate_region || '',
         desired_use_cases: opportunity.desired_use_cases || [],
         desired_expertise_areas: opportunity.desired_expertise_areas || [],
         external_crm_id: opportunity.external_crm_id || '',
-        external_crm_type: opportunity.external_crm_type,
+        external_crm_type: opportunity.external_crm_type || undefined,
         external_crm_url: opportunity.external_crm_url || '',
         reference_needed_by: opportunity.reference_needed_by || '',
         follow_up_date: opportunity.follow_up_date || '',
@@ -370,7 +370,7 @@ export const OpportunityForm: React.FC<OpportunityFormProps> = ({
 
       <CardBody>
         {error && (
-          <Alert variant="destructive" className="mb-6">
+          <Alert variant="error" className="mb-6">
             {error}
           </Alert>
         )}
@@ -391,7 +391,7 @@ export const OpportunityForm: React.FC<OpportunityFormProps> = ({
                   onChange={(e) =>
                     handleInputChange('prospect_company', e.target.value)
                   }
-                  error={validationErrors.prospect_company}
+                  variant={validationErrors.prospect_company ? "error" : "default"}
                   placeholder="Acme Corporation"
                 />
               </div>
@@ -502,7 +502,7 @@ export const OpportunityForm: React.FC<OpportunityFormProps> = ({
                   onChange={(e) =>
                     handleInputChange('opportunity_name', e.target.value)
                   }
-                  error={validationErrors.opportunity_name}
+                  variant={validationErrors.opportunity_name ? "error" : "default"}
                   placeholder="Acme Corp - Digital Transformation"
                 />
               </div>
@@ -539,7 +539,7 @@ export const OpportunityForm: React.FC<OpportunityFormProps> = ({
                       e.target.value ? parseFloat(e.target.value) : undefined
                     )
                   }
-                  error={validationErrors.deal_value}
+                  variant={validationErrors.deal_value ? "error" : "default"}
                   placeholder="250000"
                 />
               </div>
@@ -575,7 +575,7 @@ export const OpportunityForm: React.FC<OpportunityFormProps> = ({
                       e.target.value ? parseInt(e.target.value) : undefined
                     )
                   }
-                  error={validationErrors.probability}
+                  variant={validationErrors.probability ? "error" : "default"}
                   placeholder="75"
                 />
               </div>
@@ -604,7 +604,7 @@ export const OpportunityForm: React.FC<OpportunityFormProps> = ({
                       e.target.value ? parseInt(e.target.value) : 50
                     )
                   }
-                  error={validationErrors.priority_score}
+                  variant={validationErrors.priority_score ? "error" : "default"}
                 />
               </div>
             </div>
@@ -737,7 +737,7 @@ export const OpportunityForm: React.FC<OpportunityFormProps> = ({
                     checked={
                       formData.product_interest?.includes(interest) || false
                     }
-                    onChange={(checked) =>
+                    onChange={(e) =>
                       handleCheckboxChange(
                         'product_interest',
                         interest,
@@ -767,7 +767,7 @@ export const OpportunityForm: React.FC<OpportunityFormProps> = ({
                       formData.technical_requirements?.includes(requirement) ||
                       false
                     }
-                    onChange={(checked) =>
+                    onChange={(e) =>
                       handleCheckboxChange(
                         'technical_requirements',
                         requirement,
@@ -796,7 +796,7 @@ export const OpportunityForm: React.FC<OpportunityFormProps> = ({
                     checked={
                       formData.business_challenges?.includes(challenge) || false
                     }
-                    onChange={(checked) =>
+                    onChange={(e) =>
                       handleCheckboxChange(
                         'business_challenges',
                         challenge,

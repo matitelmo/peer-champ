@@ -407,7 +407,7 @@ export const OpportunityList: React.FC<OpportunityListProps> = ({
   }
 
   if (error) {
-    return <Alert variant="destructive">{error}</Alert>;
+    return <Alert variant="error">{error}</Alert>;
   }
 
   return (
@@ -605,7 +605,7 @@ export const OpportunityList: React.FC<OpportunityListProps> = ({
                   Cancel
                 </Button>
                 <LoadingButton
-                  variant="destructive"
+                  variant="error"
                   onClick={confirmDelete}
                   loading={deleting}
                 >

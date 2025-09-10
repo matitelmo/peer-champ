@@ -287,7 +287,7 @@ export const MatchingInterface: React.FC<MatchingInterfaceProps> = ({
       </Card>
 
       {/* Error Display */}
-      {matchingError && <Alert variant="destructive">{matchingError}</Alert>}
+      {matchingError && <Alert variant="error">{matchingError}</Alert>}
 
       {/* Results Summary */}
       {stats && (

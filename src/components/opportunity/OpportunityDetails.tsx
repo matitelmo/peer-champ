@@ -343,7 +343,7 @@ export const OpportunityDetails: React.FC<OpportunityDetailsProps> = ({
                   </label>
                   <p className="text-lg font-semibold text-gray-900 dark:text-white">
                     {formatCurrency(
-                      opportunity.deal_value,
+                      opportunity.deal_value || undefined,
                       opportunity.currency
                     )}
                   </p>
@@ -363,7 +363,7 @@ export const OpportunityDetails: React.FC<OpportunityDetailsProps> = ({
                     Expected Close Date
                   </label>
                   <p className="text-sm text-gray-900 dark:text-white">
-                    {formatDate(opportunity.expected_close_date)}
+                    {formatDate(opportunity.expected_close_date || undefined)}
                   </p>
                 </div>
                 <div>
@@ -414,7 +414,7 @@ export const OpportunityDetails: React.FC<OpportunityDetailsProps> = ({
                     Reference Needed By
                   </label>
                   <p className="text-sm text-gray-900 dark:text-white">
-                    {formatDate(opportunity.reference_needed_by)}
+                    {formatDate(opportunity.reference_needed_by || undefined)}
                   </p>
                 </div>
                 <div>
@@ -422,7 +422,7 @@ export const OpportunityDetails: React.FC<OpportunityDetailsProps> = ({
                     Follow-up Date
                   </label>
                   <p className="text-sm text-gray-900 dark:text-white">
-                    {formatDate(opportunity.follow_up_date)}
+                    {formatDate(opportunity.follow_up_date || undefined)}
                   </p>
                 </div>
               </div>

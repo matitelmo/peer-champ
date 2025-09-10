@@ -392,12 +392,21 @@ export const StarIcon = ({ className, size }: IconProps) => (
   </BaseIcon>
 );
 
+
+export const GlobeAltIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <circle cx="12" cy="12" r="10" />
+    <path d="M2 12h20" />
+    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+  </BaseIcon>
+);
 // Export all icons as a group for easier importing
 export const Icons = {
   Plus: PlusIcon,
   ChevronDown: ChevronDownIcon,
   ChevronRight: ChevronRightIcon,
   ChevronLeft: ChevronLeftIcon,
+
   ArrowLeft: ArrowLeftIcon,
   Search: SearchIcon,
   MagnifyingGlass: MagnifyingGlassIcon,
@@ -444,4 +453,5 @@ export const Icons = {
   Tag: TagIcon,
   MessageSquare: MessageSquareIcon,
   FileText: FileTextIcon,
+  GlobeAlt: GlobeAltIcon,
 };

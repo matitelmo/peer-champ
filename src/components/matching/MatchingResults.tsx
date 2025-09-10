@@ -383,7 +383,7 @@ export const MatchingResults: React.FC<MatchingResultsProps> = ({
                       Last Call:
                     </span>
                     <span className="ml-2 text-gray-900 dark:text-white">
-                      {formatDate(selectedMatch.advocate.last_call_date)}
+                      {formatDate(selectedMatch.advocate.last_call_date || undefined)}
                     </span>
                   </div>
                 </div>

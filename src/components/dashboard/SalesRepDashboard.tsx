@@ -76,7 +76,7 @@ export const SalesRepDashboard: React.FC<SalesRepDashboardProps> = ({
   }
 
   if (error) {
-    return <Alert variant="destructive">{error}</Alert>;
+    return <Alert variant="error">{error}</Alert>;
   }
 
   return (
@@ -116,12 +116,11 @@ export const SalesRepDashboard: React.FC<SalesRepDashboardProps> = ({
               key={index}
               variant={
                 insight.type === 'success'
-                  ? 'default'
+                  ? 'success'
                   : insight.type === 'warning'
-                    ? 'destructive'
-                    : 'secondary'
-              }
-              className="p-4"
+                    ? 'warning'
+                    : 'info'
+              }              className="p-4"
             >
               <div className="flex items-start space-x-3">
                 {insight.type === 'success' && (
@@ -158,7 +157,6 @@ export const SalesRepDashboard: React.FC<SalesRepDashboardProps> = ({
           value={stats?.openOpportunities.value || 0}
           subtitle={`${stats?.openOpportunities.percentage || 0}% of total`}
           icon={<BuildingOfficeIcon size={24} />}
-          trend={stats?.openOpportunities.change}
           color="blue"
         />
 
