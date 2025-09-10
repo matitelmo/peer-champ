@@ -181,7 +181,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
                 value={formData.firstName}
                 onChange={handleInputChange('firstName')}
                 placeholder="First name"
-                error={!!errors.firstName}
+                variant={!!errors.firstName ? "error" : "default"}
                 disabled={isLoading}
                 className="w-full"
               />
@@ -205,7 +205,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
                 value={formData.lastName}
                 onChange={handleInputChange('lastName')}
                 placeholder="Last name"
-                error={!!errors.lastName}
+                variant={!!errors.lastName ? "error" : "default"}
                 disabled={isLoading}
                 className="w-full"
               />
@@ -231,7 +231,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
               value={formData.email}
               onChange={handleInputChange('email')}
               placeholder="Enter your email"
-              error={!!errors.email}
+              variant={!!errors.email ? "error" : "default"}
               disabled={isLoading}
               className="w-full"
             />
@@ -256,7 +256,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
               value={formData.password}
               onChange={handleInputChange('password')}
               placeholder="Create a password"
-              error={!!errors.password}
+              variant={!!errors.password ? "error" : "default"}
               disabled={isLoading}
               className="w-full"
             />
@@ -285,7 +285,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
               value={formData.confirmPassword}
               onChange={handleInputChange('confirmPassword')}
               placeholder="Confirm your password"
-              error={!!errors.confirmPassword}
+              variant={!!errors.confirmPassword ? "error" : "default"}
               disabled={isLoading}
               className="w-full"
             />

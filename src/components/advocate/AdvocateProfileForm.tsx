@@ -11,7 +11,7 @@ import React, { useState, useEffect } from 'react';
 import { useAdvocates } from '@/hooks/useAdvocates';
 import {
   Advocate,
-  UpdateAdvocateData,
+  UpdateAdvocate,
   AdvocateStatus,
   CompanySize,
   RewardType,
@@ -140,7 +140,7 @@ export const AdvocateProfileForm: React.FC<AdvocateProfileFormProps> = ({
   } = useAdvocates();
 
   // Form state
-  const [formData, setFormData] = useState<UpdateAdvocateData>({});
+  const [formData, setFormData] = useState<UpdateAdvocate>({});
   const [validationErrors, setValidationErrors] = useState<
     Record<string, string>
   >({});
@@ -183,7 +183,7 @@ export const AdvocateProfileForm: React.FC<AdvocateProfileFormProps> = ({
   }, [currentAdvocate]);
 
   // Handle input changes
-  const handleInputChange = (field: keyof UpdateAdvocateData, value: any) => {
+  const handleInputChange = (field: keyof UpdateAdvocate, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     setHasChanges(true);
 
@@ -195,7 +195,7 @@ export const AdvocateProfileForm: React.FC<AdvocateProfileFormProps> = ({
 
   // Handle array field changes
   const handleArrayFieldChange = (
-    field: keyof UpdateAdvocateData,
+    field: keyof UpdateAdvocate,
     value: string[]
   ) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -208,7 +208,7 @@ export const AdvocateProfileForm: React.FC<AdvocateProfileFormProps> = ({
 
   // Handle checkbox changes for arrays
   const handleCheckboxChange = (
-    field: keyof UpdateAdvocateData,
+    field: keyof UpdateAdvocate,
     value: string,
     checked: boolean
   ) => {
@@ -297,7 +297,7 @@ export const AdvocateProfileForm: React.FC<AdvocateProfileFormProps> = ({
 
   if (!currentAdvocate) {
     return (
-      <Alert variant="destructive">Advocate not found or failed to load.</Alert>
+      <Alert variant="error">Advocate not found or failed to load.</Alert>
     );
   }
 
@@ -384,7 +384,7 @@ export const AdvocateProfileForm: React.FC<AdvocateProfileFormProps> = ({
 
         <CardBody>
           {error && (
-            <Alert variant="destructive" className="mb-6">
+            <Alert variant="error" className="mb-6">
               {error}
             </Alert>
           )}
@@ -400,7 +400,7 @@ export const AdvocateProfileForm: React.FC<AdvocateProfileFormProps> = ({
                     label="Full Name *"
                     value={formData.name || ''}
                     onChange={(e) => handleInputChange('name', e.target.value)}
-                    error={validationErrors.name}
+                    variant={validationErrors.name ? "error" : "default"}
                   />
                 </div>
 
@@ -410,7 +410,7 @@ export const AdvocateProfileForm: React.FC<AdvocateProfileFormProps> = ({
                     type="email"
                     value={formData.email || ''}
                     onChange={(e) => handleInputChange('email', e.target.value)}
-                    error={validationErrors.email}
+                    variant={validationErrors.email ? "error" : "default"}
                   />
                 </div>
 
@@ -444,7 +444,7 @@ export const AdvocateProfileForm: React.FC<AdvocateProfileFormProps> = ({
                     onChange={(e) =>
                       handleInputChange('company_name', e.target.value)
                     }
-                    error={validationErrors.company_name}
+                    variant={validationErrors.company_name ? "error" : "default"}
                   />
                 </div>
 
@@ -455,7 +455,7 @@ export const AdvocateProfileForm: React.FC<AdvocateProfileFormProps> = ({
                     onChange={(e) =>
                       handleInputChange('industry', e.target.value)
                     }
-                    error={validationErrors.industry}
+                    variant={validationErrors.industry ? "error" : "default"}
                   />
                 </div>
 
@@ -466,7 +466,7 @@ export const AdvocateProfileForm: React.FC<AdvocateProfileFormProps> = ({
                     onChange={(value) =>
                       handleInputChange('company_size', value as CompanySize)
                     }
-                    error={validationErrors.company_size}
+                    variant={validationErrors.company_size ? "error" : "default"}
                     options={COMPANY_SIZES}
                   />
                 </div>
@@ -478,7 +478,7 @@ export const AdvocateProfileForm: React.FC<AdvocateProfileFormProps> = ({
                     onChange={(e) =>
                       handleInputChange('geographic_region', e.target.value)
                     }
-                    error={validationErrors.geographic_region}
+                    variant={validationErrors.geographic_region ? "error" : "default"}
                   />
                 </div>
               </div>
@@ -503,8 +503,8 @@ export const AdvocateProfileForm: React.FC<AdvocateProfileFormProps> = ({
                       key={useCase}
                       label={useCase}
                       checked={formData.use_cases?.includes(useCase) || false}
-                      onChange={(checked) =>
-                        handleCheckboxChange('use_cases', useCase, checked)
+                      onChange={(e) =>
+                        handleCheckboxChange('use_cases', useCase, e.target.checked)
                       }
                     />
                   ))}
@@ -528,8 +528,8 @@ export const AdvocateProfileForm: React.FC<AdvocateProfileFormProps> = ({
                       checked={
                         formData.expertise_areas?.includes(area) || false
                       }
-                      onChange={(checked) =>
-                        handleCheckboxChange('expertise_areas', area, checked)
+                      onChange={(e) =>
+                        handleCheckboxChange('expertise_areas', area, e.target.checked)
                       }
                     />
                   ))}

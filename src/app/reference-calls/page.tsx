@@ -9,7 +9,7 @@
 
 import React, { useState } from 'react';
 import { withAuth } from '@/hooks/useAuth';
-import { ReferenceCall } from '@/lib/services/referenceCallService';
+import { ReferenceCall } from '@/types/database';
 import { ReferenceCallList } from '@/components/reference-calls/ReferenceCallList';
 import { ReferenceCallForm } from '@/components/reference-calls/ReferenceCallForm';
 import { ReferenceCallDetails } from '@/components/reference-calls/ReferenceCallDetails';

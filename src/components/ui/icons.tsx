@@ -219,6 +219,9 @@ export const FilterIcon = ({ className, size }: IconProps) => (
   </BaseIcon>
 );
 
+// Alias for commonly used names
+export const FunnelIcon = FilterIcon;
+
 export const SortIcon = ({ className, size }: IconProps) => (
   <BaseIcon className={className} size={size}>
     <path d="M3 6h18" />

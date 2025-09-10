@@ -24,7 +24,7 @@ import {
   updateAdvocateAvailability,
   getAdvocateStats,
   CreateAdvocateData,
-  UpdateAdvocateData,
+  UpdateAdvocate,
   AdvocateFilters,
   AdvocateMatchCriteria,
 } from '@/lib/services/advocateService';
@@ -57,7 +57,7 @@ export interface UseAdvocatesReturn {
   createNewAdvocate: (data: CreateAdvocateData) => Promise<Advocate>;
   updateAdvocateData: (
     id: string,
-    data: UpdateAdvocateData
+    data: UpdateAdvocate
   ) => Promise<Advocate>;
   deleteAdvocateData: (id: string) => Promise<void>;
   findMatches: (criteria: AdvocateMatchCriteria) => Promise<Advocate[]>;
@@ -131,7 +131,7 @@ export const useAdvocates = (): UseAdvocatesReturn => {
 
   // Update advocate
   const updateAdvocateData = useCallback(
-    async (id: string, data: UpdateAdvocateData): Promise<Advocate> => {
+    async (id: string, data: UpdateAdvocate): Promise<Advocate> => {
       try {
         setUpdating(true);
         setError(null);

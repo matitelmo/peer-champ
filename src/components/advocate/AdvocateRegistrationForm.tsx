@@ -240,7 +240,7 @@ export const AdvocateRegistrationForm: React.FC<
 
       <CardBody>
         {error && (
-          <Alert variant="destructive" className="mb-6">
+          <Alert variant="error" className="mb-6">
             {error}
           </Alert>
         )}
@@ -256,7 +256,7 @@ export const AdvocateRegistrationForm: React.FC<
                   label="Full Name *"
                   value={formData.name}
                   onChange={(e) => handleInputChange('name', e.target.value)}
-                  error={validationErrors.name}
+                  variant={validationErrors.name ? "error" : "default"}
                   placeholder="John Smith"
                 />
               </div>
@@ -267,7 +267,7 @@ export const AdvocateRegistrationForm: React.FC<
                   type="email"
                   value={formData.email}
                   onChange={(e) => handleInputChange('email', e.target.value)}
-                  error={validationErrors.email}
+                  variant={validationErrors.email ? "error" : "default"}
                   placeholder="john.smith@company.com"
                 />
               </div>
@@ -304,7 +304,7 @@ export const AdvocateRegistrationForm: React.FC<
                   onChange={(e) =>
                     handleInputChange('company_name', e.target.value)
                   }
-                  error={validationErrors.company_name}
+                  variant={validationErrors.company_name ? "error" : "default"}
                   placeholder="Acme Corporation"
                 />
               </div>
@@ -316,7 +316,7 @@ export const AdvocateRegistrationForm: React.FC<
                   onChange={(e) =>
                     handleInputChange('industry', e.target.value)
                   }
-                  error={validationErrors.industry}
+                  variant={validationErrors.industry ? "error" : "default"}
                   placeholder="Software, Manufacturing, Healthcare, etc."
                 />
               </div>
@@ -328,7 +328,7 @@ export const AdvocateRegistrationForm: React.FC<
                   onChange={(value) =>
                     handleInputChange('company_size', value as CompanySize)
                   }
-                  error={validationErrors.company_size}
+                  variant={validationErrors.company_size ? "error" : "default"}
                   options={COMPANY_SIZES}
                   placeholder="Select company size"
                 />
@@ -341,7 +341,7 @@ export const AdvocateRegistrationForm: React.FC<
                   onChange={(e) =>
                     handleInputChange('geographic_region', e.target.value)
                   }
-                  error={validationErrors.geographic_region}
+                  variant={validationErrors.geographic_region ? "error" : "default"}
                   placeholder="North America, Europe, Asia-Pacific, etc."
                 />
               </div>
@@ -367,8 +367,8 @@ export const AdvocateRegistrationForm: React.FC<
                     key={useCase}
                     label={useCase}
                     checked={formData.use_cases?.includes(useCase) || false}
-                    onChange={(checked) =>
-                      handleCheckboxChange('use_cases', useCase, checked)
+                    onChange={(e) =>
+                      handleCheckboxChange('use_cases', useCase, e.target.checked)
                     }
                   />
                 ))}
@@ -390,8 +390,8 @@ export const AdvocateRegistrationForm: React.FC<
                     key={area}
                     label={area}
                     checked={formData.expertise_areas?.includes(area) || false}
-                    onChange={(checked) =>
-                      handleCheckboxChange('expertise_areas', area, checked)
+                    onChange={(e) =>
+                      handleCheckboxChange('expertise_areas', area, e.target.checked)
                     }
                   />
                 ))}
@@ -476,8 +476,8 @@ export const AdvocateRegistrationForm: React.FC<
                       key={language}
                       label={language}
                       checked={formData.languages?.includes(language) || false}
-                      onChange={(checked) =>
-                        handleCheckboxChange('languages', language, checked)
+                      onChange={(e) =>
+                        handleCheckboxChange('languages', language, e.target.checked)
                       }
                     />
                   ))}

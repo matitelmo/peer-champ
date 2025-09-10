@@ -76,7 +76,7 @@ export default function VerifyEmailPage() {
 
   return (
     <AuthLayout
-      variant="centered"
+      variant="default"
       size="md"
       title="Verify Your Email"
       subtitle="We've sent a verification link to your email address"

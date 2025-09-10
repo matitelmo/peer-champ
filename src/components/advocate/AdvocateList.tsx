@@ -208,7 +208,7 @@ export const AdvocateList: React.FC<AdvocateListProps> = ({
   }
 
   if (error) {
-    return <Alert variant="destructive">{error}</Alert>;
+    return <Alert variant="error">{error}</Alert>;
   }
 
   return (
@@ -284,7 +284,7 @@ export const AdvocateList: React.FC<AdvocateListProps> = ({
       {/* Advocate Grid */}
       {filteredAdvocates.length === 0 ? (
         <EmptyState
-          icon={<UserIcon size={48} />}
+          illustration={<UserIcon size={48} />}
           title="No advocates found"
           description="No advocates match your current filters. Try adjusting your search criteria."
         />
@@ -422,13 +422,12 @@ export const AdvocateList: React.FC<AdvocateListProps> = ({
 
       {/* Delete Confirmation Modal */}
       <ConfirmModal
-        open={deleteModalOpen}
+        isOpen={deleteModalOpen}
         onClose={() => setDeleteModalOpen(false)}
         onConfirm={handleDeleteConfirm}
         title="Delete Advocate"
-        description={`Are you sure you want to delete ${advocateToDelete?.name}? This action cannot be undone.`}
+        message={`Are you sure you want to delete ${advocateToDelete?.name}? This action cannot be undone.`}
         confirmText="Delete"
-        confirmVariant="destructive"
         loading={deleting}
       />
     </div>
