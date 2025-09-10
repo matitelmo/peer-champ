@@ -49,20 +49,23 @@ export const AvailabilityCalendar: React.FC<AvailabilityCalendarProps> = ({
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" role="group" aria-label="Available time slots">
       {grouped.map(([day, list], dayIdx) => (
-        <div key={day} className="border rounded-lg p-4">
+        <div key={day} className="border rounded-lg p-4" role="group" aria-label={day}>
           <div className="font-medium mb-2">{day}</div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2" role="list">
             {list.map((slot, idx) => {
               const index = `${dayIdx}-${idx}`;
               const isSelected = selectedIndex === idx && dayIdx === 0; // simple selection handling
               return (
                 <button
                   key={index}
-                  className={`border rounded px-3 py-2 text-sm text-left hover:border-primary-500 ${
+                  className={`border rounded px-3 py-2 text-sm text-left hover:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-300 ${
                     isSelected ? 'border-primary-600 ring-2 ring-primary-200' : 'border-gray-300'
                   }`}
+                  role="listitem"
+                  aria-pressed={isSelected}
+                  aria-label={`Select ${formatTime(slot.start, timeZone)} to ${formatTime(slot.end, timeZone)}`}
                   onClick={() => {
                     setSelectedIndex(idx);
                     onSelect(slot);

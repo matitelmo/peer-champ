@@ -8,6 +8,8 @@ import ProspectForm from '@/components/booking/ProspectForm';
 import { Spinner } from '@/components/ui/Spinner';
 import { ErrorState } from '@/components/ui/ErrorState';
 import { Toast, ToastContainer } from '@/components/ui/ToastContainer';
+import { getMockSlots } from '@/lib/services/mockAvailability';
+import { track } from '@/lib/utils';
 
 interface PageProps {
   params: { token: string };
@@ -41,6 +43,7 @@ export default function BookingTokenPage({ params }: PageProps) {
       }
     };
     run();
+    track('booking_view', { token });
   }, [token]);
 
   if (loading) {
@@ -104,8 +107,11 @@ export default function BookingTokenPage({ params }: PageProps) {
           <div className="mt-6">
             <h3 className="font-medium mb-2">Select a time</h3>
             <AvailabilityCalendar
-              slots={[]}
-              onSelect={(slot) => setSelectedSlot(slot)}
+              slots={getMockSlots(5)}
+              onSelect={(slot) => {
+                setSelectedSlot(slot);
+                track('booking_slot_selected', { start: slot.start, end: slot.end });
+              }}
             />
             {selectedSlot && (
               <div className="mt-3 text-sm text-gray-700">

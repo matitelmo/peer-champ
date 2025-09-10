@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
+import { track } from '@/lib/utils';
 
 interface ProspectFormProps {
   token: string;
@@ -16,12 +17,14 @@ export const ProspectForm: React.FC<ProspectFormProps> = ({ token, onSubmitted }
   const [notes, setNotes] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const isValid = name.trim().length > 1 && /.+@.+\..+/.test(email);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       setSubmitting(true);
       setError(null);
+      track('booking_form_submitted', { name, email });
       const { error } = await supabase
         .from('magic_links')
         .update({
@@ -53,6 +56,7 @@ export const ProspectForm: React.FC<ProspectFormProps> = ({ token, onSubmitted }
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
+          aria-required="true"
         />
       </div>
       <div>
@@ -63,6 +67,8 @@ export const ProspectForm: React.FC<ProspectFormProps> = ({ token, onSubmitted }
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          aria-required="true"
+          aria-invalid={email.length > 0 && !/.+@.+\..+/.test(email)}
         />
       </div>
       <div>
@@ -78,7 +84,8 @@ export const ProspectForm: React.FC<ProspectFormProps> = ({ token, onSubmitted }
       <button
         type="submit"
         className="inline-flex items-center px-4 py-2 rounded-md bg-primary-600 text-white disabled:opacity-50"
-        disabled={submitting}
+        disabled={submitting || !isValid}
+        aria-disabled={submitting || !isValid}
       >
         {submitting ? 'Submitting…' : 'Continue'}
       </button>

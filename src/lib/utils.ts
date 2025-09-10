@@ -198,3 +198,24 @@ export function deepMerge<T extends Record<string, unknown>>(
 
   return result;
 }
+
+// Lightweight analytics emitter (no external deps). Replace with real client later.
+export type AnalyticsEvent =
+  | 'booking_view'
+  | 'booking_slot_selected'
+  | 'booking_form_submitted';
+
+export function track(event: AnalyticsEvent, payload?: Record<string, unknown>) {
+  try {
+    const body = {
+      event,
+      payload: payload ?? {},
+      ts: Date.now(),
+      path: typeof window !== 'undefined' ? window.location.pathname : '',
+    };
+    // eslint-disable-next-line no-console
+    console.debug('[analytics]', body);
+  } catch {
+    // noop
+  }
+}
