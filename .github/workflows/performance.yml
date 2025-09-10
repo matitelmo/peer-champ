@@ -1,0 +1,112 @@
+name: Performance Testing
+
+on:
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run performance tests daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  performance-test:
+    name: Performance Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: '8'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build application
+        run: pnpm build
+
+      - name: Start application
+        run: pnpm start &
+        env:
+          NODE_ENV: production
+
+      - name: Wait for application to start
+        run: npx wait-on http://localhost:3000
+
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          configPath: './lighthouse.config.js'
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+
+      - name: Run WebPageTest
+        uses: treosh/webpagetest-action@v1
+        with:
+          apiKey: ${{ secrets.WEBPAGETEST_API_KEY }}
+          url: http://localhost:3000
+          location: 'Dulles:Chrome'
+          runs: 3
+          timeout: 300
+
+      - name: Run Bundle Analyzer
+        run: |
+          pnpm build --analyze
+          npx @next/bundle-analyzer .next/static/chunks/*.js
+
+      - name: Upload performance results
+        uses: actions/upload-artifact@v3
+        with:
+          name: performance-results
+          path: |
+            .lighthouseci/
+            .next/analyze/
+          retention-days: 30
+
+      - name: Comment PR with performance results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            // Read Lighthouse results
+            const lighthouseResults = fs.readFileSync('.lighthouseci/lighthouse-results.json', 'utf8');
+            const results = JSON.parse(lighthouseResults);
+            
+            // Generate performance report
+            let comment = '## 🚀 Performance Test Results\n\n';
+            
+            results.forEach(result => {
+              const scores = result.lhr.categories;
+              comment += `### ${result.lhr.finalUrl}\n`;
+              comment += `- **Performance**: ${Math.round(scores.performance.score * 100)}/100\n`;
+              comment += `- **Accessibility**: ${Math.round(scores.accessibility.score * 100)}/100\n`;
+              comment += `- **Best Practices**: ${Math.round(scores['best-practices'].score * 100)}/100\n`;
+              comment += `- **SEO**: ${Math.round(scores.seo.score * 100)}/100\n\n`;
+            });
+            
+            // Post comment
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      - name: Notify performance results
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          channel: '#performance'
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow
+        if: always()

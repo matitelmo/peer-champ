@@ -1,0 +1,263 @@
+/**
+ * Authentication Hook and Context
+ * 
+ * Provides authentication state and methods throughout the application.
+ * Handles user session management, sign-in, sign-up, and sign-out operations.
+ */
+
+'use client';
+
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { User, Session } from '@supabase/supabase-js';
+import { supabase } from '@/lib/supabase';
+
+// Types
+export interface AuthContextType {
+  user: User | null;
+  session: Session | null;
+  loading: boolean;
+  signIn: (email: string, password: string) => Promise<{ error: any }>;
+  signUp: (email: string, password: string, userData?: { firstName?: string; lastName?: string }) => Promise<{ error: any }>;
+  signOut: () => Promise<void>;
+  resetPassword: (email: string) => Promise<{ error: any }>;
+  updatePassword: (newPassword: string) => Promise<{ error: any }>;
+  updateProfile: (updates: { firstName?: string; lastName?: string }) => Promise<{ error: any }>;
+}
+
+// Create the context
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+// Auth Provider Component
+interface AuthProviderProps {
+  children: ReactNode;
+}
+
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const [user, setUser] = useState<User | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Get initial session
+    const getInitialSession = async () => {
+      try {
+        const { data: { session }, error } = await supabase.auth.getSession();
+        
+        if (error) {
+          console.error('Error getting initial session:', error);
+        } else {
+          setSession(session);
+          setUser(session?.user ?? null);
+        }
+      } catch (error) {
+        console.error('Error in getInitialSession:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getInitialSession();
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        console.log('Auth state changed:', event, session?.user?.email);
+        
+        setSession(session);
+        setUser(session?.user ?? null);
+        setLoading(false);
+
+        // Handle specific auth events
+        if (event === 'SIGNED_IN' && session?.user) {
+          // Create or update user profile in our database
+          await createOrUpdateUserProfile(session.user);
+        }
+      }
+    );
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  // Create or update user profile in our database
+  const createOrUpdateUserProfile = async (user: User) => {
+    try {
+      const { error } = await supabase
+        .from('users')
+        .upsert({
+          id: user.id,
+          email: user.email,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        }, {
+          onConflict: 'id'
+        });
+
+      if (error) {
+        console.error('Error creating/updating user profile:', error);
+      }
+    } catch (error) {
+      console.error('Error in createOrUpdateUserProfile:', error);
+    }
+  };
+
+  // Sign in with email and password
+  const signIn = async (email: string, password: string): Promise<{ error: any }> => {
+    try {
+      setLoading(true);
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      return { error };
+    } catch (error) {
+      return { error };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Sign up with email and password
+  const signUp = async (
+    email: string, 
+    password: string, 
+    userData?: { firstName?: string; lastName?: string }
+  ): Promise<{ error: any }> => {
+    try {
+      setLoading(true);
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            first_name: userData?.firstName,
+            last_name: userData?.lastName,
+          }
+        }
+      });
+      return { error };
+    } catch (error) {
+      return { error };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Sign out
+  const signOut = async (): Promise<void> => {
+    try {
+      setLoading(true);
+      await supabase.auth.signOut();
+    } catch (error) {
+      console.error('Error signing out:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Reset password
+  const resetPassword = async (email: string): Promise<{ error: any }> => {
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/auth/reset-password`,
+      });
+      return { error };
+    } catch (error) {
+      return { error };
+    }
+  };
+
+  // Update password
+  const updatePassword = async (newPassword: string): Promise<{ error: any }> => {
+    try {
+      const { error } = await supabase.auth.updateUser({
+        password: newPassword
+      });
+      return { error };
+    } catch (error) {
+      return { error };
+    }
+  };
+
+  // Update user profile
+  const updateProfile = async (updates: { firstName?: string; lastName?: string }): Promise<{ error: any }> => {
+    try {
+      const { error } = await supabase.auth.updateUser({
+        data: {
+          first_name: updates.firstName,
+          last_name: updates.lastName,
+        }
+      });
+      return { error };
+    } catch (error) {
+      return { error };
+    }
+  };
+
+  const value: AuthContextType = {
+    user,
+    session,
+    loading,
+    signIn,
+    signUp,
+    signOut,
+    resetPassword,
+    updatePassword,
+    updateProfile,
+  };
+
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+// Custom hook to use auth context
+export const useAuth = (): AuthContextType => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
+
+// Higher-order component for protecting routes
+export const withAuth = <P extends object>(Component: React.ComponentType<P>) => {
+  const AuthenticatedComponent = (props: P) => {
+    const { user, loading } = useAuth();
+
+    if (loading) {
+      return (
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
+        </div>
+      );
+    }
+
+    if (!user) {
+      return (
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Authentication Required</h2>
+            <p className="text-gray-600 mb-4">Please sign in to access this page.</p>
+            <a 
+              href="/auth/signin" 
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700"
+            >
+              Sign In
+            </a>
+          </div>
+        </div>
+      );
+    }
+
+    return <Component {...props} />;
+  };
+
+  AuthenticatedComponent.displayName = `withAuth(${Component.displayName || Component.name})`;
+  return AuthenticatedComponent;
+};
+
+export default AuthProvider;

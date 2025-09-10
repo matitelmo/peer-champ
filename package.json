@@ -18,6 +18,7 @@
     "db:setup": "npm run migrate && npm run seed"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "@supabase/supabase-js": "^2.57.4",
     "autoprefixer": "^10.4.21",
     "class-variance-authority": "^0.7.1",

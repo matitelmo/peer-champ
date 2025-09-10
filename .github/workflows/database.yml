@@ -1,0 +1,96 @@
+name: Database Operations
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: 'Database operation to perform'
+        required: true
+        default: 'migrate'
+        type: choice
+        options:
+          - migrate
+          - seed
+          - reset
+          - backup
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+
+jobs:
+  database-operation:
+    name: Database Operation
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: '8'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Setup Supabase CLI
+        run: |
+          npm install -g supabase
+          supabase --version
+
+      - name: Run database migration
+        if: github.event.inputs.operation == 'migrate'
+        run: |
+          supabase db push --db-url ${{ secrets.SUPABASE_DB_URL }}
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+
+      - name: Seed database
+        if: github.event.inputs.operation == 'seed'
+        run: |
+          pnpm run seed:db
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+
+      - name: Reset database
+        if: github.event.inputs.operation == 'reset'
+        run: |
+          supabase db reset --db-url ${{ secrets.SUPABASE_DB_URL }}
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+
+      - name: Backup database
+        if: github.event.inputs.operation == 'backup'
+        run: |
+          supabase db dump --db-url ${{ secrets.SUPABASE_DB_URL }} > backup.sql
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+
+      - name: Upload backup
+        if: github.event.inputs.operation == 'backup'
+        uses: actions/upload-artifact@v3
+        with:
+          name: database-backup-${{ github.run_number }}
+          path: backup.sql
+          retention-days: 30
+
+      - name: Notify completion
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          channel: '#database'
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow
+        if: always()

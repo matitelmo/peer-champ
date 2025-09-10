@@ -10,7 +10,13 @@ if (!supabaseUrl || !supabaseAnonKey) {
 }
 
 // Create the main Supabase client for client-side operations
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    autoRefreshToken: true,
+    persistSession: true,
+    detectSessionInUrl: true
+  }
+});
 
 // Server-side service role client (use only in API routes or server components)
 export const getServiceSupabase = () => {

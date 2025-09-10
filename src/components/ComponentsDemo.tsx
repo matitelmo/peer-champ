@@ -21,6 +21,7 @@ import FormComponentsDemo from './FormComponentsDemo';
 import CardComponentsDemo from './CardComponentsDemo';
 import AlertNotificationDemo from './AlertNotificationDemo';
 import LoadingErrorDemo from './LoadingErrorDemo';
+import AuthLayoutDemo from './AuthLayoutDemo';
 
 export function ComponentsDemo() {
   return (
@@ -420,6 +421,26 @@ export function ComponentsDemo() {
               </p>
               <div className="space-y-4">
                 <LoadingErrorDemo />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* AuthLayout Component Section */}
+        <section className="mb-16">
+          <div className="rounded-lg bg-white p-8 shadow-sm dark:bg-gray-800">
+            <div className="text-center">
+              <h3 className="mb-4 text-lg font-medium text-gray-900 dark:text-white">
+                AuthLayout Component
+              </h3>
+              <p className="mb-6 text-gray-600 dark:text-gray-300">
+                A comprehensive layout component for authentication pages with
+                centered content, branding, responsive behavior, and support for
+                various auth flows including login, registration, password
+                reset, and navigation between auth states.
+              </p>
+              <div className="space-y-4">
+                <AuthLayoutDemo />
               </div>
             </div>
           </div>

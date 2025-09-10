@@ -1,0 +1,21 @@
+{
+  "files": [
+    {
+      "path": ".next/static/chunks/pages/_app-*.js",
+      "maxSize": "100 kB"
+    },
+    {
+      "path": ".next/static/chunks/pages/index-*.js",
+      "maxSize": "50 kB"
+    },
+    {
+      "path": ".next/static/chunks/pages/dashboard-*.js",
+      "maxSize": "100 kB"
+    },
+    {
+      "path": ".next/static/chunks/pages/auth/*-*.js",
+      "maxSize": "50 kB"
+    }
+  ],
+  "defaultCompression": "gzip"
+}

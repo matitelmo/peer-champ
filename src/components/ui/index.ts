@@ -132,6 +132,39 @@ export type { LoadingButtonProps } from './LoadingButton';
 export { LoadingInput } from './LoadingInput';
 export type { LoadingInputProps } from './LoadingInput';
 
+// Modal and Dialog components
+export { Modal, ConfirmModal } from './Modal';
+export type { ModalProps } from './Modal';
+
+export { Dialog, FormDialog, AlertDialog } from './Dialog';
+export type { DialogProps, FormDialogProps, AlertDialogProps } from './Dialog';
+
+export { Drawer, FilterDrawer, SettingsDrawer } from './Drawer';
+export type { DrawerProps, FilterDrawerProps, SettingsDrawerProps } from './Drawer';
+
+export { Popover, Tooltip, Dropdown } from './Popover';
+export type { PopoverProps, TooltipProps, DropdownProps } from './Popover';
+
+// Table components
+export { Table } from './Table';
+export type { TableProps, Column } from './Table';
+
+export { DataTable } from './DataTable';
+export type { DataTableProps } from './DataTable';
+
+export { VirtualizedTable, InfiniteScrollTable } from './VirtualizedTable';
+export type { VirtualizedTableProps, InfiniteScrollTableProps } from './VirtualizedTable';
+
+// Navigation components
+export { Navbar, Sidebar, Breadcrumb, Tabs } from './Navigation';
+export type { NavbarProps, SidebarProps, BreadcrumbProps, TabsProps, NavItem } from './Navigation';
+
+export { Pagination, SimplePagination } from './Pagination';
+export type { PaginationProps, SimplePaginationProps } from './Pagination';
+
+export { Stepper, ProgressStepper } from './Stepper';
+export type { StepperProps, ProgressStepperProps, Step } from './Stepper';
+
 // Icons
 export * from './icons';
 
