@@ -1,0 +1,350 @@
+---
+description: Comprehensive design system rules for consistent UI styling across the application
+globs: src/**/*.tsx, src/**/*.ts, src/**/*.css, src/**/*.scss
+alwaysApply: true
+---
+
+# Design System Rules
+
+## **Color Palette**
+
+### **Primary Colors**
+- **Amaranth**: `#E63946` - Primary brand color for CTAs and highlights
+- **Sundown**: `#F7A6A4` - Light accent for backgrounds and subtle elements
+- **Tutu**: `#FAF3EE` - Warm neutral for light backgrounds
+- **Hippie Blue**: `#8BACAA` - Secondary text and muted elements
+- **Regal Blue**: `#1D3557` - Primary text and dark elements
+
+### **Secondary Colors**
+- **Deep Amaranth**: `#C61824` - Darker variant for hover states
+- **Dusk Sundown**: `#F05451` - Medium accent for gradients
+- **Midnight Tutu**: `#E2B89B` - Warm neutral for borders
+- **Stormy Hippie Blue**: `#355F79` - Medium blue for secondary text
+- **Royal Regal Blue**: `#172A44` - Darkest blue for headers
+
+### **Tertiary Colors**
+- **Pale Amaranth**: `#EC646D` - Light red for subtle highlights
+- **Pale Sundown**: `#F9BBBA` - Very light pink for backgrounds
+- **Pale Tutu**: `#FBF6F3` - Lightest warm neutral
+- **Pale Hippie Blue**: `#659ABB` - Light blue for accents
+- **Pale Regal Blue**: `#335E99` - Medium blue for links
+
+### **Utility Colors**
+- **White**: `#FFFFFF` - Pure white backgrounds
+- **Black**: `#000000` - Pure black text
+- **Light Gray**: `#F5F5F5` - Light backgrounds
+- **Medium Gray**: `#E0E0E0` - Borders and dividers
+- **Dark Gray**: `#BDBDBD` - Disabled states
+
+## **Typography System**
+
+### **Font Family**
+```css
+font-family: 'Inter', sans-serif;
+```
+
+### **Headings**
+- **H1**: `48px / 700 / 1.2 / -0.02em` - Hero headlines, color: `#1D3557`
+- **H2**: `36px / 700 / 1.3 / -0.015em` - Section headers, color: `#1D3557`
+- **H3**: `24px / 600 / 1.4 / -0.01em` - Subsection headers, color: `#1D3557`
+
+### **Body Text**
+- **Large**: `18px / 400 / 1.6` - Lead paragraphs, color: `#1D3557`
+- **Regular**: `16px / 400 / 1.5` - Main content, color: `#1D3557`
+- **Small**: `14px / 400 / 1.4` - Captions, color: `#8BACAA`
+
+### **Links**
+- **Default**: `#1D3557` with underline
+- **Hover**: `#335E99`
+
+## **Component Styling Rules**
+
+### **Cards**
+```css
+/* ✅ DO: Standard card styling */
+.card {
+  background: #FFFFFF;
+  border: 1px solid #E0E0E0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  padding: 24px;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.card-title {
+  color: #1D3557;
+}
+
+.card-text {
+  color: #8BACAA;
+}
+
+.card-icon {
+  fill: #1D3557;
+}
+```
+
+```css
+/* ❌ DON'T: Avoid these patterns */
+.card {
+  background: linear-gradient(...); /* No gradients on cards */
+  border: 1px solid #E0E0E0; /* Don't use border color for text */
+}
+```
+
+### **Buttons**
+
+#### **Primary Button**
+```css
+/* ✅ DO: Primary button styling */
+.btn-primary {
+  /* Higher-contrast brand gradient */
+  background: linear-gradient(135deg, #C61824 0%, #E63946 50%, #F05451 100%);
+  color: #FFFFFF;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(230, 57, 70, 0.4);
+  transform: scale(1);
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #C61824 0%, #E63946 60%, #F05451 100%);
+  transform: scale(1.05);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+  background: #BDBDBD;
+  color: #F5F5F5;
+  box-shadow: none;
+}
+```
+
+#### **Brand Gradients (Accessibility)**
+- Use the brand gradient with these stops for text-over-gradient and CTA surfaces to ensure readability: `#C61824 → #E63946 → #F05451`.
+- For gradient text, always use `background-clip: text` and `color: transparent` to avoid low-opacity overlays.
+- Only apply gradients to large headings and solid surfaces; never to small body text.
+
+#### **Secondary Button**
+```css
+/* ✅ DO: Secondary button styling */
+.btn-secondary {
+  background: transparent;
+  color: #1D3557;
+  border: 1px solid #1D3557;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  transform: scale(1);
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(29, 53, 87, 0.05);
+  transform: scale(1.05);
+}
+
+.btn-secondary:active {
+  background: rgba(29, 53, 87, 0.1);
+  transform: scale(0.98);
+}
+
+.btn-secondary:disabled {
+  background: transparent;
+  color: #BDBDBD;
+  border: 1px solid #BDBDBD;
+}
+```
+
+```css
+/* ❌ DON'T: Avoid these patterns */
+.btn-primary {
+  color: #E63946; /* Don't use primary button colors for text links */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* Don't apply card shadows to buttons */
+}
+```
+
+### **Icons**
+
+#### **Navigation Icons**
+```css
+/* ✅ DO: Navigation icon styling */
+.nav-icon {
+  fill: #1D3557;
+  background: transparent;
+  transition: fill 0.2s ease;
+}
+
+.nav-icon:hover {
+  fill: #335E99;
+}
+```
+
+#### **Action Icons**
+```css
+/* ✅ DO: Action icon styling */
+.action-icon {
+  fill: #FFFFFF;
+  background: #E63946;
+  border-radius: 50%;
+  padding: 8px;
+  transition: background 0.2s ease;
+}
+
+.action-icon:hover {
+  background: #C61824;
+}
+```
+
+```css
+/* ❌ DON'T: Avoid these patterns */
+.icon {
+  fill: linear-gradient(...); /* Don't apply gradients to icon fills */
+  background: #1D3557; /* Don't use text colors for icon containers */
+}
+```
+
+### **Form Inputs**
+```css
+/* ✅ DO: Input styling */
+.input {
+  background: #FFFFFF;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  padding: 12px;
+  color: #1D3557;
+  transition: all 0.2s ease;
+}
+
+.input::placeholder {
+  color: #BDBDBD;
+}
+
+.input:focus {
+  border: 1px solid #1D3557;
+  box-shadow: 0 0 0 3px rgba(29, 53, 87, 0.1);
+  outline: none;
+}
+
+.input:disabled {
+  background: #F5F5F5;
+  border: 1px solid #E0E0E0;
+  color: #BDBDBD;
+}
+```
+
+## **Layout Guidelines**
+
+### **Spacing Scale**
+- **XS**: `4px`
+- **SM**: `8px`
+- **MD**: `16px`
+- **LG**: `24px`
+- **XL**: `32px`
+- **2XL**: `48px`
+- **3XL**: `64px`
+- **4XL**: `96px`
+
+### **Border Radius**
+- **Small**: `4px` - Small elements
+- **Medium**: `8px` - Buttons, inputs
+- **Large**: `12px` - Cards, containers
+- **Full**: `50%` - Circular elements
+
+### **Shadows**
+- **Light**: `0 2px 8px rgba(0,0,0,0.05)` - Subtle elevation
+- **Medium**: `0 4px 12px rgba(0,0,0,0.1)` - Cards
+- **Heavy**: `0 8px 24px rgba(0,0,0,0.15)` - Hover states
+- **Colored**: `0 2px 8px rgba(230, 57, 70, 0.4)` - Primary buttons
+
+## **Accessibility Requirements**
+
+### **Color Contrast**
+- Ensure minimum 4.5:1 contrast ratio for normal text
+- Ensure minimum 3:1 contrast ratio for large text
+- Test all color combinations for accessibility compliance
+
+### **Focus States**
+- All interactive elements must have visible focus indicators
+- Use `#1D3557` with 10% opacity for focus rings
+- Minimum 2px focus ring thickness
+
+### **Touch Targets**
+- Minimum 44px touch target size for mobile
+- Adequate spacing between interactive elements
+
+## **Implementation Notes**
+
+### **CSS Custom Properties**
+```css
+:root {
+  /* Primary Colors */
+  --color-amaranth: #E63946;
+  --color-sundown: #F7A6A4;
+  --color-tutu: #FAF3EE;
+  --color-hippie-blue: #8BACAA;
+  --color-regal-blue: #1D3557;
+  
+  /* Secondary Colors */
+  --color-deep-amaranth: #C61824;
+  --color-dusk-sundown: #F05451;
+  --color-midnight-tutu: #E2B89B;
+  --color-stormy-hippie-blue: #355F79;
+  --color-royal-regal-blue: #172A44;
+  
+  /* Utility Colors */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-light-gray: #F5F5F5;
+  --color-medium-gray: #E0E0E0;
+  --color-dark-gray: #BDBDBD;
+  
+  /* Typography */
+  --font-family: 'Inter', sans-serif;
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+  --spacing-4xl: 96px;
+}
+```
+
+### **Component Usage Examples**
+
+```tsx
+// ✅ DO: Proper button usage
+<button className="btn-primary">
+  Primary Action
+</button>
+
+<button className="btn-secondary">
+  Secondary Action
+</button>
+
+// ✅ DO: Proper card usage
+<div className="card">
+  <h3 className="card-title">Card Title</h3>
+  <p className="card-text">Card content goes here</p>
+</div>
+
+// ✅ DO: Proper icon usage
+<svg className="nav-icon" viewBox="0 0 24 24">
+  <path d="..." />
+</svg>
+```
+
+This design system ensures consistent, accessible, and visually appealing components across your entire application while maintaining the warm, professional aesthetic of your chosen color palette.

@@ -400,6 +400,26 @@ export const GlobeAltIcon = ({ className, size }: IconProps) => (
     <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
   </BaseIcon>
 );
+
+export const ShieldCheckIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    <path d="m9 12 2 2 4-4" />
+  </BaseIcon>
+);
+
+export const PlayIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <polygon points="5,3 19,12 5,21" />
+  </BaseIcon>
+);
+
+export const HomeIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+    <polyline points="9,22 9,12 15,12 15,22" />
+  </BaseIcon>
+);
 // Export all icons as a group for easier importing
 export const Icons = {
   Plus: PlusIcon,
@@ -454,4 +474,6 @@ export const Icons = {
   MessageSquare: MessageSquareIcon,
   FileText: FileTextIcon,
   GlobeAlt: GlobeAltIcon,
+  ShieldCheck: ShieldCheckIcon,
+  Play: PlayIcon,
 };

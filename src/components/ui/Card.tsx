@@ -3,6 +3,7 @@
  *
  * A flexible card component with header, body, and footer sections.
  * Supports various style variants and interactive states.
+ * Updated to follow the design system guidelines.
  */
 
 'use client';
@@ -14,16 +15,16 @@ import { cn } from '@/lib/utils';
 // Card variants using class-variance-authority
 const cardVariants = cva(
   [
-    'rounded-lg border bg-white shadow-sm transition-all duration-200',
-    'dark:bg-secondary-800 dark:border-secondary-700',
+    'rounded-xl border bg-white shadow-sm transition-all duration-200',
+    'dark:bg-regalBlue-900 dark:border-regalBlue-700',
   ],
   {
     variants: {
       variant: {
-        default: 'border-secondary-200',
-        outlined: 'border-2 border-secondary-300 dark:border-secondary-600',
-        elevated: 'shadow-lg border-secondary-100 dark:border-secondary-700',
-        flat: 'shadow-none border-secondary-100 dark:border-secondary-700',
+        default: 'border-medium-gray',
+        outlined: 'border-2 border-regalBlue-300 dark:border-regalBlue-600',
+        elevated: 'shadow-lg border-tutu-100 dark:border-regalBlue-700',
+        flat: 'shadow-none border-tutu-100 dark:border-regalBlue-700',
       },
       padding: {
         none: 'p-0',
@@ -33,11 +34,11 @@ const cardVariants = cva(
         xl: 'p-8',
       },
       interactive: {
-        true: 'cursor-pointer hover:shadow-md hover:scale-[1.02] active:scale-[0.98]',
+        true: 'cursor-pointer hover:shadow-lg hover:-translate-y-1 active:translate-y-0 transition-all duration-200 ease-in-out',
         false: '',
       },
       clickable: {
-        true: 'cursor-pointer hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2',
+        true: 'cursor-pointer hover:shadow-md focus:outline-none focus:ring-2 focus:ring-amaranth-500 focus:ring-offset-2',
         false: '',
       },
     },
@@ -54,7 +55,7 @@ const cardVariants = cva(
 const cardHeaderVariants = cva(
   [
     'flex flex-col space-y-1.5',
-    'border-b border-secondary-200 dark:border-secondary-700',
+    'border-b border-medium-gray dark:border-regalBlue-700',
   ],
   {
     variants: {
@@ -92,7 +93,7 @@ const cardBodyVariants = cva(['flex-1'], {
 const cardFooterVariants = cva(
   [
     'flex items-center',
-    'border-t border-secondary-200 dark:border-secondary-700',
+    'border-t border-medium-gray dark:border-regalBlue-700',
   ],
   {
     variants: {
@@ -247,7 +248,7 @@ const CardTitle = React.forwardRef<HTMLHeadingElement, CardTitleProps>(
     <Component
       ref={ref}
       className={cn(
-        'text-lg font-semibold leading-none tracking-tight text-secondary-900 dark:text-secondary-100',
+        'text-lg font-semibold leading-none tracking-tight text-regalBlue-700 dark:text-regalBlue-100',
         className
       )}
       {...props}
@@ -263,7 +264,7 @@ const CardDescription = React.forwardRef<
   <p
     ref={ref}
     className={cn(
-      'text-sm text-secondary-600 dark:text-secondary-400',
+      'text-sm text-hippieBlue-500 dark:text-hippieBlue-400',
       className
     )}
     {...props}

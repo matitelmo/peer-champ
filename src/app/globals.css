@@ -8,42 +8,82 @@
 @tailwind utilities;
 
 :root {
-  /* Light mode colors */
-  --background: #ffffff;
-  --background-secondary: #f8fafc;
-  --background-tertiary: #f1f5f9;
-  --foreground: #0f172a;
-  --foreground-secondary: #475569;
-  --foreground-tertiary: #64748b;
-  --border: #e2e8f0;
-  --border-secondary: #cbd5e1;
+  /* Design System Color Palette - Primary Colors */
+  --color-amaranth: #E63946;      /* Primary brand color for CTAs and highlights */
+  --color-sundown: #F7A6A4;       /* Light accent for backgrounds and subtle elements */
+  --color-tutu: #FAF3EE;          /* Warm neutral for light backgrounds */
+  --color-hippie-blue: #8BACAA;   /* Secondary text and muted elements */
+  --color-regal-blue: #1D3557;    /* Primary text and dark elements */
+  
+  /* Design System Color Palette - Secondary Colors */
+  --color-deep-amaranth: #C61824; /* Darker variant for hover states */
+  --color-dusk-sundown: #F05451;  /* Medium accent for gradients */
+  --color-midnight-tutu: #E2B89B; /* Warm neutral for borders */
+  --color-stormy-hippie-blue: #355F79; /* Medium blue for secondary text */
+  --color-royal-regal-blue: #172A44;   /* Darkest blue for headers */
+  
+  /* Design System Color Palette - Tertiary Colors */
+  --color-pale-amaranth: #EC646D; /* Light red for subtle highlights */
+  --color-pale-sundown: #F9BBBA;  /* Very light pink for backgrounds */
+  --color-pale-tutu: #FBF6F3;     /* Lightest warm neutral */
+  --color-pale-hippie-blue: #659ABB; /* Light blue for accents */
+  --color-pale-regal-blue: #335E99;  /* Medium blue for links */
+  
+  /* Design System Color Palette - Utility Colors */
+  --color-white: #FFFFFF;         /* Pure white backgrounds */
+  --color-black: #000000;         /* Pure black text */
+  --color-light-gray: #F5F5F5;    /* Light backgrounds */
+  --color-medium-gray: #E0E0E0;   /* Borders and dividers */
+  --color-dark-gray: #BDBDBD;     /* Disabled states */
+
+  /* Design System Color Palette - Semantic Colors */
+  --success: #059669;             /* Success states */
+  --warning: #D97706;             /* Warning states */
+  --error: #DC2626;               /* Error states */
+  --info: #0EA5E9;                /* Info states */
+
+  /* Legacy color mappings for compatibility */
+  --background: var(--color-white);
+  --background-secondary: var(--color-light-gray);
+  --background-tertiary: var(--color-pale-tutu);
+  --foreground: var(--color-regal-blue);
+  --foreground-secondary: var(--color-hippie-blue);
+  --foreground-tertiary: var(--color-dark-gray);
+  --border: var(--color-medium-gray);
+  --border-secondary: var(--color-midnight-tutu);
 
   /* Primary colors */
-  --primary: #3b82f6;
-  --primary-foreground: #ffffff;
+  --primary: var(--color-amaranth);
+  --primary-foreground: var(--color-white);
 
   /* Component colors */
-  --card: #ffffff;
-  --card-foreground: #0f172a;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --accent: #f1f5f9;
-  --accent-foreground: #0f172a;
+  --card: var(--color-white);
+  --card-foreground: var(--color-regal-blue);
+  --muted: var(--color-pale-tutu);
+  --muted-foreground: var(--color-hippie-blue);
+  --accent: var(--color-pale-tutu);
+  --accent-foreground: var(--color-regal-blue);
 
   /* State colors */
   --success: #22c55e;
   --warning: #f59e0b;
-  --error: #ef4444;
-  --info: #06b6d4;
+  --error: var(--color-amaranth);
+  --info: var(--color-pale-hippie-blue);
 
   /* Shadows */
   --shadow-soft:
     0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
   --shadow-medium:
     0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+  --shadow-heavy:
+    0 8px 24px rgba(0, 0, 0, 0.15);
+  --shadow-colored:
+    0 2px 8px rgba(230, 57, 70, 0.4);
 
-  /* Border radius */
-  --radius: 0.5rem;
+  /* Brand Gradient Tokens (higher contrast) */
+  --gradient-brand-start: #C61824; /* Deep Amaranth */
+  --gradient-brand-mid: #E63946;   /* Amaranth */
+  --gradient-brand-end: #F05451;   /* Dusk Sundown */
 }
 
 .dark {
@@ -96,6 +136,31 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Typography System */
+h1 {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-regal-blue);
+}
+
+h2 {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--color-regal-blue);
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--color-regal-blue);
+}
+
 /* Custom scrollbar styles */
 ::-webkit-scrollbar {
   width: 8px;
@@ -135,6 +200,18 @@ body {
     color 0.2s ease-in-out,
     background-color 0.2s ease-in-out,
     border-color 0.2s ease-in-out;
+}
+
+/* Gradient utilities with guaranteed contrast */
+.bg-gradient-brand {
+  background-image: linear-gradient(135deg, var(--gradient-brand-start) 0%, var(--gradient-brand-mid) 50%, var(--gradient-brand-end) 100%);
+}
+
+.text-gradient-brand {
+  background-image: linear-gradient(135deg, var(--gradient-brand-start) 0%, var(--gradient-brand-mid) 50%, var(--gradient-brand-end) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 /* Animation utilities */

@@ -9,19 +9,85 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Primary color palette - Professional blue
+        // Design System Color Palette - Primary Colors
+        amaranth: {
+          50: '#fef2f2',
+          100: '#fee2e2',
+          200: '#fecaca',
+          300: '#fca5a5',
+          400: '#f87171',
+          500: '#E63946', // Primary Amaranth
+          600: '#dc2626',
+          700: '#b91c1c',
+          800: '#C61824', // Deep Amaranth
+          900: '#7f1d1d',
+          950: '#450a0a',
+        },
+        sundown: {
+          50: '#fef7f7',
+          100: '#fdeaea',
+          200: '#fbd4d4',
+          300: '#F7A6A4', // Primary Sundown
+          400: '#f87171',
+          500: '#f87171',
+          600: '#F05451', // Dusk Sundown
+          700: '#b91c1c',
+          800: '#991b1b',
+          900: '#7f1d1d',
+          950: '#450a0a',
+        },
+        tutu: {
+          50: '#FBF6F3', // Pale Tutu
+          100: '#FAF3EE', // Primary Tutu
+          200: '#f5f5f5',
+          300: '#E2B89B', // Midnight Tutu
+          400: '#d1d5db',
+          500: '#9ca3af',
+          600: '#6b7280',
+          700: '#374151',
+          800: '#1f2937',
+          900: '#111827',
+          950: '#030712',
+        },
+        hippieBlue: {
+          50: '#f0f9ff',
+          100: '#e0f2fe',
+          200: '#bae6fd',
+          300: '#7dd3fc',
+          400: '#38bdf8',
+          500: '#8BACAA', // Primary Hippie Blue
+          600: '#0284c7',
+          700: '#355F79', // Stormy Hippie Blue
+          800: '#075985',
+          900: '#659ABB', // Pale Hippie Blue
+          950: '#0c4a6e',
+        },
+        regalBlue: {
+          50: '#f8fafc',
+          100: '#f1f5f9',
+          200: '#e2e8f0',
+          300: '#cbd5e1',
+          400: '#94a3b8',
+          500: '#64748b',
+          600: '#475569',
+          700: '#1D3557', // Primary Regal Blue
+          800: '#1e293b',
+          900: '#172A44', // Royal Regal Blue
+          950: '#335E99', // Pale Regal Blue
+        },
+        // Legacy primary mapping for compatibility
         primary: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
-          950: '#172554',
+          50: '#fef2f2',
+          100: '#fee2e2',
+          200: '#fecaca',
+          300: '#fca5a5',
+          400: '#f87171',
+          500: '#E63946', // Amaranth
+          600: '#dc2626',
+          700: '#b91c1c',
+          800: '#C61824', // Deep Amaranth
+          900: '#7f1d1d',
+          950: '#450a0a',
         },
         // Secondary color palette - Slate gray
         secondary: {

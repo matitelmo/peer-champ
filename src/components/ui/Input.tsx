@@ -3,6 +3,7 @@
  *
  * A comprehensive input component with validation states, icons, and accessibility features.
  * Supports various input types and integrates with form validation libraries.
+ * Updated to follow the design system guidelines.
  */
 
 'use client';
@@ -15,38 +16,39 @@ import { AlertTriangleIcon, CheckIcon, InfoIcon } from './icons';
 // Input variants using class-variance-authority
 const inputVariants = cva(
   [
-    'flex w-full rounded-md border px-3 py-2 text-sm',
-    'placeholder:text-secondary-500',
+    'flex w-full rounded-lg border px-4 py-3 text-base', // Design system: border-radius: 8px, padding: var(--space-3) var(--space-4)
+    'placeholder:text-hippieBlue-500',
     'focus:outline-none focus:ring-2 focus:ring-offset-2',
     'disabled:cursor-not-allowed disabled:opacity-50',
     'transition-colors duration-200',
+    'min-h-[44px]', // Touch-friendly as per design system
     'file:border-0 file:bg-transparent file:text-sm file:font-medium',
   ],
   {
     variants: {
       variant: {
         default: [
-          'border-secondary-300 bg-white text-secondary-900',
-          'focus:border-primary-500 focus:ring-primary-500',
-          'dark:border-secondary-600 dark:bg-secondary-900 dark:text-secondary-100',
-          'dark:focus:border-primary-400 dark:focus:ring-primary-400',
+          'border-medium-gray bg-white text-regalBlue-700',
+          'focus:border-regalBlue-700 focus:ring-regalBlue-500',
+          'dark:border-regalBlue-600 dark:bg-regalBlue-900 dark:text-regalBlue-100',
+          'dark:focus:border-regalBlue-400 dark:focus:ring-regalBlue-400',
         ],
         error: [
-          'border-error-300 bg-white text-secondary-900',
-          'focus:border-error-500 focus:ring-error-500',
-          'dark:border-error-600 dark:bg-secondary-900 dark:text-secondary-100',
-          'dark:focus:border-error-400 dark:focus:ring-error-400',
+          'border-amaranth-300 bg-white text-regalBlue-700',
+          'focus:border-amaranth-500 focus:ring-amaranth-500',
+          'dark:border-amaranth-600 dark:bg-regalBlue-900 dark:text-regalBlue-100',
+          'dark:focus:border-amaranth-400 dark:focus:ring-amaranth-400',
         ],
         success: [
-          'border-success-300 bg-white text-secondary-900',
+          'border-success-300 bg-white text-regalBlue-700',
           'focus:border-success-500 focus:ring-success-500',
-          'dark:border-success-600 dark:bg-secondary-900 dark:text-secondary-100',
+          'dark:border-success-600 dark:bg-regalBlue-900 dark:text-regalBlue-100',
           'dark:focus:border-success-400 dark:focus:ring-success-400',
         ],
         warning: [
-          'border-warning-300 bg-white text-secondary-900',
+          'border-warning-300 bg-white text-regalBlue-700',
           'focus:border-warning-500 focus:ring-warning-500',
-          'dark:border-warning-600 dark:bg-secondary-900 dark:text-secondary-100',
+          'dark:border-warning-600 dark:bg-regalBlue-900 dark:text-regalBlue-100',
           'dark:focus:border-warning-400 dark:focus:ring-warning-400',
         ],
       },
@@ -135,7 +137,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
       switch (actualVariant) {
         case 'error':
-          return <AlertTriangleIcon className="h-4 w-4 text-error-500" />;
+          return <AlertTriangleIcon className="h-4 w-4 text-amaranth-500" />;
         case 'success':
           return <CheckIcon className="h-4 w-4 text-success-500" />;
         case 'warning':
@@ -154,11 +156,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="block text-sm font-medium text-secondary-700 dark:text-secondary-300 mb-1"
+            className="block text-sm font-medium text-regalBlue-700 dark:text-regalBlue-300 mb-1"
           >
             {label}
             {required && (
-              <span className="text-error-500 ml-1" aria-label="required">
+              <span className="text-amaranth-500 ml-1" aria-label="required">
                 *
               </span>
             )}
@@ -169,7 +171,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <div className="relative">
           {/* Left Icon */}
           {leftIcon && (
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-secondary-400 pointer-events-none">
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-hippieBlue-400 pointer-events-none">
               {leftIcon}
             </div>
           )}
@@ -192,7 +194,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
           {/* Right Icon or Validation Icon */}
           {(rightIcon || getValidationIcon()) && (
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary-400 pointer-events-none">
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-hippieBlue-400 pointer-events-none">
               {rightIcon || getValidationIcon()}
             </div>
           )}
@@ -202,7 +204,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {helpText && !message && (
           <p
             id={helpId}
-            className="mt-1 text-xs text-secondary-500 dark:text-secondary-400"
+            className="mt-1 text-xs text-hippieBlue-500 dark:text-hippieBlue-400"
           >
             {helpText}
           </p>
@@ -212,7 +214,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {errorMessage && (
           <p
             id={errorId}
-            className="mt-1 text-xs text-error-600 dark:text-error-400"
+            className="mt-1 text-xs text-amaranth-600 dark:text-amaranth-400"
             role="alert"
           >
             {errorMessage}

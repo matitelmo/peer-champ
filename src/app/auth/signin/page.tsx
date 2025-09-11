@@ -32,7 +32,7 @@ function SignInContent() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <Spinner size="lg" />
+        <Spinner size="xl" />
       </div>
     );
   }
@@ -45,7 +45,7 @@ function SignInContent() {
   return (
     <AuthLayout
       variant="default"
-      size="3xl"
+      size="4xl"
       title="Welcome Back"
       subtitle="Sign in to your PeerChamps account"
     >
@@ -59,7 +59,7 @@ export default function SignInPage() {
     <Suspense
       fallback={
         <div className="min-h-screen flex items-center justify-center">
-          <Spinner size="lg" />
+          <Spinner size="xl" />
         </div>
       }
     >

@@ -6,6 +6,7 @@ import { validateMagicLink } from '@/lib/services/bookingLinkService';
 import { getAdvocate } from '@/lib/services/advocateService';
 import AvailabilityCalendar, { TimeSlot } from '@/components/booking/AvailabilityCalendar';
 import ProspectForm from '@/components/booking/ProspectForm';
+import { AdvocateProfile } from '@/components/booking/AdvocateProfile';
 import { Spinner } from '@/components/ui/Spinner';
 import { ErrorState } from '@/components/ui/ErrorState';
 import { Toast, ToastContainer } from '@/components/ui/ToastContainer';
@@ -72,59 +73,93 @@ export default function BookingTokenPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-        <h1 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Schedule a call</h1>
-        <div className="rounded-lg bg-white dark:bg-gray-800 p-6 shadow">
-          <p className="text-gray-700 dark:text-gray-300 mb-2">Opportunity: {linkData.opportunityId}</p>
-          <p className="text-gray-700 dark:text-gray-300 mb-6">Advocate: {linkData.advocateId}</p>
-          {advocate ? (
-            <div className="space-y-2">
-              <h2 className="text-xl font-medium text-gray-900 dark:text-gray-100">{advocate.name}</h2>
-              <p className="text-gray-700 dark:text-gray-300">{advocate.title}{advocate.company_name ? ` · ${advocate.company_name}` : ''}</p>
-              {advocate.industry && (
-                <p className="text-gray-600 dark:text-gray-400">Industry: {advocate.industry}</p>
-              )}
-              {advocate.geographic_region && (
-                <p className="text-gray-600 dark:text-gray-400">Region: {advocate.geographic_region}</p>
-              )}
-              {Array.isArray(advocate.expertise_areas) && advocate.expertise_areas.length > 0 && (
-                <p className="text-gray-600 dark:text-gray-400">Expertise: {advocate.expertise_areas.join(', ')}</p>
-              )}
-              {typeof advocate.average_rating === 'number' && (
-                <p className="text-gray-600 dark:text-gray-400">Avg. Rating: {advocate.average_rating.toFixed(1)} / 5</p>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            Schedule a Reference Call
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-gray-400">
+            Connect with a customer advocate who can share their experience
+          </p>
+        </div>
+
+        {/* Enhanced Advocate Profile */}
+        {advocate ? (
+          <AdvocateProfile advocate={advocate} />
+        ) : (
+          <div className="rounded-lg bg-white dark:bg-gray-800 p-6 shadow">
+            <p className="text-gray-600 dark:text-gray-400">Loading advocate details…</p>
+          </div>
+        )}
+
+        {/* Scheduling Section */}
+        {advocate && (
+          <div className="mt-8 space-y-6">
+            {/* Availability Calendar */}
+            <div className="rounded-lg bg-white dark:bg-gray-800 p-6 shadow">
+              <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
+                Select a Time
+              </h3>
+              <AvailabilityCalendar
+                slots={getMockSlots(5)}
+                onSelect={(slot) => {
+                  setSelectedSlot(slot);
+                  track('booking_slot_selected', { start: slot.start, end: slot.end });
+                }}
+              />
+              {selectedSlot && (
+                <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-blue-900 dark:text-blue-100">
+                        Selected Time
+                      </p>
+                      <p className="text-sm text-blue-700 dark:text-blue-300">
+                        {new Date(selectedSlot.start).toLocaleString()} -{' '}
+                        {new Date(selectedSlot.end).toLocaleString()}
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => setSelectedSlot(null)}
+                      className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200"
+                    >
+                      Change
+                    </button>
+                  </div>
+                </div>
               )}
             </div>
-          ) : (
-            <p className="text-gray-600 dark:text-gray-400">Loading advocate details…</p>
-          )}
-          <div className="mt-6">
-            <h3 className="font-medium mb-2 text-gray-900 dark:text-gray-100">Select a time</h3>
-            <AvailabilityCalendar
-              slots={getMockSlots(5)}
-              onSelect={(slot) => {
-                setSelectedSlot(slot);
-                track('booking_slot_selected', { start: slot.start, end: slot.end });
-              }}
-            />
-            {selectedSlot && (
-              <div className="mt-3 text-sm text-gray-700 dark:text-gray-300">
-                Selected: {new Date(selectedSlot.start).toLocaleString()} -{' '}
-                {new Date(selectedSlot.end).toLocaleString()}
-              </div>
-            )}
+
+            {/* Prospect Information Form */}
+            <div className="rounded-lg bg-white dark:bg-gray-800 p-6 shadow">
+              <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
+                Your Information
+              </h3>
+              {submitted ? (
+                <div className="text-center py-8">
+                  <div className="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                    Thank you!
+                  </h4>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Your booking request has been submitted. You'll receive a confirmation email shortly.
+                  </p>
+                </div>
+              ) : (
+                <ProspectForm 
+                  token={token} 
+                  onSubmitted={() => setSubmitted(true)}
+                  selectedSlot={selectedSlot}
+                />
+              )}
+            </div>
           </div>
-          <div className="mt-8">
-            <h3 className="font-medium mb-2 text-gray-900 dark:text-gray-100">Your information</h3>
-            {submitted ? (
-              <div className="text-green-700 dark:text-green-400">Thanks! We saved your details.</div>
-            ) : (
-              <ProspectForm token={token} onSubmitted={() => setSubmitted(true)} />
-            )}
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );
 }
-
-

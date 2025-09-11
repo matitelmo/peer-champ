@@ -40,6 +40,7 @@ const authLayoutVariants = cva(
         '2xl': 'max-w-2xl',
         '3xl': 'max-w-3xl',
         '4xl': 'max-w-4xl',
+        full: 'max-w-full',
       },
     },
     defaultVariants: {
@@ -176,8 +177,8 @@ const AuthLayout = React.forwardRef<HTMLDivElement, AuthLayoutProps>(
           )}
         >
           <Container className="w-full" size="full">
-            <div className="flex justify-center">
-              <div className={cn('w-full', size)}>
+            <div className="flex justify-center w-full px-4 sm:px-6 lg:px-8">
+              <div className={cn('w-full', size === 'full' ? 'max-w-full' : size)}>
                 {/* Logo/Branding */}
                 {displayLogo}
 

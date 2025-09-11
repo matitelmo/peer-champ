@@ -42,7 +42,7 @@ export default function SignUpPage() {
   return (
     <AuthLayout
       variant="default"
-      size="3xl"
+      size="lg"
       title="Join PeerChamps"
       subtitle="Create your account to start connecting with advocates"
     >

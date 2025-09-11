@@ -7,6 +7,9 @@
 
 'use client';
 
+// Force dynamic rendering to prevent prerendering issues
+export const dynamic = 'force-dynamic';
+
 import React, { useState } from 'react';
 import { Advocate } from '@/types/database';
 import { AdvocateList } from '@/components/advocate/AdvocateList';

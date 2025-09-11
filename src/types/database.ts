@@ -125,7 +125,12 @@ export interface Advocate {
   // Expertise and specialization
   use_cases: string[] | null;
   expertise_areas: string[] | null;
-  success_stories: string[] | null;
+  success_stories: SuccessStory[] | null;
+  
+  // Profile and presentation
+  bio: string | null;
+  profile_photo_url: string | null;
+  testimonials: Testimonial[] | null;
 
   // Availability and capacity
   availability_score: number; // 0-100
@@ -407,4 +412,20 @@ export interface ReferenceCallFilters {
   scheduled_after?: DatabaseTimestamp;
   scheduled_before?: DatabaseTimestamp;
   tags?: string[];
+}
+
+
+// Additional types for enhanced advocate profiles
+export interface Testimonial {
+  quote: string;
+  author: string;
+  title: string;
+  company?: string;
+}
+
+export interface SuccessStory {
+  title: string;
+  description: string;
+  metrics?: string[];
+  date?: string;
 }

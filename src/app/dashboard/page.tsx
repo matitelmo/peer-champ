@@ -7,6 +7,9 @@
 
 'use client';
 
+// Force dynamic rendering to prevent prerendering issues
+export const dynamic = 'force-dynamic';
+
 import React from 'react';
 import { DashboardLayout } from '@/components/layouts/DashboardLayout';
 import { withAuth } from '@/hooks/useAuth';
