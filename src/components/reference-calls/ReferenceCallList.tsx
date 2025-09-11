@@ -9,7 +9,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { useReferenceCalls } from '@/hooks/useReferenceCalls';
-import { ReferenceCall } from '@/lib/services/referenceCallService';
+import { ReferenceCall } from '@/types/database';
 import {
   Table,
   Button,
@@ -61,7 +61,7 @@ const SORT_OPTIONS = [
   { value: 'created_at_desc', label: 'Created Date (Newest)' },
   { value: 'created_at_asc', label: 'Created Date (Oldest)' },
   { value: 'prospect_company_asc', label: 'Prospect Company (A-Z)' },
-  { value: 'advocate_name_asc', label: 'Advocate Name (A-Z)' },
+  { value: 'advocate_id_asc', label: 'Advocate ID (A-Z)' },
 ];
 
 export const ReferenceCallList: React.FC<ReferenceCallListProps> = ({
@@ -90,8 +90,8 @@ export const ReferenceCallList: React.FC<ReferenceCallListProps> = ({
           call.prospect_name?.toLowerCase().includes(term) ||
           call.prospect_company?.toLowerCase().includes(term) ||
           call.prospect_email?.toLowerCase().includes(term) ||
-          call.advocate_name?.toLowerCase().includes(term) ||
-          call.advocate_company?.toLowerCase().includes(term)
+          call.advocate_id?.toLowerCase().includes(term) ||
+          "Unknown Company"?.toLowerCase().includes(term)
       );
     }
 
@@ -105,13 +105,13 @@ export const ReferenceCallList: React.FC<ReferenceCallListProps> = ({
       switch (sortBy) {
         case 'scheduled_at_desc':
           return (
-            new Date(b.scheduled_at).getTime() -
-            new Date(a.scheduled_at).getTime()
+            new Date(b.scheduled_at || 0).getTime() -
+            new Date(a.scheduled_at || 0).getTime()
           );
         case 'scheduled_at_asc':
           return (
-            new Date(a.scheduled_at).getTime() -
-            new Date(b.scheduled_at).getTime()
+            new Date(a.scheduled_at || 0).getTime() -
+            new Date(b.scheduled_at || 0).getTime()
           );
         case 'created_at_desc':
           return (
@@ -125,8 +125,8 @@ export const ReferenceCallList: React.FC<ReferenceCallListProps> = ({
           return (a.prospect_company || '').localeCompare(
             b.prospect_company || ''
           );
-        case 'advocate_name_asc':
-          return (a.advocate_name || '').localeCompare(b.advocate_name || '');
+        case 'advocate_id_asc':
+          return (a.advocate_id || '').localeCompare(b.advocate_id || '');
         default:
           return 0;
       }
@@ -199,17 +199,17 @@ export const ReferenceCallList: React.FC<ReferenceCallListProps> = ({
   const columns = [
     {
       key: 'scheduled_at',
-      label: 'Scheduled',
+      title: 'Scheduled',
       render: (call: ReferenceCall) => (
         <div className="flex items-center space-x-2">
           <CalendarIcon size={16} className="text-gray-500" />
-          <span className="text-sm">{formatDate(call.scheduled_at)}</span>
+          <span className="text-sm">{call.scheduled_at ? formatDate(call.scheduled_at) : "Not scheduled"}</span>
         </div>
       ),
     },
     {
       key: 'prospect',
-      label: 'Prospect',
+      title: 'Prospect',
       render: (call: ReferenceCall) => (
         <div>
           <div className="font-medium">{call.prospect_name}</div>
@@ -220,17 +220,17 @@ export const ReferenceCallList: React.FC<ReferenceCallListProps> = ({
     },
     {
       key: 'advocate',
-      label: 'Advocate',
+      title: 'Advocate',
       render: (call: ReferenceCall) => (
         <div>
-          <div className="font-medium">{call.advocate_name}</div>
-          <div className="text-sm text-gray-500">{call.advocate_company}</div>
+          <div className="font-medium">{call.advocate_id}</div>
+          <div className="text-sm text-gray-500">{"Unknown Company"}</div>
         </div>
       ),
     },
     {
       key: 'meeting',
-      label: 'Meeting',
+      title: 'Meeting',
       render: (call: ReferenceCall) => (
         <div className="flex items-center space-x-2">
           {getMeetingPlatformIcon(call.meeting_platform || 'zoom')}
@@ -246,7 +246,7 @@ export const ReferenceCallList: React.FC<ReferenceCallListProps> = ({
     },
     {
       key: 'status',
-      label: 'Status',
+      title: 'Status',
       render: (call: ReferenceCall) => (
         <Badge variant={getStatusBadgeVariant(call.status)}>
           {call.status.replace('_', ' ')}
@@ -255,7 +255,7 @@ export const ReferenceCallList: React.FC<ReferenceCallListProps> = ({
     },
     {
       key: 'actions',
-      label: 'Actions',
+      title: 'Actions',
       render: (call: ReferenceCall) => (
         <div className="flex items-center space-x-2">
           {onViewCall && (
@@ -297,11 +297,8 @@ export const ReferenceCallList: React.FC<ReferenceCallListProps> = ({
     return (
       <ErrorState
         title="Failed to load reference calls"
-        message={error}
-        action={
-          <Button onClick={() => window.location.reload()}>Try Again</Button>
-        }
-      />
+        description={error}
+        onRetry={() => window.location.reload()} retryLabel="Try Again"/>
     );
   }
 
@@ -373,23 +370,21 @@ export const ReferenceCallList: React.FC<ReferenceCallListProps> = ({
 
         {/* Calls Table */}
         <div className="relative">
-          <LoadingOverlay loading={loading} />
+          <LoadingOverlay visible={loading} />
 
           {filteredAndSortedCalls.length === 0 ? (
             <EmptyState
               title="No reference calls found"
-              message={
+              description={
                 searchTerm || statusFilter
                   ? 'No calls match your current filters. Try adjusting your search criteria.'
                   : 'No reference calls have been scheduled yet. Create your first call to get started.'
               }
               action={
-                onCreateCall && (
-                  <Button onClick={onCreateCall}>
-                    <PlusIcon size={16} className="mr-2" />
-                    Schedule First Call
-                  </Button>
-                )
+                onCreateCall ? {
+                  label: "Schedule First Call",
+                  onClick: onCreateCall
+                } : undefined
               }
             />
           ) : (

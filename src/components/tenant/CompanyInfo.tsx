@@ -70,7 +70,7 @@ export const CompanyInfo: React.FC<CompanyInfoProps> = ({
       case 'enterprise':
         return 'success';
       case 'professional':
-        return 'primary';
+        return 'default';
       case 'starter':
         return 'secondary';
       default:
@@ -157,25 +157,25 @@ export const CompanyInfo: React.FC<CompanyInfoProps> = ({
             </h3>
             <div className="space-y-3">
               {/* Branding */}
-              {company.settings.branding && (
+              {company.settings.branding as any &&  (
                 <div className="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
                   <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-2">
                     Branding
                   </h4>
                   <div className="space-y-2">
-                    {company.settings.branding.logo_url && (
+                    {(company.settings.branding as any).logo_url && (
                       <div className="flex items-center space-x-2">
                         <span className="text-xs text-gray-600 dark:text-gray-400">
                           Logo:
                         </span>
                         <img
-                          src={company.settings.branding.logo_url}
+                          src={(company.settings.branding as any).logo_url}
                           alt="Company logo"
                           className="h-6 w-6 rounded"
                         />
                       </div>
                     )}
-                    {company.settings.branding.primary_color && (
+                    {(company.settings.branding as any).primary_color && (
                       <div className="flex items-center space-x-2">
                         <span className="text-xs text-gray-600 dark:text-gray-400">
                           Primary Color:
@@ -184,11 +184,11 @@ export const CompanyInfo: React.FC<CompanyInfoProps> = ({
                           className="w-4 h-4 rounded border"
                           style={{
                             backgroundColor:
-                              company.settings.branding.primary_color,
+                              (company.settings.branding as any).primary_color,
                           }}
                         />
                         <span className="text-xs text-gray-900 dark:text-white">
-                          {company.settings.branding.primary_color}
+                          {(company.settings.branding as any).primary_color}
                         </span>
                       </div>
                     )}

@@ -439,18 +439,18 @@ export const Table = <T extends Record<string, any>>({
               <span className="text-sm text-gray-700 dark:text-gray-300">
                 Show:
               </span>
-              <Select
+              <select
                 value={pageSize.toString()}
                 onChange={(e) =>
                   onPaginationChange?.(1, parseInt(e.target.value))
                 }
-                className="w-20"
+                className="w-20 rounded-md border border-gray-300 bg-white px-2 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
               >
                 <option value="10">10</option>
                 <option value="20">20</option>
                 <option value="50">50</option>
                 <option value="100">100</option>
-              </Select>
+              </select>
             </div>
           )}
         </div>

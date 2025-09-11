@@ -9,9 +9,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { useAdvocates } from '@/hooks/useAdvocates';
-import {
+import { UpdateAdvocateData } from '@/lib/services/advocateService';import {
   Advocate,
-  UpdateAdvocate,
+
   AdvocateStatus,
   CompanySize,
   RewardType,
@@ -140,7 +140,7 @@ export const AdvocateProfileForm: React.FC<AdvocateProfileFormProps> = ({
   } = useAdvocates();
 
   // Form state
-  const [formData, setFormData] = useState<UpdateAdvocate>({});
+  const [formData, setFormData] = useState<UpdateAdvocateData>({});
   const [validationErrors, setValidationErrors] = useState<
     Record<string, string>
   >({});
@@ -159,23 +159,23 @@ export const AdvocateProfileForm: React.FC<AdvocateProfileFormProps> = ({
       setFormData({
         name: currentAdvocate.name,
         email: currentAdvocate.email,
-        title: currentAdvocate.title,
-        company_name: currentAdvocate.company_name,
-        phone: currentAdvocate.phone,
-        industry: currentAdvocate.industry,
-        company_size: currentAdvocate.company_size,
-        geographic_region: currentAdvocate.geographic_region,
-        use_cases: currentAdvocate.use_cases,
-        expertise_areas: currentAdvocate.expertise_areas,
-        success_stories: currentAdvocate.success_stories,
-        max_calls_per_month: currentAdvocate.max_calls_per_month,
-        preferred_call_times: currentAdvocate.preferred_call_times,
-        timezone: currentAdvocate.timezone,
-        languages: currentAdvocate.languages,
-        call_duration_preference: currentAdvocate.call_duration_preference,
-        preferred_reward_type: currentAdvocate.preferred_reward_type,
-        internal_notes: currentAdvocate.internal_notes,
-        tags: currentAdvocate.tags,
+        title: currentAdvocate.title ?? undefined,
+        company_name: currentAdvocate.company_name ?? undefined,
+        phone: currentAdvocate.phone ?? undefined,
+        industry: currentAdvocate.industry ?? undefined,
+        company_size: currentAdvocate.company_size ?? undefined,
+        geographic_region: currentAdvocate.geographic_region ?? undefined,
+        use_cases: currentAdvocate.use_cases ?? undefined,
+        expertise_areas: currentAdvocate.expertise_areas ?? undefined,
+        success_stories: currentAdvocate.success_stories ?? undefined,
+        max_calls_per_month: currentAdvocate.max_calls_per_month ?? undefined,
+        preferred_call_times: currentAdvocate.preferred_call_times ?? undefined,
+        timezone: currentAdvocate.timezone ?? undefined,
+        languages: currentAdvocate.languages ?? undefined,
+        call_duration_preference: currentAdvocate.call_duration_preference ?? undefined,
+        preferred_reward_type: currentAdvocate.preferred_reward_type ?? undefined,
+        internal_notes: currentAdvocate.internal_notes ?? undefined,
+        tags: currentAdvocate.tags ?? undefined,
         status: currentAdvocate.status,
       });
       setHasChanges(false);
@@ -183,7 +183,7 @@ export const AdvocateProfileForm: React.FC<AdvocateProfileFormProps> = ({
   }, [currentAdvocate]);
 
   // Handle input changes
-  const handleInputChange = (field: keyof UpdateAdvocate, value: any) => {
+  const handleInputChange = (field: keyof UpdateAdvocateData, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     setHasChanges(true);
 
@@ -195,7 +195,7 @@ export const AdvocateProfileForm: React.FC<AdvocateProfileFormProps> = ({
 
   // Handle array field changes
   const handleArrayFieldChange = (
-    field: keyof UpdateAdvocate,
+    field: keyof UpdateAdvocateData,
     value: string[]
   ) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -208,7 +208,7 @@ export const AdvocateProfileForm: React.FC<AdvocateProfileFormProps> = ({
 
   // Handle checkbox changes for arrays
   const handleCheckboxChange = (
-    field: keyof UpdateAdvocate,
+    field: keyof UpdateAdvocateData,
     value: string,
     checked: boolean
   ) => {

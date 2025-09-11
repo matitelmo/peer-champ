@@ -157,19 +157,14 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
       setFormData((prev) => ({
         ...prev,
         [field]: value,
-      
       }));
-    };
+
       // Clear error when user starts typing
       if (errors[field]) {
         setErrors((prev) => { const newErrors = { ...prev }; delete newErrors[field]; return newErrors; });
       }
-
-      // Clear submit error
-      if (submitError) {
-        setSubmitError(null);
-      }
     };
+
 
   // Handle profile object changes
   const handleProfileChange =
@@ -187,7 +182,50 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
           ...prev.profile,
           [field]: value,
         },
-      
+      }));
+    };
+
+  // Handle select changes (for Select component that takes string value)
+  const handleSelectChange =
+    (field: keyof ProfileFormData) =>
+    (value: string) => {
+      setFormData((prev) => ({
+        ...prev,
+        [field]: value,
+      }));
+
+      // Clear error when user selects
+      if (errors[field]) {
+        setErrors((prev) => { const newErrors = { ...prev }; delete newErrors[field]; return newErrors; });
+      }
+
+      // Clear submit error
+      if (submitError) {
+        setSubmitError(null);
+      }
+
+    };
+  // Handle profile select changes (for Select component that takes string value)
+  const handleProfileSelectChange =
+    (field: keyof ProfileFormData['profile']) =>
+    (value: string) => {
+      setFormData((prev) => ({
+        ...prev,
+        profile: {
+          ...prev.profile,
+          [field]: value,
+        },
+      }));
+
+      // Clear error when user selects
+      if (errors[field]) {
+        setErrors((prev) => { const newErrors = { ...prev }; delete newErrors[field]; return newErrors; });
+      }
+
+      // Clear submit error
+      if (submitError) {
+        setSubmitError(null);
+      }
     };
 
   if (loading) {
@@ -239,7 +277,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
                   value={formData.first_name}
                   onChange={handleInputChange('first_name')}
                   placeholder="Enter your first name"
-                  error={!!errors.first_name}
+                  variant={errors.first_name ? 'error' : 'default'}
                   disabled={isSubmitting}
                   className="w-full"
                 />
@@ -263,7 +301,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
                   value={formData.last_name}
                   onChange={handleInputChange('last_name')}
                   placeholder="Enter your last name"
-                  error={!!errors.last_name}
+                  variant={errors.last_name ? 'error' : 'default'}
                   disabled={isSubmitting}
                   className="w-full"
                 />
@@ -288,7 +326,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
                 value={formData.email}
                 onChange={handleInputChange('email')}
                 placeholder="Enter your email"
-                error={!!errors.email}
+                variant={errors.email ? 'error' : 'default'}
                 disabled={isSubmitting}
                 className="w-full"
               />
@@ -309,15 +347,16 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
               <Select
                 id="role"
                 value={formData.role}
-                onChange={handleInputChange('role')}
-                error={!!errors.role}
+                onChange={handleSelectChange('role')}
+                variant={errors.role ? 'error' : 'default'}
                 disabled={isSubmitting}
                 className="w-full"
-              >
-                <option value="sales_rep">Sales Representative</option>
-                <option value="admin">Administrator</option>
-                <option value="advocate">Advocate</option>
-              </Select>
+                options={[
+                  { value: "sales_rep", label: "Sales Representative" },
+                  { value: "admin", label: "Administrator" },
+                  { value: "advocate", label: "Advocate" }
+                ]}
+              />
               {errors.role && (
                 <p className="mt-1 text-sm text-error-600 dark:text-error-400">
                   {errors.role}
@@ -406,21 +445,21 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
                 <Select
                   id="timezone"
                   value={formData.profile.timezone || 'America/New_York'}
-                  onChange={handleProfileChange('timezone')}
+                  onChange={handleProfileSelectChange('timezone')}
                   disabled={isSubmitting}
                   className="w-full"
-                >
-                  <option value="America/New_York">Eastern Time</option>
-                  <option value="America/Chicago">Central Time</option>
-                  <option value="America/Denver">Mountain Time</option>
-                  <option value="America/Los_Angeles">Pacific Time</option>
-                  <option value="Europe/London">London</option>
-                  <option value="Europe/Paris">Paris</option>
-                  <option value="Asia/Tokyo">Tokyo</option>
-                  <option value="Asia/Shanghai">Shanghai</option>
-                </Select>
+                  options={[
+                    { value: "America/New_York", label: "Eastern Time" },
+                    { value: "America/Chicago", label: "Central Time" },
+                    { value: "America/Denver", label: "Mountain Time" },
+                    { value: "America/Los_Angeles", label: "Pacific Time" },
+                    { value: "Europe/London", label: "London" },
+                    { value: "Europe/Paris", label: "Paris" },
+                    { value: "Asia/Tokyo", label: "Tokyo" },
+                    { value: "Asia/Shanghai", label: "Shanghai" }
+                  ]}
+                />
               </div>
-
               <div>
                 <label
                   htmlFor="language"
@@ -431,19 +470,20 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
                 <Select
                   id="language"
                   value={formData.profile.language || 'en'}
-                  onChange={handleProfileChange('language')}
+                  onChange={handleProfileSelectChange('language')}
                   disabled={isSubmitting}
                   className="w-full"
-                >
-                  <option value="en">English</option>
-                  <option value="es">Spanish</option>
-                  <option value="fr">French</option>
-                  <option value="de">German</option>
-                  <option value="it">Italian</option>
-                  <option value="pt">Portuguese</option>
-                  <option value="zh">Chinese</option>
-                  <option value="ja">Japanese</option>
-                </Select>
+                  options={[
+                    { value: "en", label: "English" },
+                    { value: "es", label: "Spanish" },
+                    { value: "fr", label: "French" },
+                    { value: "de", label: "German" },
+                    { value: "it", label: "Italian" },
+                    { value: "pt", label: "Portuguese" },
+                    { value: "zh", label: "Chinese" },
+                    { value: "ja", label: "Japanese" }
+                  ]}
+                />
               </div>
             </div>
           </div>

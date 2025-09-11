@@ -7,14 +7,14 @@
 
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
 import { AuthLayout } from '@/components/layouts/AuthLayout';
 import { SignInForm } from '@/components/auth/SignInForm';
 import { Spinner } from '@/components/ui/Spinner';
 
-export default function SignInPage() {
+function SignInContent() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -51,5 +51,19 @@ export default function SignInPage() {
     >
       <SignInForm redirectTo={redirectTo} />
     </AuthLayout>
+  );
+}
+
+export default function SignInPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <Spinner size="lg" />
+        </div>
+      }
+    >
+      <SignInContent />
+    </Suspense>
   );
 }

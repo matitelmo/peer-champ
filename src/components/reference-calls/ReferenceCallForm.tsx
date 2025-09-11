@@ -11,8 +11,8 @@ import React, { useState, useEffect } from 'react';
 import { useReferenceCalls } from '@/hooks/useReferenceCalls';
 import { useAdvocates } from '@/hooks/useAdvocates';
 import { useOpportunities } from '@/hooks/useOpportunities';
+import { ReferenceCall } from '@/types/database';
 import {
-  ReferenceCall,
   CreateReferenceCallData,
   UpdateReferenceCallData,
 } from '@/lib/services/referenceCallService';
@@ -68,12 +68,12 @@ const TIMEZONES = [
 ];
 
 const DURATION_OPTIONS = [
-  { value: 15, label: '15 minutes' },
-  { value: 30, label: '30 minutes' },
-  { value: 45, label: '45 minutes' },
-  { value: 60, label: '1 hour' },
-  { value: 90, label: '1.5 hours' },
-  { value: 120, label: '2 hours' },
+  { value: "15", label: '15 minutes' },
+  { value: "30", label: '30 minutes' },
+  { value: "45", label: '45 minutes' },
+  { value: "60", label: '1 hour' },
+  { value: "90", label: '1.5 hours' },
+  { value: "120", label: '2 hours' },
 ];
 
 export const ReferenceCallForm: React.FC<ReferenceCallFormProps> = ({
@@ -124,11 +124,11 @@ export const ReferenceCallForm: React.FC<ReferenceCallFormProps> = ({
         opportunity_id: call.opportunity_id,
         advocate_id: call.advocate_id,
         sales_rep_id: call.sales_rep_id,
-        prospect_name: call.prospect_name,
-        prospect_email: call.prospect_email,
+        prospect_name: call.prospect_name || "",
+        prospect_email: call.prospect_email || "",
         prospect_title: call.prospect_title || '',
-        prospect_company: call.prospect_company,
-        scheduled_at: call.scheduled_at,
+        prospect_company: call.prospect_company || "",
+        scheduled_at: call.scheduled_at || "",
         duration_minutes: call.duration_minutes || 30,
         timezone: call.timezone || 'UTC',
         meeting_platform: call.meeting_platform || 'zoom',
@@ -299,7 +299,7 @@ export const ReferenceCallForm: React.FC<ReferenceCallFormProps> = ({
                     label: `${opp.opportunity_name} (${opp.prospect_company})`,
                   })),
                 ]}
-                error={validationErrors.opportunity_id}
+                variant={validationErrors.opportunity_id ? 'error' : 'default'}
                 placeholder="Choose opportunity"
               />
             </div>
@@ -316,7 +316,7 @@ export const ReferenceCallForm: React.FC<ReferenceCallFormProps> = ({
                     label: `${advocate.name} (${advocate.company_name})`,
                   })),
                 ]}
-                error={validationErrors.advocate_id}
+                variant={validationErrors.advocate_id ? 'error' : 'default'}
                 placeholder="Choose advocate"
               />
             </div>
@@ -337,7 +337,7 @@ export const ReferenceCallForm: React.FC<ReferenceCallFormProps> = ({
                   onChange={(e) =>
                     handleInputChange('prospect_name', e.target.value)
                   }
-                  error={validationErrors.prospect_name}
+                  variant={validationErrors.prospect_name ? 'error' : 'default'}
                   placeholder="John Smith"
                 />
               </div>
@@ -350,7 +350,7 @@ export const ReferenceCallForm: React.FC<ReferenceCallFormProps> = ({
                   onChange={(e) =>
                     handleInputChange('prospect_email', e.target.value)
                   }
-                  error={validationErrors.prospect_email}
+                  variant={validationErrors.prospect_email ? 'error' : 'default'}
                   placeholder="john.smith@company.com"
                 />
               </div>
@@ -373,7 +373,7 @@ export const ReferenceCallForm: React.FC<ReferenceCallFormProps> = ({
                   onChange={(e) =>
                     handleInputChange('prospect_company', e.target.value)
                   }
-                  error={validationErrors.prospect_company}
+                  variant={validationErrors.prospect_company ? 'error' : 'default'}
                   placeholder="Acme Corporation"
                 />
               </div>
@@ -396,14 +396,14 @@ export const ReferenceCallForm: React.FC<ReferenceCallFormProps> = ({
                   onChange={(e) =>
                     handleInputChange('scheduled_at', e.target.value)
                   }
-                  error={validationErrors.scheduled_at}
+                  variant={validationErrors.scheduled_at ? 'error' : 'default'}
                 />
               </div>
 
               <div>
                 <Select
                   label="Duration"
-                  value={formData.duration_minutes}
+                  value={formData.duration_minutes?.toString() || ""}
                   onChange={(value) =>
                     handleInputChange('duration_minutes', parseInt(value))
                   }

@@ -114,18 +114,18 @@ export const CompanySwitcher: React.FC<CompanySwitcherProps> = ({
       <div className="flex items-center space-x-2">
         <Select
           value={company?.id || ''}
-          onChange={(e) => handleCompanyChange(e.target.value)}
+          onChange={(e) => handleCompanyChange(e)}
           disabled={switching || companies.length === 0}
           className="flex-1"
           size={size}
-        >
-          <option value="">Select a company...</option>
-          {companies.map((comp) => (
-            <option key={comp.id} value={comp.id}>
-              {comp.name}
-            </option>
-          ))}
-        </Select>
+          options={[
+            { value: '', label: 'Select a company...' },
+            ...companies.map((comp) => ({
+              value: comp.id,
+              label: comp.name
+            }))
+          ]}
+        />
 
         {switching && <Spinner size="sm" />}
       </div>

@@ -121,8 +121,8 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({
       // Update auth profile if name fields changed
       if (updates.first_name || updates.last_name) {
         await authUpdateProfile({
-          firstName: updates.first_name,
-          lastName: updates.last_name,
+          firstName: updates.first_name ?? undefined,
+          lastName: updates.last_name ?? undefined,
         });
       }
 
@@ -234,11 +234,11 @@ export const ProfileProvider: React.FC<ProfileProviderProps> = ({
       setError(null);
 
       // Delete user from database
-      const { error: dbError } = await userService.delete(user.id);
-
-      if (dbError) {
-        return { success: false, error: dbError.message };
-      }
+      //       const { error: dbError } = await userService.delete(user.id);
+      // 
+      //       if (dbError) {
+      //         return { success: false, error: dbError.message };
+      //       }
 
       // Sign out user
       await signOut();

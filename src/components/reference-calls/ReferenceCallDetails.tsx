@@ -9,7 +9,7 @@
 
 import React, { useState } from 'react';
 import { useReferenceCalls } from '@/hooks/useReferenceCalls';
-import { ReferenceCall } from '@/lib/services/referenceCallService';
+import { ReferenceCall } from '@/types/database';
 import {
   Card,
   CardHeader,
@@ -21,9 +21,9 @@ import {
   Alert,
   LoadingOverlay,
   Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
+
+
+
 } from '@/components/ui';
 import {
   CalendarIcon,
@@ -63,7 +63,7 @@ export const ReferenceCallDetails: React.FC<ReferenceCallDetailsProps> = ({
   if (loading) {
     return (
       <div className="relative min-h-96">
-        <LoadingOverlay loading={true} />
+        <LoadingOverlay visible={true} />
       </div>
     );
   }
@@ -182,7 +182,7 @@ export const ReferenceCallDetails: React.FC<ReferenceCallDetailsProps> = ({
                 </Badge>
               </CardTitle>
               <CardDescription>
-                Call between {call.advocate_name} and {call.prospect_name}
+                Call with {call.prospect_name || "Unknown Prospect"}
               </CardDescription>
             </div>
             <div className="flex space-x-2">
@@ -202,16 +202,19 @@ export const ReferenceCallDetails: React.FC<ReferenceCallDetailsProps> = ({
       </Card>
 
       {/* Main Content */}
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="preparation">Preparation</TabsTrigger>
-          <TabsTrigger value="feedback">Feedback</TabsTrigger>
-          <TabsTrigger value="intelligence">Intelligence</TabsTrigger>
-        </TabsList>
+      <Tabs 
+        value={activeTab} 
+        onChange={setActiveTab} 
+        items={[
+          { label: "Overview", value: "overview" },
+          { label: "Preparation", value: "preparation" },
+          { label: "Feedback", value: "feedback" },
+          { label: "Intelligence", value: "intelligence" }
+        ]}
+      />
 
         {/* Overview Tab */}
-        <TabsContent value="overview" className="space-y-6">
+        {activeTab === "overview" && (<div className="space-y-6">
           {/* Scheduling Information */}
           <Card>
             <CardHeader>
@@ -227,7 +230,7 @@ export const ReferenceCallDetails: React.FC<ReferenceCallDetailsProps> = ({
                     Scheduled Date & Time
                   </label>
                   <p className="text-sm text-gray-900">
-                    {formatDate(call.scheduled_at)}
+                    {call.scheduled_at ? formatDate(call.scheduled_at) : "Not scheduled"}
                   </p>
                 </div>
                 <div>
@@ -332,14 +335,14 @@ export const ReferenceCallDetails: React.FC<ReferenceCallDetailsProps> = ({
                   <label className="text-sm font-medium text-gray-700">
                     Name
                   </label>
-                  <p className="text-sm text-gray-900">{call.advocate_name}</p>
+                  <p className="text-sm text-gray-900">{call.advocate_id || "Unknown Advocate"}</p>
                 </div>
                 <div>
                   <label className="text-sm font-medium text-gray-700">
                     Company
                   </label>
                   <p className="text-sm text-gray-900">
-                    {call.advocate_company}
+                    {"Company not available"}
                   </p>
                 </div>
                 <div>
@@ -421,10 +424,10 @@ export const ReferenceCallDetails: React.FC<ReferenceCallDetailsProps> = ({
               </CardBody>
             </Card>
           </div>
-        </TabsContent>
+        </div>)}
 
         {/* Preparation Tab */}
-        <TabsContent value="preparation" className="space-y-6">
+        {activeTab === "preparation" && (<div className="space-y-6">
           {/* Talking Points */}
           {call.talking_points && call.talking_points.length > 0 && (
             <Card>
@@ -482,10 +485,10 @@ export const ReferenceCallDetails: React.FC<ReferenceCallDetailsProps> = ({
               </CardBody>
             </Card>
           )}
-        </TabsContent>
+        </div>)}
 
         {/* Feedback Tab */}
-        <TabsContent value="feedback" className="space-y-6">
+        {activeTab === "feedback" && (<div className="space-y-6">
           {/* Call Ratings */}
           <Card>
             <CardHeader>
@@ -559,10 +562,10 @@ export const ReferenceCallDetails: React.FC<ReferenceCallDetailsProps> = ({
                 </CardBody>
               </Card>
             )}
-        </TabsContent>
+        </div>)}
 
         {/* Intelligence Tab */}
-        <TabsContent value="intelligence" className="space-y-6">
+        {activeTab === "intelligence" && (<div className="space-y-6">
           {/* Call Intelligence */}
           {call.call_intelligence && (
             <Card>
@@ -625,8 +628,7 @@ export const ReferenceCallDetails: React.FC<ReferenceCallDetailsProps> = ({
               </CardBody>
             </Card>
           )}
-        </TabsContent>
-      </Tabs>
+        </div>)}
     </div>
   );
 };

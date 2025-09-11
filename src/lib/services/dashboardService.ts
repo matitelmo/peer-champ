@@ -85,13 +85,16 @@ export async function getDashboardData(
       console.warn('Failed to fetch dashboard stats:', err);
       return {
         totalAdvocates: 0,
-        activeOpportunities: 0,
+        activeAdvocates: 0,
+        totalOpportunities: 0,
+        openOpportunities: 0,
+        totalReferenceCalls: 0,
+        upcomingCalls: 0,
         completedCalls: 0,
-        totalRevenue: 0,
-        conversionRate: 0,
         averageCallRating: 0,
-      };
-    });
+        totalDealValue: 0,
+        closedDealsValue: 0,
+      };    });
 
     // Get recent activity with fallback
     const recentActivity = await getRecentActivity(companyId, userRole).catch(
@@ -140,12 +143,15 @@ export async function getDashboardData(
     return {
       stats: {
         totalAdvocates: 0,
-        activeOpportunities: 0,
+        activeAdvocates: 0,
+        totalOpportunities: 0,
+        openOpportunities: 0,
+        totalReferenceCalls: 0,
+        upcomingCalls: 0,
         completedCalls: 0,
-        totalRevenue: 0,
-        conversionRate: 0,
         averageCallRating: 0,
-      },
+        totalDealValue: 0,
+        closedDealsValue: 0,      },
       recentActivity: [],
       upcomingCalls: [],
       topPerformingAdvocates: [],
@@ -335,7 +341,7 @@ async function getRecentActivity(
             id: `call-completed-${call.id}`,
             type: 'call_completed',
             title: 'Reference Call Completed',
-            description: `Call between ${advocate.name} and ${opportunity.prospect_company} completed`,
+            description: `Call between ${advocate?.[0]?.name || "Unknown"} and ${opportunity?.[0]?.prospect_company || "Unknown"} completed`,
             timestamp: call.actual_start_time || call.scheduled_at,
             metadata: { callId: call.id },
           });
@@ -344,7 +350,7 @@ async function getRecentActivity(
             id: `call-scheduled-${call.id}`,
             type: 'call_scheduled',
             title: 'Reference Call Scheduled',
-            description: `Call scheduled between ${advocate.name} and ${opportunity.prospect_company}`,
+            description: `Call scheduled between ${advocate?.[0]?.name || "Unknown"} and ${opportunity?.[0]?.prospect_company || "Unknown"}`,
             timestamp: call.scheduled_at,
             metadata: { callId: call.id },
           });
@@ -397,10 +403,10 @@ async function getUpcomingCalls(
     return data.map((call) => ({
       id: call.id,
       opportunity_name:
-        call.opportunities?.opportunity_name || 'Unknown Opportunity',
+        call.opportunities?.[0]?.opportunity_name || 'Unknown Opportunity',
       prospect_company:
-        call.opportunities?.prospect_company || 'Unknown Company',
-      advocate_name: call.advocates?.name || 'Unknown Advocate',
+        call.opportunities?.[0]?.prospect_company || 'Unknown Company',
+      advocate_name: call.advocates?.[0]?.name || 'Unknown Advocate',
       scheduled_at: call.scheduled_at,
       duration_minutes: call.duration_minutes || 30,
       meeting_platform: call.meeting_platform || 'Zoom',

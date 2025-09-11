@@ -127,7 +127,7 @@ export const FormDialog: React.FC<FormDialogProps> = ({
   return (
     <Dialog
       {...dialogProps}
-      onConfirm={handleSubmit}
+      onConfirm={() => handleSubmit({} as React.FormEvent)}
       confirmText={submitText}
       confirmVariant="primary"
     />

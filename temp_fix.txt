@@ -1,0 +1,12 @@
+      // Clear error when user starts typing
+      if (errors[field]) {
+        setErrors((prev) => { const newErrors = { ...prev }; delete newErrors[field]; return newErrors; });
+      }
+
+      // Clear submit error
+      if (submitError) {
+        setSubmitError(null);
+      }
+    };
+
+  // Handle profile object changes

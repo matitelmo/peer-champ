@@ -338,9 +338,9 @@ export function calculateMatchScore(
 
   // Industry match
   const industryMatch = calculateIndustryScore(
-    advocate.industry,
-    opportunity.prospect_industry,
-    opportunity.desired_advocate_industry
+    advocate.industry ?? undefined,
+    opportunity.prospect_industry ?? undefined,
+    opportunity.desired_advocate_industry ?? undefined
   );
   const industryScore =
     (industryMatch.score / 100) * SCORING_WEIGHTS.INDUSTRY_MATCH;
@@ -351,9 +351,9 @@ export function calculateMatchScore(
 
   // Company size match
   const sizeMatch = calculateCompanySizeScore(
-    advocate.company_size,
-    opportunity.prospect_size,
-    opportunity.desired_advocate_size
+    advocate.company_size ?? undefined,
+    opportunity.prospect_size ?? undefined,
+    opportunity.desired_advocate_size ?? undefined
   );
   const sizeScore =
     (sizeMatch.score / 100) * SCORING_WEIGHTS.COMPANY_SIZE_MATCH;
@@ -364,9 +364,9 @@ export function calculateMatchScore(
 
   // Use case match
   const useCaseMatch = calculateUseCaseScore(
-    advocate.use_cases,
-    opportunity.use_case,
-    opportunity.desired_use_cases
+    advocate.use_cases ?? undefined,
+    opportunity.use_case ?? undefined,
+    opportunity.desired_use_cases ?? undefined
   );
   const useCaseScore =
     (useCaseMatch.score / 100) * SCORING_WEIGHTS.USE_CASE_MATCH;
@@ -377,8 +377,8 @@ export function calculateMatchScore(
 
   // Expertise match
   const expertiseMatch = calculateExpertiseScore(
-    advocate.expertise_areas,
-    opportunity.desired_expertise_areas
+    advocate.expertise_areas ?? undefined,
+    opportunity.desired_expertise_areas ?? undefined
   );
   const expertiseScore =
     (expertiseMatch.score / 100) * SCORING_WEIGHTS.EXPERTISE_MATCH;
@@ -389,9 +389,9 @@ export function calculateMatchScore(
 
   // Region match
   const regionMatch = calculateRegionScore(
-    advocate.geographic_region,
-    opportunity.geographic_region,
-    opportunity.desired_advocate_region
+    advocate.geographic_region ?? undefined,
+    opportunity.geographic_region ?? undefined,
+    opportunity.desired_advocate_region ?? undefined
   );
   const regionScore = (regionMatch.score / 100) * SCORING_WEIGHTS.REGION_MATCH;
   totalScore += regionScore;

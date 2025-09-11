@@ -346,7 +346,7 @@ export const DataTable = <T extends Record<string, any>>({
 
           {onBulkDelete && (
             <Button
-              variant="danger"
+              variant="destructive"
               onClick={handleBulkDelete}
               className="flex items-center space-x-2"
             >
@@ -474,7 +474,7 @@ export const DataTable = <T extends Record<string, any>>({
             showSizeChanger: true,
             showTotal: true,
           }}
-          sorting={sorting}
+          sorting={sorting || undefined}
           selection={
             selectable
               ? {

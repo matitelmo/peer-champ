@@ -184,18 +184,18 @@ export const Pagination: React.FC<PaginationProps> = ({
         {showSizeChanger && onPageSizeChange && (
           <div className="flex items-center space-x-2">
             <span className="text-gray-700 dark:text-gray-300">Show:</span>
-            <Select
+            <select
               value={pageSize.toString()}
               onChange={(e) => handlePageSizeChange(parseInt(e.target.value))}
               disabled={disabled}
-              className="w-20"
+              className="w-20 rounded-md border border-gray-300 bg-white px-2 py-1 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
             >
               {pageSizeOptions.map((size) => (
                 <option key={size} value={size}>
                   {size}
                 </option>
               ))}
-            </Select>
+            </select>
           </div>
         )}
       </div>

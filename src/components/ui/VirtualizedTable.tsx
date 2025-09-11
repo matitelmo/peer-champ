@@ -30,6 +30,7 @@ export interface VirtualizedTableProps<T = any> {
     onMouseEnter?: () => void;
     onMouseLeave?: () => void;
   };
+  onScroll?: (e: React.UIEvent<HTMLDivElement>) => void;
   emptyText?: string;
   showHeader?: boolean;
   stickyHeader?: boolean;
@@ -46,6 +47,7 @@ export const VirtualizedTable = <T extends Record<string, any>>({
   rowKey = 'id',
   rowClassName,
   onRow,
+  onScroll,
   emptyText = 'No data available',
   showHeader = true,
   stickyHeader = true,
@@ -83,6 +85,7 @@ export const VirtualizedTable = <T extends Record<string, any>>({
 
   // Handle scroll
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    onScroll?.(e);
     setScrollTop(e.currentTarget.scrollTop);
   };
 
