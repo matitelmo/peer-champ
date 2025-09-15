@@ -333,6 +333,41 @@ export interface ReferenceCall {
   updated_at: DatabaseTimestamp;
 }
 
+export interface CaseStudy {
+  id: string;
+  advocate_id: string;
+  company_id: string;
+  
+  // Case study information
+  title: string;
+  description: string | null;
+  content: string | null;
+  
+  // File information
+  file_name: string | null;
+  file_url: string | null;
+  file_size: number | null;
+  file_type: string | null;
+  
+  // Categorization
+  category: 'success_story' | 'case_study' | 'testimonial' | 'documentation' | 'presentation';
+  tags: string[] | null;
+  
+  // Metadata
+  is_public: boolean;
+  is_featured: boolean;
+  approval_status: 'pending' | 'approved' | 'rejected';
+  
+  // Usage tracking
+  view_count: number;
+  download_count: number;
+  last_accessed_at: DatabaseTimestamp | null;
+  
+  // Timestamps
+  created_at: DatabaseTimestamp;
+  updated_at: DatabaseTimestamp;
+}
+
 // Utility types for database operations
 export type InsertCompany = Omit<Company, 'id' | 'created_at' | 'updated_at'>;
 export type UpdateCompany = Partial<InsertCompany>;

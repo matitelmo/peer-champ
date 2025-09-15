@@ -9,9 +9,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { useAdvocates } from '@/hooks/useAdvocates';
-import { UpdateAdvocateData } from '@/lib/services/advocateService';import {
+import { UpdateAdvocateData } from '@/lib/services/advocateService';
+import { CaseStudyList } from '@/components/case-study/CaseStudyList';
+import {
   Advocate,
-
   AdvocateStatus,
   CompanySize,
   RewardType,

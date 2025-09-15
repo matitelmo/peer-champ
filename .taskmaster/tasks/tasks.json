@@ -494,7 +494,7 @@
             "description": "Implement the company list view component that displays all companies with pagination, sorting, and basic filtering capabilities.",
             "dependencies": [],
             "details": "Create a React component for the company list view. Use a table or card layout to display company information including name, status, number of users, and creation date. Implement pagination with limit/offset pattern. Add sorting functionality for relevant columns. Include a search bar for filtering companies by name. Use the Supabase client to fetch company data with proper error handling and loading states.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test rendering with mock data. Verify pagination controls work correctly. Test sorting functionality for each column. Ensure search filtering returns correct results."
           },
           {
@@ -503,7 +503,7 @@
             "description": "Create a custom React hook for fetching and managing company data from the Supabase backend.",
             "dependencies": [],
             "details": "Implement a useCompanies hook similar to the provided useUsers example. The hook should handle fetching companies with pagination, sorting, and filtering parameters. Include state management for loading, error handling, and the companies array. Add functions for refreshing data and handling pagination changes. Implement proper TypeScript interfaces for company data structure.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test hook behavior with mock Supabase responses. Verify error handling works correctly. Test pagination parameter changes. Ensure proper state management during loading and after data is fetched."
           },
           {
@@ -514,7 +514,7 @@
               "5.2"
             ],
             "details": "Implement a form component with fields for company name, description, industry, size, and other relevant details. Use a form library like Formik or React Hook Form for state management and validation. Add client-side validation for required fields and data formats. Implement submission handling that uses the Supabase client to create new company records. Include success and error notifications for user feedback.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test form validation with valid and invalid inputs. Verify submission handling with mock API responses. Test error scenarios and ensure proper user feedback. Verify form reset functionality after successful submission."
           },
           {
@@ -525,7 +525,7 @@
               "5.2"
             ],
             "details": "Implement a company details page that displays comprehensive information about a selected company. Create an edit mode that transforms the view into an editable form. Reuse validation logic from the company creation form. Implement save functionality that updates the company record in Supabase. Add confirmation dialogs for important changes. Include a section showing basic usage statistics and user counts.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test view/edit mode toggle functionality. Verify form validation in edit mode. Test update functionality with mock API responses. Ensure proper handling of concurrent edit scenarios."
           },
           {
@@ -536,7 +536,7 @@
               "5.4"
             ],
             "details": "Build a settings page with tabs or sections for different configuration categories. Include branding settings (logo, colors, custom domain), notification preferences, integration settings, and security options. Implement save functionality for each section that updates the appropriate records in Supabase. Add validation for settings fields where appropriate. Include a reset to defaults option for each section.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test settings persistence across page reloads. Verify validation for each settings field. Test the reset to defaults functionality. Ensure proper error handling and user feedback for settings updates."
           },
           {
@@ -545,7 +545,7 @@
             "description": "Create a user list view with advanced filtering, search, and pagination capabilities.",
             "dependencies": [],
             "details": "Implement a user list component that displays users with relevant information (name, email, role, status). Add filtering capabilities for role, status, and other attributes. Implement a search function that filters by name or email. Add pagination controls with configurable page size. Include sorting functionality for relevant columns. Use the provided useUsers hook for data fetching and state management.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test rendering with various data sets. Verify filter combinations work correctly. Test search functionality with partial matches. Ensure pagination works with different filter combinations."
           },
           {
@@ -554,7 +554,7 @@
             "description": "Extend the provided useUsers hook with additional functionality for filtering, pagination, and data management.",
             "dependencies": [],
             "details": "Enhance the provided useUsers hook to support pagination, filtering, and sorting parameters. Add functions for refreshing data, changing pagination, and applying filters. Implement proper TypeScript interfaces for user data structure. Add functionality for handling user status changes and role updates. Optimize the hook to minimize unnecessary re-fetches.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test hook behavior with different parameter combinations. Verify error handling for various error scenarios. Test pagination and filtering logic. Ensure proper state management during loading and after data is fetched."
           },
           {
@@ -565,7 +565,7 @@
               "5.7"
             ],
             "details": "Build a form component for adding new users with fields for name, email, role, and other relevant information. Implement an invitation flow that sends emails to new users. Add validation for email format and required fields. Create a preview of the invitation email. Implement submission handling that creates user records in Supabase and triggers invitation emails. Add success and error notifications for user feedback.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test form validation with valid and invalid inputs. Verify email invitation flow with mock email service. Test error scenarios and ensure proper user feedback. Verify duplicate email handling."
           },
           {
@@ -576,7 +576,7 @@
               "5.7"
             ],
             "details": "Implement a role assignment interface that allows administrators to change user roles. Display available roles with descriptions of their permissions. Add confirmation dialogs for role changes that affect permissions. Implement the backend logic for updating user roles in Supabase. Include a visual indicator of the current user's role. Add validation to prevent removing all admin users.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test role assignment with different user types. Verify permission changes take effect immediately. Test validation logic for preventing removal of all admins. Ensure proper error handling and user feedback."
           },
           {
@@ -587,7 +587,7 @@
               "5.7"
             ],
             "details": "Implement a user profile component that displays user information and allows editing. Include fields for name, contact information, preferences, and profile picture. Add validation for required fields and data formats. Implement image upload functionality for profile pictures. Create save functionality that updates user records in Supabase. Add success and error notifications for user feedback.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test profile editing with valid and invalid inputs. Verify image upload functionality. Test error scenarios and ensure proper user feedback. Verify changes persist after page reload."
           },
           {
@@ -596,7 +596,7 @@
             "description": "Create reusable validation logic for company and user forms to ensure data integrity.",
             "dependencies": [],
             "details": "Implement a validation utility that can be used across company and user forms. Create validation rules for common fields like email, phone numbers, and required fields. Add custom validation for business-specific rules. Implement real-time validation feedback. Create helper functions for displaying validation errors in form components. Ensure validation logic is consistent across all forms.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test validation rules with various input combinations. Verify error messages are clear and helpful. Test validation timing (on blur, on submit, etc.). Ensure validation logic handles edge cases correctly."
           },
           {
@@ -607,7 +607,7 @@
               "5.9"
             ],
             "details": "Create an interface for defining and managing roles and their permissions. Implement a matrix view showing roles and their associated permissions. Add functionality to create, edit, and delete custom roles. Implement permission inheritance and override capabilities. Create a preview mode to see the application from different role perspectives. Add validation to prevent creating roles with conflicting permissions.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test role creation and editing functionality. Verify permission changes are reflected in the UI. Test role deletion with users assigned to that role. Ensure proper error handling and validation for role management."
           },
           {
@@ -618,7 +618,7 @@
               "5.8"
             ],
             "details": "Create a file upload component that accepts CSV or Excel files. Implement parsing logic for extracting user data from uploaded files. Add validation for file format and required user fields. Create a preview interface showing parsed data before import. Implement batch processing for creating multiple user records. Add error handling for partial successes. Create a downloadable template file for users to fill in.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test file upload with various file formats and sizes. Verify parsing logic handles different CSV formats correctly. Test validation of imported data. Ensure proper error handling for malformed files and invalid data."
           },
           {
@@ -627,7 +627,7 @@
             "description": "Create the navigation structure and page layouts for company and user management interfaces.",
             "dependencies": [],
             "details": "Implement a navigation sidebar or header for accessing company and user management pages. Create consistent page layouts with appropriate spacing and responsive design. Add breadcrumbs for navigation context. Implement tab navigation for multi-section pages. Ensure proper routing between management interfaces. Add loading states and error boundaries for each page.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test navigation flow between different management pages. Verify responsive behavior on different screen sizes. Test loading states and error boundaries. Ensure consistent styling across all management interfaces."
           },
           {
@@ -638,7 +638,7 @@
               "5.12"
             ],
             "details": "Create a permission checking utility that determines if a user can access specific features. Implement conditional rendering for UI elements based on user permissions. Add redirect logic for unauthorized access attempts. Create fallback UI for users with limited permissions. Implement permission-based navigation that only shows accessible options. Add tooltips explaining why certain features are unavailable.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test UI rendering with different user roles. Verify unauthorized access attempts are properly handled. Test navigation visibility with different permission sets. Ensure proper fallback UI for limited permissions."
           }
         ]
@@ -663,7 +663,7 @@
             "description": "Define the TypeScript interfaces and types for the advocate management system, including the main Advocate interface and related types.",
             "dependencies": [],
             "details": "Create the necessary TypeScript interfaces in the types directory. Start with the Advocate interface as provided in the task description. Add additional types for advocate availability, status tracking, and filtering options. Ensure all properties have appropriate types and documentation.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Verify type definitions with TypeScript compiler. Create sample objects to ensure they conform to the defined interfaces."
           },
           {
@@ -674,7 +674,7 @@
               "6.1"
             ],
             "details": "Implement the advocate service with functions for creating, reading, updating, and deleting advocate records. Use the Supabase client for database operations. Include error handling and return appropriate responses. Implement the createAdvocate function as provided in the task description, and add getAdvocate, updateAdvocate, deleteAdvocate, and listAdvocates functions.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test each CRUD operation with mock data. Verify error handling for database failures. Test filtering and pagination for list operations."
           },
           {
@@ -685,7 +685,7 @@
               "6.2"
             ],
             "details": "Implement a responsive list view component for advocates. Include search functionality that filters by name, company, and expertise areas. Add filtering options for status, industry, and availability. Implement sorting by various fields. Use pagination for efficient loading of large datasets. Include status indicators for advocate availability.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test search and filtering functionality with various inputs. Verify pagination works correctly. Test responsive layout on different screen sizes."
           },
           {
@@ -696,7 +696,7 @@
               "6.2"
             ],
             "details": "Create a detailed profile view component that displays all advocate information. Include sections for personal details, company information, expertise areas, availability status, and call history. Add visual indicators for availability score and status. Implement navigation between the list view and profile view.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test profile view with various advocate data scenarios. Verify all information displays correctly. Test navigation between views."
           },
           {
@@ -708,7 +708,7 @@
               "6.2"
             ],
             "details": "Create a multi-step form for advocate creation. Include fields for all required advocate properties. Implement form validation for required fields and data formats. Add support for selecting multiple expertise areas and use cases. Integrate with the advocate service to submit the form data. Provide appropriate feedback on success or failure.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test form validation with valid and invalid inputs. Verify form submission works correctly. Test multi-step navigation. Ensure error messages are displayed appropriately."
           },
           {
@@ -721,7 +721,7 @@
               "6.5"
             ],
             "details": "Adapt the advocate creation form for editing existing advocates. Pre-populate the form with current advocate data. Implement partial updates to avoid overwriting unchanged fields. Add confirmation for status changes. Include audit tracking for changes.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test form pre-population with existing data. Verify partial updates work correctly. Test confirmation dialogs for status changes."
           },
           {
@@ -733,7 +733,7 @@
               "6.4"
             ],
             "details": "Implement an availability management interface that allows advocates to set their preferred call times. Include calendar integration for blocking out unavailable times. Add recurring availability patterns (e.g., available every Tuesday morning). Implement time zone handling for global availability. Create visual calendar view for availability settings.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test calendar integration with various availability patterns. Verify time zone handling works correctly. Test recurring availability settings."
           },
           {
@@ -745,7 +745,7 @@
               "6.2"
             ],
             "details": "Create a service that tracks advocate participation frequency. Implement logic to calculate and update availability scores based on recent activity. Define cooling-off periods based on call frequency. Create functions to determine if an advocate is available for a new call based on their history and preferences.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test availability calculation with various call history scenarios. Verify cooling-off periods are enforced correctly. Test edge cases like advocates with no prior calls."
           },
           {
@@ -756,7 +756,7 @@
               "6.8"
             ],
             "details": "Create a notification service that monitors advocate status changes. Implement email notifications for status changes (active, inactive, cooling-off). Add in-app notifications for upcoming calls and availability changes. Create notification preferences for advocates and administrators.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test notification generation for various status changes. Verify email delivery with mock email service. Test notification preferences and opt-out functionality."
           },
           {
@@ -768,7 +768,7 @@
               "6.5"
             ],
             "details": "Implement an invitation system that sends email invitations to potential advocates. Create a secure registration flow for invited advocates. Build an onboarding wizard that guides new advocates through profile completion, availability settings, and system introduction. Add admin interfaces for tracking invitation status and onboarding progress.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test invitation sending and tracking. Verify secure registration links work correctly. Test the onboarding wizard with various completion scenarios."
           },
           {
@@ -780,7 +780,7 @@
               "6.8"
             ],
             "details": "Build an analytics dashboard that displays key metrics for advocates. Include visualizations for call frequency, feedback scores, and availability trends. Add filtering by time period, advocate attributes, and performance metrics. Implement export functionality for reports.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test dashboard with various data scenarios. Verify visualizations render correctly. Test filtering and export functionality."
           },
           {
@@ -795,7 +795,7 @@
               "6.6"
             ],
             "details": "Integrate the advocate management interfaces with the authentication system. Implement role-based access controls for different user types (admins, advocates, sales reps). Add company-based tenant isolation to ensure advocates are only visible to appropriate users. Modify service calls to include authentication tokens and permission checks.",
-            "status": "in-progress",
+            "status": "done",
             "testStrategy": "Test access controls with different user roles. Verify tenant isolation prevents cross-company data access. Test authentication token handling and expiration."
           }
         ]
@@ -820,7 +820,7 @@
             "description": "Define and implement the database schema for opportunities, including relationships to companies, users, and advocates.",
             "dependencies": [],
             "details": "Create SQL migration for opportunities table with fields for name, stage, value, company_id, owner_id, etc. Implement TypeScript interfaces for opportunity data models. Set up Row Level Security policies to ensure proper data isolation between tenants. Include status tracking fields and timestamps for synchronization with CRM systems.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Write SQL queries to test the schema integrity and relationships. Verify RLS policies by attempting cross-tenant data access."
           },
           {
@@ -831,7 +831,7 @@
               "7.1"
             ],
             "details": "Build a React component for displaying opportunities in a table/list format. Implement filters for opportunity stage, value range, and creation date. Add sorting functionality for columns. Implement pagination for large datasets. Include search functionality to filter by opportunity name or details.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test rendering with various data sets. Verify filtering and sorting functionality. Test pagination with large data sets. Ensure responsive design works on different screen sizes."
           },
           {
@@ -842,7 +842,7 @@
               "7.1"
             ],
             "details": "Build a React component for displaying comprehensive opportunity details. Include sections for basic info, related contacts, activity history, and reference calls. Implement tabs for organizing different types of information. Add edit functionality with proper permission checks.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test rendering with various opportunity states. Verify all data is displayed correctly. Test tab navigation and content loading."
           },
           {
@@ -853,7 +853,7 @@
               "7.1"
             ],
             "details": "Build React form components using Formik or React Hook Form. Implement validation for required fields and data formats. Create form sections for different categories of information. Add functionality to save drafts before submission. Implement error handling and success notifications.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test form validation with valid and invalid inputs. Verify form submission and error handling. Test draft saving functionality."
           },
           {
@@ -864,7 +864,7 @@
               "7.1"
             ],
             "details": "Implement the OAuth 2.0 flow for Salesforce authentication. Create API endpoints for initiating auth, handling callbacks, and token refresh. Store encrypted tokens securely in the database. Implement token refresh logic to handle expiring access tokens. Add UI components for connection status and reconnection.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test OAuth flow with mock Salesforce endpoints. Verify token storage and encryption. Test token refresh logic with expired tokens."
           },
           {
@@ -876,7 +876,7 @@
               "7.5"
             ],
             "details": "Implement bidirectional sync between local database and Salesforce. Create mapping logic for field transformations between systems. Handle conflict resolution for simultaneous updates. Implement batch processing for large datasets. Add logging for sync operations and errors.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test sync with mock Salesforce API responses. Verify conflict resolution with simultaneous updates. Test error handling with API failures."
           },
           {
@@ -888,7 +888,7 @@
               "7.6"
             ],
             "details": "Implement activity logging for reference calls, including call outcomes, notes, and follow-ups. Create mapping between internal activity types and Salesforce activity types. Add support for custom fields in Salesforce activities. Implement queuing system for failed log attempts.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test activity logging with various call scenarios. Verify custom field mapping. Test retry logic for failed API calls."
           },
           {
@@ -899,7 +899,7 @@
               "7.1"
             ],
             "details": "Implement the OAuth 2.0 flow for HubSpot authentication. Create API endpoints for initiating auth, handling callbacks, and token refresh. Store encrypted tokens securely in the database. Implement token refresh logic to handle expiring access tokens. Add UI components for connection status and reconnection.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test OAuth flow with mock HubSpot endpoints. Verify token storage and encryption. Test token refresh logic with expired tokens."
           },
           {
@@ -911,7 +911,7 @@
               "7.8"
             ],
             "details": "Implement bidirectional sync between local database and HubSpot. Create mapping logic for field transformations between systems. Handle conflict resolution for simultaneous updates. Implement batch processing for large datasets. Add logging for sync operations and errors.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test sync with mock HubSpot API responses. Verify conflict resolution with simultaneous updates. Test error handling with API failures."
           },
           {
@@ -923,7 +923,7 @@
               "7.9"
             ],
             "details": "Implement activity logging for reference calls, including call outcomes, notes, and follow-ups. Create mapping between internal activity types and HubSpot activity types. Add support for custom properties in HubSpot activities. Implement queuing system for failed log attempts.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test activity logging with various call scenarios. Verify custom property mapping. Test retry logic for failed API calls."
           },
           {
@@ -935,7 +935,7 @@
               "7.9"
             ],
             "details": "Create API endpoints to receive webhook notifications from CRM systems. Implement signature verification for webhook security. Process incoming data and update local database accordingly. Handle different event types (create, update, delete). Add monitoring and alerting for webhook failures.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test webhook handlers with sample payloads from both CRMs. Verify signature validation logic. Test handling of different event types. Ensure proper error handling for malformed requests."
           },
           {
@@ -947,7 +947,7 @@
               "7.8"
             ],
             "details": "Build React components for CRM connection management. Implement connection status indicators. Create setup wizards for new connections. Add troubleshooting tools for connection issues. Implement permission controls for CRM management features.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test UI rendering in different connection states. Verify setup wizard flow. Test error handling and display of troubleshooting information."
           },
           {
@@ -959,7 +959,7 @@
               "7.9"
             ],
             "details": "Develop embeddable JavaScript widgets for CRM systems. Create authentication mechanism for embedded contexts. Implement UI components that match CRM visual styles. Add functionality to view and schedule reference calls directly from CRM. Create documentation for widget installation.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test widget loading in mock CRM environments. Verify authentication in embedded context. Test responsive design within CRM layouts."
           },
           {
@@ -973,7 +973,7 @@
               "7.10"
             ],
             "details": "Implement data endpoints for CRM reporting tools. Create pre-built report templates for common metrics. Develop custom objects/entities in CRMs for advanced reporting. Add scheduled data exports for offline reporting. Implement proper access controls for sensitive metrics.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test data endpoint responses with various query parameters. Verify report template generation. Test scheduled export functionality."
           },
           {
@@ -987,7 +987,7 @@
               "7.10"
             ],
             "details": "Create a unified CRM service interface that works with multiple CRM providers. Implement provider-specific adapters for Salesforce and HubSpot. Add factory pattern for selecting the appropriate provider. Create comprehensive error handling and retry logic. Add support for future CRM integrations.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test service with both CRM providers. Verify adapter pattern correctly handles provider differences. Test factory selection logic with various company configurations."
           },
           {
@@ -1000,7 +1000,7 @@
               "7.15"
             ],
             "details": "Implement scheduled jobs for regular CRM synchronization. Create admin dashboard for monitoring sync status and history. Add alerting for sync failures or discrepancies. Implement manual sync triggers for immediate synchronization. Add detailed logging for troubleshooting.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test scheduled job execution. Verify monitoring dashboard displays accurate information. Test alerting with simulated failures. Verify manual sync triggers work correctly."
           }
         ]
@@ -1025,7 +1025,7 @@
             "description": "Develop utilities to prepare and structure data for the AI matching algorithm, including opportunity and advocate data normalization.",
             "dependencies": [],
             "details": "Create a set of utility functions in `utils/dataPreparation.ts` that transform raw opportunity and advocate data into a structured format suitable for the matching algorithm. Include functions for extracting relevant features, normalizing text fields, and creating embeddings for semantic matching. Implement methods to handle missing data and standardize industry terms and company sizes.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Write unit tests for each utility function with various input scenarios including edge cases like missing data. Verify that the output format is consistent and properly structured for the matching algorithm."
           },
           {
@@ -1036,7 +1036,7 @@
               "8.1"
             ],
             "details": "Create a service in `services/aiService.ts` that handles communication with OpenAI. Implement functions to generate appropriate prompts based on opportunity context, send requests to OpenAI API, and parse responses. Include error handling, retry logic, and response validation. Configure the service to use the appropriate OpenAI model (GPT-4) and parameters for optimal matching results.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test the OpenAI integration with mock API responses. Verify prompt generation with different opportunity contexts. Test error handling and retry mechanisms by simulating API failures."
           },
           {
@@ -1047,7 +1047,7 @@
               "8.1"
             ],
             "details": "Implement a rule-based matching algorithm in `services/fallbackMatching.ts` that uses deterministic rules to match advocates to opportunities. Include logic for industry matching, company size compatibility, use case alignment, and geographic relevance. Design the system to be configurable with weighted scoring for different matching criteria. Ensure the output format matches the AI-based system for seamless integration.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test the rule-based matching with various opportunity profiles and advocate datasets. Verify that the scoring system correctly prioritizes the most relevant advocates. Compare results with expected outcomes for known test cases."
           },
           {
@@ -1059,7 +1059,7 @@
               "8.3"
             ],
             "details": "Implement the `services/matchingService.ts` as outlined in the task description. Create the `findMatchingAdvocates` function that fetches opportunity details, prepares context for AI matching, calls the AI service, applies availability and fatigue filters, and handles custom filters. Add proper error handling and logging. Ensure the service gracefully falls back to rule-based matching when AI matching fails or returns insufficient results.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test the matching service with various opportunity profiles. Verify that it correctly integrates both AI and fallback matching systems. Test the filter application logic with different filter combinations. Simulate AI service failures to verify fallback behavior."
           },
           {
@@ -1070,7 +1070,7 @@
               "8.4"
             ],
             "details": "Develop the `filterByAvailability` function in `services/availabilityService.ts` that checks advocate calendars and availability settings. Implement fatigue prevention logic that considers recent and upcoming calls to avoid overusing the same advocates. Create a scoring system that factors in recency and frequency of previous engagements. Integrate with the advocate management system to access availability data.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test availability filtering with various calendar scenarios. Verify fatigue prevention with simulated call history data. Test edge cases like advocates with no availability or fully booked schedules."
           },
           {
@@ -1081,7 +1081,7 @@
               "8.4"
             ],
             "details": "Implement the `applyCustomFilters` function in `services/filterService.ts` that processes user-defined filters. Support filtering by industry, company size, geographic region, use case, language, and other relevant attributes. Design the filter system to be extensible for future filter types. Ensure filters can be combined with logical AND/OR operations.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test the custom filtering system with various filter combinations. Verify that complex filter logic works correctly. Test performance with large datasets and multiple filters."
           },
           {
@@ -1092,7 +1092,7 @@
               "8.4"
             ],
             "details": "Create a confidence scoring module in `services/confidenceScoring.ts` that evaluates the quality of each match. Develop algorithms to calculate scores based on industry match, use case relevance, company size similarity, and other factors. Normalize scores on a 0-100 scale. Include confidence metadata from AI responses when available. Ensure scores are consistent between AI and rule-based matching systems.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test confidence scoring with various match scenarios. Verify score normalization and consistency. Compare scores against expert-rated matches to validate the scoring algorithm."
           },
           {
@@ -1103,7 +1103,7 @@
               "8.7"
             ],
             "details": "Develop a feedback collection service in `services/feedbackService.ts` that captures user ratings and comments on advocate matches. Create data structures to store feedback data in the database. Implement functions to associate feedback with specific matches and opportunities. Design the system to collect both explicit feedback (ratings) and implicit feedback (selections made).",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test feedback collection with various user inputs. Verify that feedback is correctly associated with matches and stored in the database. Test the feedback API endpoints with different request scenarios."
           },
           {
@@ -1114,7 +1114,7 @@
               "8.8"
             ],
             "details": "Develop a learning system in `services/matchLearning.ts` that analyzes feedback data to refine matching algorithms. Implement functions to adjust matching weights based on historical feedback. Create a periodic job to process feedback and update matching parameters. Design the system to identify patterns in successful matches and incorporate them into future recommendations.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test the learning system with historical feedback data. Verify that matching parameters are appropriately adjusted based on feedback. Measure recommendation quality improvement over time with simulated feedback cycles."
           },
           {
@@ -1125,7 +1125,7 @@
               "8.7"
             ],
             "details": "Develop a React component in `components/AdvocateRecommendations.tsx` that displays advocate matches with their confidence scores, relevance factors, and availability. Implement sorting by confidence score and other attributes. Include advocate details like industry experience, company size, and use case expertise. Design the component to be responsive and accessible.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Create unit tests for the component with various data scenarios. Test sorting and filtering functionality. Verify responsive behavior at different screen sizes. Test accessibility compliance."
           },
           {
@@ -1137,7 +1137,7 @@
               "8.10"
             ],
             "details": "Implement a filtering interface component in `components/AdvocateFilters.tsx` that allows users to apply and manage custom filters. Include filter controls for industry, company size, geographic region, use case, and other attributes. Design the component with clear visual feedback for active filters. Implement filter combination logic with AND/OR operations.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test the filtering interface with various filter combinations. Verify that the UI correctly reflects active filters. Test filter application and removal. Verify that filter changes trigger appropriate data updates."
           },
           {
@@ -1148,7 +1148,7 @@
               "8.10"
             ],
             "details": "Implement the selection and booking flow in `components/AdvocateBooking.tsx` that allows users to select advocates from recommendations and schedule calls. Include confirmation steps, calendar integration, and notification setup. Design the flow to handle multiple advocate selections. Implement validation to prevent double-booking and scheduling conflicts.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test the booking flow with various selection scenarios. Verify calendar integration and availability checking. Test validation logic for scheduling conflicts. Verify that notifications are correctly triggered."
           },
           {
@@ -1159,7 +1159,7 @@
               "8.4"
             ],
             "details": "Create a caching service in `services/cachingService.ts` that stores and retrieves matching results. Implement cache invalidation strategies based on data changes and time expiration. Use Redis or a similar in-memory store for high-performance caching. Design the system to cache at multiple levels: raw AI responses, processed matches, and filtered results.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test cache hit and miss scenarios. Verify cache invalidation when underlying data changes. Measure performance improvements with and without caching. Test cache behavior under concurrent access."
           },
           {
@@ -1171,7 +1171,7 @@
               "8.9"
             ],
             "details": "Develop an admin configuration interface in `components/admin/MatchingConfiguration.tsx` that allows administrators to view and adjust matching algorithm parameters. Include controls for confidence threshold, weighting factors, and fallback behavior. Implement validation for configuration changes. Design the interface with clear explanations of each parameter's impact.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test the admin interface with various configuration changes. Verify that changes are correctly saved and applied to the matching algorithm. Test validation logic for invalid configurations. Verify that configuration history is maintained."
           }
         ]
@@ -1195,7 +1195,7 @@
             "description": "Set up OAuth authentication flow for Google Calendar integration, including authorization endpoints, token handling, and user consent screens.",
             "dependencies": [],
             "details": "1. Create OAuth configuration for Google Calendar API in Google Cloud Console\n2. Implement authorization URL generation with required scopes (calendar.readonly, calendar.events)\n3. Create callback handler to process OAuth code and exchange for tokens\n4. Implement token storage in database with encryption\n5. Add token refresh mechanism for expired tokens\n6. Create user interface for connecting Google Calendar\n\nExample code:\n```typescript\n// services/auth/googleAuth.ts\nimport { oauth2Client } from '../config/googleApi';\n\nexport const generateAuthUrl = (userId: string): string => {\n  return oauth2Client.generateAuthUrl({\n    access_type: 'offline',\n    scope: ['https://www.googleapis.com/auth/calendar.readonly', 'https://www.googleapis.com/auth/calendar.events'],\n    state: userId, // Pass user ID to callback\n    prompt: 'consent'\n  });\n};\n\nexport const handleCallback = async (code: string): Promise<{\n  tokens: any;\n  userId: string;\n}> => {\n  const { tokens } = await oauth2Client.getToken(code);\n  // Store tokens in database\n  return { tokens, userId };\n};\n```",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "1. Create mock OAuth endpoints for testing\n2. Verify correct scopes are requested\n3. Test token exchange with mock responses\n4. Verify token storage and encryption\n5. Test token refresh mechanism with expired tokens\n6. Verify error handling for failed authentication attempts"
           },
           {
@@ -1204,7 +1204,7 @@
             "description": "Set up OAuth authentication flow for Microsoft Outlook Calendar integration using Microsoft Graph API, including authorization endpoints, token handling, and user consent screens.",
             "dependencies": [],
             "details": "1. Register application in Azure AD portal\n2. Configure Microsoft Graph API permissions (Calendars.Read, Calendars.ReadWrite)\n3. Implement authorization URL generation with required scopes\n4. Create callback handler to process OAuth code and exchange for tokens\n5. Implement token storage in database with encryption\n6. Add token refresh mechanism for expired tokens\n7. Create user interface for connecting Outlook Calendar\n\nExample code:\n```typescript\n// services/auth/outlookAuth.ts\nimport { confidentialClientApplication } from '../config/microsoftGraph';\n\nexport const generateAuthUrl = (userId: string): string => {\n  const authCodeUrlParameters = {\n    scopes: ['Calendars.Read', 'Calendars.ReadWrite'],\n    redirectUri: process.env.OUTLOOK_REDIRECT_URI,\n    state: userId\n  };\n  \n  return confidentialClientApplication.getAuthCodeUrl(authCodeUrlParameters);\n};\n\nexport const handleCallback = async (code: string): Promise<{\n  tokens: any;\n  userId: string;\n}> => {\n  const tokenResponse = await confidentialClientApplication.acquireTokenByCode({\n    code,\n    redirectUri: process.env.OUTLOOK_REDIRECT_URI,\n    scopes: ['Calendars.Read', 'Calendars.ReadWrite']\n  });\n  \n  // Store tokens in database\n  return { tokens: tokenResponse, userId };\n};\n```",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "1. Create mock OAuth endpoints for testing\n2. Verify correct scopes are requested\n3. Test token exchange with mock responses\n4. Verify token storage and encryption\n5. Test token refresh mechanism with expired tokens\n6. Verify error handling for failed authentication attempts"
           },
           {
@@ -1215,7 +1215,7 @@
               "9.1"
             ],
             "details": "1. Implement the CalendarProvider interface for Google Calendar\n2. Create methods to fetch calendar events within a date range\n3. Implement availability calculation based on existing events\n4. Add methods to create, update, and delete calendar events\n5. Handle time zone conversions for events\n6. Implement video conferencing link generation (Google Meet)\n\nExample code:\n```typescript\n// services/calendar/googleCalendarProvider.ts\nimport { google } from 'googleapis';\nimport { CalendarProvider, AvailabilitySlot, MeetingDetails, Meeting } from '../calendarService';\n\nexport class GoogleCalendarProvider implements CalendarProvider {\n  private getAuthClient(userId: string) {\n    // Fetch tokens from database and create authenticated client\n    // ...\n    return authClient;\n  }\n\n  async getAvailability(userId: string, startDate: Date, endDate: Date): Promise<AvailabilitySlot[]> {\n    const auth = this.getAuthClient(userId);\n    const calendar = google.calendar({ version: 'v3', auth });\n    \n    const response = await calendar.events.list({\n      calendarId: 'primary',\n      timeMin: startDate.toISOString(),\n      timeMax: endDate.toISOString(),\n      singleEvents: true,\n      orderBy: 'startTime',\n    });\n    \n    // Process events and calculate availability slots\n    // ...\n    \n    return availabilitySlots;\n  }\n\n  async createMeeting(details: MeetingDetails): Promise<Meeting> {\n    const auth = this.getAuthClient(details.userId);\n    const calendar = google.calendar({ version: 'v3', auth });\n    \n    const event = {\n      summary: details.title,\n      description: details.description,\n      start: { dateTime: details.startTime.toISOString() },\n      end: { dateTime: details.endTime.toISOString() },\n      attendees: details.attendees.map(email => ({ email })),\n      conferenceData: {\n        createRequest: { requestId: uuid() }\n      }\n    };\n    \n    const response = await calendar.events.insert({\n      calendarId: 'primary',\n      conferenceDataVersion: 1,\n      requestBody: event\n    });\n    \n    return this.mapToMeeting(response.data);\n  }\n\n  // Implement updateMeeting and deleteMeeting methods\n  // ...\n}\n```",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "1. Mock Google Calendar API responses for testing\n2. Test availability calculation with various calendar scenarios\n3. Verify meeting creation with correct parameters\n4. Test meeting updates and deletions\n5. Verify proper handling of time zones\n6. Test error handling for API failures"
           },
           {
@@ -1226,7 +1226,7 @@
               "9.2"
             ],
             "details": "1. Implement the CalendarProvider interface for Outlook Calendar\n2. Create methods to fetch calendar events within a date range\n3. Implement availability calculation based on existing events\n4. Add methods to create, update, and delete calendar events\n5. Handle time zone conversions for events\n6. Implement video conferencing link generation (Microsoft Teams)\n\nExample code:\n```typescript\n// services/calendar/outlookCalendarProvider.ts\nimport { Client } from '@microsoft/microsoft-graph-client';\nimport { CalendarProvider, AvailabilitySlot, MeetingDetails, Meeting } from '../calendarService';\n\nexport class OutlookCalendarProvider implements CalendarProvider {\n  private getGraphClient(userId: string) {\n    // Fetch tokens from database and create authenticated client\n    // ...\n    return client;\n  }\n\n  async getAvailability(userId: string, startDate: Date, endDate: Date): Promise<AvailabilitySlot[]> {\n    const client = this.getGraphClient(userId);\n    \n    const events = await client\n      .api(`/me/calendarView?startDateTime=${startDate.toISOString()}&endDateTime=${endDate.toISOString()}`)\n      .select('subject,start,end,isAllDay')\n      .orderby('start/dateTime')\n      .get();\n    \n    // Process events and calculate availability slots\n    // ...\n    \n    return availabilitySlots;\n  }\n\n  async createMeeting(details: MeetingDetails): Promise<Meeting> {\n    const client = this.getGraphClient(details.userId);\n    \n    const event = {\n      subject: details.title,\n      body: {\n        contentType: 'HTML',\n        content: details.description\n      },\n      start: {\n        dateTime: details.startTime.toISOString(),\n        timeZone: 'UTC'\n      },\n      end: {\n        dateTime: details.endTime.toISOString(),\n        timeZone: 'UTC'\n      },\n      attendees: details.attendees.map(email => ({\n        emailAddress: { address: email },\n        type: 'required'\n      })),\n      isOnlineMeeting: true,\n      onlineMeetingProvider: 'teamsForBusiness'\n    };\n    \n    const response = await client.api('/me/events').post(event);\n    \n    return this.mapToMeeting(response);\n  }\n\n  // Implement updateMeeting and deleteMeeting methods\n  // ...\n}\n```",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "1. Mock Microsoft Graph API responses for testing\n2. Test availability calculation with various calendar scenarios\n3. Verify meeting creation with correct parameters\n4. Test meeting updates and deletions\n5. Verify proper handling of time zones\n6. Test error handling for API failures"
           },
           {
@@ -1238,7 +1238,7 @@
               "9.4"
             ],
             "details": "1. Implement the CalendarProvider interface\n2. Create factory method to get appropriate calendar provider\n3. Implement shared utility functions for availability calculations\n4. Add methods for working with multiple calendar providers simultaneously\n5. Create database models for storing calendar connections\n\nExample code:\n```typescript\n// services/calendarService.ts\nexport interface AvailabilitySlot {\n  start: Date;\n  end: Date;\n}\n\nexport interface MeetingDetails {\n  userId: string;\n  title: string;\n  description: string;\n  startTime: Date;\n  endTime: Date;\n  attendees: string[];\n  videoConferencing?: boolean;\n}\n\nexport interface Meeting {\n  id: string;\n  title: string;\n  description: string;\n  startTime: Date;\n  endTime: Date;\n  attendees: string[];\n  videoConferenceLink?: string;\n  calendarLink: string;\n}\n\nexport interface CalendarProvider {\n  getAvailability(userId: string, startDate: Date, endDate: Date): Promise<AvailabilitySlot[]>;\n  createMeeting(details: MeetingDetails): Promise<Meeting>;\n  updateMeeting(meetingId: string, details: Partial<MeetingDetails>): Promise<Meeting>;\n  deleteMeeting(meetingId: string): Promise<void>;\n}\n\nimport { GoogleCalendarProvider } from './calendar/googleCalendarProvider';\nimport { OutlookCalendarProvider } from './calendar/outlookCalendarProvider';\n\nexport const getCalendarProvider = (type: 'google' | 'outlook'): CalendarProvider => {\n  if (type === 'google') return new GoogleCalendarProvider();\n  return new OutlookCalendarProvider();\n};\n\n// Get user's connected calendar providers\nexport const getUserCalendarProviders = async (userId: string): Promise<Array<{\n  type: 'google' | 'outlook';\n  provider: CalendarProvider;\n}>> => {\n  // Fetch user's connected calendars from database\n  // Return initialized providers\n};\n\n// Get availability across all connected calendars\nexport const getUserAvailability = async (\n  userId: string,\n  startDate: Date,\n  endDate: Date\n): Promise<AvailabilitySlot[]> => {\n  const providers = await getUserCalendarProviders(userId);\n  \n  // Fetch availability from all providers\n  const availabilityPromises = providers.map(({ provider }) => \n    provider.getAvailability(userId, startDate, endDate)\n  );\n  \n  const availabilities = await Promise.all(availabilityPromises);\n  \n  // Merge availabilities and resolve conflicts\n  return mergeAvailabilities(availabilities);\n};\n```",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "1. Test factory method returns correct provider instances\n2. Verify availability merging with multiple calendars\n3. Test handling of conflicting events across calendars\n4. Verify proper database operations for calendar connections\n5. Test error handling when a provider fails"
           },
           {
@@ -1249,7 +1249,7 @@
               "9.5"
             ],
             "details": "1. Implement function to merge events from multiple calendars\n2. Create algorithm to find free slots between events\n3. Add support for working hours constraints\n4. Implement buffer time before/after meetings\n5. Handle time zone differences in availability calculation\n6. Add support for minimum meeting duration filtering\n\nExample code:\n```typescript\n// services/availability/availabilityCalculator.ts\nimport { AvailabilitySlot } from '../calendarService';\n\ninterface CalendarEvent {\n  start: Date;\n  end: Date;\n}\n\ninterface WorkingHours {\n  daysOfWeek: number[]; // 0 = Sunday, 6 = Saturday\n  startTime: string; // Format: \"HH:MM\"\n  endTime: string; // Format: \"HH:MM\"\n  timeZone: string;\n}\n\nexport const mergeEvents = (eventSets: CalendarEvent[][]): CalendarEvent[] => {\n  // Flatten and sort all events\n  const allEvents = eventSets.flat().sort((a, b) => a.start.getTime() - b.start.getTime());\n  \n  // Merge overlapping events\n  const mergedEvents: CalendarEvent[] = [];\n  \n  for (const event of allEvents) {\n    const lastEvent = mergedEvents[mergedEvents.length - 1];\n    \n    if (!lastEvent || event.start > lastEvent.end) {\n      mergedEvents.push(event);\n    } else if (event.end > lastEvent.end) {\n      lastEvent.end = event.end;\n    }\n  }\n  \n  return mergedEvents;\n};\n\nexport const calculateAvailability = (\n  startDate: Date,\n  endDate: Date,\n  events: CalendarEvent[],\n  workingHours: WorkingHours,\n  bufferMinutes: number = 0,\n  minimumDurationMinutes: number = 15\n): AvailabilitySlot[] => {\n  const availableSlots: AvailabilitySlot[] = [];\n  const mergedEvents = [...events];\n  \n  // Add working hours constraints as events\n  // ...\n  \n  // Sort events chronologically\n  mergedEvents.sort((a, b) => a.start.getTime() - b.start.getTime());\n  \n  // Find gaps between events\n  let currentTime = new Date(startDate);\n  \n  for (const event of mergedEvents) {\n    // Add buffer to current time\n    const bufferTime = new Date(currentTime);\n    bufferTime.setMinutes(bufferTime.getMinutes() + bufferMinutes);\n    \n    // If there's a gap between current time (with buffer) and next event\n    if (bufferTime < event.start) {\n      // Check if gap meets minimum duration\n      const gapDuration = event.start.getTime() - bufferTime.getTime();\n      if (gapDuration >= minimumDurationMinutes * 60 * 1000) {\n        availableSlots.push({\n          start: new Date(bufferTime),\n          end: new Date(event.start)\n        });\n      }\n    }\n    \n    // Move current time to end of event plus buffer\n    currentTime = new Date(event.end);\n    currentTime.setMinutes(currentTime.getMinutes() + bufferMinutes);\n  }\n  \n  // Check for availability after last event\n  if (currentTime < endDate) {\n    availableSlots.push({\n      start: new Date(currentTime),\n      end: new Date(endDate)\n    });\n  }\n  \n  return availableSlots;\n};\n```",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "1. Test with various calendar event scenarios\n2. Verify working hours constraints are properly applied\n3. Test buffer time calculations\n4. Verify time zone handling with events in different time zones\n5. Test minimum duration filtering\n6. Verify merging of events from multiple calendars"
           },
           {
@@ -1260,7 +1260,7 @@
               "9.5"
             ],
             "details": "1. Implement meeting creation service\n2. Add support for generating video conferencing links (Zoom/Teams/Meet)\n3. Create email invitation templates\n4. Implement meeting confirmation workflow\n5. Add support for adding meeting details to both host and attendee calendars\n\nExample code:\n```typescript\n// services/meeting/meetingService.ts\nimport { MeetingDetails, Meeting, getCalendarProvider } from '../calendarService';\nimport { sendMeetingInvitation } from '../notifications/emailService';\nimport { generateZoomMeetingLink } from '../integrations/zoomService';\n\nexport interface ScheduleMeetingRequest {\n  hostUserId: string;\n  hostCalendarType: 'google' | 'outlook';\n  title: string;\n  description: string;\n  startTime: Date;\n  endTime: Date;\n  attendees: string[];\n  useVideoConferencing: boolean;\n  videoProvider?: 'zoom' | 'teams' | 'meet';\n}\n\nexport const scheduleMeeting = async (request: ScheduleMeetingRequest): Promise<Meeting> => {\n  // Get the appropriate calendar provider\n  const calendarProvider = getCalendarProvider(request.hostCalendarType);\n  \n  // Generate video conferencing link if requested\n  let videoConferenceLink: string | undefined;\n  \n  if (request.useVideoConferencing) {\n    if (request.videoProvider === 'zoom') {\n      videoConferenceLink = await generateZoomMeetingLink({\n        topic: request.title,\n        startTime: request.startTime,\n        duration: Math.ceil((request.endTime.getTime() - request.startTime.getTime()) / (60 * 1000))\n      });\n    }\n    // Handle other providers or use native calendar video conferencing\n  }\n  \n  // Create meeting details\n  const meetingDetails: MeetingDetails = {\n    userId: request.hostUserId,\n    title: request.title,\n    description: request.description + (videoConferenceLink ? `\\n\\nJoin meeting: ${videoConferenceLink}` : ''),\n    startTime: request.startTime,\n    endTime: request.endTime,\n    attendees: request.attendees,\n    videoConferencing: request.useVideoConferencing\n  };\n  \n  // Create the meeting in the calendar\n  const meeting = await calendarProvider.createMeeting(meetingDetails);\n  \n  // Send email invitations\n  await Promise.all(request.attendees.map(attendee => \n    sendMeetingInvitation({\n      to: attendee,\n      meeting,\n      hostName: 'Host Name', // Get from user profile\n      hostEmail: 'host@example.com' // Get from user profile\n    })\n  ));\n  \n  return meeting;\n};\n```",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "1. Test meeting creation with different calendar providers\n2. Verify video conferencing link generation\n3. Test email invitation sending\n4. Verify proper error handling for failed meeting creation\n5. Test with various time zones and date formats"
           },
           {
@@ -1271,7 +1271,7 @@
               "9.7"
             ],
             "details": "1. Create notification templates for different event types\n2. Implement email notification service\n3. Add support for SMS notifications (optional)\n4. Create in-app notification system\n5. Implement reminder scheduling based on event times\n6. Add notification preferences for users\n\nExample code:\n```typescript\n// services/notifications/calendarNotifications.ts\nimport { Meeting } from '../calendarService';\nimport { sendEmail } from './emailService';\nimport { sendSms } from './smsService';\nimport { createInAppNotification } from './inAppNotificationService';\n\nexport enum NotificationType {\n  BOOKING_CONFIRMATION = 'booking_confirmation',\n  MEETING_REMINDER = 'meeting_reminder',\n  MEETING_RESCHEDULED = 'meeting_rescheduled',\n  MEETING_CANCELLED = 'meeting_cancelled'\n}\n\nexport interface NotificationPreferences {\n  email: boolean;\n  sms: boolean;\n  inApp: boolean;\n  reminderTimes: number[]; // Minutes before meeting\n}\n\nexport const sendMeetingNotification = async (\n  type: NotificationType,\n  meeting: Meeting,\n  recipients: Array<{\n    email: string;\n    phone?: string;\n    userId?: string;\n    preferences: NotificationPreferences;\n  }>\n): Promise<void> => {\n  const notifications = [];\n  \n  for (const recipient of recipients) {\n    // Send email notification\n    if (recipient.preferences.email) {\n      notifications.push(sendEmail({\n        to: recipient.email,\n        templateId: getEmailTemplateForType(type),\n        data: {\n          meeting,\n          recipientEmail: recipient.email\n        }\n      }));\n    }\n    \n    // Send SMS notification\n    if (recipient.preferences.sms && recipient.phone) {\n      notifications.push(sendSms({\n        to: recipient.phone,\n        templateId: getSmsTemplateForType(type),\n        data: {\n          meeting\n        }\n      }));\n    }\n    \n    // Create in-app notification\n    if (recipient.preferences.inApp && recipient.userId) {\n      notifications.push(createInAppNotification({\n        userId: recipient.userId,\n        type,\n        data: {\n          meeting\n        }\n      }));\n    }\n  }\n  \n  await Promise.all(notifications);\n};\n\nexport const scheduleMeetingReminders = async (\n  meeting: Meeting,\n  recipients: Array<{\n    email: string;\n    phone?: string;\n    userId?: string;\n    preferences: NotificationPreferences;\n  }>\n): Promise<void> => {\n  for (const recipient of recipients) {\n    for (const reminderTime of recipient.preferences.reminderTimes) {\n      const reminderDate = new Date(meeting.startTime);\n      reminderDate.setMinutes(reminderDate.getMinutes() - reminderTime);\n      \n      // Schedule reminder\n      await scheduleNotification({\n        type: NotificationType.MEETING_REMINDER,\n        meeting,\n        recipient,\n        scheduledTime: reminderDate\n      });\n    }\n  }\n};\n```",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "1. Test notification sending for different event types\n2. Verify reminder scheduling with various time offsets\n3. Test notification preferences are respected\n4. Verify proper handling of failed notifications\n5. Test notification content for different templates"
           },
           {
@@ -1280,7 +1280,7 @@
             "description": "Create a reusable date/time picker component for selecting meeting times, with support for time zone selection and duration options.",
             "dependencies": [],
             "details": "1. Create a date picker component with calendar view\n2. Implement time selection with appropriate time increments\n3. Add time zone selector with automatic detection\n4. Create duration selector for common meeting lengths\n5. Implement responsive design for mobile and desktop\n6. Add accessibility features (keyboard navigation, screen reader support)\n\nExample code:\n```typescript\n// components/DateTimePicker.tsx\nimport React, { useState } from 'react';\nimport { format, addMinutes } from 'date-fns';\nimport { Calendar } from './Calendar';\nimport { TimeSelector } from './TimeSelector';\nimport { TimeZoneSelector } from './TimeZoneSelector';\nimport { DurationSelector } from './DurationSelector';\n\ninterface DateTimePickerProps {\n  initialDate?: Date;\n  minDate?: Date;\n  maxDate?: Date;\n  timeZone?: string;\n  availableTimeSlots?: Array<{\n    start: Date;\n    end: Date;\n  }>;\n  onChange: (selection: {\n    startTime: Date;\n    endTime: Date;\n    timeZone: string;\n  }) => void;\n}\n\nexport const DateTimePicker: React.FC<DateTimePickerProps> = ({\n  initialDate = new Date(),\n  minDate,\n  maxDate,\n  timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone,\n  availableTimeSlots = [],\n  onChange\n}) => {\n  const [selectedDate, setSelectedDate] = useState<Date>(initialDate);\n  const [selectedTime, setSelectedTime] = useState<string>(format(initialDate, 'HH:mm'));\n  const [selectedTimeZone, setSelectedTimeZone] = useState<string>(timeZone);\n  const [duration, setDuration] = useState<number>(30); // minutes\n  \n  // Get available time slots for the selected date\n  const availableTimesForDate = availableTimeSlots.filter(slot => {\n    const slotDate = new Date(slot.start);\n    return (\n      slotDate.getFullYear() === selectedDate.getFullYear() &&\n      slotDate.getMonth() === selectedDate.getMonth() &&\n      slotDate.getDate() === selectedDate.getDate()\n    );\n  });\n  \n  // Handle date change\n  const handleDateChange = (date: Date) => {\n    setSelectedDate(date);\n    \n    // If there are available slots for this date, select the first one\n    if (availableTimesForDate.length > 0) {\n      setSelectedTime(format(availableTimesForDate[0].start, 'HH:mm'));\n    }\n  };\n  \n  // Handle time change\n  const handleTimeChange = (time: string) => {\n    setSelectedTime(time);\n    updateSelectedDateTime(selectedDate, time, selectedTimeZone, duration);\n  };\n  \n  // Handle time zone change\n  const handleTimeZoneChange = (tz: string) => {\n    setSelectedTimeZone(tz);\n    updateSelectedDateTime(selectedDate, selectedTime, tz, duration);\n  };\n  \n  // Handle duration change\n  const handleDurationChange = (mins: number) => {\n    setDuration(mins);\n    updateSelectedDateTime(selectedDate, selectedTime, selectedTimeZone, mins);\n  };\n  \n  // Update the selected date/time and call onChange\n  const updateSelectedDateTime = (date: Date, time: string, tz: string, durationMins: number) => {\n    const [hours, minutes] = time.split(':').map(Number);\n    \n    const startTime = new Date(date);\n    startTime.setHours(hours, minutes, 0, 0);\n    \n    const endTime = addMinutes(startTime, durationMins);\n    \n    onChange({\n      startTime,\n      endTime,\n      timeZone: tz\n    });\n  };\n  \n  return (\n    <div className=\"date-time-picker\">\n      <Calendar\n        selectedDate={selectedDate}\n        minDate={minDate}\n        maxDate={maxDate}\n        availableDates={availableTimeSlots.map(slot => new Date(slot.start))}\n        onChange={handleDateChange}\n      />\n      \n      <TimeSelector\n        selectedTime={selectedTime}\n        availableSlots={availableTimesForDate}\n        onChange={handleTimeChange}\n      />\n      \n      <DurationSelector\n        duration={duration}\n        onChange={handleDurationChange}\n        options={[15, 30, 45, 60, 90]}\n      />\n      \n      <TimeZoneSelector\n        selectedTimeZone={selectedTimeZone}\n        onChange={handleTimeZoneChange}\n      />\n    </div>\n  );\n};\n```",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "1. Test date selection with various date ranges\n2. Verify time selection respects available time slots\n3. Test time zone conversion functionality\n4. Verify duration selection updates end time correctly\n5. Test accessibility with keyboard navigation\n6. Verify component works on different screen sizes"
           },
           {
@@ -1292,7 +1292,7 @@
               "9.9"
             ],
             "details": "1. Create a component to display daily/weekly availability\n2. Implement visual indicators for available and busy times\n3. Add time slot selection functionality\n4. Create responsive grid layout for different time formats\n5. Implement loading states for availability data fetching\n6. Add refresh functionality to update availability\n\nExample code:\n```typescript\n// components/AvailabilityDisplay.tsx\nimport React, { useState, useEffect } from 'react';\nimport { format, addDays, isSameDay } from 'date-fns';\nimport { AvailabilitySlot } from '../services/calendarService';\n\ninterface AvailabilityDisplayProps {\n  userId: string;\n  startDate: Date;\n  numberOfDays: number;\n  onSlotSelect: (slot: {\n    start: Date;\n    end: Date;\n  }) => void;\n  slotDuration: number; // minutes\n  workingHours: {\n    start: string; // Format: \"HH:MM\"\n    end: string; // Format: \"HH:MM\"\n  };\n}\n\nexport const AvailabilityDisplay: React.FC<AvailabilityDisplayProps> = ({\n  userId,\n  startDate,\n  numberOfDays,\n  onSlotSelect,\n  slotDuration,\n  workingHours\n}) => {\n  const [availabilitySlots, setAvailabilitySlots] = useState<AvailabilitySlot[]>([]);\n  const [isLoading, setIsLoading] = useState<boolean>(true);\n  const [error, setError] = useState<string | null>(null);\n  \n  // Calculate end date\n  const endDate = addDays(startDate, numberOfDays);\n  \n  // Fetch availability data\n  const fetchAvailability = async () => {\n    setIsLoading(true);\n    setError(null);\n    \n    try {\n      const response = await fetch(`/api/availability?userId=${userId}&startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`);\n      \n      if (!response.ok) {\n        throw new Error('Failed to fetch availability');\n      }\n      \n      const data = await response.json();\n      setAvailabilitySlots(data.availabilitySlots.map((slot: any) => ({\n        start: new Date(slot.start),\n        end: new Date(slot.end)\n      })));\n    } catch (err) {\n      setError(err.message);\n    } finally {\n      setIsLoading(false);\n    }\n  };\n  \n  useEffect(() => {\n    fetchAvailability();\n  }, [userId, startDate, numberOfDays]);\n  \n  // Generate time slots for display\n  const generateTimeSlots = () => {\n    const days = [];\n    \n    for (let i = 0; i < numberOfDays; i++) {\n      const currentDate = addDays(startDate, i);\n      const daySlots = [];\n      \n      // Parse working hours\n      const [startHour, startMinute] = workingHours.start.split(':').map(Number);\n      const [endHour, endMinute] = workingHours.end.split(':').map(Number);\n      \n      // Create slots within working hours\n      const slotStartTime = new Date(currentDate);\n      slotStartTime.setHours(startHour, startMinute, 0, 0);\n      \n      const dayEndTime = new Date(currentDate);\n      dayEndTime.setHours(endHour, endMinute, 0, 0);\n      \n      while (slotStartTime < dayEndTime) {\n        const slotEndTime = new Date(slotStartTime);\n        slotEndTime.setMinutes(slotEndTime.getMinutes() + slotDuration);\n        \n        if (slotEndTime > dayEndTime) {\n          break;\n        }\n        \n        // Check if slot is available\n        const isAvailable = availabilitySlots.some(availableSlot => {\n          return (\n            slotStartTime >= availableSlot.start &&\n            slotEndTime <= availableSlot.end\n          );\n        });\n        \n        daySlots.push({\n          start: new Date(slotStartTime),\n          end: new Date(slotEndTime),\n          isAvailable\n        });\n        \n        // Move to next slot\n        slotStartTime.setMinutes(slotStartTime.getMinutes() + slotDuration);\n      }\n      \n      days.push({\n        date: currentDate,\n        slots: daySlots\n      });\n    }\n    \n    return days;\n  };\n  \n  const timeSlots = generateTimeSlots();\n  \n  // Handle slot selection\n  const handleSlotClick = (slot: {\n    start: Date;\n    end: Date;\n    isAvailable: boolean;\n  }) => {\n    if (slot.isAvailable) {\n      onSlotSelect({\n        start: slot.start,\n        end: slot.end\n      });\n    }\n  };\n  \n  if (isLoading) {\n    return <div className=\"loading\">Loading availability...</div>;\n  }\n  \n  if (error) {\n    return (\n      <div className=\"error\">\n        <p>{error}</p>\n        <button onClick={fetchAvailability}>Retry</button>\n      </div>\n    );\n  }\n  \n  return (\n    <div className=\"availability-display\">\n      <div className=\"days-container\">\n        {timeSlots.map((day, dayIndex) => (\n          <div key={dayIndex} className=\"day-column\">\n            <div className=\"day-header\">\n              {format(day.date, 'EEE, MMM d')}\n            </div>\n            <div className=\"slots-container\">\n              {day.slots.map((slot, slotIndex) => (\n                <div\n                  key={slotIndex}\n                  className={`time-slot ${slot.isAvailable ? 'available' : 'busy'}`}\n                  onClick={() => handleSlotClick(slot)}\n                >\n                  {format(slot.start, 'h:mm a')}\n                </div>\n              ))}\n            </div>\n          </div>\n        ))}\n      </div>\n      <button className=\"refresh-button\" onClick={fetchAvailability}>\n        Refresh Availability\n      </button>\n    </div>\n  );\n};\n```",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "1. Test rendering with various availability patterns\n2. Verify slot selection functionality\n3. Test loading and error states\n4. Verify refresh functionality updates the display\n5. Test with different time zones and working hours\n6. Verify responsive layout on different screen sizes"
           },
           {
@@ -1303,7 +1303,7 @@
               "9.7"
             ],
             "details": "1. Create a booking confirmation component\n2. Display meeting details (title, time, attendees)\n3. Show video conferencing link\n4. Add calendar links for different providers (Google, Outlook, iCal)\n5. Implement copy-to-clipboard functionality\n6. Add options to reschedule or cancel\n\nExample code:\n```typescript\n// components/BookingConfirmation.tsx\nimport React from 'react';\nimport { format } from 'date-fns';\nimport { Meeting } from '../services/calendarService';\n\ninterface BookingConfirmationProps {\n  meeting: Meeting;\n  onReschedule?: () => void;\n  onCancel?: () => void;\n  showAddToCalendarOptions?: boolean;\n}\n\nexport const BookingConfirmation: React.FC<BookingConfirmationProps> = ({\n  meeting,\n  onReschedule,\n  onCancel,\n  showAddToCalendarOptions = true\n}) => {\n  // Generate calendar links\n  const generateGoogleCalendarLink = () => {\n    const startTime = meeting.startTime.toISOString().replace(/-|:|\\./g, '');\n    const endTime = meeting.endTime.toISOString().replace(/-|:|\\./g, '');\n    \n    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(meeting.title)}&dates=${startTime}/${endTime}&details=${encodeURIComponent(meeting.description)}`;\n  };\n  \n  const generateOutlookCalendarLink = () => {\n    return `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodeURIComponent(meeting.title)}&startdt=${meeting.startTime.toISOString()}&enddt=${meeting.endTime.toISOString()}&body=${encodeURIComponent(meeting.description)}`;\n  };\n  \n  const generateICalLink = () => {\n    // In a real implementation, this would generate an .ics file\n    return `/api/calendar/ical?meetingId=${meeting.id}`;\n  };\n  \n  // Copy meeting link to clipboard\n  const copyMeetingLink = () => {\n    navigator.clipboard.writeText(meeting.videoConferenceLink || '');\n  };\n  \n  return (\n    <div className=\"booking-confirmation\">\n      <div className=\"confirmation-header\">\n        <h2>Meeting Confirmed!</h2>\n      </div>\n      \n      <div className=\"meeting-details\">\n        <h3>{meeting.title}</h3>\n        \n        <div className=\"meeting-time\">\n          <div className=\"date\">{format(meeting.startTime, 'EEEE, MMMM d, yyyy')}</div>\n          <div className=\"time\">\n            {format(meeting.startTime, 'h:mm a')} - {format(meeting.endTime, 'h:mm a')}\n          </div>\n        </div>\n        \n        {meeting.videoConferenceLink && (\n          <div className=\"video-link\">\n            <h4>Video Conference Link:</h4>\n            <div className=\"link-container\">\n              <a href={meeting.videoConferenceLink} target=\"_blank\" rel=\"noopener noreferrer\">\n                {meeting.videoConferenceLink}\n              </a>\n              <button className=\"copy-button\" onClick={copyMeetingLink}>\n                Copy\n              </button>\n            </div>\n          </div>\n        )}\n        \n        <div className=\"attendees\">\n          <h4>Attendees:</h4>\n          <ul>\n            {meeting.attendees.map((attendee, index) => (\n              <li key={index}>{attendee}</li>\n            ))}\n          </ul>\n        </div>\n        \n        {meeting.description && (\n          <div className=\"description\">\n            <h4>Description:</h4>\n            <p>{meeting.description}</p>\n          </div>\n        )}\n      </div>\n      \n      {showAddToCalendarOptions && (\n        <div className=\"calendar-options\">\n          <h4>Add to Calendar:</h4>\n          <div className=\"calendar-buttons\">\n            <a\n              href={generateGoogleCalendarLink()}\n              target=\"_blank\"\n              rel=\"noopener noreferrer\"\n              className=\"calendar-button google\"\n            >\n              Google Calendar\n            </a>\n            <a\n              href={generateOutlookCalendarLink()}\n              target=\"_blank\"\n              rel=\"noopener noreferrer\"\n              className=\"calendar-button outlook\"\n            >\n              Outlook\n            </a>\n            <a\n              href={generateICalLink()}\n              download=\"meeting.ics\"\n              className=\"calendar-button ical\"\n            >\n              iCal File\n            </a>\n          </div>\n        </div>\n      )}\n      \n      <div className=\"action-buttons\">\n        {onReschedule && (\n          <button className=\"reschedule-button\" onClick={onReschedule}>\n            Reschedule\n          </button>\n        )}\n        {onCancel && (\n          <button className=\"cancel-button\" onClick={onCancel}>\n            Cancel Meeting\n          </button>\n        )}\n      </div>\n    </div>\n  );\n};\n```",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "1. Test rendering with different meeting details\n2. Verify calendar link generation\n3. Test copy-to-clipboard functionality\n4. Verify reschedule and cancel button actions\n5. Test with and without video conferencing links\n6. Verify responsive layout on different screen sizes"
           },
           {
@@ -1316,7 +1316,7 @@
               "9.11"
             ],
             "details": "1. Create a rescheduling workflow component\n2. Implement meeting lookup by ID\n3. Display current meeting details\n4. Add availability selection for new time\n5. Implement rescheduling confirmation\n6. Create notification system for rescheduled meetings\n\nExample code:\n```typescript\n// components/RescheduleMeeting.tsx\nimport React, { useState, useEffect } from 'react';\nimport { Meeting } from '../services/calendarService';\nimport { DateTimePicker } from './DateTimePicker';\nimport { AvailabilityDisplay } from './AvailabilityDisplay';\nimport { BookingConfirmation } from './BookingConfirmation';\n\nenum RescheduleStep {\n  LOADING,\n  CURRENT_DETAILS,\n  SELECT_NEW_TIME,\n  CONFIRMATION\n}\n\ninterface RescheduleMeetingProps {\n  meetingId: string;\n  userId: string;\n  onComplete: () => void;\n  onCancel: () => void;\n}\n\nexport const RescheduleMeeting: React.FC<RescheduleMeetingProps> = ({\n  meetingId,\n  userId,\n  onComplete,\n  onCancel\n}) => {\n  const [currentStep, setCurrentStep] = useState<RescheduleStep>(RescheduleStep.LOADING);\n  const [currentMeeting, setCurrentMeeting] = useState<Meeting | null>(null);\n  const [newMeeting, setNewMeeting] = useState<Meeting | null>(null);\n  const [selectedTimeSlot, setSelectedTimeSlot] = useState<{\n    startTime: Date;\n    endTime: Date;\n    timeZone: string;\n  } | null>(null);\n  const [availabilitySlots, setAvailabilitySlots] = useState<Array<{\n    start: Date;\n    end: Date;\n  }>>([]);\n  const [isLoading, setIsLoading] = useState<boolean>(false);\n  const [error, setError] = useState<string | null>(null);\n  \n  // Fetch current meeting details\n  useEffect(() => {\n    const fetchMeeting = async () => {\n      try {\n        const response = await fetch(`/api/meetings/${meetingId}`);\n        \n        if (!response.ok) {\n          throw new Error('Failed to fetch meeting details');\n        }\n        \n        const data = await response.json();\n        setCurrentMeeting({\n          ...data,\n          startTime: new Date(data.startTime),\n          endTime: new Date(data.endTime)\n        });\n        \n        setCurrentStep(RescheduleStep.CURRENT_DETAILS);\n      } catch (err) {\n        setError(err.message);\n      }\n    };\n    \n    fetchMeeting();\n  }, [meetingId]);\n  \n  // Fetch availability for new time selection\n  const fetchAvailability = async (startDate: Date, days: number) => {\n    setIsLoading(true);\n    \n    try {\n      const endDate = new Date(startDate);\n      endDate.setDate(endDate.getDate() + days);\n      \n      const response = await fetch(`/api/availability?userId=${userId}&startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`);\n      \n      if (!response.ok) {\n        throw new Error('Failed to fetch availability');\n      }\n      \n      const data = await response.json();\n      setAvailabilitySlots(data.availabilitySlots.map((slot: any) => ({\n        start: new Date(slot.start),\n        end: new Date(slot.end)\n      })));\n    } catch (err) {\n      setError(err.message);\n    } finally {\n      setIsLoading(false);\n    }\n  };\n  \n  // Handle time slot selection\n  const handleTimeSlotSelect = (slot: {\n    start: Date;\n    end: Date;\n  }) => {\n    setSelectedTimeSlot({\n      startTime: slot.start,\n      endTime: slot.end,\n      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone\n    });\n  };\n  \n  // Handle date/time selection from picker\n  const handleDateTimeChange = (selection: {\n    startTime: Date;\n    endTime: Date;\n    timeZone: string;\n  }) => {\n    setSelectedTimeSlot(selection);\n  };\n  \n  // Proceed to new time selection\n  const proceedToTimeSelection = () => {\n    setCurrentStep(RescheduleStep.SELECT_NEW_TIME);\n    \n    // Start with current date for availability\n    const startDate = new Date();\n    fetchAvailability(startDate, 14); // Fetch 2 weeks of availability\n  };\n  \n  // Reschedule the meeting\n  const handleReschedule = async () => {\n    if (!currentMeeting || !selectedTimeSlot) return;\n    \n    setIsLoading(true);\n    \n    try {\n      // Call API to reschedule meeting\n      const response = await fetch(`/api/meetings/${meetingId}/reschedule`, {\n        method: 'POST',\n        headers: {\n          'Content-Type': 'application/json'\n        },\n        body: JSON.stringify({\n          startTime: selectedTimeSlot.startTime.toISOString(),\n          endTime: selectedTimeSlot.endTime.toISOString(),\n          timeZone: selectedTimeSlot.timeZone\n        })\n      });\n      \n      if (!response.ok) {\n        throw new Error('Failed to reschedule meeting');\n      }\n      \n      const data = await response.json();\n      setNewMeeting({\n        ...data,\n        startTime: new Date(data.startTime),\n        endTime: new Date(data.endTime)\n      });\n      \n      setCurrentStep(RescheduleStep.CONFIRMATION);\n    } catch (err) {\n      setError(err.message);\n    } finally {\n      setIsLoading(false);\n    }\n  };\n  \n  // Render based on current step\n  const renderContent = () => {\n    switch (currentStep) {\n      case RescheduleStep.LOADING:\n        return <div className=\"loading\">Loading meeting details...</div>;\n        \n      case RescheduleStep.CURRENT_DETAILS:\n        if (!currentMeeting) return null;\n        \n        return (\n          <div className=\"current-meeting\">\n            <h2>Current Meeting Details</h2>\n            <BookingConfirmation\n              meeting={currentMeeting}\n              showAddToCalendarOptions={false}\n            />\n            <div className=\"action-buttons\">\n              <button\n                className=\"primary-button\"\n                onClick={proceedToTimeSelection}\n              >\n                Select New Time\n              </button>\n              <button\n                className=\"secondary-button\"\n                onClick={onCancel}\n              >\n                Cancel\n              </button>\n            </div>\n          </div>\n        );\n        \n      case RescheduleStep.SELECT_NEW_TIME:\n        return (\n          <div className=\"select-new-time\">\n            <h2>Select New Meeting Time</h2>\n            <div className=\"time-selection-container\">\n              <div className=\"availability-section\">\n                <h3>Available Time Slots</h3>\n                <AvailabilityDisplay\n                  userId={userId}\n                  startDate={new Date()}\n                  numberOfDays={7}\n                  onSlotSelect={handleTimeSlotSelect}\n                  slotDuration={30}\n                  workingHours={{ start: '09:00', end: '17:00' }}\n                />\n              </div>\n              <div className=\"date-time-picker-section\">\n                <h3>Custom Date/Time</h3>\n                <DateTimePicker\n                  initialDate={new Date()}\n                  minDate={new Date()}\n                  availableTimeSlots={availabilitySlots}\n                  onChange={handleDateTimeChange}\n                />\n              </div>\n            </div>\n            \n            <div className=\"selected-time\">\n              {selectedTimeSlot && (\n                <div>\n                  <h3>Selected Time:</h3>\n                  <p>\n                    {selectedTimeSlot.startTime.toLocaleString()} - {selectedTimeSlot.endTime.toLocaleString()}\n                  </p>\n                </div>\n              )}\n            </div>\n            \n            <div className=\"action-buttons\">\n              <button\n                className=\"primary-button\"\n                onClick={handleReschedule}\n                disabled={!selectedTimeSlot || isLoading}\n              >\n                {isLoading ? 'Rescheduling...' : 'Confirm Reschedule'}\n              </button>\n              <button\n                className=\"secondary-button\"\n                onClick={() => setCurrentStep(RescheduleStep.CURRENT_DETAILS)}\n                disabled={isLoading}\n              >\n                Back\n              </button>\n            </div>\n          </div>\n        );\n        \n      case RescheduleStep.CONFIRMATION:\n        if (!newMeeting) return null;\n        \n        return (\n          <div className=\"reschedule-confirmation\">\n            <h2>Meeting Rescheduled</h2>\n            <p>Your meeting has been successfully rescheduled.</p>\n            <BookingConfirmation meeting={newMeeting} />\n            <button\n              className=\"primary-button\"\n              onClick={onComplete}\n            >\n              Done\n            </button>\n          </div>\n        );\n    }\n  };\n  \n  if (error) {\n    return (\n      <div className=\"error-container\">\n        <h2>Error</h2>\n        <p>{error}</p>\n        <button onClick={onCancel}>Back</button>\n      </div>\n    );\n  }\n  \n  return (\n    <div className=\"reschedule-meeting-container\">\n      {renderContent()}\n    </div>\n  );\n};\n```",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "1. Test the complete rescheduling workflow\n2. Verify meeting details are correctly displayed\n3. Test availability fetching and display\n4. Verify time slot selection functionality\n5. Test rescheduling API integration\n6. Verify confirmation display with new meeting details"
           },
           {
@@ -1331,7 +1331,7 @@
               "9.12"
             ],
             "details": "1. Create main scheduling page layout\n2. Implement user calendar settings page\n3. Create meeting management interface\n4. Add navigation between calendar components\n5. Implement responsive design for all screens\n6. Add loading states and error handling\n\nExample code:\n```typescript\n// pages/schedule/index.tsx\nimport React, { useState, useEffect } from 'react';\nimport { useRouter } from 'next/router';\nimport { DateTimePicker } from '../../components/DateTimePicker';\nimport { AvailabilityDisplay } from '../../components/AvailabilityDisplay';\nimport { BookingConfirmation } from '../../components/BookingConfirmation';\nimport { RescheduleMeeting } from '../../components/RescheduleMeeting';\nimport { getUserCalendarProviders } from '../../services/calendarService';\n\nenum ScheduleStep {\n  SELECT_DATE,\n  ENTER_DETAILS,\n  CONFIRMATION\n}\n\nconst SchedulePage: React.FC = () => {\n  const router = useRouter();\n  const { userId, rescheduleId } = router.query;\n  \n  const [currentStep, setCurrentStep] = useState<ScheduleStep>(ScheduleStep.SELECT_DATE);\n  const [selectedTimeSlot, setSelectedTimeSlot] = useState<{\n    startTime: Date;\n    endTime: Date;\n    timeZone: string;\n  } | null>(null);\n  const [meetingDetails, setMeetingDetails] = useState<{\n    title: string;\n    name: string;\n    email: string;\n    notes: string;\n  }>({ title: '', name: '', email: '', notes: '' });\n  const [createdMeeting, setCreatedMeeting] = useState<any>(null);\n  const [isLoading, setIsLoading] = useState<boolean>(false);\n  const [error, setError] = useState<string | null>(null);\n  const [connectedCalendars, setConnectedCalendars] = useState<Array<{\n    type: 'google' | 'outlook';\n    email: string;\n  }>>([]);\n  \n  // Check if this is a reschedule\n  useEffect(() => {\n    if (rescheduleId) {\n      // Handle reschedule flow\n    }\n  }, [rescheduleId]);\n  \n  // Fetch connected calendars\n  useEffect(() => {\n    if (!userId) return;\n    \n    const fetchCalendars = async () => {\n      try {\n        const response = await fetch(`/api/users/${userId}/calendars`);\n        \n        if (!response.ok) {\n          throw new Error('Failed to fetch connected calendars');\n        }\n        \n        const data = await response.json();\n        setConnectedCalendars(data.calendars);\n      } catch (err) {\n        setError('Failed to load calendar connections');\n      }\n    };\n    \n    fetchCalendars();\n  }, [userId]);\n  \n  // Handle time slot selection\n  const handleTimeSlotSelect = (slot: {\n    start: Date;\n    end: Date;\n  }) => {\n    setSelectedTimeSlot({\n      startTime: slot.start,\n      endTime: slot.end,\n      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone\n    });\n    setCurrentStep(ScheduleStep.ENTER_DETAILS);\n  };\n  \n  // Handle date/time selection from picker\n  const handleDateTimeChange = (selection: {\n    startTime: Date;\n    endTime: Date;\n    timeZone: string;\n  }) => {\n    setSelectedTimeSlot(selection);\n    setCurrentStep(ScheduleStep.ENTER_DETAILS);\n  };\n  \n  // Handle meeting details form submission\n  const handleDetailsSubmit = async (e: React.FormEvent) => {\n    e.preventDefault();\n    \n    if (!selectedTimeSlot || !userId) return;\n    \n    setIsLoading(true);\n    \n    try {\n      const response = await fetch('/api/meetings', {\n        method: 'POST',\n        headers: {\n          'Content-Type': 'application/json'\n        },\n        body: JSON.stringify({\n          hostUserId: userId,\n          title: meetingDetails.title,\n          startTime: selectedTimeSlot.startTime.toISOString(),\n          endTime: selectedTimeSlot.endTime.toISOString(),\n          timeZone: selectedTimeSlot.timeZone,\n          attendees: [meetingDetails.email],\n          notes: meetingDetails.notes,\n          guestName: meetingDetails.name\n        })\n      });\n      \n      if (!response.ok) {\n        throw new Error('Failed to create meeting');\n      }\n      \n      const data = await response.json();\n      setCreatedMeeting({\n        ...data,\n        startTime: new Date(data.startTime),\n        endTime: new Date(data.endTime)\n      });\n      \n      setCurrentStep(ScheduleStep.CONFIRMATION);\n    } catch (err) {\n      setError(err.message);\n    } finally {\n      setIsLoading(false);\n    }\n  };\n  \n  // Handle input changes\n  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {\n    const { name, value } = e.target;\n    setMeetingDetails(prev => ({ ...prev, [name]: value }));\n  };\n  \n  // Render based on current step\n  const renderContent = () => {\n    switch (currentStep) {\n      case ScheduleStep.SELECT_DATE:\n        return (\n          <div className=\"select-date-container\">\n            <h1>Schedule a Meeting</h1>\n            \n            {connectedCalendars.length === 0 ? (\n              <div className=\"no-calendars\">\n                <p>No calendars connected. Please connect a calendar to continue.</p>\n                <button onClick={() => router.push(`/settings/calendars?userId=${userId}`)}>\n                  Connect Calendar\n                </button>\n              </div>\n            ) : (\n              <>\n                <div className=\"availability-section\">\n                  <h2>Select a Time Slot</h2>\n                  <AvailabilityDisplay\n                    userId={userId as string}\n                    startDate={new Date()}\n                    numberOfDays={7}\n                    onSlotSelect={handleTimeSlotSelect}\n                    slotDuration={30}\n                    workingHours={{ start: '09:00', end: '17:00' }}\n                  />\n                </div>\n                \n                <div className=\"date-time-picker-section\">\n                  <h2>Or Choose a Custom Time</h2>\n                  <DateTimePicker\n                    initialDate={new Date()}\n                    minDate={new Date()}\n                    onChange={handleDateTimeChange}\n                  />\n                </div>\n              </>\n            )}\n          </div>\n        );\n        \n      case ScheduleStep.ENTER_DETAILS:\n        if (!selectedTimeSlot) return null;\n        \n        return (\n          <div className=\"enter-details-container\">\n            <h1>Meeting Details</h1>\n            \n            <div className=\"selected-time-info\">\n              <h3>Selected Time:</h3>\n              <p>\n                {selectedTimeSlot.startTime.toLocaleString(undefined, {\n                  weekday: 'long',\n                  year: 'numeric',\n                  month: 'long',\n                  day: 'numeric',\n                  hour: 'numeric',\n                  minute: '2-digit'\n                })}\n                {' - '}\n                {selectedTimeSlot.endTime.toLocaleString(undefined, {\n                  hour: 'numeric',\n                  minute: '2-digit'\n                })}\n              </p>\n            </div>\n            \n            <form onSubmit={handleDetailsSubmit} className=\"meeting-details-form\">\n              <div className=\"form-group\">\n                <label htmlFor=\"title\">Meeting Title</label>\n                <input\n                  type=\"text\"\n                  id=\"title\"\n                  name=\"title\"\n                  value={meetingDetails.title}\n                  onChange={handleInputChange}\n                  required\n                />\n              </div>\n              \n              <div className=\"form-group\">\n                <label htmlFor=\"name\">Your Name</label>\n                <input\n                  type=\"text\"\n                  id=\"name\"\n                  name=\"name\"\n                  value={meetingDetails.name}\n                  onChange={handleInputChange}\n                  required\n                />\n              </div>\n              \n              <div className=\"form-group\">\n                <label htmlFor=\"email\">Your Email</label>\n                <input\n                  type=\"email\"\n                  id=\"email\"\n                  name=\"email\"\n                  value={meetingDetails.email}\n                  onChange={handleInputChange}\n                  required\n                />\n              </div>\n              \n              <div className=\"form-group\">\n                <label htmlFor=\"notes\">Additional Notes</label>\n                <textarea\n                  id=\"notes\"\n                  name=\"notes\"\n                  value={meetingDetails.notes}\n                  onChange={handleInputChange}\n                  rows={4}\n                />\n              </div>\n              \n              <div className=\"form-actions\">\n                <button\n                  type=\"button\"\n                  className=\"back-button\"\n                  onClick={() => setCurrentStep(ScheduleStep.SELECT_DATE)}\n                >\n                  Back\n                </button>\n                <button\n                  type=\"submit\"\n                  className=\"schedule-button\"\n                  disabled={isLoading}\n                >\n                  {isLoading ? 'Scheduling...' : 'Schedule Meeting'}\n                </button>\n              </div>\n            </form>\n          </div>\n        );\n        \n      case ScheduleStep.CONFIRMATION:\n        if (!createdMeeting) return null;\n        \n        return (\n          <div className=\"confirmation-container\">\n            <BookingConfirmation meeting={createdMeeting} />\n          </div>\n        );\n    }\n  };\n  \n  // Handle reschedule mode\n  if (rescheduleId) {\n    return (\n      <div className=\"schedule-page reschedule-mode\">\n        <RescheduleMeeting\n          meetingId={rescheduleId as string}\n          userId={userId as string}\n          onComplete={() => router.push('/meetings')}\n          onCancel={() => router.push('/meetings')}\n        />\n      </div>\n    );\n  }\n  \n  if (error) {\n    return (\n      <div className=\"error-container\">\n        <h2>Error</h2>\n        <p>{error}</p>\n        <button onClick={() => setError(null)}>Try Again</button>\n      </div>\n    );\n  }\n  \n  return (\n    <div className=\"schedule-page\">\n      {renderContent()}\n    </div>\n  );\n};\n\nexport default SchedulePage;\n```",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "1. Test the complete scheduling workflow\n2. Verify calendar connection handling\n3. Test availability display and time slot selection\n4. Verify meeting details form submission\n5. Test confirmation display\n6. Verify rescheduling integration\n7. Test responsive layout on different screen sizes"
           }
         ]
@@ -1347,7 +1347,7 @@
           6,
           9
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -1378,7 +1378,7 @@
               "10.2"
             ],
             "details": "1. Create a calendar UI component that shows available time slots\n2. Implement time zone detection and conversion\n3. Add time slot selection functionality\n4. Connect to the backend to fetch real-time availability data\n5. Handle edge cases like no available slots\n6. Add loading states and error handling",
-            "status": "pending",
+            "status": "done",
             "testStrategy": ""
           },
           {
@@ -1390,7 +1390,7 @@
               "10.3"
             ],
             "details": "1. Design and implement the prospect information form\n2. Add form validation for required fields\n3. Create form submission handler\n4. Implement error handling and feedback\n5. Store prospect data securely in the database\n6. Add privacy policy consent checkbox",
-            "status": "pending",
+            "status": "done",
             "testStrategy": ""
           },
           {
@@ -1402,7 +1402,7 @@
               "10.4"
             ],
             "details": "1. Create booking confirmation page with meeting details\n2. Implement email confirmation sending functionality\n3. Generate and send calendar invitations (ICS files)\n4. Create templates for confirmation emails\n5. Add preparation materials delivery\n6. Implement booking status tracking in the database",
-            "status": "pending",
+            "status": "done",
             "testStrategy": ""
           },
           {
@@ -1414,7 +1414,7 @@
               "10.5"
             ],
             "details": "1. Add tracking for magic link opens\n2. Implement tracking for each step of the booking process\n3. Create conversion rate calculations\n4. Build dashboard components to display booking metrics\n5. Implement export functionality for booking analytics\n6. Add real-time tracking for active booking sessions",
-            "status": "pending",
+            "status": "done",
             "testStrategy": ""
           }
         ]
@@ -1643,7 +1643,7 @@
             "description": "Create a service to extract audio from video call recordings for further processing",
             "dependencies": [],
             "details": "Create a utility service that uses ffmpeg or a similar library to extract audio tracks from video recordings. The service should accept video file paths or URLs and output audio files in a format suitable for transcription (e.g., MP3 or WAV). Include error handling for corrupted files and logging for processing status.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test with various video formats (MP4, WebM, etc.) and verify audio extraction quality. Ensure proper error handling for corrupted files."
           },
           {
@@ -1654,7 +1654,7 @@
               "12.1"
             ],
             "details": "Integrate with a transcription service (e.g., AWS Transcribe, Google Speech-to-Text) to convert audio to text. Create a service that accepts audio files, sends them to the transcription API, and retrieves the text results. Include speaker diarization if supported by the chosen service to distinguish between different speakers in the conversation.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test with sample audio files of varying quality and accents. Verify transcription accuracy and proper speaker identification."
           },
           {
@@ -1665,7 +1665,7 @@
               "12.2"
             ],
             "details": "Develop a text preprocessing service that cleans and structures the raw transcription text. This should include removing filler words, normalizing text, segmenting by speaker, and formatting the text for optimal analysis by the AI model. The output should be structured in a way that preserves conversation flow and speaker identification.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test with various transcription outputs to ensure proper cleaning and structuring. Verify that important context is preserved."
           },
           {
@@ -1676,7 +1676,7 @@
               "12.3"
             ],
             "details": "Implement the `generateAnalysisPrompt` function that creates structured prompts for OpenAI. The prompt should guide the model to extract specific insights like competitive intelligence, objections, success factors, sentiment, and next steps. Include clear instructions and examples in the prompt to improve analysis quality.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test with different transcript samples to ensure prompts effectively guide the AI to extract relevant insights."
           },
           {
@@ -1687,7 +1687,7 @@
               "12.4"
             ],
             "details": "Implement the core OpenAI integration service that sends prompts to the API and receives responses. This should include proper error handling, retry logic, and response validation. Configure appropriate model parameters (temperature, max tokens, etc.) for optimal analysis results.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test API integration with various transcript lengths. Verify error handling and retry logic. Measure response times and optimize as needed."
           },
           {
@@ -1698,7 +1698,7 @@
               "12.5"
             ],
             "details": "Implement the `extractCompetitiveIntel` function to parse OpenAI responses and identify mentions of competitors, competitive features, and market positioning. The function should structure this information in a consistent format for storage and display.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test with responses containing various competitor mentions. Verify accurate extraction and proper formatting of competitive intelligence."
           },
           {
@@ -1709,7 +1709,7 @@
               "12.5"
             ],
             "details": "Implement the `extractObjections` function to identify customer objections, concerns, and hesitations from the AI analysis. The function should categorize objections (e.g., price, features, implementation) and include context around how they were addressed.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test with transcripts containing various types of objections. Verify proper categorization and context preservation."
           },
           {
@@ -1720,7 +1720,7 @@
               "12.5"
             ],
             "details": "Implement the `extractSuccessFactors` function to identify positive signals, features that resonated with prospects, and other success indicators from the AI analysis. The function should structure these insights for easy consumption by sales teams.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test with transcripts containing various positive signals. Verify accurate identification of success factors."
           },
           {
@@ -1731,7 +1731,7 @@
               "12.5"
             ],
             "details": "Implement the `extractSentiment` function to analyze the overall sentiment of the prospect throughout the call. This should include sentiment trends (how sentiment changed during the call) and key moments that influenced sentiment shifts.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test with transcripts showing various sentiment patterns. Verify accurate sentiment assessment and identification of sentiment shifts."
           },
           {
@@ -1742,7 +1742,7 @@
               "12.5"
             ],
             "details": "Implement the `extractNextSteps` function to identify action items, follow-ups, and commitments made during the call. The function should structure these as actionable items with relevant context and potential due dates if mentioned.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test with transcripts containing various types of next steps and commitments. Verify accurate extraction and proper formatting."
           },
           {
@@ -1757,7 +1757,7 @@
               "12.10"
             ],
             "details": "Implement the `storeCallInsights` function to save structured insights to the database. Design appropriate database schema to store different types of insights with relationships to calls, opportunities, and advocates. Include indexing for efficient querying of insights.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test storage and retrieval of various insight types. Verify proper relationships and query performance."
           },
           {
@@ -1768,7 +1768,7 @@
               "12.11"
             ],
             "details": "Develop a service to push relevant call insights to CRM systems (e.g., Salesforce, HubSpot). This should include mapping insights to appropriate CRM fields, creating activities or notes, and ensuring proper attribution. Implement authentication and API integration with major CRM providers.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test integration with different CRM systems. Verify proper data mapping and synchronization. Test error handling for API failures."
           },
           {
@@ -1779,7 +1779,7 @@
               "12.11"
             ],
             "details": "Develop a frontend dashboard to display call insights in a visual, actionable format. Include charts for sentiment analysis, tables for competitive mentions and objections, and summaries of key insights. Implement filtering and sorting capabilities to help users find relevant insights.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test dashboard with various insight datasets. Verify proper visualization and interactive features. Test responsiveness on different devices."
           },
           {
@@ -1790,7 +1790,7 @@
               "12.11"
             ],
             "details": "Develop a service to analyze trends across multiple calls, identifying patterns in objections, competitive mentions, and sentiment over time. Create aggregation functions to summarize insights across calls and visualize changes over time.",
-            "status": "pending",
+            "status": "done",
             "testStrategy": "Test with datasets containing multiple related calls. Verify accurate trend identification and meaningful aggregation of insights."
           }
         ]
@@ -1822,7 +1822,7 @@
           11,
           12
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": []
       },
       {
@@ -1837,7 +1837,7 @@
           3,
           5
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": []
       },
       {
@@ -1865,7 +1865,7 @@
         "dependencies": [
           4
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": []
       },
       {
@@ -1911,11 +1911,25 @@
         ],
         "status": "pending",
         "subtasks": []
+      },
+      {
+        "id": 21,
+        "title": "Navigation System Implementation",
+        "description": "Create a comprehensive dashboard navigation system with links to all major features, user menu with profile/settings/sign out options, mobile responsive design, and consistent layout across all pages.",
+        "details": "1. Design and implement the main navigation component:\n```typescript\n// components/navigation/MainNavigation.tsx\nimport Link from 'next/link'\nimport { useRouter } from 'next/router'\nimport { useState } from 'react'\nimport { UserMenu } from './UserMenu'\nimport { MobileMenu } from './MobileMenu'\n\ninterface NavItem {\n  name: string;\n  href: string;\n  icon: React.ComponentType<any>;\n}\n\nconst navItems: NavItem[] = [\n  { name: 'Dashboard', href: '/dashboard', icon: DashboardIcon },\n  { name: 'Opportunities', href: '/opportunities', icon: OpportunitiesIcon },\n  { name: 'Advocates', href: '/advocates', icon: AdvocatesIcon },\n  { name: 'Reference Calls', href: '/calls', icon: CallsIcon },\n  { name: 'Matching', href: '/matching', icon: MatchingIcon },\n]\n\nexport const MainNavigation = () => {\n  const router = useRouter()\n  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)\n  \n  return (\n    <nav className=\"bg-white shadow\">\n      <div className=\"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8\">\n        <div className=\"flex justify-between h-16\">\n          <div className=\"flex\">\n            <div className=\"flex-shrink-0 flex items-center\">\n              <img className=\"h-8 w-auto\" src=\"/logo.svg\" alt=\"PeerChamp\" />\n            </div>\n            <div className=\"hidden sm:ml-6 sm:flex sm:space-x-8\">\n              {navItems.map((item) => {\n                const isActive = router.pathname.startsWith(item.href)\n                return (\n                  <Link\n                    key={item.name}\n                    href={item.href}\n                    className={`${\n                      isActive\n                        ? 'border-primary-500 text-gray-900'\n                        : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'\n                    } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}\n                  >\n                    <item.icon className=\"mr-2 h-5 w-5\" />\n                    {item.name}\n                  </Link>\n                )\n              })}\n            </div>\n          </div>\n          <div className=\"hidden sm:ml-6 sm:flex sm:items-center\">\n            <UserMenu />\n          </div>\n          <div className=\"-mr-2 flex items-center sm:hidden\">\n            <button\n              type=\"button\"\n              className=\"inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500\"\n              aria-expanded=\"false\"\n              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}\n            >\n              <span className=\"sr-only\">Open main menu</span>\n              <MenuIcon className=\"block h-6 w-6\" aria-hidden=\"true\" />\n            </button>\n          </div>\n        </div>\n      </div>\n      \n      {mobileMenuOpen && <MobileMenu navItems={navItems} />}\n    </nav>\n  )\n}\n```\n\n2. Implement the user menu component with profile, settings, and sign out options:\n```typescript\n// components/navigation/UserMenu.tsx\nimport { Fragment } from 'react'\nimport { Menu, Transition } from '@headlessui/react'\nimport { useAuth } from '@/hooks/useAuth'\nimport Link from 'next/link'\n\nexport const UserMenu = () => {\n  const { user, signOut } = useAuth()\n  \n  return (\n    <Menu as=\"div\" className=\"ml-3 relative\">\n      <div>\n        <Menu.Button className=\"bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500\">\n          <span className=\"sr-only\">Open user menu</span>\n          <img\n            className=\"h-8 w-8 rounded-full\"\n            src={user?.profileImage || '/default-avatar.png'}\n            alt=\"\"\n          />\n        </Menu.Button>\n      </div>\n      <Transition\n        as={Fragment}\n        enter=\"transition ease-out duration-200\"\n        enterFrom=\"transform opacity-0 scale-95\"\n        enterTo=\"transform opacity-100 scale-100\"\n        leave=\"transition ease-in duration-75\"\n        leaveFrom=\"transform opacity-100 scale-100\"\n        leaveTo=\"transform opacity-0 scale-95\"\n      >\n        <Menu.Items className=\"origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none\">\n          <Menu.Item>\n            {({ active }) => (\n              <Link\n                href=\"/profile\"\n                className={`${\n                  active ? 'bg-gray-100' : ''\n                } block px-4 py-2 text-sm text-gray-700`}\n              >\n                Your Profile\n              </Link>\n            )}\n          </Menu.Item>\n          <Menu.Item>\n            {({ active }) => (\n              <Link\n                href=\"/settings\"\n                className={`${\n                  active ? 'bg-gray-100' : ''\n                } block px-4 py-2 text-sm text-gray-700`}\n              >\n                Settings\n              </Link>\n            )}\n          </Menu.Item>\n          <Menu.Item>\n            {({ active }) => (\n              <button\n                onClick={signOut}\n                className={`${\n                  active ? 'bg-gray-100' : ''\n                } block w-full text-left px-4 py-2 text-sm text-gray-700`}\n              >\n                Sign out\n              </button>\n            )}\n          </Menu.Item>\n        </Menu.Items>\n      </Transition>\n    </Menu>\n  )\n}\n```\n\n3. Create a mobile-responsive menu component:\n```typescript\n// components/navigation/MobileMenu.tsx\nimport Link from 'next/link'\nimport { useRouter } from 'next/router'\nimport { useAuth } from '@/hooks/useAuth'\n\ninterface MobileMenuProps {\n  navItems: Array<{\n    name: string;\n    href: string;\n    icon: React.ComponentType<any>;\n  }>;\n}\n\nexport const MobileMenu = ({ navItems }: MobileMenuProps) => {\n  const router = useRouter()\n  const { user, signOut } = useAuth()\n  \n  return (\n    <div className=\"sm:hidden\">\n      <div className=\"pt-2 pb-3 space-y-1\">\n        {navItems.map((item) => {\n          const isActive = router.pathname.startsWith(item.href)\n          return (\n            <Link\n              key={item.name}\n              href={item.href}\n              className={`${\n                isActive\n                  ? 'bg-primary-50 border-primary-500 text-primary-700'\n                  : 'border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800'\n              } block pl-3 pr-4 py-2 border-l-4 text-base font-medium flex items-center`}\n            >\n              <item.icon className=\"mr-3 h-6 w-6\" />\n              {item.name}\n            </Link>\n          )\n        })}\n      </div>\n      <div className=\"pt-4 pb-3 border-t border-gray-200\">\n        <div className=\"flex items-center px-4\">\n          <div className=\"flex-shrink-0\">\n            <img\n              className=\"h-10 w-10 rounded-full\"\n              src={user?.profileImage || '/default-avatar.png'}\n              alt=\"\"\n            />\n          </div>\n          <div className=\"ml-3\">\n            <div className=\"text-base font-medium text-gray-800\">{user?.name}</div>\n            <div className=\"text-sm font-medium text-gray-500\">{user?.email}</div>\n          </div>\n        </div>\n        <div className=\"mt-3 space-y-1\">\n          <Link\n            href=\"/profile\"\n            className=\"block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100\"\n          >\n            Your Profile\n          </Link>\n          <Link\n            href=\"/settings\"\n            className=\"block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100\"\n          >\n            Settings\n          </Link>\n          <button\n            onClick={signOut}\n            className=\"block w-full text-left px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100\"\n          >\n            Sign out\n          </button>\n        </div>\n      </div>\n    </div>\n  )\n}\n```\n\n4. Create a layout component to ensure consistent layout across all pages:\n```typescript\n// components/layout/DashboardLayout.tsx\nimport { ReactNode } from 'react'\nimport { MainNavigation } from '../navigation/MainNavigation'\nimport Head from 'next/head'\n\ninterface DashboardLayoutProps {\n  children: ReactNode;\n  title?: string;\n}\n\nexport const DashboardLayout = ({ children, title = 'PeerChamp' }: DashboardLayoutProps) => {\n  return (\n    <>\n      <Head>\n        <title>{title}</title>\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n      </Head>\n      <div className=\"min-h-screen bg-gray-50\">\n        <MainNavigation />\n        <main className=\"py-6\">\n          <div className=\"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8\">\n            {children}\n          </div>\n        </main>\n      </div>\n    </>\n  )\n}\n```\n\n5. Apply the layout to all pages using Next.js custom App component:\n```typescript\n// pages/_app.tsx\nimport type { AppProps } from 'next/app'\nimport { AuthProvider } from '@/contexts/AuthContext'\nimport { DashboardLayout } from '@/components/layout/DashboardLayout'\nimport '@/styles/globals.css'\n\nfunction MyApp({ Component, pageProps, router }: AppProps) {\n  // Skip layout for authentication pages\n  const isAuthPage = router.pathname.startsWith('/auth')\n  \n  return (\n    <AuthProvider>\n      {isAuthPage ? (\n        <Component {...pageProps} />\n      ) : (\n        <DashboardLayout>\n          <Component {...pageProps} />\n        </DashboardLayout>\n      )}\n    </AuthProvider>\n  )\n}\n\nexport default MyApp\n```\n\n6. Implement active state tracking for navigation items:\n```typescript\n// hooks/useNavigation.ts\nimport { useRouter } from 'next/router'\n\nexport const useNavigation = () => {\n  const router = useRouter()\n  \n  const isActive = (path: string) => {\n    return router.pathname.startsWith(path)\n  }\n  \n  return { isActive }\n}\n```\n\n7. Create breadcrumb navigation for improved user orientation:\n```typescript\n// components/navigation/Breadcrumbs.tsx\nimport Link from 'next/link'\nimport { useRouter } from 'next/router'\nimport { useMemo } from 'react'\n\nexport const Breadcrumbs = () => {\n  const router = useRouter()\n  \n  const breadcrumbs = useMemo(() => {\n    const pathSegments = router.pathname.split('/').filter(Boolean)\n    \n    return pathSegments.map((segment, index) => {\n      const href = `/${pathSegments.slice(0, index + 1).join('/')}`\n      const label = segment.charAt(0).toUpperCase() + segment.slice(1)\n      \n      return { href, label }\n    })\n  }, [router.pathname])\n  \n  if (breadcrumbs.length <= 1) return null\n  \n  return (\n    <nav className=\"flex mb-4\" aria-label=\"Breadcrumb\">\n      <ol className=\"flex items-center space-x-4\">\n        <li>\n          <div>\n            <Link href=\"/dashboard\" className=\"text-gray-400 hover:text-gray-500\">\n              <HomeIcon className=\"flex-shrink-0 h-5 w-5\" aria-hidden=\"true\" />\n              <span className=\"sr-only\">Home</span>\n            </Link>\n          </div>\n        </li>\n        {breadcrumbs.map((breadcrumb, index) => (\n          <li key={breadcrumb.href}>\n            <div className=\"flex items-center\">\n              <ChevronRightIcon className=\"flex-shrink-0 h-5 w-5 text-gray-400\" aria-hidden=\"true\" />\n              <Link\n                href={breadcrumb.href}\n                className={`ml-4 text-sm font-medium ${\n                  index === breadcrumbs.length - 1\n                    ? 'text-gray-700'\n                    : 'text-gray-500 hover:text-gray-700'\n                }`}\n                aria-current={index === breadcrumbs.length - 1 ? 'page' : undefined}\n              >\n                {breadcrumb.label}\n              </Link>\n            </div>\n          </li>\n        ))}\n      </ol>\n    </nav>\n  )\n}\n```\n\n8. Implement responsive design utilities:\n```typescript\n// hooks/useBreakpoint.ts\nimport { useState, useEffect } from 'react'\n\ntype Breakpoint = 'sm' | 'md' | 'lg' | 'xl' | '2xl'\n\nconst breakpoints = {\n  sm: 640,\n  md: 768,\n  lg: 1024,\n  xl: 1280,\n  '2xl': 1536,\n}\n\nexport const useBreakpoint = () => {\n  const [breakpoint, setBreakpoint] = useState<Breakpoint | null>(null)\n  \n  useEffect(() => {\n    const handleResize = () => {\n      const width = window.innerWidth\n      \n      if (width < breakpoints.sm) {\n        setBreakpoint(null)\n      } else if (width < breakpoints.md) {\n        setBreakpoint('sm')\n      } else if (width < breakpoints.lg) {\n        setBreakpoint('md')\n      } else if (width < breakpoints.xl) {\n        setBreakpoint('lg')\n      } else if (width < breakpoints['2xl']) {\n        setBreakpoint('xl')\n      } else {\n        setBreakpoint('2xl')\n      }\n    }\n    \n    handleResize()\n    window.addEventListener('resize', handleResize)\n    \n    return () => {\n      window.removeEventListener('resize', handleResize)\n    }\n  }, [])\n  \n  return breakpoint\n}\n```",
+        "testStrategy": "1. Verify navigation rendering and functionality:\n   - Test that all navigation links render correctly and point to the right routes\n   - Verify active state highlighting works for the current route\n   - Test that the user menu opens and closes correctly\n   - Verify all user menu options (profile, settings, sign out) work as expected\n\n2. Test mobile responsiveness:\n   - Test navigation on various screen sizes (mobile, tablet, desktop)\n   - Verify the mobile menu appears on small screens and functions correctly\n   - Test the hamburger menu toggle functionality\n   - Ensure touch targets are appropriately sized for mobile devices\n   - Verify navigation is usable in both portrait and landscape orientations\n\n3. Test layout consistency:\n   - Verify the navigation appears consistently across all application pages\n   - Test that the layout maintains proper spacing and alignment on all pages\n   - Ensure the breadcrumb navigation correctly reflects the current page hierarchy\n   - Verify that page content is properly contained within the layout\n\n4. Test accessibility:\n   - Verify navigation is keyboard navigable\n   - Test with screen readers to ensure proper ARIA attributes\n   - Check color contrast for all navigation elements\n   - Verify focus states are visible and properly styled\n   - Test tab order for logical navigation flow\n\n5. Test browser compatibility:\n   - Verify navigation works correctly in all supported browsers (Chrome, Firefox, Safari, Edge)\n   - Test on different operating systems (Windows, macOS, iOS, Android)\n   - Verify that any animations or transitions work consistently across browsers\n\n6. Performance testing:\n   - Measure render time for navigation components\n   - Test navigation performance on low-end devices\n   - Verify that navigation doesn't cause layout shifts during page load\n\n7. Integration testing:\n   - Test navigation with authenticated and unauthenticated users\n   - Verify proper handling of restricted routes\n   - Test navigation state persistence during page refreshes",
+        "status": "done",
+        "dependencies": [
+          1,
+          4
+        ],
+        "priority": "medium",
+        "subtasks": []
       }
     ],
     "metadata": {
       "created": "2025-09-09T14:08:57.331Z",
-      "updated": "2025-09-11T02:16:38.340Z",
+      "updated": "2025-09-15T22:33:58.433Z",
       "description": "Tasks for master context"
     }
   }

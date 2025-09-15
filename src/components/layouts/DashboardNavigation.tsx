@@ -20,6 +20,7 @@ import {
   PhoneIcon,
   ChartBarIcon,
   UserIcon,
+  CalendarIcon,
 } from '@/components/ui/icons';
 
 interface DashboardNavigationProps {
@@ -46,6 +47,18 @@ const navigationItems = [
     description: 'Customer advocate management',
   },
   {
+    name: 'Case Studies',
+    href: '/case-studies',
+    icon: UserIcon, // Using UserIcon as placeholder
+    description: 'Manage case studies and success stories',
+  },
+  {
+    name: 'Scheduling',
+    href: '/scheduling',
+    icon: CalendarIcon,
+    description: 'Schedule reference calls',
+  },
+  {
     name: 'Reference Calls',
     href: '/reference-calls',
     icon: PhoneIcon,
@@ -56,6 +69,12 @@ const navigationItems = [
     href: '/matching',
     icon: ChartBarIcon,
     description: 'AI-powered advocate matching',
+  },
+  {
+    name: 'Onboarding',
+    href: '/onboarding',
+    icon: UserIcon, // Using UserIcon as placeholder
+    description: 'Company setup and user invitation',
   },
 ];
 
