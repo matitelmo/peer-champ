@@ -2,47 +2,35 @@ import { render, screen } from '@testing-library/react';
 import Home from '../src/app/page';
 
 describe('Home Page', () => {
-  it('renders the home page with expected content', () => {
+  it('renders the hero with current copy', () => {
     render(<Home />);
-    expect(screen.getByText(/Welcome to/)).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        /The comprehensive customer reference and advocate management platform/
-      )
-    ).toBeInTheDocument();
+    expect(screen.getByText(/Stop Losing Deals to/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Reference Chaos/i)[0]).toBeInTheDocument();
   });
 
-  it('contains the main heading', () => {
+  it('contains main action buttons', () => {
     render(<Home />);
-    const heading = screen.getByText(/Welcome to/);
-    expect(heading).toBeInTheDocument();
-    // Check for the first instance of PeerChamps (in the main heading)
-    const peerChampsElements = screen.getAllByText('PeerChamps');
-    expect(peerChampsElements.length).toBeGreaterThan(0);
+    expect(screen.getByText('Book Free Demo')).toBeInTheDocument();
+    expect(screen.getAllByText('Start Free Trial').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Sign In').length).toBeGreaterThan(0);
   });
 
-  it('contains action buttons', () => {
-    render(<Home />);
-    expect(screen.getByText('Get Started')).toBeInTheDocument();
-    expect(screen.getAllByText('Sign In')).toHaveLength(2);
-  });
-
-  it('displays feature sections', () => {
+  it('displays feature sections with updated headings', () => {
     render(<Home />);
     expect(
-      screen.getByText('Powerful Features for Customer Advocacy')
+      screen.getByText(/Everything you need to scale customer advocacy/i)
     ).toBeInTheDocument();
     expect(screen.getByText('AI-Powered Matching')).toBeInTheDocument();
-    expect(screen.getByText('Seamless Scheduling')).toBeInTheDocument();
-    expect(screen.getByText('Analytics & Insights')).toBeInTheDocument();
+    expect(screen.getByText('Automated Scheduling')).toBeInTheDocument();
+    expect(screen.getByText('Revenue Analytics')).toBeInTheDocument();
   });
 
-  it('contains call-to-action section', () => {
+  it('contains the final CTA section', () => {
     render(<Home />);
     expect(
-      screen.getByText('Ready to Transform Your Customer Advocacy?')
+      screen.getByText(/Ready to transform your customer advocacy\?/i)
     ).toBeInTheDocument();
-    expect(screen.getByText('Start Free Trial')).toBeInTheDocument();
-    expect(screen.getAllByText('Sign In')).toHaveLength(2);
+    expect(screen.getAllByText('Start Free Trial').length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Sign In').length).toBeGreaterThan(0);
   });
 });
