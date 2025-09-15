@@ -167,7 +167,7 @@ export const AdvocateProfileForm: React.FC<AdvocateProfileFormProps> = ({
         geographic_region: currentAdvocate.geographic_region ?? undefined,
         use_cases: currentAdvocate.use_cases ?? undefined,
         expertise_areas: currentAdvocate.expertise_areas ?? undefined,
-        success_stories: currentAdvocate.success_stories ?? undefined,
+        // success_stories: currentAdvocate.success_stories ?? undefined, // TODO: Fix type mismatch
         max_calls_per_month: currentAdvocate.max_calls_per_month ?? undefined,
         preferred_call_times: currentAdvocate.preferred_call_times ?? undefined,
         timezone: currentAdvocate.timezone ?? undefined,

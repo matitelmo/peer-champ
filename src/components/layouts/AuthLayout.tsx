@@ -178,7 +178,17 @@ const AuthLayout = React.forwardRef<HTMLDivElement, AuthLayoutProps>(
         >
           <Container className="w-full" size="full">
             <div className="flex justify-center w-full px-4 sm:px-6 lg:px-8">
-              <div className={cn('w-full', size === 'full' ? 'max-w-full' : size)}>
+              <div className={cn(
+                'w-full',
+                size === 'full' ? 'max-w-full' : 
+                size === '4xl' ? 'max-w-4xl' :
+                size === '3xl' ? 'max-w-3xl' :
+                size === '2xl' ? 'max-w-2xl' :
+                size === 'xl' ? 'max-w-xl' :
+                size === 'lg' ? 'max-w-lg' :
+                size === 'md' ? 'max-w-md' :
+                size === 'sm' ? 'max-w-sm' : 'max-w-md'
+              )}>
                 {/* Logo/Branding */}
                 {displayLogo}
 
@@ -224,117 +234,87 @@ const AuthLayout = React.forwardRef<HTMLDivElement, AuthLayoutProps>(
 AuthLayout.displayName = 'AuthLayout';
 
 // Auth navigation component for switching between auth flows
-export const AuthNavigation = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & {
-    /** Current auth step */
-    currentStep?: 'login' | 'register' | 'forgot-password' | 'reset-password';
-    /** Navigation items */
-    items?: Array<{
-      key: string;
-      label: string;
-      href: string;
-      active?: boolean;
-    }>;
-  }
->(({ className, currentStep, items, ...props }, ref) => {
-  const defaultItems = [
-    { key: 'login', label: 'Sign In', href: '/auth/login' },
-    { key: 'register', label: 'Sign Up', href: '/auth/register' },
-  ];
-
-  const navigationItems = items || defaultItems;
+export const AuthNavigation: React.FC<{
+  currentFlow: 'signin' | 'signup' | 'forgot-password' | 'reset-password';
+  onFlowChange: (flow: 'signin' | 'signup' | 'forgot-password' | 'reset-password') => void;
+}> = ({ currentFlow, onFlowChange }) => {
+  const flows = [
+    { key: 'signin', label: 'Sign In' },
+    { key: 'signup', label: 'Sign Up' },
+  ] as const;
 
   return (
-    <div
-      ref={ref}
-      className={cn(
-        'flex justify-center space-x-1 bg-gray-100 dark:bg-gray-700 rounded-lg p-1',
-        className
-      )}
-      {...props}
-    >
-      {navigationItems.map((item) => (
-        <a
-          key={item.key}
-          href={item.href}
+    <div className="flex space-x-1 bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
+      {flows.map((flow) => (
+        <button
+          key={flow.key}
+          onClick={() => onFlowChange(flow.key)}
           className={cn(
-            'flex-1 px-3 py-2 text-sm font-medium rounded-md transition-colors',
-            ('active' in item && item.active === true) ||
-              item.key === currentStep
-              ? 'bg-white dark:bg-gray-600 shadow-sm text-gray-900 dark:text-white'
-              : 'hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-600 dark:text-gray-400'
+            'flex-1 px-4 py-2 text-sm font-medium rounded-md transition-colors',
+            currentFlow === flow.key
+              ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm'
+              : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
           )}
         >
-          {item.label}
-        </a>
+          {flow.label}
+        </button>
       ))}
     </div>
   );
-});
+};
 
-AuthNavigation.displayName = 'AuthNavigation';
+// Auth footer with links
+export const AuthFooter: React.FC<{
+  showSignIn?: boolean;
+  showSignUp?: boolean;
+  showForgotPassword?: boolean;
+  onSignIn?: () => void;
+  onSignUp?: () => void;
+  onForgotPassword?: () => void;
+}> = ({
+  showSignIn = true,
+  showSignUp = true,
+  showForgotPassword = true,
+  onSignIn,
+  onSignUp,
+  onForgotPassword,
+}) => {
+  return (
+    <div className="mt-6 text-center space-y-2">
+      {showSignIn && onSignIn && (
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          Already have an account?{' '}
+          <button
+            onClick={onSignIn}
+            className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
+          >
+            Sign in
+          </button>
+        </p>
+      )}
+      {showSignUp && onSignUp && (
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          Don't have an account?{' '}
+          <button
+            onClick={onSignUp}
+            className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
+          >
+            Sign up
+          </button>
+        </p>
+      )}
+      {showForgotPassword && onForgotPassword && (
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          <button
+            onClick={onForgotPassword}
+            className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
+          >
+            Forgot your password?
+          </button>
+        </p>
+      )}
+    </div>
+  );
+};
 
-// Auth form wrapper component
-export const AuthForm = React.forwardRef<
-  HTMLFormElement,
-  React.FormHTMLAttributes<HTMLFormElement> & {
-    /** Form title */
-    title?: string;
-    /** Form description */
-    description?: string;
-    /** Submit button text */
-    submitText?: string;
-    /** Whether the form is submitting */
-    isSubmitting?: boolean;
-    /** Additional form actions */
-    actions?: React.ReactNode;
-  }
->(
-  (
-    {
-      className,
-      title,
-      description,
-      submitText = 'Submit',
-      isSubmitting = false,
-      actions,
-      children,
-      ...props
-    },
-    ref
-  ) => {
-    return (
-      <form ref={ref} className={cn('space-y-6', className)} {...props}>
-        {(title || description) && (
-          <div className="text-center mb-6">
-            {title && (
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                {title}
-              </h3>
-            )}
-            {description && (
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                {description}
-              </p>
-            )}
-          </div>
-        )}
-
-        <div className="space-y-4">{children}</div>
-
-        <div className="space-y-4">
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
-            {isSubmitting ? 'Processing...' : submitText}
-          </Button>
-
-          {actions && <div className="text-center">{actions}</div>}
-        </div>
-      </form>
-    );
-  }
-);
-
-AuthForm.displayName = 'AuthForm';
-
-export { AuthLayout, authLayoutVariants };
+export { AuthLayout };

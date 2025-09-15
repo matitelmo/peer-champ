@@ -31,6 +31,10 @@ export type { ToggleProps } from './Toggle';
 export { Badge, badgeVariants } from './Badge';
 export type { BadgeProps } from './Badge';
 
+// Avatar component
+export { Avatar } from './Avatar';
+export type { AvatarProps } from './Avatar';
+
 // Card components
 export {
   Card,

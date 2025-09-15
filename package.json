@@ -12,6 +12,8 @@
     "test:watch": "jest --watch",
     "cypress": "cypress open",
     "cypress:run": "cypress run",
+    "setup:env": "node scripts/setup-env.js",
+    "setup:db": "node scripts/setup-database.js",
     "migrate": "node scripts/run-migrations.js",
     "db:test": "node -e \"require('./scripts/run-migrations.js').testConnection()\"",
     "seed": "npx ts-node scripts/seed-database.ts",

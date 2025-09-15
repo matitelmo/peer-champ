@@ -420,6 +420,13 @@ export const HomeIcon = ({ className, size }: IconProps) => (
     <polyline points="9,22 9,12 15,12 15,22" />
   </BaseIcon>
 );
+
+export const AwardIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <circle cx="12" cy="8" r="6" />
+    <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
+  </BaseIcon>
+);
 // Export all icons as a group for easier importing
 export const Icons = {
   Plus: PlusIcon,

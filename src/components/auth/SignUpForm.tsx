@@ -51,6 +51,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
   const [errors, setErrors] = useState<Partial<SignUpFormData>>({});
   const [authError, setAuthError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   // Form validation
   const validateForm = (): boolean => {

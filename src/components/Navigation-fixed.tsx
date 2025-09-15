@@ -15,6 +15,7 @@ const navigation = [
 
 export function Navigation() {
   const pathname = usePathname();
+  const { user, signOut } = useAuth();
 
   const handleNavClick = (href: string) => {
     if (href.startsWith('#')) {
@@ -63,14 +64,33 @@ export function Navigation() {
 
           {/* CTA Buttons */}
           <div className="flex items-center space-x-4">
-            <Link href="/auth/signin">
-              <Button variant="ghost" size="sm">
-                Sign In
-              </Button>
-            </Link>
-            <Link href="/auth/signup">
-              <Button size="sm">Get Started</Button>
-            </Link>
+            {user ? (
+              <>
+                <Link href="/dashboard">
+                  <Button variant="ghost" size="sm">
+                    Dashboard
+                  </Button>
+                </Link>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => signOut()}
+                >
+                  Sign Out
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link href="/auth/signin">
+                  <Button variant="ghost" size="sm">
+                    Sign In
+                  </Button>
+                </Link>
+                <Link href="/auth/signup">
+                  <Button size="sm">Get Started</Button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

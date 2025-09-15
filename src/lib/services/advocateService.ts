@@ -11,6 +11,7 @@ import {
   AdvocateStatus,
   CompanySize,
   RewardType,
+  SuccessStory,
 } from '@/types/database';
 
 export interface CreateAdvocateData {

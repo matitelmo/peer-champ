@@ -16,7 +16,7 @@ import {
   ChartBarIcon,
   ShieldCheckIcon,
   StarIcon,
-  ArrowRightIcon,
+  // ArrowRightIcon, // TODO: Add this icon
   PlayIcon,
   TrendingUpIcon,
   ClockIcon,

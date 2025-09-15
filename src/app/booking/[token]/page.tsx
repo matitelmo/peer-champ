@@ -153,7 +153,6 @@ export default function BookingTokenPage() {
                 <ProspectForm 
                   token={token} 
                   onSubmitted={() => setSubmitted(true)}
-                  selectedSlot={selectedSlot}
                 />
               )}
             </div>
