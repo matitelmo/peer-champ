@@ -11,33 +11,69 @@
 export const dynamic = 'force-dynamic';
 
 import React from 'react';
-import { DashboardLayout } from '@/components/layouts/DashboardLayout';
-import { withAuth } from '@/hooks/useAuth';
+import { DashboardLayoutWithNav } from '@/components/layouts/DashboardLayoutWithNav';
+import { useAuth } from '@/hooks/useAuth';
 import { SalesRepDashboard } from '@/components/dashboard/SalesRepDashboard';
+import { Spinner } from '@/components/ui/Spinner';
 
-type UserRole = 'sales_rep';
+type UserRole = 'sales_rep' | 'advocate' | 'admin';
+
 function DashboardPage() {
-  // TODO: Determine user role from user context and render appropriate dashboard
-  // For now, defaulting to sales rep dashboard
-  const userRole: UserRole = 'sales_rep'; // This should come from user context
+  const { user, loading } = useAuth();
+
+  // Show loading state while determining user role
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Spinner size="xl" />
+      </div>
+    );
+  }
+
+  // Determine user role from user metadata or default to sales_rep
+  const userRole: UserRole = (user?.user_metadata?.role as UserRole) || 'sales_rep';
 
   const renderDashboard = () => {
     switch (userRole) {
       case 'sales_rep':
         return <SalesRepDashboard />;
+      case 'advocate':
+        // TODO: Implement AdvocateDashboard component
+        return (
+          <div className="text-center py-12">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              Advocate Dashboard
+            </h2>
+            <p className="text-gray-600">
+              Advocate dashboard coming soon...
+            </p>
+          </div>
+        );
+      case 'admin':
+        // TODO: Implement AdminDashboard component
+        return (
+          <div className="text-center py-12">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              Admin Dashboard
+            </h2>
+            <p className="text-gray-600">
+              Admin dashboard coming soon...
+            </p>
+          </div>
+        );
       default:
         return <SalesRepDashboard />;
     }
   };
 
   return (
-    <DashboardLayout
+    <DashboardLayoutWithNav
       title="Dashboard"
-      subtitle="Welcome to your PeerChamps dashboard"
+      subtitle={`Welcome to your PeerChamps dashboard, ${user?.email || 'User'}`}
     >
       {renderDashboard()}
-    </DashboardLayout>
+    </DashboardLayoutWithNav>
   );
 }
 
-export default withAuth(DashboardPage);
+export default DashboardPage;

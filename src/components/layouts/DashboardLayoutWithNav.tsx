@@ -1,9 +1,9 @@
 /**
- * Dashboard Layout Component
+ * Dashboard Layout Component with Navigation
  *
  * Full-width layout specifically designed for dashboard pages.
  * Provides proper spacing and structure without width constraints.
- * Includes user info and sign-out functionality.
+ * Includes main navigation and user info and sign-out functionality.
  */
 
 'use client';
@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/Button';
 import { useAuth } from '@/hooks/useAuth';
 import { DashboardNavigation } from './DashboardNavigation';
 
-export interface DashboardLayoutProps
+export interface DashboardLayoutWithNavProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /** Main content to display */
   children: React.ReactNode;
@@ -37,7 +37,7 @@ export interface DashboardLayoutProps
 }
 
 // Main DashboardLayout component
-const DashboardLayout = React.forwardRef<HTMLDivElement, DashboardLayoutProps>(
+const DashboardLayoutWithNav = React.forwardRef<HTMLDivElement, DashboardLayoutWithNavProps>(
   (
     {
       className,
@@ -62,6 +62,9 @@ const DashboardLayout = React.forwardRef<HTMLDivElement, DashboardLayoutProps>(
         className={cn('min-h-screen bg-gray-50 dark:bg-gray-900', className)}
         {...props}
       >
+        {/* Main Navigation */}
+        <DashboardNavigation />
+
         {/* Header with back button, custom header, and user info */}
         {(showBackButton || header || showUserInfo) && (
           <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
@@ -107,34 +110,40 @@ const DashboardLayout = React.forwardRef<HTMLDivElement, DashboardLayoutProps>(
           </header>
         )}
 
-        {/* Main content area */}
-        <main className={cn('w-full', spacing && 'py-8')}>
-          <div className="w-full px-4 sm:px-6 lg:px-8">
-            {/* Page Header */}
-            {(title || subtitle) && (
-              <div className="mb-8">
+        {/* Page Header */}
+        {(title || subtitle) && (
+          <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+              <div>
                 {title && (
-                  <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                  <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
                     {title}
                   </h1>
                 )}
                 {subtitle && (
-                  <p className="text-lg text-gray-600 dark:text-gray-400">
+                  <p className="mt-2 text-gray-600 dark:text-gray-400">
                     {subtitle}
                   </p>
                 )}
               </div>
-            )}
-
-            {/* Page Content */}
-            {children}
+            </div>
           </div>
+        )}
+
+        {/* Main Content */}
+        <main
+          className={cn(
+            'flex-1',
+            spacing && 'px-4 sm:px-6 lg:px-8 py-8'
+          )}
+        >
+          {children}
         </main>
       </div>
     );
   }
 );
 
-DashboardLayout.displayName = 'DashboardLayout';
+DashboardLayoutWithNav.displayName = 'DashboardLayoutWithNav';
 
-export { DashboardLayout };
+export { DashboardLayoutWithNav };

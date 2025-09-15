@@ -11,18 +11,18 @@
 export const dynamic = 'force-dynamic';
 
 import React from 'react';
-import { AuthLayout } from '@/components/layouts/AuthLayout';
+import { DashboardLayoutWithNav } from '@/components/layouts/DashboardLayoutWithNav';
 import { withAuth } from '@/hooks/useAuth';
 import { MatchingInterface } from '@/components/matching/MatchingInterface';
 
 function MatchingPage() {
   return (
-    <AuthLayout
+    <DashboardLayoutWithNav
       title="Advocate Matching"
       subtitle="Find the best advocates for your opportunities using AI-powered matching"
     >
       <MatchingInterface />
-    </AuthLayout>
+    </DashboardLayoutWithNav>
   );
 }
 

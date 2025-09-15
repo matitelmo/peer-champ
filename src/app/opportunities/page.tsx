@@ -11,18 +11,18 @@
 export const dynamic = 'force-dynamic';
 
 import React from 'react';
-import { AuthLayout } from '@/components/layouts/AuthLayout';
+import { DashboardLayoutWithNav } from '@/components/layouts/DashboardLayoutWithNav';
 import { withAuth } from '@/hooks/useAuth';
 import { OpportunityList } from '@/components/opportunity/OpportunityList';
 
 function OpportunitiesPage() {
   return (
-    <AuthLayout
+    <DashboardLayoutWithNav
       title="Opportunities"
       subtitle="Manage your sales opportunities and reference requests"
     >
       <OpportunityList />
-    </AuthLayout>
+    </DashboardLayoutWithNav>
   );
 }
 
