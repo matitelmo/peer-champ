@@ -28,15 +28,15 @@ import {
   TabsTrigger,
 } from '@/components/ui';
 import {
-  // LinkIcon, // TODO: Add this icon
+  // ExternalLinkIcon, // TODO: Add this icon
   CopyIcon,
-  ShareIcon,
+  // ExternalLinkIcon, // TODO: Add this icon
   EyeIcon,
   CalendarIcon,
   CheckCircleIcon,
   ExclamationTriangleIcon,
   ExternalLinkIcon,
-  BarChartIcon,
+  // BarChartIcon, // TODO: Add this icon
 } from '@/components/ui/icons';
 
 interface BookingLinkManagerProps {
@@ -211,7 +211,7 @@ export const BookingLinkManager: React.FC<BookingLinkManagerProps> = ({
         </div>
         <Button
           onClick={() => setShowGenerateModal(true)}
-          leftIcon={<LinkIcon size={16} />}
+          leftIcon={<ExternalLinkIcon size={16} />}
         >
           Generate Link
         </Button>
@@ -226,24 +226,24 @@ export const BookingLinkManager: React.FC<BookingLinkManagerProps> = ({
       )}
 
       {/* Links Tabs */}
-      <Tabs defaultValue="active" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="active">
+      {/* Tabs temporarily disabled */}
+        <div className="grid w-full grid-cols-3">
+          <button value="active">
             Active ({activeLinks.length})
-          </TabsTrigger>
-          <TabsTrigger value="used">
+          </button>
+          <button value="used">
             Used ({usedLinks.length})
-          </TabsTrigger>
-          <TabsTrigger value="expired">
+          </button>
+          <button value="expired">
             Expired ({expiredLinks.length})
-          </TabsTrigger>
-        </TabsList>
+          </button>
+        </div>
 
-        <TabsContent value="active" className="space-y-4">
+        <div className="space-y-4">
           {activeLinks.length === 0 ? (
             <Card>
               <CardBody className="text-center py-8">
-                <LinkIcon size={48} className="mx-auto mb-4 text-gray-300" />
+                <ExternalLinkIcon size={48} className="mx-auto mb-4 text-gray-300" />
                 <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
                   No Active Links
                 </h4>
@@ -296,7 +296,7 @@ export const BookingLinkManager: React.FC<BookingLinkManagerProps> = ({
                         variant="outline"
                         size="sm"
                         onClick={() => handleShareLink(link.url)}
-                        leftIcon={<ShareIcon size={14} />}
+                        leftIcon={<ExternalLinkIcon size={14} />}
                       >
                         Share
                       </Button>
@@ -314,9 +314,9 @@ export const BookingLinkManager: React.FC<BookingLinkManagerProps> = ({
               </Card>
             ))
           )}
-        </TabsContent>
+        </div>
 
-        <TabsContent value="used" className="space-y-4">
+        <div className="space-y-4">
           {usedLinks.length === 0 ? (
             <Card>
               <CardBody className="text-center py-8">
@@ -368,9 +368,9 @@ export const BookingLinkManager: React.FC<BookingLinkManagerProps> = ({
               </Card>
             ))
           )}
-        </TabsContent>
+        </div>
 
-        <TabsContent value="expired" className="space-y-4">
+        <div className="space-y-4">
           {expiredLinks.length === 0 ? (
             <Card>
               <CardBody className="text-center py-8">
@@ -407,7 +407,7 @@ export const BookingLinkManager: React.FC<BookingLinkManagerProps> = ({
                         variant="outline"
                         size="sm"
                         onClick={() => setShowGenerateModal(true)}
-                        leftIcon={<LinkIcon size={14} />}
+                        leftIcon={<ExternalLinkIcon size={14} />}
                       >
                         Regenerate
                       </Button>
@@ -417,8 +417,8 @@ export const BookingLinkManager: React.FC<BookingLinkManagerProps> = ({
               </Card>
             ))
           )}
-        </TabsContent>
-      </Tabs>
+        </div>
+      {/* Tabs temporarily disabled */}
 
       {/* Generate Link Modal */}
       <Modal

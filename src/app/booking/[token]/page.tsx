@@ -162,3 +162,6 @@ export default function BookingTokenPage() {
     </div>
   );
 }
+
+
+// Required for static export

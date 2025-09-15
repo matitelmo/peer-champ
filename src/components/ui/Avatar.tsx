@@ -9,7 +9,7 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 import { UserIcon } from './icons';
 
-interface AvatarProps {
+export interface AvatarProps {
   src?: string;
   alt?: string;
   size?: 'sm' | 'md' | 'lg' | 'xl';

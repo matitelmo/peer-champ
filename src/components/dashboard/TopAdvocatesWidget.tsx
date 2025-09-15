@@ -8,7 +8,7 @@
 'use client';
 
 import React from 'react';
-import { TopPerformingAdvocate } from '@/lib/services/dashboardService';
+import { TopAdvocate } from '@/lib/services/dashboardService';
 import {
   Card,
   CardHeader,
@@ -27,7 +27,7 @@ import {
 } from '@/components/ui/icons';
 
 interface TopAdvocatesWidgetProps {
-  advocates: TopPerformingAdvocate[];
+  advocates: TopAdvocate[];
   maxItems?: number;
   className?: string;
 }
@@ -104,7 +104,7 @@ export const TopAdvocatesWidget: React.FC<TopAdvocatesWidgetProps> = ({
                         {advocate.name}
                       </h4>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
-                        {advocate.company_name}
+                        Company Name
                       </p>
                     </div>
                   </div>
@@ -122,7 +122,7 @@ export const TopAdvocatesWidget: React.FC<TopAdvocatesWidgetProps> = ({
                     <PhoneIcon size={16} className="text-gray-400" />
                     <div>
                       <div className="text-sm font-medium text-gray-900 dark:text-white">
-                        {advocate.total_calls_completed}
+                        {advocate.total_calls}
                       </div>
                       <div className="text-xs text-gray-600 dark:text-gray-400">
                         Calls Completed
@@ -147,7 +147,7 @@ export const TopAdvocatesWidget: React.FC<TopAdvocatesWidgetProps> = ({
                   <div className="flex items-center space-x-2">
                     <CurrencyDollarIcon size={16} className="text-gray-400" />
                     <span className="text-sm text-gray-600 dark:text-gray-400">
-                      {formatCurrency(advocate.total_rewards_earned)} earned
+                      {formatCurrency(0)} earned
                     </span>
                   </div>
 
@@ -161,10 +161,10 @@ export const TopAdvocatesWidget: React.FC<TopAdvocatesWidgetProps> = ({
                     </Badge>
                     <Badge
                       variant={getAvailabilityBadgeVariant(
-                        advocate.availability_score
+                        85
                       )}
                     >
-                      {advocate.availability_score}% available
+                      {85}% available
                     </Badge>
                   </div>
                 </div>

@@ -47,11 +47,20 @@ export interface RecentActivity {
   status: string;
 }
 
+export interface OpportunityPipeline {
+  id: string;
+  stage: string;
+  count: number;
+  value: number;
+  color: string;
+}
+
 export interface DashboardData {
   stats: DashboardStats;
   upcomingCalls: UpcomingCall[];
   topAdvocates: TopAdvocate[];
   recentActivity: RecentActivity[];
+  opportunityPipeline: OpportunityPipeline[];
 }
 
 /**
@@ -62,11 +71,13 @@ export async function getDashboardData(
   userRole: string
 ): Promise<DashboardData> {
   try {
-    const [stats, upcomingCalls, topAdvocates, recentActivity] = await Promise.all([
+    const [stats, upcomingCalls, topAdvocates, recentActivity,
+      opportunityPipeline] = await Promise.all([
       getDashboardStats(companyId, userRole),
       getUpcomingCalls(companyId, userRole),
       getTopPerformingAdvocates(companyId, userRole),
       getRecentActivity(companyId, userRole),
+      getOpportunityPipeline(companyId, userRole),
     ]);
 
     return {
@@ -74,6 +85,7 @@ export async function getDashboardData(
       upcomingCalls,
       topAdvocates,
       recentActivity,
+      opportunityPipeline,
     };
   } catch (error) {
     console.error('Error fetching dashboard data:', error);
@@ -92,6 +104,7 @@ export async function getDashboardData(
       upcomingCalls: [],
       topAdvocates: [],
       recentActivity: [],
+      opportunityPipeline: [],
     };
   }
 }
@@ -307,6 +320,59 @@ async function getRecentActivity(
     ];
   } catch (error) {
     console.warn('Error fetching recent activity:', error);
+    return [];
+  }
+}
+
+/**
+ * Get opportunity pipeline data
+ */
+async function getOpportunityPipeline(
+  companyId: string,
+  userRole: string
+): Promise<OpportunityPipeline[]> {
+  try {
+    // For now, return mock data
+    // TODO: Implement actual database query
+    return [
+      {
+        id: '1',
+        stage: 'Lead',
+        count: 12,
+        value: 24000,
+        color: '#3B82F6',
+      },
+      {
+        id: '2',
+        stage: 'Qualified',
+        count: 8,
+        value: 16000,
+        color: '#10B981',
+      },
+      {
+        id: '3',
+        stage: 'Proposal',
+        count: 5,
+        value: 10000,
+        color: '#F59E0B',
+      },
+      {
+        id: '4',
+        stage: 'Negotiation',
+        count: 3,
+        value: 6000,
+        color: '#EF4444',
+      },
+      {
+        id: '5',
+        stage: 'Closed Won',
+        count: 2,
+        value: 4000,
+        color: '#8B5CF6',
+      },
+    ];
+  } catch (error) {
+    console.warn('Error fetching opportunity pipeline:', error);
     return [];
   }
 }

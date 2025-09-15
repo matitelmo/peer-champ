@@ -5,8 +5,7 @@ const nextConfig: NextConfig = {
     // Don't fail production builds on ESLint errors while we stabilize
     ignoreDuringBuilds: true,
   },
-  // Disable static generation for all pages to prevent prerendering issues
-  output: 'export',
+  // Vercel deployment configuration
   trailingSlash: true,
   images: {
     unoptimized: true,

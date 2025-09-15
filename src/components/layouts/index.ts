@@ -7,7 +7,6 @@
 export {
   AuthLayout,
   AuthNavigation,
-  AuthForm,
-  authLayoutVariants,
+  AuthFooter,
 } from './AuthLayout';
 export type { AuthLayoutProps } from './AuthLayout';

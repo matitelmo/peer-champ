@@ -7,14 +7,14 @@
 
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { Spinner } from '@/components/ui/Spinner';
 import { Alert } from '@/components/ui/Alert';
 import { AuthLayoutSimple } from '@/components/layouts/AuthLayoutSimple';
 
-export default function AuthCallbackPage() {
+function AuthCallbackContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(true);
@@ -127,4 +127,13 @@ export default function AuthCallbackPage() {
   }
 
   return null;
+}
+
+
+export default function AuthCallbackPage() {
+  return (
+    <Suspense fallback={<Spinner />}>
+      <AuthCallbackContent />
+    </Suspense>
+  );
 }

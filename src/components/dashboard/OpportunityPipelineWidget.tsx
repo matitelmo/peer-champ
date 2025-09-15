@@ -80,7 +80,7 @@ export const OpportunityPipelineWidget: React.FC<
   // Calculate total count and value
   const totalCount = pipeline.reduce((sum, stage) => sum + stage.count, 0);
   const totalPipelineValue = pipeline.reduce(
-    (sum, stage) => sum + stage.total_value,
+    (sum, stage) => sum + stage.value,
     0
   );
 
@@ -142,7 +142,7 @@ export const OpportunityPipelineWidget: React.FC<
                   totalCount > 0 ? (stage.count / totalCount) * 100 : 0;
                 const valuePercentage =
                   totalPipelineValue > 0
-                    ? (stage.total_value / totalPipelineValue) * 100
+                    ? (stage.value / totalPipelineValue) * 100
                     : 0;
 
                 return (
@@ -158,10 +158,10 @@ export const OpportunityPipelineWidget: React.FC<
                       </div>
                       <div className="text-right">
                         <div className="text-lg font-semibold text-gray-900 dark:text-white">
-                          {formatCurrency(stage.total_value)}
+                          {formatCurrency(stage.value)}
                         </div>
                         <div className="text-sm text-gray-600 dark:text-gray-400">
-                          {formatCurrency(stage.average_value)} avg
+                          {formatCurrency(stage.value / stage.count)} avg
                         </div>
                       </div>
                     </div>
@@ -219,7 +219,7 @@ export const OpportunityPipelineWidget: React.FC<
                         </div>
                       </div>
                       <div className="text-xs text-center text-gray-600 dark:text-gray-400">
-                        {formatCurrency(stage.total_value)}
+                        {formatCurrency(stage.value)}
                       </div>
                     </div>
                     {index < sortedPipeline.length - 1 && (

@@ -53,7 +53,7 @@ export const SalesRepDashboard: React.FC<SalesRepDashboardProps> = ({
     getFormattedStats,
     getRecentActivity,
     getUpcomingCalls,
-    getTopPerformingAdvocates,
+    getTopAdvocates,
     getOpportunityPipeline,
     getQuickInsights,
     refreshDashboard,
@@ -63,7 +63,7 @@ export const SalesRepDashboard: React.FC<SalesRepDashboardProps> = ({
   const stats = getFormattedStats();
   const recentActivity = getRecentActivity();
   const upcomingCalls = getUpcomingCalls();
-  const topAdvocates = getTopPerformingAdvocates();
+  const topAdvocates = getTopAdvocates();
   const opportunityPipeline = getOpportunityPipeline();
   const insights = getQuickInsights();
 
@@ -154,8 +154,8 @@ export const SalesRepDashboard: React.FC<SalesRepDashboardProps> = ({
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
           title="Open Opportunities"
-          value={stats?.openOpportunities.value || 0}
-          subtitle={`${stats?.openOpportunities.percentage || 0}% of total`}
+          value={stats?.activeOpportunities.value || 0}
+          subtitle={`${stats?.activeOpportunities.percentage || 0}% of total`}
           icon={<BuildingOfficeIcon size={24} />}
           color="blue"
         />
