@@ -7,6 +7,7 @@
 
 import { supabase } from '@/lib/supabase';
 import { ReferenceCall } from '@/types/database';
+import { createMeeting, CreateMeetingOptions } from './meetingService';
 
 export interface CreateReferenceCallData {
   opportunity_id: string;
@@ -123,6 +124,50 @@ export async function getReferenceCalls(
   if (error) throw error;
   return data;
 }
+/**
+ * Create a new reference call with automatic meeting link generation
+ */
+export async function createReferenceCallWithMeeting(
+  callData: CreateReferenceCallData,
+  autoGenerateMeeting: boolean = true
+): Promise<ReferenceCall> {
+  let meetingLink: string | undefined;
+  let meetingPlatform: string | undefined;
+  let meetingId: string | undefined;
+
+  // Auto-generate meeting link if requested and not already provided
+  if (autoGenerateMeeting && !callData.meeting_link) {
+    try {
+      const meetingOptions: CreateMeetingOptions = {
+        title: `Reference Call: ${callData.prospect_company}`,
+        description: `Reference call between ${callData.prospect_name} and advocate`,
+        scheduled_at: callData.scheduled_at,
+        duration_minutes: callData.duration_minutes || 30,
+        host_email: callData.prospect_email, // Use prospect email as host
+      };
+
+      const meeting = await createMeeting(meetingOptions);
+      meetingLink = meeting.meeting_url;
+      meetingPlatform = meeting.platform;
+      meetingId = meeting.meeting_id;
+    } catch (error) {
+      console.error('Failed to generate meeting link:', error);
+      // Continue without meeting link - user can add manually later
+    }
+  }
+
+  // Create the reference call with meeting details
+  const callDataWithMeeting = {
+    ...callData,
+    meeting_link: meetingLink || callData.meeting_link,
+    meeting_platform: meetingPlatform || callData.meeting_platform,
+    meeting_id: meetingId || callData.meeting_id,
+  };
+
+  return createReferenceCall(callDataWithMeeting);
+}
+
+
 
 /**
  * Get reference call by ID

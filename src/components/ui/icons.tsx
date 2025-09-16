@@ -248,6 +248,14 @@ export const ChartBarIcon = ({ className, size }: IconProps) => (
   </BaseIcon>
 );
 
+export const HistoryIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+    <path d="M3 3v5h5" />
+    <path d="M12 7v5l4 2" />
+  </BaseIcon>
+);
+
 export const UsersIcon = ({ className, size }: IconProps) => (
   <BaseIcon className={className} size={size}>
     <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
@@ -309,6 +317,13 @@ export const FileTextIcon = ({ className, size }: IconProps) => (
     <path d="M14 2v6h6" />
     <line x1="16" y1="13" x2="8" y2="13" />
     <line x1="16" y1="17" x2="8" y2="17" />
+  </BaseIcon>
+);
+
+export const LinkIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
   </BaseIcon>
 );
 

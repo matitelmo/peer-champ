@@ -177,6 +177,9 @@ export type {
 
 // Navigation components
 export { Navbar, Sidebar, Breadcrumb, Tabs } from './Navigation';
+
+// New Tabs components
+export { Tabs as TabsNew, TabsList, TabsTrigger, TabsContent } from './TabsNew';
 export type {
   NavbarProps,
   SidebarProps,
@@ -185,10 +188,7 @@ export type {
   NavItem,
 } from './Navigation';
 
-// Backwards-compat: export Tabs subcomponents that some pages expect
-export const TabsList = () => null;
-export const TabsTrigger = () => null;
-export const TabsContent = () => null;
+// Tabs components are now properly exported from ./Tabs
 
 export { Pagination, SimplePagination } from './Pagination';
 export type { PaginationProps, SimplePaginationProps } from './Pagination';

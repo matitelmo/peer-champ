@@ -21,6 +21,7 @@ import {
   ChartBarIcon,
   UserIcon,
   CalendarIcon,
+  VideoCameraIcon,
 } from '@/components/ui/icons';
 
 interface DashboardNavigationProps {
@@ -63,6 +64,12 @@ const navigationItems = [
     href: '/reference-calls',
     icon: PhoneIcon,
     description: 'Schedule and track calls',
+  },
+  {
+    name: 'Meetings',
+    href: '/meetings',
+    icon: VideoCameraIcon,
+    description: 'Generate meeting links',
   },
   {
     name: 'Matching',

@@ -260,9 +260,30 @@ async function getTopPerformingAdvocates(
       return [];
     }
 
-    // TODO: Implement actual query to get top performing advocates
-    // For now, return empty array for new users
-    return [];
+    // For now, return mock data since we don't have call history yet
+    return [
+      {
+        id: '1',
+        name: 'John Smith',
+        total_calls: 12,
+        success_rate: 85,
+        average_rating: 4.8,
+      },
+      {
+        id: '2',
+        name: 'Sarah Johnson',
+        total_calls: 8,
+        success_rate: 75,
+        average_rating: 4.6,
+      },
+      {
+        id: '3',
+        name: 'Mike Davis',
+        total_calls: 15,
+        success_rate: 90,
+        average_rating: 4.9,
+      },
+    ];
   } catch (error) {
     console.warn('Error fetching top advocates:', error);
     return [];
@@ -277,9 +298,33 @@ async function getRecentActivity(
   userRole: string
 ): Promise<RecentActivity[]> {
   try {
-    // TODO: Implement actual activity tracking
-    // For now, return empty array for new users
-    return [];
+    // Return mock data for now since we don't have activity tracking yet
+    return [
+      {
+        id: '1',
+        type: 'call',
+        title: 'Reference call completed',
+        description: 'Call with Acme Corp completed successfully',
+        timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2 hours ago
+        status: 'completed',
+      },
+      {
+        id: '2',
+        type: 'opportunity',
+        title: 'New opportunity created',
+        description: 'Opportunity "Enterprise Deal" created for TechCorp',
+        timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(), // 4 hours ago
+        status: 'active',
+      },
+      {
+        id: '3',
+        type: 'advocate',
+        title: 'Advocate registered',
+        description: 'New advocate John Smith joined the platform',
+        timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(), // 6 hours ago
+        status: 'active',
+      },
+    ];
   } catch (error) {
     console.warn('Error fetching recent activity:', error);
     return [];
@@ -294,9 +339,45 @@ async function getOpportunityPipeline(
   userRole: string
 ): Promise<OpportunityPipeline[]> {
   try {
+    // For now, return mock data
     // TODO: Implement actual database query
-    // For now, return empty array for new users
-    return [];
+    return [
+      {
+        id: '1',
+        stage: 'Lead',
+        count: 12,
+        value: 24000,
+        color: '#3B82F6',
+      },
+      {
+        id: '2',
+        stage: 'Qualified',
+        count: 8,
+        value: 16000,
+        color: '#10B981',
+      },
+      {
+        id: '3',
+        stage: 'Proposal',
+        count: 5,
+        value: 10000,
+        color: '#F59E0B',
+      },
+      {
+        id: '4',
+        stage: 'Negotiation',
+        count: 3,
+        value: 6000,
+        color: '#EF4444',
+      },
+      {
+        id: '5',
+        stage: 'Closed Won',
+        count: 2,
+        value: 4000,
+        color: '#8B5CF6',
+      },
+    ];
   } catch (error) {
     console.warn('Error fetching opportunity pipeline:', error);
     return [];

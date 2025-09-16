@@ -39,6 +39,7 @@ import { ActivityFeed } from './ActivityFeed';
 import { UpcomingCallsWidget } from './UpcomingCallsWidget';
 import { OpportunityPipelineWidget } from './OpportunityPipelineWidget';
 import { TopAdvocatesWidget } from './TopAdvocatesWidget';
+import { EmptyDashboardState } from './EmptyDashboardState';
 
 interface SalesRepDashboardProps {
   className?: string;
@@ -67,11 +68,38 @@ export const SalesRepDashboard: React.FC<SalesRepDashboardProps> = ({
   const opportunityPipeline = getOpportunityPipeline();
   const insights = getQuickInsights();
 
+  // Check if user has no data (new user)
+  const hasData = stats && (
+    stats.totalAdvocates.value > 0 ||
+    stats.totalOpportunities.value > 0 ||
+    stats.totalCalls.value > 0
+  );
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
         <Spinner size="lg" />
       </div>
+    );
+  }
+
+  // Show empty state for new users
+  if (!hasData) {
+    return (
+      <EmptyDashboardState
+        onAddAdvocate={() => {
+          // TODO: Navigate to add advocate page
+          alert("👥 Adding your first advocate! This would normally open the advocate onboarding form.");
+        }}
+        onCreateOpportunity={() => {
+          // TODO: Navigate to create opportunity page
+          alert("💼 Creating your first opportunity! This would normally open the opportunity creation form.");
+        }}
+        onScheduleCall={() => {
+          // TODO: Navigate to schedule call page
+          alert("📞 Scheduling your first reference call! This would normally open the call scheduling interface.");
+        }}
+      />
     );
   }
 
