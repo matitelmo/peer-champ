@@ -8,7 +8,23 @@
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
+import {
+  DndContext,
+  DragEndEvent,
+  DragOverlay,
+  DragStartEvent,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import {
+  useSortable,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 import { useOpportunities } from '@/hooks/useOpportunities';
 import { Opportunity } from '@/types/database';
 import { Button, Card, CardHeader, CardTitle, CardBody, Badge, Select, Input, Alert } from '@/components/ui';
@@ -57,6 +73,122 @@ const FILTER_OPTIONS = [
   { value: 'stale', label: 'Stale (>90 days)' },
 ];
 
+// Sortable Opportunity Item Component
+interface SortableOpportunityItemProps {
+  opportunity: Opportunity;
+  onOpportunityClick?: (opportunity: Opportunity) => void;
+  onOpportunityEdit?: (opportunity: Opportunity) => void;
+}
+
+const SortableOpportunityItem: React.FC<SortableOpportunityItemProps> = ({
+  opportunity,
+  onOpportunityClick,
+  onOpportunityEdit,
+}) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: opportunity.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount);
+  };
+
+  const getDaysSinceUpdate = (updatedAt: string) => {
+    const days = Math.floor((new Date().getTime() - new Date(updatedAt).getTime()) / (1000 * 60 * 60 * 24));
+    return days;
+  };
+
+  const getAgeColor = (days: number) => {
+    if (days > 90) return 'text-red-600';
+    if (days > 30) return 'text-yellow-600';
+    return 'text-green-600';
+  };
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      className={cn(
+        'p-4 bg-white border border-gray-200 rounded-lg shadow-sm cursor-move hover:shadow-md transition-shadow',
+        isDragging && 'shadow-lg rotate-2 opacity-50'
+      )}
+      onClick={() => onOpportunityClick?.(opportunity)}
+    >
+      <div className="space-y-2">
+        <div className="flex items-start justify-between">
+          <h4 className="font-medium text-gray-900 text-sm">
+            {opportunity.prospect_company}
+          </h4>
+          <div className="flex items-center space-x-1">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onOpportunityEdit?.(opportunity);
+              }}
+              className="p-1 text-gray-400 hover:text-gray-600"
+            >
+              <PencilIcon size={14} />
+            </button>
+          </div>
+        </div>
+        
+        <div className="text-sm text-gray-600">
+          {opportunity.opportunity_name}
+        </div>
+        
+        <div className="flex items-center justify-between text-xs text-gray-500">
+          <div className="flex items-center space-x-1">
+            <CurrencyDollarIcon size={12} />
+            <span className="font-medium">
+              {formatCurrency(opportunity.deal_value || 0)}
+            </span>
+          </div>
+          <div className={cn(
+            'flex items-center space-x-1',
+            getAgeColor(getDaysSinceUpdate(opportunity.updated_at || opportunity.created_at))
+          )}>
+            <CalendarIcon size={12} />
+            <span>
+              {getDaysSinceUpdate(opportunity.updated_at || opportunity.created_at)}d
+            </span>
+          </div>
+        </div>
+        
+        {opportunity.prospect_contact_name && (
+          <div className="flex items-center space-x-1 text-xs text-gray-500">
+            <UserIcon size={12} />
+            <span>{opportunity.prospect_contact_name}</span>
+          </div>
+        )}
+        
+        {opportunity.prospect_industry && (
+          <div className="flex items-center space-x-1 text-xs text-gray-500">
+            <BuildingOfficeIcon size={12} />
+            <span>{opportunity.prospect_industry}</span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 export const OpportunityPipeline: React.FC<OpportunityPipelineProps> = ({
   onOpportunityClick,
   onOpportunityEdit,
@@ -67,6 +199,15 @@ export const OpportunityPipeline: React.FC<OpportunityPipelineProps> = ({
   const [filter, setFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [showAnalytics, setShowAnalytics] = useState(false);
+  const [activeId, setActiveId] = useState<string | null>(null);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    })
+  );
 
   // Initialize stages with opportunities
   useEffect(() => {
@@ -135,7 +276,6 @@ export const OpportunityPipeline: React.FC<OpportunityPipelineProps> = ({
     return filtered;
   };
 
-
   // Map stage names to database values
   const mapStageToDbValue = (stageName: string) => {
     const mapping: Record<string, string> = {
@@ -148,22 +288,34 @@ export const OpportunityPipeline: React.FC<OpportunityPipelineProps> = ({
     };
     return mapping[stageName.toLowerCase()] || 'qualification';
   };
-  const handleDragEnd = async (result: DropResult) => {
-    const { destination, source, draggableId } = result;
 
-    if (!destination) return;
-    if (destination.droppableId === source.droppableId && destination.index === source.index) return;
+  const handleDragStart = (event: DragStartEvent) => {
+    setActiveId(event.active.id as string);
+  };
 
-    const sourceStage = stages.find(stage => stage.id === source.droppableId);
-    const destStage = stages.find(stage => stage.id === destination.droppableId);
+  const handleDragEnd = async (event: DragEndEvent) => {
+    const { active, over } = event;
+    setActiveId(null);
+
+    if (!over) return;
+
+    const activeId = active.id as string;
+    const overId = over.id as string;
+
+    // Find the source stage (where the item was dragged from)
+    const sourceStage = stages.find(stage => 
+      stage.opportunities.some(opp => opp.id === activeId)
+    );
     
-    if (!sourceStage || !destStage) return;
+    // Find the destination stage (where the item was dropped)
+    const destStage = stages.find(stage => stage.id === overId);
+    
+    if (!sourceStage || !destStage || sourceStage.id === destStage.id) return;
 
-    const opportunity = sourceStage.opportunities.find(opp => opp.id === draggableId);
+    const opportunity = sourceStage.opportunities.find(opp => opp.id === activeId);
     if (!opportunity) return;
 
     // Update opportunity stage
-    const newStage = destStage.name.toLowerCase().replace(/\s+/g, ' ');
     try {
       await updateOpportunityData(opportunity.id, {
         deal_stage: mapStageToDbValue(destStage.id) as any,
@@ -180,17 +332,6 @@ export const OpportunityPipeline: React.FC<OpportunityPipelineProps> = ({
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(amount);
-  };
-
-  const getDaysSinceUpdate = (updatedAt: string) => {
-    const days = Math.floor((new Date().getTime() - new Date(updatedAt).getTime()) / (1000 * 60 * 60 * 24));
-    return days;
-  };
-
-  const getAgeColor = (days: number) => {
-    if (days > 90) return 'text-red-600';
-    if (days > 30) return 'text-yellow-600';
-    return 'text-green-600';
   };
 
   // Calculate pipeline metrics
@@ -301,7 +442,11 @@ export const OpportunityPipeline: React.FC<OpportunityPipelineProps> = ({
       </div>
 
       {/* Pipeline Board */}
-      <DragDropContext onDragEnd={handleDragEnd}>
+      <DndContext 
+        sensors={sensors}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+      >
         <div className="flex space-x-4 overflow-x-auto pb-4">
           {stages.map((stage) => (
             <div key={stage.id} className="flex-shrink-0 w-80">
@@ -322,101 +467,39 @@ export const OpportunityPipeline: React.FC<OpportunityPipelineProps> = ({
                   </div>
                 </CardHeader>
                 <CardBody className="pt-0">
-                  <Droppable droppableId={stage.id}>
-                    {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.droppableProps}
-                        className={cn(
-                          'min-h-96 space-y-3',
-                          snapshot.isDraggingOver && 'bg-blue-50 rounded-lg'
-                        )}
-                      >
-                        {stage.opportunities.map((opportunity, index) => (
-                          <Draggable
-                            key={opportunity.id}
-                            draggableId={opportunity.id}
-                            index={index}
-                          >
-                            {(provided, snapshot) => (
-                              <div
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                                className={cn(
-                                  'p-4 bg-white border border-gray-200 rounded-lg shadow-sm cursor-move hover:shadow-md transition-shadow',
-                                  snapshot.isDragging && 'shadow-lg rotate-2'
-                                )}
-                                onClick={() => onOpportunityClick?.(opportunity)}
-                              >
-                                <div className="space-y-2">
-                                  <div className="flex items-start justify-between">
-                                    <h4 className="font-medium text-gray-900 text-sm">
-                                      {opportunity.prospect_company}
-                                    </h4>
-                                    <div className="flex items-center space-x-1">
-                                      <button
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          onOpportunityEdit?.(opportunity);
-                                        }}
-                                        className="p-1 text-gray-400 hover:text-gray-600"
-                                      >
-                                        <PencilIcon size={14} />
-                                      </button>
-                                    </div>
-                                  </div>
-                                  
-                                  <div className="text-sm text-gray-600">
-                                    {opportunity.opportunity_name}
-                                  </div>
-                                  
-                                  <div className="flex items-center justify-between text-xs text-gray-500">
-                                    <div className="flex items-center space-x-1">
-                                      <CurrencyDollarIcon size={12} />
-                                      <span className="font-medium">
-                                        {formatCurrency(opportunity.deal_value || 0)}
-                                      </span>
-                                    </div>
-                                    <div className={cn(
-                                      'flex items-center space-x-1',
-                                      getAgeColor(getDaysSinceUpdate(opportunity.updated_at || opportunity.created_at))
-                                    )}>
-                                      <CalendarIcon size={12} />
-                                      <span>
-                                        {getDaysSinceUpdate(opportunity.updated_at || opportunity.created_at)}d
-                                      </span>
-                                    </div>
-                                  </div>
-                                  
-                                  {opportunity.prospect_contact_name && (
-                                    <div className="flex items-center space-x-1 text-xs text-gray-500">
-                                      <UserIcon size={12} />
-                                      <span>{opportunity.prospect_contact_name}</span>
-                                    </div>
-                                  )}
-                                  
-                                  {opportunity.prospect_industry && (
-                                    <div className="flex items-center space-x-1 text-xs text-gray-500">
-                                      <BuildingOfficeIcon size={12} />
-                                      <span>{opportunity.prospect_industry}</span>
-                                    </div>
-                                  )}
-                                </div>
-                              </div>
-                            )}
-                          </Draggable>
-                        ))}
-                        {provided.placeholder}
-                      </div>
-                    )}
-                  </Droppable>
+                  <SortableContext 
+                    id={stage.id}
+                    items={stage.opportunities.map(opp => opp.id)}
+                    strategy={verticalListSortingStrategy}
+                  >
+                    <div className="min-h-96 space-y-3">
+                      {stage.opportunities.map((opportunity) => (
+                        <SortableOpportunityItem
+                          key={opportunity.id}
+                          opportunity={opportunity}
+                          onOpportunityClick={onOpportunityClick}
+                          onOpportunityEdit={onOpportunityEdit}
+                        />
+                      ))}
+                    </div>
+                  </SortableContext>
                 </CardBody>
               </Card>
             </div>
           ))}
         </div>
-      </DragDropContext>
+        <DragOverlay>
+          {activeId ? (
+            <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-lg opacity-90 rotate-2">
+              <div className="font-medium text-gray-900 text-sm">
+                {stages.find(stage => 
+                  stage.opportunities.some(opp => opp.id === activeId)
+                )?.opportunities.find(opp => opp.id === activeId)?.prospect_company}
+              </div>
+            </div>
+          ) : null}
+        </DragOverlay>
+      </DndContext>
 
       {/* Empty State */}
       {pipelineMetrics.totalCount === 0 && (
