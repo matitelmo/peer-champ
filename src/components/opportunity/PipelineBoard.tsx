@@ -165,10 +165,10 @@ const SortableOpportunityCard: React.FC<SortableOpportunityCardProps> = ({
           </div>
         )}
         
-        {opportunity.industry && (
+        {opportunity.prospect_industry && (
           <div className="flex items-center space-x-1 text-xs text-gray-500">
             <BuildingOfficeIcon size={12} />
-            <span>{opportunity.industry}</span>
+            <span>{opportunity.prospect_industry}</span>
           </div>
         )}
       </div>
@@ -181,7 +181,7 @@ export const PipelineBoard: React.FC<PipelineBoardProps> = ({
   onOpportunityEdit,
   className = '',
 }) => {
-  const { opportunities, updateOpportunity, loading, error } = useOpportunities();
+  const { opportunities, updateOpportunityData, loading, error } = useOpportunities();
   const [stages, setStages] = useState<PipelineStage[]>([]);
   const [filter, setFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
@@ -261,6 +261,20 @@ export const PipelineBoard: React.FC<PipelineBoardProps> = ({
     return filtered;
   };
 
+
+  // Map stage names to database values
+  const mapStageToDbValue = (stageName: string) => {
+    const mapping: Record<string, string> = {
+      'prospecting': 'qualification',
+      'qualification': 'qualification', 
+      'proposal': 'proposal',
+      'negotiation': 'negotiation',
+      'closed-won': 'closed_won',
+      'closed-lost': 'closed_lost',
+    };
+    return mapping[stageName.toLowerCase()] || 'qualification';
+  };
+
   const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
 
@@ -284,9 +298,8 @@ export const PipelineBoard: React.FC<PipelineBoardProps> = ({
     // Update opportunity stage
     const newStage = destStage.name.toLowerCase().replace(/\s+/g, ' ');
     try {
-      await updateOpportunity(opportunity.id, {
-        deal_stage: newStage,
-        updated_at: new Date().toISOString(),
+      await updateOpportunityData(opportunity.id, {
+        deal_stage: mapStageToDbValue(destStage.id) as any,
       });
     } catch (error) {
       console.error('Error updating opportunity stage:', error);

@@ -196,11 +196,26 @@
         ],
         "status": "pending",
         "subtasks": []
+      },
+      {
+        "id": 37,
+        "title": "Fix Vercel Deployment Build Errors",
+        "description": "Resolve various build errors occurring during Vercel deployment including component imports, API updates, TypeScript errors, and package dependencies to ensure successful production builds.",
+        "details": "1. Fix missing Progress component:\n   - Identify where the Progress component is being imported\n   - Either implement the missing component or install the appropriate package\n   - Update imports to use the correct path\n\n2. Resolve icon import issues:\n   - Check all icon imports and ensure they follow the correct pattern\n   - Update any deprecated icon import syntax\n   - Verify icon packages are properly listed in package.json\n\n3. Update date-fns-tz API usage:\n   - Review all instances of date-fns-tz usage\n   - Update to the latest API patterns according to documentation\n   - Test date/timezone functionality after updates\n\n4. Fix TypeScript errors in AvailabilityManager:\n   - Address type definitions and interfaces in AvailabilityManager component\n   - Resolve any null/undefined handling issues\n   - Ensure proper typing for all props and state variables\n\n5. Correct Badge component variants:\n   - Update Badge component to support all required variants\n   - Fix any type errors related to variant props\n   - Ensure consistent styling across all variants\n\n6. Add missing react-beautiful-dnd package:\n   - Install react-beautiful-dnd: `npm install react-beautiful-dnd`\n   - Add types: `npm install @types/react-beautiful-dnd --save-dev`\n   - Update package.json and lock files\n\n7. Fix hook method naming issues:\n   - Rename hook methods to follow React conventions (use* prefix)\n   - Update all references to these hooks throughout the codebase\n   - Ensure hooks follow React rules (only called at top level, etc.)\n\n8. Resolve stage mapping issues:\n   - Identify and fix incorrect stage mappings in the application\n   - Ensure consistent stage values between frontend and backend\n   - Add validation for stage values\n\n9. Fix industry property references:\n   - Update components that reference industry properties\n   - Ensure consistent property naming across the application\n   - Add fallbacks for missing industry data\n\n10. Resolve export conflicts:\n    - Identify files with conflicting exports\n    - Refactor to use named exports where appropriate\n    - Ensure consistent export patterns across the codebase\n\n11. Create a comprehensive build verification process:\n    - Add pre-build checks for common errors\n    - Document common build issues and their solutions\n    - Set up local environment that mirrors Vercel for testing",
+        "testStrategy": "1. Set up a local build environment that mirrors Vercel configuration:\n   - Use `vercel build` command locally to test builds\n   - Create a CI/CD pipeline that matches Vercel's build process\n\n2. Create a systematic testing approach for each error type:\n   - Test Progress component rendering in all relevant views\n   - Verify all icons display correctly across the application\n   - Test date/time functionality with various timezones\n   - Run TypeScript compiler with strict mode to catch type errors\n   - Test Badge component with all possible variant values\n   - Verify drag-and-drop functionality using react-beautiful-dnd\n   - Test all custom hooks in isolation with React Testing Library\n   - Verify stage mapping with test data covering all possible stages\n   - Test industry property references with mock data\n   - Check for export conflicts using ESLint rules\n\n3. Implement automated build verification:\n   - Add TypeScript compilation check to pre-commit hooks\n   - Set up ESLint rules to catch import/export issues\n   - Create a build log analyzer to identify recurring issues\n\n4. Perform cross-browser testing after fixes:\n   - Test in Chrome, Firefox, Safari, and Edge\n   - Verify mobile responsiveness after build fixes\n\n5. Create deployment test environments:\n   - Set up staging environment on Vercel\n   - Implement progressive deployment to catch issues early\n\n6. Document verification process:\n   - Create checklist for manual verification steps\n   - Document common build errors and solutions for the team\n   - Update README with build troubleshooting information",
+        "status": "pending",
+        "dependencies": [
+          33,
+          34,
+          36
+        ],
+        "priority": "high",
+        "subtasks": []
       }
     ],
     "metadata": {
       "created": "2025-09-09T14:08:57.331Z",
-      "updated": "2025-09-16T00:26:40.203Z",
+      "updated": "2025-09-16T21:57:23.431Z",
       "description": "Tasks for master context"
     }
   }

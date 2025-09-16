@@ -159,6 +159,9 @@ export type { PopoverProps, TooltipProps, DropdownProps } from './Popover';
 // Separator component
 export { Separator } from './Separator';
 
+// Progress component
+export { Progress, progressVariants, progressBarVariants } from './Progress';
+
 // Table components
 export { Table } from './Table';
 export type { TableProps, Column } from './Table';

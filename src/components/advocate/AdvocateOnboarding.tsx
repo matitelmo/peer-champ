@@ -12,12 +12,12 @@ import { useAuth } from '@/hooks/useAuth';
 import { Button, Card, CardHeader, CardTitle, CardBody, Input, Select, Alert, Progress, Badge } from '@/components/ui';
 import { 
   CheckIcon, 
-  ArrowRightIcon, 
+  ChevronRightIcon as ArrowRightIcon, 
   ArrowLeftIcon, 
-  DocumentIcon,
+  FileTextIcon as DocumentIcon,
   UserIcon,
   ShieldCheckIcon,
-  AcademicCapIcon,
+  AwardIcon as AcademicCapIcon,
   ClockIcon,
   UploadIcon
 } from '@/components/ui/icons';

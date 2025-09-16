@@ -68,6 +68,7 @@ export const ChevronLeftIcon = ({ className, size }: IconProps) => (
 
 // Aliases for commonly used names in app code
 export const ArrowLeftIcon = ChevronLeftIcon;
+export const ArrowRightIcon = ChevronRightIcon;
 
 export const SearchIcon = ({ className, size }: IconProps) => (
   <BaseIcon className={className} size={size}>
