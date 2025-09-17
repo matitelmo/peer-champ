@@ -396,15 +396,43 @@ const getCurrentUserCompanyId = async (): Promise<string> => {
     throw new Error('User not authenticated');
   }
 
-  const { data: userData } = await supabase
+  // Try to read user profile
+  let { data: userData } = await supabase
     .from('users')
     .select('company_id')
     .eq('id', user.id)
     .single();
 
+  // If missing, create/update via server API (uses service role) then retry once
   if (!userData) {
-    throw new Error('User not found in database');
+    try {
+      // try to infer company_id from auth user metadata
+      const {
+        data: { user: freshUser },
+      } = await supabase.auth.getUser();
+      const inferredCompanyId = (freshUser?.user_metadata as any)?.company_id;
+
+      await fetch('/api/auth/update-profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: user.id,
+          email: user.email,
+          company_id: inferredCompanyId,
+        }),
+      });
+      const retry = await supabase
+        .from('users')
+        .select('company_id')
+        .eq('id', user.id)
+        .single();
+      userData = retry.data as typeof userData;
+    } catch (_) {
+      // swallow and fall through to error below
+    }
   }
+
+  if (!userData) throw new Error('User not found in database');
 
   return userData.company_id;
 };

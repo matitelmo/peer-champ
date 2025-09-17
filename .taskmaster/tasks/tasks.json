@@ -266,11 +266,79 @@
         ],
         "priority": "high",
         "subtasks": []
+      },
+      {
+        "id": 38,
+        "title": "Create Comprehensive Customer Onboarding Flow",
+        "description": "Develop an intuitive, multi-step onboarding flow for new PeerChamp customers that guides them through company setup, user management, configuration, and product introduction.",
+        "details": "Implement a comprehensive onboarding flow using React with a state management library like Zustand or Redux Toolkit for maintaining onboarding state across steps. The implementation should include:\n\n1. **Welcome & Company Setup**:\n   - Create a responsive landing page with company branding\n   - Implement form components using React Hook Form with Zod validation\n   - Add industry selection dropdown with autocomplete functionality\n   - Include company size selection and basic configuration options\n   - Store company data in Supabase with proper validation\n\n2. **Admin Account Creation**:\n   - Build secure admin user registration with email verification\n   - Implement password strength requirements and validation\n   - Create two-factor authentication option using libraries like react-otp-input\n   - Store user credentials securely with proper hashing via Supabase Auth\n\n3. **Team Invitation System**:\n   - Develop email invitation system using SendGrid or similar service\n   - Create role-based permission selection interface\n   - Implement bulk invitation capability with CSV upload\n   - Add invitation tracking and reminder functionality\n   - Store invitation status and history in database\n\n4. **Initial Configuration**:\n   - Build company settings dashboard with theme customization\n   - Create integration setup wizard for third-party services\n   - Implement preference toggles for notifications and defaults\n   - Add company logo upload using Supabase Storage\n\n5. **Advocate Onboarding**:\n   - Leverage existing advocate profile system (Task #27)\n   - Create simplified advocate addition flow for initial setup\n   - Implement batch import functionality for existing advocates\n   - Add progress tracking for advocate profile completion\n\n6. **CRM Integration Setup**:\n   - Implement OAuth flows for Salesforce and HubSpot\n   - Create connection testing and validation\n   - Build field mapping interface for data synchronization\n   - Add manual/scheduled sync options\n   - Store integration credentials securely\n\n7. **Success Metrics Setup**:\n   - Create goals and KPI configuration interface\n   - Implement reporting preferences selection\n   - Add dashboard customization options\n   - Store metrics configuration in database\n\n8. **Welcome Tour**:\n   - Implement interactive product tour using libraries like react-joyride\n   - Create contextual help tooltips for key features\n   - Add progress tracking for tour completion\n   - Implement tour skip and resume functionality\n\n9. **Onboarding Completion**:\n   - Build completion confirmation page with summary\n   - Create next steps guidance with actionable recommendations\n   - Implement email notification for successful onboarding\n   - Add feedback collection mechanism\n\nThroughout the implementation:\n- Use a step indicator component to show progress\n- Implement data persistence between steps with ability to return later\n- Add proper error handling with user-friendly messages\n- Create loading states and transitions between steps\n- Ensure responsive design for all device sizes\n- Implement analytics tracking for onboarding funnel analysis\n- Add accessibility features following WCAG guidelines",
+        "testStrategy": "1. **Unit Testing**:\n   - Write comprehensive unit tests for all form components using Jest and React Testing Library\n   - Test validation logic for all input fields\n   - Verify state management functionality for the onboarding flow\n   - Test conditional rendering based on user selections\n   - Ensure proper error handling for all edge cases\n\n2. **Integration Testing**:\n   - Create end-to-end tests for the complete onboarding flow using Cypress\n   - Test data persistence between onboarding steps\n   - Verify database operations and state updates\n   - Test email sending functionality with mocked services\n   - Validate file upload components for company logos and batch imports\n   - Test OAuth flows for CRM integrations with mock providers\n\n3. **User Acceptance Testing**:\n   - Create test scenarios for different company types and sizes\n   - Conduct usability testing with representative users\n   - Gather feedback on clarity of instructions and ease of use\n   - Test completion time and identify potential friction points\n\n4. **Cross-browser Testing**:\n   - Verify functionality across Chrome, Firefox, Safari, and Edge\n   - Test responsive behavior on different device sizes\n   - Ensure consistent styling and layout across platforms\n\n5. **Performance Testing**:\n   - Measure and optimize load times for each onboarding step\n   - Test performance with large data imports\n   - Verify smooth transitions between steps\n\n6. **Security Testing**:\n   - Conduct security review of authentication implementation\n   - Test for common vulnerabilities (XSS, CSRF)\n   - Verify secure storage of sensitive information\n   - Test permission controls and access restrictions\n\n7. **Accessibility Testing**:\n   - Verify WCAG 2.1 AA compliance using automated tools\n   - Conduct manual testing with screen readers\n   - Test keyboard navigation throughout the flow\n   - Ensure proper focus management between steps\n\n8. **Analytics Verification**:\n   - Confirm proper event tracking for onboarding steps\n   - Verify funnel analysis data collection\n   - Test conversion tracking from start to completion",
+        "status": "pending",
+        "dependencies": [
+          27,
+          30,
+          35
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Design Database Schema and API Endpoints",
+            "description": "Design and implement the database schema and API endpoints required for the onboarding flow, including company setup, user management, and configuration tables.",
+            "dependencies": [],
+            "details": "Create Supabase database tables for company profiles, user accounts, team invitations, configurations, and onboarding progress tracking. Implement RESTful API endpoints for each onboarding step including company creation, user registration, team invitations, configuration settings, and onboarding status updates. Document API specifications using Swagger or similar tool. Ensure proper relationships between tables with foreign key constraints. Implement security measures for API endpoints including authentication and authorization checks.",
+            "status": "done",
+            "testStrategy": "Create unit tests for API endpoints using Jest. Verify database schema with test data insertion and retrieval. Test API error handling with invalid inputs. Validate security measures with authentication bypass attempts. Perform load testing on critical endpoints to ensure scalability."
+          },
+          {
+            "id": 2,
+            "title": "Develop Core Onboarding UI Components",
+            "description": "Build the reusable UI components needed for the onboarding flow, including step indicators, form elements, and navigation controls.",
+            "dependencies": [],
+            "details": "Create a responsive step indicator component showing progress through the onboarding flow. Develop standardized form components with React Hook Form and Zod validation for all data entry screens. Build navigation controls for moving between steps with validation checks. Implement a persistent header/footer with save/exit functionality. Create loading states and transitions between steps. Design error message components for form validation and API errors. Ensure all components follow WCAG accessibility guidelines and are responsive for all device sizes.",
+            "status": "in-progress",
+            "testStrategy": "Write unit tests for all UI components using React Testing Library. Test component rendering in various viewport sizes. Verify keyboard navigation and screen reader compatibility. Test form validation behavior with valid and invalid inputs. Ensure proper state management between components."
+          },
+          {
+            "id": 3,
+            "title": "Implement Company Setup and Admin Account Creation",
+            "description": "Build the first two steps of the onboarding flow: company setup and admin account creation with secure authentication.",
+            "dependencies": [
+              "38.1",
+              "38.2"
+            ],
+            "details": "Implement the welcome landing page with company branding. Create company setup form with industry selection dropdown (with autocomplete), company size selection, and basic configuration options. Build admin user registration with email verification workflow. Implement password strength requirements and validation. Add two-factor authentication option using react-otp-input. Connect forms to API endpoints for data persistence. Implement proper error handling and user feedback. Store company data and user credentials in Supabase with proper validation and security measures.",
+            "status": "pending",
+            "testStrategy": "Create integration tests for the complete company setup and admin creation flow. Test form validation with various input combinations. Verify email verification process and 2FA setup. Test error scenarios including network failures and validation errors. Ensure data is correctly stored in the database after submission."
+          },
+          {
+            "id": 4,
+            "title": "Develop Team Invitation and Configuration Systems",
+            "description": "Implement the team invitation system and initial configuration steps of the onboarding flow, including role-based permissions and company settings.",
+            "dependencies": [
+              "38.3"
+            ],
+            "details": "Develop email invitation system using SendGrid integration. Create role-based permission selection interface with predefined roles and custom options. Implement bulk invitation capability with CSV upload functionality. Add invitation tracking and reminder functionality. Build company settings dashboard with theme customization options. Create integration setup wizard for third-party services. Implement preference toggles for notifications and defaults. Add company logo upload using Supabase Storage. Store invitation status and configuration settings in the database with proper validation.",
+            "status": "pending",
+            "testStrategy": "Test email sending functionality with various email providers. Verify CSV upload with valid and invalid data formats. Test invitation tracking and reminder scheduling. Validate configuration settings persistence. Test file upload for company logos with various file types and sizes. Verify proper error handling for all user interactions."
+          },
+          {
+            "id": 5,
+            "title": "Implement Advocate Setup, CRM Integration, and Onboarding Completion",
+            "description": "Complete the onboarding flow with advocate setup, CRM integration, success metrics configuration, interactive tour, and completion steps.",
+            "dependencies": [
+              "38.4"
+            ],
+            "details": "Leverage existing advocate profile system to create simplified advocate addition flow. Implement batch import functionality for existing advocates. Build OAuth flows for Salesforce and HubSpot integration. Create connection testing and field mapping interface for CRM data synchronization. Develop goals and KPI configuration interface with reporting preferences. Implement interactive product tour using react-joyride with contextual help tooltips. Build completion confirmation page with summary and next steps guidance. Add feedback collection mechanism and email notification for successful onboarding. Implement analytics tracking for onboarding funnel analysis.",
+            "status": "pending",
+            "testStrategy": "Create end-to-end tests for the complete onboarding flow from start to finish. Test OAuth authentication with mock CRM services. Verify advocate import functionality with various data formats. Test interactive tour on different devices and screen sizes. Validate analytics tracking for key onboarding events. Perform usability testing with representative users to identify UX improvements."
+          }
+        ]
       }
     ],
     "metadata": {
       "created": "2025-09-09T14:08:57.331Z",
-      "updated": "2025-09-16T22:25:09.423Z",
+      "updated": "2025-09-17T01:08:26.873Z",
       "description": "Tasks for master context"
     }
   }

@@ -8,6 +8,7 @@
 'use client';
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { useDashboard } from '@/hooks/useDashboard';
 import {
   Card,
@@ -48,6 +49,7 @@ interface SalesRepDashboardProps {
 export const SalesRepDashboard: React.FC<SalesRepDashboardProps> = ({
   className = '',
 }) => {
+  const router = useRouter();
   const {
     loading,
     error,
@@ -88,16 +90,13 @@ export const SalesRepDashboard: React.FC<SalesRepDashboardProps> = ({
     return (
       <EmptyDashboardState
         onAddAdvocate={() => {
-          // TODO: Navigate to add advocate page
-          alert("👥 Adding your first advocate! This would normally open the advocate onboarding form.");
+          router.push('/advocates/');
         }}
         onCreateOpportunity={() => {
-          // TODO: Navigate to create opportunity page
-          alert("💼 Creating your first opportunity! This would normally open the opportunity creation form.");
+          router.push('/opportunities/');
         }}
         onScheduleCall={() => {
-          // TODO: Navigate to schedule call page
-          alert("📞 Scheduling your first reference call! This would normally open the call scheduling interface.");
+          router.push('/scheduling/');
         }}
       />
     );

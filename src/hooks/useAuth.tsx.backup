@@ -110,44 +110,25 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   // Create or update user profile in our database
   const createOrUpdateUserProfile = async (user: User) => {
-    // de-duplicate within a session
-    const key = `profile-upserted:${user.id}`;
-    if (sessionStorage.getItem(key)) return;
-    sessionStorage.setItem(key, '1');
+    try {
+      // Use a server-side API call to create/update user profile
+      const response = await fetch('/api/auth/update-profile', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: user.id,
+          email: user.email,
+        }),
+      });
 
-    const url = `${window.location.origin}/api/auth/update-profile`;
-    const payload = {
-      id: user.id,
-      email: user.email,
-      company_id: (user as any)?.user_metadata?.company_id,
-    };
-
-    const tryOnce = async () => {
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), 7000);
-      try {
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-          signal: controller.signal,
-        });
-        clearTimeout(timer);
-        if (!response.ok) {
-          try {
-            const err = await response.json();
-            console.warn('Profile upsert non-OK:', err);
-          } catch (_) {
-            console.warn('Profile upsert non-OK, no JSON');
-          }
-        }
-      } catch (error) {
-        clearTimeout(timer);
-        console.warn('Profile upsert fetch failed (non-blocking):', (error as any)?.message || error);
+      if (!response.ok) {
+        console.error('Error creating/updating user profile via API');
       }
-    };
-
-    await tryOnce();
+    } catch (error) {
+      console.error('Error in createOrUpdateUserProfile:', error);
+    }
   };
 
   // Sign in with email and password
