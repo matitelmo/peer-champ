@@ -228,14 +228,13 @@ export async function GET(request: NextRequest) {
     }
     
     // Get company details with onboarding progress
-    const { data: company, error: companyError } = await supabase
+    const { data: companyData, error: companyError } = await supabase
       .from('companies')
       .select(`
         *,
-        onboarding_progress(*),
-        companies(*)
+        onboarding_progress(*)
       `)
-      .eq('id', company.id)
+      .eq('id', companyId)
       .single();
     
     if (companyError) {
@@ -248,7 +247,7 @@ export async function GET(request: NextRequest) {
     
     return NextResponse.json({
       success: true,
-      data: company,
+      data: companyData,
     });
     
   } catch (error) {
