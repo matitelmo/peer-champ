@@ -187,7 +187,7 @@ export const DemoDashboard: React.FC<DemoDashboardProps> = ({
                     />
                     <StatCard
                       title="Conversion Rate"
-                      value={formattedStats.conversionRate}
+                      value={formattedStats.conversionRate.value}
                       subtitle="vs last month"
                       icon={<TrendingUpIcon size={24} className="text-orange-600" />}
                       color="orange"
