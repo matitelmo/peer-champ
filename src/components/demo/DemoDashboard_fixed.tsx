@@ -166,21 +166,21 @@ export const DemoDashboard: React.FC<DemoDashboardProps> = ({
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <StatCard
                       title="Total Opportunities"
-                      value={formattedStats.totalOpportunities}
+                      value={formattedStats.totalOpportunities.value}
                       icon={<BuildingOfficeIcon size={24} className="text-blue-600" />}
                       color="blue"
                       trend="12"
                     />
                     <StatCard
                       title="Active Advocates"
-                      value={formattedStats.activeAdvocates}
+                      value={formattedStats.activeAdvocates.value}
                       icon={<UsersIcon size={24} className="text-green-600" />}
                       color="green"
                       trend="8"
                     />
                     <StatCard
                       title="Upcoming Calls"
-                      value={formattedStats.upcomingCalls}
+                      value={formattedStats.upcomingCalls.value}
                       icon={<PhoneIcon size={24} className="text-purple-600" />}
                       color="purple"
                       trend="15"

@@ -47,6 +47,7 @@ export const InitialConfigStep: React.FC<InitialConfigStepProps> = ({
       slack_notifications: false,
       webhook_notifications: false,
     },
+    integrations: {},
     company_logo: null as File | null,
     default_meeting_duration: 30,
     timezone: 'UTC',

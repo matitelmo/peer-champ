@@ -37,6 +37,7 @@ export interface OnboardingData {
     timezone: string;
     currency: string;
   };
+  company_id?: string;
   admin_user?: {
     first_name: string;
     last_name: string;
@@ -58,6 +59,11 @@ export interface OnboardingData {
     provider: string;
     connected: boolean;
     settings: any;
+  };
+  welcome_tour?: {
+    features_toured: string[];
+    completed_at: string;
+    duration: number;
   };
   success_metrics?: {
     goals: any[];
@@ -278,7 +284,7 @@ export const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ className = '' }
       <StepComponent
         onNext={goToNextStep}
         onPrevious={goToPreviousStep}
-        onComplete={(stepData) => markStepCompleted(currentStep, stepData)}
+        onComplete={(stepData: any) => markStepCompleted(currentStep, stepData)}
         onSkip={goToNextStep}
         data={data[currentStep as keyof OnboardingData]}
         isOptional={currentStepData.optional}

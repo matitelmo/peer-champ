@@ -296,6 +296,12 @@ export function getFormattedDemoStats() {
         ? Math.round(((stats.totalOpportunities - stats.activeOpportunities) / stats.totalOpportunities) * 100)
         : 0,
     },
+    conversionRate: {
+      value: stats.conversionRate,
+      label: 'Conversion Rate',
+      unit: '%',
+      change: null,
+    },
   };
 }
 

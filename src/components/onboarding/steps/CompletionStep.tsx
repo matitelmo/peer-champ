@@ -92,9 +92,9 @@ export const CompletionStep: React.FC<CompletionStepProps> = ({
     const summary = {
       company: data.company ? '✅' : '❌',
       admin: data.admin_user ? '✅' : '❌',
-      invitations: data.invitations?.length > 0 ? `✅ (${data.invitations.length})` : '⏭️',
+      invitations: data.invitations && data.invitations.length > 0 ? `✅ (${data.invitations.length})` : '⏭️',
       configuration: data.configuration ? '✅' : '❌',
-      advocates: data.advocates?.length > 0 ? `✅ (${data.advocates.length})` : '⏭️',
+      advocates: data.advocates && data.advocates.length > 0 ? `✅ (${data.advocates.length})` : '⏭️',
       crm: data.crm_integration?.connected ? '✅' : '⏭️',
       metrics: data.success_metrics ? '✅' : '❌',
       tour: data.welcome_tour ? '✅' : '⏭️',
