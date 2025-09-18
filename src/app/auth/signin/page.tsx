@@ -1,8 +1,8 @@
 /**
- * Sign In Page - Fixed Version
+ * Sign In Page - Enhanced Version
  *
  * Authentication page for user sign-in with email and password.
- * Uses the simple AuthLayout for better desktop support.
+ * Supports pre-filled email from query parameters.
  */
 
 'use client';
@@ -11,7 +11,7 @@ import React, { useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
 import { AuthLayoutSimple } from '@/components/layouts/AuthLayoutSimple';
-import { SignInForm } from '@/components/auth/SignInForm';
+import { EnhancedSignInForm } from '@/components/auth/EnhancedSignInForm';
 import { Spinner } from '@/components/ui/Spinner';
 
 function SignInContent() {
@@ -20,11 +20,18 @@ function SignInContent() {
   const searchParams = useSearchParams();
 
   const redirectTo = searchParams.get('redirect') || '/dashboard';
+  const email = searchParams.get('email');
 
   // Redirect if user is already authenticated
   useEffect(() => {
     if (!loading && user) {
-      router.push(redirectTo);
+      // Check if user has completed onboarding
+      const hasCompletedOnboarding = localStorage.getItem('onboarding_completed');
+      if (hasCompletedOnboarding) {
+        router.push(redirectTo);
+      } else {
+        router.push('/onboarding');
+      }
     }
   }, [user, loading, router, redirectTo]);
 
@@ -47,20 +54,21 @@ function SignInContent() {
       title="Welcome Back"
       subtitle="Sign in to your PeerChamps account"
     >
-      <SignInForm redirectTo={redirectTo} />
+      <EnhancedSignInForm 
+        redirectTo={redirectTo} 
+        prefillEmail={email || undefined}
+      />
     </AuthLayoutSimple>
   );
 }
 
 export default function SignInPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen flex items-center justify-center">
-          <Spinner size="xl" />
-        </div>
-      }
-    >
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <Spinner size="xl" />
+      </div>
+    }>
       <SignInContent />
     </Suspense>
   );

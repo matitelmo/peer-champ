@@ -1,8 +1,8 @@
 /**
- * Sign Up Page - Fixed Version
+ * Sign Up Page - Enhanced Version
  *
  * Registration page for new users to create accounts.
- * Uses the simple AuthLayout for better desktop support.
+ * Uses the enhanced form that handles existing users better.
  */
 
 'use client';
@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
 import { AuthLayoutSimple } from '@/components/layouts/AuthLayoutSimple';
-import { SignUpForm } from '@/components/auth/SignUpForm';
+import { EnhancedSignUpForm } from '@/components/auth/EnhancedSignUpForm';
 import { Spinner } from '@/components/ui/Spinner';
 import { Alert } from '@/components/ui/Alert';
 
@@ -20,10 +20,16 @@ export default function SignUpPage() {
   const router = useRouter();
   const [showSuccess, setShowSuccess] = useState(false);
 
-  // Redirect if user is already authenticated
+  // Redirect if user is already authenticated and has completed onboarding
   useEffect(() => {
     if (!loading && user) {
-      router.push('/dashboard');
+      // Check if user has completed onboarding
+      const hasCompletedOnboarding = localStorage.getItem('onboarding_completed');
+      if (hasCompletedOnboarding) {
+        router.push('/dashboard');
+      } else {
+        router.push('/onboarding');
+      }
     }
   }, [user, loading, router]);
 
@@ -71,7 +77,7 @@ export default function SignUpPage() {
           </Alert>
         </div>
       ) : (
-        <SignUpForm 
+        <EnhancedSignUpForm 
           onSuccess={handleSignupSuccess}
           redirectTo="/auth/verify-email"
         />
