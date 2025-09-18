@@ -18,7 +18,7 @@ import { cn } from '@/lib/utils';
 // Import step components
 import { WelcomeStep } from './steps/WelcomeStep';
 import { CompanySetupStep } from './steps/CompanySetupStep';
-import { AdminAccountStep } from './steps/AdminAccountStep';
+import { EnhancedAdminAccountStep as AdminAccountStep } from './steps/EnhancedAdminAccountStep';
 import { TeamInvitationStep } from './steps/TeamInvitationStep';
 import { InitialConfigStep } from './steps/InitialConfigStep';
 import { AdvocateSetupStep } from './steps/AdvocateSetupStep';
