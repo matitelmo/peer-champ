@@ -13,6 +13,7 @@ export const dynamic = 'force-dynamic';
 import React from 'react';
 import { DashboardLayoutWithNav } from '@/components/layouts/DashboardLayoutWithNav';
 import { useAuth } from '@/hooks/useAuth';
+import { EnhancedDashboard } from '@/components/dashboard/EnhancedDashboard';
 import { SalesRepDashboard } from '@/components/dashboard/SalesRepDashboard';
 import { Spinner } from '@/components/ui/Spinner';
 
@@ -36,7 +37,7 @@ function DashboardPage() {
   const renderDashboard = () => {
     switch (userRole) {
       case 'sales_rep':
-        return <SalesRepDashboard />;
+        return <EnhancedDashboard />;
       case 'advocate':
         // TODO: Implement AdvocateDashboard component
         return (
@@ -62,7 +63,7 @@ function DashboardPage() {
           </div>
         );
       default:
-        return <SalesRepDashboard />;
+        return <EnhancedDashboard />;
     }
   };
 

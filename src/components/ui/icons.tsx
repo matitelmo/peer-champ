@@ -452,6 +452,89 @@ export const AwardIcon = ({ className, size }: IconProps) => (
     <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
   </BaseIcon>
 );
+
+// Additional missing icons
+export const XMarkIcon = CloseIcon;
+export const ChevronUpIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="m18 15-6-6-6 6" />
+  </BaseIcon>
+);
+
+export const BellIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+  </BaseIcon>
+);
+
+export const TargetIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <circle cx="12" cy="12" r="10" />
+    <circle cx="12" cy="12" r="6" />
+    <circle cx="12" cy="12" r="2" />
+  </BaseIcon>
+);
+
+export const SparklesIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+  </BaseIcon>
+);
+
+export const LightBulbIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1z" />
+    <path d="M12 2C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z" />
+  </BaseIcon>
+);
+
+export const BookOpenIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+  </BaseIcon>
+);
+
+export const VideoIcon = VideoCameraIcon;
+
+export const MessageCircleIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+  </BaseIcon>
+);
+
+export const CameraIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
+    <circle cx="12" cy="13" r="3" />
+  </BaseIcon>
+);
+
+export const TableIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M12 3v18" />
+    <rect width="18" height="18" x="3" y="3" rx="2" />
+    <path d="M3 9h18" />
+    <path d="M3 15h18" />
+  </BaseIcon>
+);
+
+export const FileIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+    <path d="M14 2v6h6" />
+  </BaseIcon>
+);
+
+export const CogIcon = SettingsIcon;
+
+export const PauseIcon = ({ className, size }: IconProps) => (
+  <BaseIcon className={className} size={size}>
+    <rect x="6" y="4" width="4" height="16" />
+    <rect x="14" y="4" width="4" height="16" />
+  </BaseIcon>
+);
 // Export all icons as a group for easier importing
 export const Icons = {
   Plus: PlusIcon,

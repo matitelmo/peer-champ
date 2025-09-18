@@ -334,11 +334,153 @@
             "testStrategy": "Create end-to-end tests for the complete onboarding flow from start to finish. Test OAuth authentication with mock CRM services. Verify advocate import functionality with various data formats. Test interactive tour on different devices and screen sizes. Validate analytics tracking for key onboarding events. Perform usability testing with representative users to identify UX improvements."
           }
         ]
+      },
+      {
+        "id": 39,
+        "title": "Create Multi-Step Company Signup Flow",
+        "description": "Develop a comprehensive company signup flow that collects company information, sets up admin accounts, handles subscription selection, and properly initializes the company before redirecting to the detailed onboarding flow.",
+        "details": "Implement a multi-step company signup process using React with a state management library (Zustand or Redux Toolkit) that occurs before the main onboarding flow:\n\n1. **Initial Company Information Collection**:\n   - Create responsive form components using React Hook Form with Zod validation\n   - Collect essential company details (name, industry, size, address)\n   - Implement company logo upload using Supabase Storage\n   - Add progress indicator showing signup completion status\n\n2. **Domain Verification System**:\n   - Implement email domain verification through DNS record checking\n   - Create alternative verification methods (email verification to domain admin)\n   - Add verification status indicators and help documentation\n   - Store verification status in Supabase database\n\n3. **Admin Account Setup**:\n   - Create admin user creation form with strong password requirements\n   - Implement email verification for admin accounts\n   - Add option to invite additional admin users during signup\n   - Create secure authentication flow using Supabase Auth\n\n4. **Subscription Plan Selection**:\n   - Build subscription plan comparison interface\n   - Implement Stripe integration for payment processing\n   - Create trial period option with automatic conversion\n   - Add promo code functionality for discounts\n   - Store subscription information in database with proper relations\n\n5. **Company Initialization**:\n   - Develop database initialization logic for new company accounts\n   - Create default settings and configurations based on company type\n   - Implement proper role and permission setup for admin accounts\n   - Add welcome email sequence using SendGrid\n\n6. **Transition to Onboarding**:\n   - Create seamless transition to the main onboarding flow\n   - Implement state persistence between signup and onboarding\n   - Add session management to handle interruptions in the process\n   - Create proper URL routing for the multi-step process\n\nThe implementation should use Next.js API routes for backend functionality, Supabase for data storage, and maintain a consistent UI with the existing application design system.",
+        "testStrategy": "1. **Unit Testing**:\n   - Write comprehensive Jest tests for all form components and validation logic\n   - Test state management functionality across the multi-step flow\n   - Verify domain verification logic with mock DNS responses\n   - Test Stripe integration using Stripe's test mode\n   - Ensure proper error handling for all API calls\n\n2. **Integration Testing**:\n   - Create Cypress tests for the complete signup flow\n   - Test the transition between signup and onboarding\n   - Verify database records are properly created for new companies\n   - Test subscription creation and validation in Stripe\n   - Ensure proper role and permission assignment\n\n3. **User Acceptance Testing**:\n   - Conduct usability testing with representative users\n   - Test the flow on various devices and screen sizes\n   - Verify all email notifications are sent correctly\n   - Test edge cases like interrupted sessions and form validation errors\n   - Ensure accessibility compliance throughout the flow\n\n4. **Security Testing**:\n   - Perform penetration testing on authentication endpoints\n   - Verify proper data encryption for sensitive information\n   - Test CSRF protection on all forms\n   - Ensure proper authorization checks for admin creation\n   - Verify secure handling of payment information\n\n5. **Performance Testing**:\n   - Test load times for all signup steps\n   - Verify responsive behavior under slow network conditions\n   - Test file upload performance for company logos\n   - Ensure database queries are optimized for speed",
+        "status": "pending",
+        "dependencies": [
+          38,
+          30,
+          27
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Initial Company Information Collection Forms",
+            "description": "Create responsive form components for collecting essential company details with validation and file upload functionality.",
+            "dependencies": [],
+            "details": "Develop form components using React Hook Form with Zod validation to collect company name, industry, size, and address. Implement company logo upload functionality using Supabase Storage. Add a progress indicator showing signup completion status. Ensure the forms are responsive and follow the existing application design system. Create reusable form components that can be used throughout the signup flow.",
+            "status": "pending",
+            "testStrategy": "Write Jest unit tests for form components, validation logic, and file upload functionality. Test form submission with valid and invalid data. Verify proper error handling and display. Test responsive design across different screen sizes. Ensure accessibility compliance with ARIA attributes."
+          },
+          {
+            "id": 2,
+            "title": "Build Domain Verification System",
+            "description": "Implement a system to verify company domain ownership through DNS record checking and alternative verification methods.",
+            "dependencies": [
+              "39.1"
+            ],
+            "details": "Create a domain verification system that checks DNS records to verify company domain ownership. Implement alternative verification methods such as email verification to domain admin. Develop verification status indicators and comprehensive help documentation. Store verification status in the Supabase database. Create API endpoints using Next.js API routes to handle the verification process.",
+            "status": "pending",
+            "testStrategy": "Test DNS record checking with mock responses for various scenarios. Verify alternative verification methods work correctly. Test error handling for failed verifications. Ensure proper storage of verification status in the database. Test help documentation accessibility and clarity."
+          },
+          {
+            "id": 3,
+            "title": "Develop Admin Account Setup Flow",
+            "description": "Create secure admin user creation and authentication flow with email verification and multi-admin invitation capabilities.",
+            "dependencies": [
+              "39.2"
+            ],
+            "details": "Build admin user creation forms with strong password requirements and validation. Implement email verification for admin accounts using Supabase Auth. Add functionality to invite additional admin users during the signup process. Create a secure authentication flow that integrates with the existing application. Ensure proper error handling and user feedback throughout the process.",
+            "status": "pending",
+            "testStrategy": "Test admin account creation with valid and invalid credentials. Verify email verification process works correctly. Test multi-admin invitation functionality. Ensure password strength requirements are enforced. Test authentication flow security and error handling. Verify proper database storage of admin accounts."
+          },
+          {
+            "id": 4,
+            "title": "Create Subscription Plan Selection Interface",
+            "description": "Implement a subscription plan comparison interface with Stripe integration for payment processing and trial options.",
+            "dependencies": [
+              "39.3"
+            ],
+            "details": "Develop a subscription plan comparison interface that clearly displays different pricing tiers and features. Implement Stripe integration for secure payment processing. Create trial period options with automatic conversion functionality. Add promo code capabilities for discounts. Store subscription information in the database with proper relations to company accounts. Implement webhook handlers for Stripe events.",
+            "status": "pending",
+            "testStrategy": "Test subscription plan selection UI for clarity and usability. Verify Stripe integration using test mode for various payment scenarios. Test trial period setup and expiration handling. Verify promo code application and discount calculations. Ensure proper database storage of subscription information. Test webhook handlers for Stripe events."
+          },
+          {
+            "id": 5,
+            "title": "Implement Company Initialization and Transition to Onboarding",
+            "description": "Develop database initialization logic for new companies and create a seamless transition to the main onboarding flow.",
+            "dependencies": [
+              "39.4"
+            ],
+            "details": "Create database initialization logic that sets up new company accounts with default settings and configurations based on company type. Implement proper role and permission setup for admin accounts. Add welcome email sequence using SendGrid. Develop a seamless transition to the main onboarding flow with state persistence between signup and onboarding. Implement session management to handle interruptions in the process. Create proper URL routing for the multi-step process.",
+            "status": "pending",
+            "testStrategy": "Test database initialization with various company types. Verify role and permission setup for admin accounts. Test welcome email sequence delivery and content. Ensure state persistence between signup and onboarding flows. Test session recovery after interruptions. Verify URL routing and navigation through the multi-step process."
+          }
+        ]
+      },
+      {
+        "id": 40,
+        "title": "Implement Post-Signup Configuration and Usage Flow",
+        "description": "Create a comprehensive post-signup configuration and usage flow that guides new users through setting up their account, importing data, configuring integrations, and learning to use the core features effectively.",
+        "details": "Implement a comprehensive post-signup configuration and usage flow using React with a state management library like Zustand or Redux Toolkit that guides users after they've completed the initial onboarding:\n\n1. **Dashboard Welcome Experience**:\n   - Create a personalized welcome dashboard that appears after signup/onboarding completion\n   - Implement a progress tracker showing configuration completion status\n   - Design contextual call-to-action cards for key setup tasks\n   - Add dismissible guided tour introduction using a library like ReactJoyride\n\n2. **Account Configuration Wizard**:\n   - Build a step-by-step wizard for completing account setup\n   - Implement user profile completion with avatar upload using Supabase Storage\n   - Create notification preferences configuration with toggles for email/in-app alerts\n   - Add team member invitation flow with role selection and permission explanation\n\n3. **Data Import Tools**:\n   - Develop CSV/Excel import functionality for bulk data loading\n   - Create mapping interface to match imported fields to system fields\n   - Implement validation and error handling for imported data\n   - Add progress indicators and success/failure reporting\n\n4. **Integration Configuration**:\n   - Build integration marketplace showing available third-party connections\n   - Implement OAuth flows for connecting to external services (CRM, calendar, etc.)\n   - Create guided setup wizards for each integration type\n   - Add integration health monitoring and troubleshooting guides\n\n5. **Feature Introduction Sequences**:\n   - Implement progressive feature disclosure based on user progress\n   - Create interactive tutorials for core features using tooltips and highlights\n   - Develop \"quick win\" guided workflows for immediate value demonstration\n   - Add contextual help panels that appear based on user activity\n\n6. **Success Metrics Setup**:\n   - Build goal-setting interface for tracking usage success\n   - Implement customizable dashboard widgets for monitoring progress\n   - Create milestone celebration notifications when goals are achieved\n   - Add export functionality for success metrics reports\n\n7. **Contextual Help System**:\n   - Implement an AI-powered help assistant using a service like OpenAI\n   - Create searchable knowledge base with categorized articles\n   - Add video tutorial library with categorized short-form content\n   - Implement in-app messaging for support requests\n\n8. **User Feedback Collection**:\n   - Create satisfaction surveys at key points in the configuration journey\n   - Implement feature request and issue reporting mechanisms\n   - Add sentiment analysis to identify pain points\n   - Create feedback dashboard for administrators\n\nUse React Context or a state management library to track user progress through the configuration flow. Implement local storage or database persistence to save progress between sessions. Ensure all components are fully responsive and accessible.",
+        "testStrategy": "1. **Unit Testing**:\n   - Write comprehensive Jest tests for all wizard components and validation logic\n   - Test state management functionality across the multi-step configuration flow\n   - Verify data import validation with various test datasets\n   - Test OAuth integration flows using mock authentication responses\n   - Ensure all form validations work correctly with valid and invalid inputs\n\n2. **Integration Testing**:\n   - Create end-to-end tests using Cypress or Playwright for complete configuration journeys\n   - Test data persistence between sessions and page refreshes\n   - Verify that integrations correctly connect to external services using test accounts\n   - Test file upload functionality with various file types and sizes\n   - Ensure proper error handling and recovery throughout the flow\n\n3. **User Experience Testing**:\n   - Conduct usability testing with representative users to identify friction points\n   - Use session recording tools like Hotjar to analyze user behavior\n   - Test the guided tour functionality across different browsers and devices\n   - Verify that help content is contextually relevant and accessible\n   - Test the flow with keyboard-only navigation for accessibility\n\n4. **Performance Testing**:\n   - Measure and optimize load times for the configuration dashboard\n   - Test data import performance with large datasets\n   - Verify responsive design works across mobile, tablet, and desktop devices\n   - Test with slow network conditions to ensure graceful degradation\n\n5. **A/B Testing**:\n   - Implement A/B testing for different configuration flow variations\n   - Measure completion rates and time-to-value for different approaches\n   - Test different help content presentation methods for effectiveness\n   - Compare guided vs. self-directed configuration approaches\n\n6. **Automated Monitoring**:\n   - Set up error tracking to identify issues in production\n   - Implement analytics to measure configuration completion rates\n   - Create dashboards for monitoring user progress through the flow\n   - Set up alerts for abandoned configurations to trigger follow-up",
+        "status": "pending",
+        "dependencies": [
+          38,
+          39,
+          30,
+          27
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Dashboard Welcome Experience",
+            "description": "Create a personalized welcome dashboard that appears after signup/onboarding completion, with progress tracking and guided tour functionality.",
+            "dependencies": [],
+            "details": "Develop a React component for the welcome dashboard that displays personalized greeting based on user data. Implement a progress tracker component showing completion status of key configuration tasks. Design and implement contextual call-to-action cards for important setup tasks using styled-components or Tailwind CSS. Integrate ReactJoyride library for creating a dismissible guided tour that highlights key dashboard features. Use Zustand or Redux Toolkit to manage the state of completed configuration steps and tour progress.",
+            "status": "done",
+            "testStrategy": "Write Jest unit tests for all dashboard components including progress tracker and CTA cards. Create integration tests for the complete welcome experience flow. Test the ReactJoyride tour functionality with different screen sizes. Verify state persistence between sessions using mock storage. Ensure accessibility compliance with WCAG standards."
+          },
+          {
+            "id": 2,
+            "title": "Build Account Configuration Wizard",
+            "description": "Develop a step-by-step wizard for completing account setup, including profile completion, notification preferences, and team member invitation.",
+            "dependencies": [
+              "40.1"
+            ],
+            "details": "Create a multi-step wizard component with navigation controls and progress indicators. Implement user profile completion form with avatar upload functionality using Supabase Storage. Build notification preferences configuration with toggles for email and in-app alerts, storing preferences in the database. Develop team member invitation flow with role selection dropdown and permission explanation tooltips. Add email notification functionality for team invitations using a service like SendGrid or AWS SES. Implement form validation using Zod or Yup schema validation.",
+            "status": "done",
+            "testStrategy": "Write unit tests for each wizard step component and validation logic. Test avatar upload functionality with various file types and sizes. Create integration tests for the complete wizard flow. Verify email sending functionality for team invitations. Test form validation with valid and invalid inputs. Ensure wizard state is properly maintained between steps."
+          },
+          {
+            "id": 3,
+            "title": "Develop Data Import Tools",
+            "description": "Create functionality for importing data via CSV/Excel files, including field mapping, validation, and progress reporting.",
+            "dependencies": [
+              "40.2"
+            ],
+            "details": "Implement file upload component supporting CSV and Excel formats using a library like react-dropzone. Create a field mapping interface allowing users to match imported columns to system fields. Develop validation logic to check data integrity and format compliance. Implement error handling with detailed feedback on problematic records. Add progress indicators showing import status and completion percentage. Create success/failure reporting with downloadable error logs. Use Web Workers for processing large files without blocking the UI thread.",
+            "status": "done",
+            "testStrategy": "Write unit tests for file parsing and validation logic. Test the mapping interface with various CSV and Excel formats. Create integration tests with sample data files containing valid and invalid records. Verify error reporting and progress indication functionality. Test performance with large datasets (10,000+ records). Ensure the import process can be canceled and resumed."
+          },
+          {
+            "id": 4,
+            "title": "Create Integration Configuration System",
+            "description": "Build an integration marketplace showing available third-party connections with OAuth flows and guided setup wizards.",
+            "dependencies": [
+              "40.2"
+            ],
+            "details": "Develop an integration marketplace component displaying available third-party services with descriptions and icons. Implement OAuth authentication flows for connecting to external services like CRM systems, calendars, and communication tools. Create guided setup wizards for each integration type with step-by-step instructions. Add integration health monitoring that periodically checks connection status. Develop troubleshooting guides and self-help resources for common integration issues. Implement secure credential storage using environment variables or a secrets manager.",
+            "status": "done",
+            "testStrategy": "Write unit tests for OAuth flow components and integration card rendering. Create mock OAuth providers for testing authentication flows. Test integration setup wizards with various configuration scenarios. Verify health monitoring functionality with simulated connection failures. Test credential storage security and token refresh mechanisms. Ensure proper error handling for failed integration attempts."
+          },
+          {
+            "id": 5,
+            "title": "Implement Feature Introduction Sequences",
+            "description": "Create interactive tutorials and progressive feature disclosure to help users learn core functionality and achieve quick wins.",
+            "dependencies": [
+              "40.1",
+              "40.2",
+              "40.3",
+              "40.4"
+            ],
+            "details": "Develop a system for progressive feature disclosure based on user progress through configuration steps. Create interactive tutorials using tooltips and highlights with a library like react-shepherd. Implement 'quick win' guided workflows that demonstrate immediate value to new users. Add contextual help panels that appear based on user activity and current page. Develop a feature discovery component highlighting new or unused features. Create a tutorial completion tracking system to monitor user progress. Implement a mechanism to suggest relevant tutorials based on user behavior and incomplete configuration steps.",
+            "status": "done",
+            "testStrategy": "Write unit tests for tutorial components and feature disclosure logic. Create integration tests for the complete tutorial flows. Test contextual help triggers with various user scenarios. Verify tutorial completion tracking and progress persistence. Test the system on different devices and screen sizes. Ensure all tutorial elements are keyboard accessible and screen reader friendly."
+          }
+        ]
       }
     ],
     "metadata": {
       "created": "2025-09-09T14:08:57.331Z",
-      "updated": "2025-09-17T01:08:26.873Z",
+      "updated": "2025-09-18T01:14:28.197Z",
       "description": "Tasks for master context"
     }
   }
